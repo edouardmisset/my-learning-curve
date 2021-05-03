@@ -283,3 +283,57 @@ Below is what the interactive configuration looks like:
 A good overview of the terminal setup can be found here: [HowToGeek](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/)
 
 **Note**: a newer, more performant theme exists : `PowerLevel 10k`
+
+### Aliases
+
+Aliases are shortcuts for other terminal commands.
+
+The simplest way to seeall the available aliases on your system
+
+```sh
+alias
+```
+
+Usually there will be lots of them. You can show specific aliases using the pipe and `grep`.
+For example
+
+```sh
+alias | grep git
+```
+
+Here are the ones I've setup:
+
+```sh
+alias ls='colorls'
+alias lc='colorls -lA --sd'
+alias la='colorls -a'
+alias yss='yarn && yarn start'
+alias ys='yarn start'
+alias gac='git add . && git commit -m'
+alias gpo='git push --set-upstream origin $(git_current_branch)'
+alias gcod='git checkout dev'
+alias wcs='z WCS'
+alias zshrc='code ~/.zshrc'
+alias c='clear'
+alias copy='rsync -ah --info=progress2'
+alias githome='cd `git rev-parse --show-toplevel`'
+alias rm="rm -i"
+```
+
+### Functions
+
+You can also write functions in shell.
+The following `cd` in a directory and then `ls` its content:
+
+```sh
+function cl() {
+  DIR="$*";
+    # if no DIR given, go home
+    if [ $# -lt 1 ]; then
+      DIR=$HOME;
+  fi;
+  builtin cd "${DIR}" && \
+  # use your preferred ls command
+    ls
+}
+```

@@ -1,65 +1,44 @@
-    <!-- Naviguer parmi les fichiers -->
-    <!-- cmd + p / cmd + e -->
-    <!-- cmd + shift + e pour juste naviguer à gauche -->
-    <!-- cmd + tab switch sans recherche -->
+# Keyboard Shortcut for VS Code (macOS)
 
+- File navigation:
+  `cmd + p / cmd + e`
 
-    <!-- Terminal -->
-    <!-- cmd + ù -->
+- Side panel navigation:
+  `cmd + shift + e`
 
+- Terminal:
+  `cmd + ù` (remapped to `cmd + $`)
 
-    <!-- Curseurs multiples -->
-    <!-- cmd + alt + up/down arrow -->
+- Multiple cursors:
+  `cmd + alt + up/down arrow`
 
-    <!-- Effectuer des recherches dans le code -->
-    <!-- cmd + f recherche simple -->
-    <!-- cmd + h recherche et remplacement -->
+- Search:
+  `cmd + f`
 
+- Replace:
+  `cmd + h`
 
+- File search:
+  `cmd + shift + f / h`
 
-    <!-- Recherche dans tous les fichiers -->
-    <!-- cmd + shift + f / h -->
+- Duplicate:
+  `shift + alt + up/down`
 
+- Go down one lione:
+  `alt + up/down`
 
+- Multiple cursors:
+  `alt + clic`
+  `cmd + alt + up/down`
 
-    <!-- Dupliquer -->
-    <!-- shift + alt + up/down -->
+- Go up / down:
+  `cmd + home / end`
 
+- Delete previous word:
+  `alt + enter`
 
-    <!-- Descendre d'une ligne -->
-    <!-- alt + up/down -->
+- Delete/cut a line:
+  `cmd + x`
 
-    Lorem ipsum dolor sit amet.
-    Lorem ipsum dolor sit amet.
-    Lorem ipsum dolor sit amet.
-    Lorem ipsum dolor sit amet.
-
-
-    <!-- Plusieurs curseurs -->
-    <!-- alt + clic -->
-    <!-- cmd + alt + up/down -->
-    <!-- echap pour annuler -->
-
-
-
-    <!-- Aller en haut / en bas -->
-    <!-- cmd + home / fin -->
-
-
-
-    <!-- Supprimer le mot précédent, au lieu de spam delete -->
-    <!-- cmd + retour -->
-    Lorem ipsum dolor sit amet.
-
-    Une fleur bleue
-
-
-    <!-- Supprimer une ligne -->
-    <!-- cmd + x -->
-
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium, odit?
-
-    <!-- Selectionner des mots sur une ligne -->
-    <!-- cmd + shift + left / right -->
-
-    Lorem ipsum dolor sit amet.
+- Select entire words:
+  `cmd + shift + left / right`

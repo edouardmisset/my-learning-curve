@@ -3,8 +3,9 @@
 ## Example with a class
 
 ```typescript
-class HoldAnything<TypeOfData> {
-  data: TypeOfData
+class HoldAnything<T> {
+  // T is the name usually given to the generic 'type of data'
+  data: T
 }
 
 const holdNumber = new HoldAnything<number>()

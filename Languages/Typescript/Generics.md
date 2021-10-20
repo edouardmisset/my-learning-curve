@@ -7,5 +7,8 @@ class HoldAnything<TypeOfData> {
   data: TypeOfData
 }
 
-const holdeNumbers = new HoldAnything<number>()
+const holdNumber = new HoldAnything<number>()
+holdNumber.data = 123
+const holdString = new HoldAnything<string>()
+holdString.data = 'Hello Wall-e'
 ```

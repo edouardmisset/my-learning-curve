@@ -172,6 +172,29 @@ const obj = {
 const { [rando]: myKey } = obj;
 ```
 
+#### Conditionnally added property / value
+
+```javascript
+const trueCondition = true
+const falseCondition = false
+
+const obj = {
+  ...(trueCondition && { '🐕': 'woof' }),
+  ...(falseCondition && { '🐈': 'meow' }),
+}
+
+console.log(obj)
+// { '🐕': 'woof' }
+
+const arr = [
+  ...(trueCondition ? ['🐕'] : []),
+  ...(falseCondition ? ['🐈'] : []),
+]
+
+console.log(arr)
+// [ '🐕' ]
+```
+
 ## Resources
 
 Introduction by [Fireship.io](https://www.youtube.com/watch?v=UgEaJBz3bjY)

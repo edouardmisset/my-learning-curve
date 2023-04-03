@@ -6,3 +6,14 @@ const objectNullifier = <T = unknown>(maybeUndefinedObj: Partial<T>): T => {
 
   return Object.fromEntries(objectEntries)
 }
+
+export const shallowComparison = <Type extends ObjectType = ObjectType>(
+  leftObject: Type,
+  rightObject: Type,
+): boolean =>
+  objectKeys(leftObject).length === objectKeys(rightObject).length &&
+  objectKeys(leftObject).every(
+    key =>
+      Object.prototype.hasOwnProperty.call(rightObject, key) &&
+      leftObject[key] === rightObject[key],
+  )

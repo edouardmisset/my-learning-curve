@@ -10,9 +10,25 @@ export const throttle = (callback: Function, delay = 50): void => {
   }, delay)
 }
 
-let debounceTimerId: TimeoutId = null
-export const debounce = (callback: Function, delay = 50): void => {
-  if (debounceTimerId != null) clearTimeout(debounceTimerId)
+// Debounce
 
-  debounceTimerId = setTimeout(callback, delay)
+type AnyVoidFunction = (...arg: any[]) => void
+
+interface DebounceParams {
+  callback: AnyVoidFunction
+  timerId?: number
+  delay?: number
+}
+
+export const debounce = (params: DebounceParams): AnyVoidFunction => {
+  const { callback, timerId, delay = 50 } = params
+  let timer = timerId
+
+  return (...args) => {
+    if (timer != null) window.clearTimeout(timer)
+
+    timer = window.setTimeout(() => {
+      callback.apply(this, args)
+    }, delay)
+  }
 }

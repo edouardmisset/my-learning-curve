@@ -1,34 +1,34 @@
-type TimeoutId = NodeJS.Timeout | number | null
-
-let throttleTimerId: TimeoutId = null
-export const throttle = (callback: Function, delay = 50): void => {
-  if (throttleTimerId != null) return
-
-  throttleTimerId = setTimeout(() => {
-    callback()
-    throttleTimerId = null
-  }, delay)
-}
-
-// Debounce
-
 type AnyVoidFunction = (...arg: any[]) => void
-
 interface DebounceParams {
   callback: AnyVoidFunction
-  timerId?: number
+  timerId?: { id: number }
   delay?: number
 }
+type ThrottleParams = Omit<DebounceParams, 'timerId'>
 
 export const debounce = (params: DebounceParams): AnyVoidFunction => {
-  const { callback, timerId, delay = 50 } = params
-  let timer = timerId
+  const { callback, timerId = { id: -1 }, delay = 50 } = params
 
   return (...args) => {
-    if (timer != null) window.clearTimeout(timer)
+    if (timerId.id !== -1) window.clearTimeout(timerId.id)
 
-    timer = window.setTimeout(() => {
+    timerId.id = window.setTimeout(() => {
       callback.apply(this, args)
+    }, delay)
+  }
+}
+
+export const throttle = (params: ThrottleParams): AnyVoidFunction => {
+  const { callback, delay = 100 } = params
+  let throttlePause: boolean
+
+  return (...args) => {
+    if (throttlePause === true) return
+
+    throttlePause = true
+    setTimeout(() => {
+      callback.apply(this, args)
+      throttlePause = false
     }, delay)
   }
 }

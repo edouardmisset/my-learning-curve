@@ -13,7 +13,12 @@ type SearchTreeListParameters<NodeType extends BasicNode = BasicNode> = Omit<
 > & {
   nodeList: NodeType[]
 }
-
+/**
+ * @description
+ * @date 04/10/2023
+ * @param {SearchTreeParameters<NodeType>} params
+ * @returns {undefined | NodeType}  {(undefined | NodeType)}
+ */
 export const searchTree = <NodeType extends BasicNode = BasicNode>(
   params: SearchTreeParameters<NodeType>,
 ): undefined | NodeType => {
@@ -41,6 +46,12 @@ export const searchTree = <NodeType extends BasicNode = BasicNode>(
   return undefined
 }
 
+/**
+ * @description
+ * @date 04/10/2023
+ * @param {SearchTreeListParameters<NodeType>} params
+ * @returns {*}  {(undefined | NodeType)}
+ */
 export function searchTreeList<NodeType extends BasicNode = BasicNode>(
   params: SearchTreeListParameters<NodeType>,
 ): undefined | NodeType {

@@ -15,6 +15,9 @@
 - Comment line:
   `cmd + :` (remapped to `shift + cmd + :`)
 
+- Sort lines:
+  `cmd + alt + s`
+
 - Terminal:
   `cmd + ù` (remapped to `cmd + $`)
 

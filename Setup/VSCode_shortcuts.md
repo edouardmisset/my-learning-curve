@@ -6,6 +6,15 @@
 - Side panel navigation:
   `cmd + shift + e`
 
+- Toggle side panel:
+  `cmd + b`
+
+- Organize imports:
+  `shift + alt + o`
+
+- Comment line:
+  `cmd + :` (remapped to `shift + cmd + :`)
+
 - Terminal:
   `cmd + ù` (remapped to `cmd + $`)
 
@@ -24,7 +33,7 @@
 - Duplicate:
   `shift + alt + up/down`
 
-- Go down one lione:
+- Go down one line:
   `alt + up/down`
 
 - Multiple cursors:

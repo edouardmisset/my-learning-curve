@@ -1,23 +1,4 @@
-export type Override<T1, T2> = Omit<T1, keyof T2> & T2
-
-export type RequireKey<T extends object, K extends keyof T = keyof T> = Omit<
-  T,
-  K
-> &
-  Required<Pick<T, K>>
-
-export type PartialProperty<T, K extends keyof T = keyof T> = Omit<T, K> &
-  Partial<Pick<T, K>>
-
-export type NotNullProperty<T extends object, K extends keyof T = keyof T> = {
-  [P in K]: Exclude<T[K], null>
-}
-  
-export type ObjectValues<T> = T[keyof T]
-
-export const objectKeys = <ObjectType extends Object_>(
-  object: ObjectType,
-): (keyof ObjectType)[] => Object.keys(object) as (keyof ObjectType)[]
+import { DefinedValue, Object_, Value } from './type-helpers'
 
 export const shallowComparison = (
   object1: Object_,
@@ -101,24 +82,25 @@ export const validNumberWithFallback = <T = number>(
 }
 
 export const shallowRemoveObjNullishValues = (object: Object_): Object_ =>
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null))
 
-export const datification = (date: string | Date): Date =>
-  typeof date === 'string' ? new Date(date) : date
-
-export const getImageUrl = (path: string): string =>
-  `${API_BASE_URL}images/${encodeURIComponent(path)}`
+export /**
+ * @description Takes a string or a Date object. If it's a string, it assumes UTC string format (YYYY-MM-DDTHH:MM)
+ * @param {(string | Date)} date
+ * @returns {Date}  {Date}
+ */
+  const datification = (date: string | Date): Date =>
+    typeof date === 'string' ? new Date(date) : date
 
 export const capitalize = (word: string): string =>
   word[0].toUpperCase() + word.slice(1)
 
 export const addOrRemoveFromList =
   <T extends DefinedValue>(listOfThings: T[], aThing: T) =>
-  (add: boolean): T[] =>
-    add
-      ? [...listOfThings, aThing]
-      : listOfThings.filter(thing => thing !== aThing)
+    (add: boolean): T[] =>
+      add
+        ? [...listOfThings, aThing]
+        : listOfThings.filter(thing => thing !== aThing)
 
 export const addWhenAbsentOtherwiseRemove = <T extends DefinedValue>(
   listOfThings: T[],

@@ -259,7 +259,7 @@ Follow the [readme](https://github.com/romkatv/powerlevel10k#oh-my-zsh) to insta
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
 
-- Restart `Zsh`
+- Restart `zsh`
 - Then run the interactive configuration: `p10k configure`
 
 Below is what the interactive configuration looks like:
@@ -291,9 +291,6 @@ Here are the ones I've setup:
 # Shell
 alias c='clear'
 alias copy='rsync -ah --info=progress2'
-# alias ls='colorls'
-# alias lc='colorls -lA --sd'
-# alias la='colorls -a'
 
 # ZSH
 alias p10k="code ~/.p10k.zsh"
@@ -318,22 +315,6 @@ alias gpo='git push --set-upstream origin $(git_current_branch)'
 alias gt="git tag"
 alias gta="git tag -a"
 alias gundo="git reset --soft HEAD^"
-
-# You fix the bug, stage only the changes related to the bug and execute
-# This will create a branch called bugfix based off master with only the bug fix
-gmove() {
-  git stash -- $(git diff --staged --name-only) &&
-  gwip ;
-  git branch $1 $2 &&
-  git checkout $1 &&
-  git stash pop
-}
-
-# You fix the bug, stage only the changes related to the bug and execute
-# This will create a branch called bugfix based off master with only the bug fix
-killport() {
-  kill -9 $(lsof -t -i:$1)
-}
 
 # YARN
 alias ylf="yarn lint:fix"

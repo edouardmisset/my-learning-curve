@@ -84,13 +84,13 @@ export const validNumberWithFallback = <T = number>(
 export const shallowRemoveObjNullishValues = (object: Object_): Object_ =>
   Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null))
 
-export /**
+/**
  * @description Takes a string or a Date object. If it's a string, it assumes UTC string format (YYYY-MM-DDTHH:MM)
  * @param {(string | Date)} date
  * @returns {Date}  {Date}
  */
-  const datification = (date: string | Date): Date =>
-    typeof date === 'string' ? new Date(date) : date
+export const datification = (date: string | Date): Date =>
+  typeof date === 'string' ? new Date(date) : date
 
 export const capitalize = (word: string): string =>
   word[0].toUpperCase() + word.slice(1)
@@ -112,3 +112,38 @@ export const stringIncludesCaseInsensitive = (
   string: string,
   searchString: string,
 ): boolean => string.toLowerCase().includes(searchString.toLowerCase())
+
+
+/**
+ * @description Deduplicates an array of objects based on a specified property.
+ *
+ * @template TObject - The type of objects in the array.
+ * @template Key - The type of the property used for deduplication.
+ *
+ * @param {T[]} array - The array of objects to deduplicate.
+ * @param {Key} key - The property used for deduplication.
+ *
+ * @returns {T[]} - An array containing unique objects based on the specified property.
+ *
+ * @example
+ * const inputArray = [
+ *   { id: 1, name: 'John' },
+ *   { id: 2, name: 'Jane' },
+ *   { id: 1, name: 'John' },
+ *   { id: 3, name: 'Doe' },
+ * ];
+ *
+ * const deduplicatedArray = deduplicateObjects(inputArray, 'id');
+ * // Result: [
+ * //   { id: 1, name: 'John' },
+ * //   { id: 2, name: 'Jane' },
+ * //   { id: 3, name: 'Doe' },
+ * // ]
+ */
+export const deduplicateObjects = <
+  T extends object = ObjectType,
+  Key extends keyof T = keyof T,
+>(
+  array: T[],
+  key: Key,
+): T[] => [...new Map(array.map(object => [object[key], object])).values()]

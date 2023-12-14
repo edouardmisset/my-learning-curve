@@ -57,7 +57,8 @@ Add this to your VS Code `settings.JSON`:
 
 #### All around
 
-- AI assistant (copilot, IntelliCode, TabNine,...)
+- GitHub Copilot
+- IntelliCode
 - Better Comments
 - Code Spell Checker
 - Conventional Commits
@@ -79,6 +80,7 @@ Add this to your VS Code `settings.JSON`:
 #### CSS
 
 - CSS Peek
+- Stylelint
 - (Tailwind CSS IntelliSense)
 - (vscode-styled-components)
 
@@ -86,9 +88,10 @@ Add this to your VS Code `settings.JSON`:
 
 - BabelJavaScript
 - JavaScript (ES6) code snippets
-- Quokka.js
-- JS Refactoring Assistant (P42 v1.165.2)
+- Quokka.js (Pro) + Wallaby.js + Console Ninja
+- JS Refactoring Assistant (P42 v3 +)
 - Document This
+- Vitest
 
 #### TypeScript
 
@@ -96,11 +99,13 @@ Add this to your VS Code `settings.JSON`:
 
 #### React
 
-- ES7 React/Reduc/GraphQL/React-Native Snippets
+- ~~ES7 React/Reduc/GraphQL/React-Native Snippets~~
 
 #### Markdown
 
 - Markdown All in One
+- MDX
+- (markdownlint)
 
 #### Shell
 

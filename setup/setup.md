@@ -296,6 +296,8 @@ Here are the ones I've setup:
 # Shell
 alias c='clear'
 alias copy='rsync -ah --info=progress2'
+alias cdi='cd ~/code/innova-web-ui'
+alias cwd='pwd'
 
 # ZSH
 alias p10k="code ~/.p10k.zsh"
@@ -309,11 +311,15 @@ alias gclean="git remote prune origin && git switch main | git branch --merged |
 alias gco--="git checkout @{-2}"
 alias gco-="git checkout -"
 alias gco-2="gco--"
+alias gco---="git checkout @{-3}"
+alias gco-3="gco---"
 alias gcod="git checkout dev"
 alias gcom="git checkout main"
 alias gdel="git branch -D"
 alias githome='cd `git rev-parse --show-toplevel`'
 alias gla="git pull --all && git fetch --all"
+alias glolm="git log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset\" main..HEAD"
+alias glolsm="glolm --stat"
 alias gmm="git merge main"
 alias gmu="git switch main && git fetch --all && git pull --all"
 alias gpo='git push --set-upstream origin $(git_current_branch)'
@@ -324,6 +330,7 @@ alias gundo="git reset --soft HEAD^"
 # YARN
 alias ylf="yarn lint:fix"
 alias yst="BROWSER=none yarn start"
+alias yta="yarn test:all"
 
 # BUN
 alias b="bun"
@@ -363,7 +370,7 @@ function cl() {
 
 # You fix the bug, stage only the changes related to the bug and execute
 # This will create a branch called bugfix based off master with only the bug fix
-gmove() {
+function gmove() {
   git stash -- $(git diff --staged --name-only) &&
   gwip ;
   git branch $1 $2 &&
@@ -373,7 +380,27 @@ gmove() {
 
 # You fix the bug, stage only the changes related to the bug and execute
 # This will create a branch called bugfix based off master with only the bug fix
-killport() {
+function killport() {
   kill -9 $(lsof -t -i:$1)
+}
+
+# Function to rename a file from Pascal case or snake case to kebab case
+function kebabify() {
+  # Check if at least one filename is provided as an argument
+  if [ "$#" -eq 0 ]; then
+    echo "Usage: pascal_snake_case_to_kebab <filename1> [<filename2> ...]"
+    return 1
+  fi
+
+  # Iterate over all provided filenames
+  for file in "$@"; do
+    # Convert Pascal case or snake case to kebab case using sed and tr
+    new_name=$(echo $file | sed -E 's/([a-z0-9])([A-Z])/\1-\2/g; s/_/-/g' | tr '[:upper:]' '[:lower:]')
+
+    # Rename the file
+    mv "$file" "$new_name"
+
+    echo "File renamed from $file to $new_name"
+  done
 }
 ```

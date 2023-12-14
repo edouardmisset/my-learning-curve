@@ -1,4 +1,4 @@
-export type Object_<T = any> = Record<string, T>
+export type ObjectType<T = any> = Record<string, T>
 
 export type Value = string | number | boolean | null | undefined
 export type DefinedValue = string | number | boolean
@@ -29,6 +29,6 @@ export type Prettify<T> = {
 
 export type ObjectValues<T> = T[keyof T]
 
-export const objectKeys = <ObjectType extends Object_>(
-	object: ObjectType,
-): (keyof ObjectType)[] => Object.keys(object) as (keyof ObjectType)[]
+export const objectKeys = <T extends ObjectType>(
+	object: T,
+): (keyof T)[] => Object.keys(object) as (keyof T)[]

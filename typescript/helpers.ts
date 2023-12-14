@@ -1,8 +1,8 @@
-import { DefinedValue, Object_, Value } from './type-helpers'
+import { DefinedValue, ObjectType, Value } from './type-helpers'
 
 export const shallowComparison = (
-  object1: Object_,
-  object2: Object_,
+  object1: ObjectType,
+  object2: ObjectType,
 ): boolean =>
   Object.keys(object1).length === Object.keys(object2).length &&
   (Object.keys(object1) as (keyof typeof object1)[]).every(
@@ -20,7 +20,7 @@ export const randomInt = (min: number, max: number): number =>
 const isObject = (item: unknown): boolean =>
   item != null && typeof item === 'object'
 
-export const isEmptyObject = (object: Object_): boolean =>
+export const isEmptyObject = (object: ObjectType): boolean =>
   object &&
   Object.keys(object).length === 0 &&
   Object.getPrototypeOf(object) === Object.prototype
@@ -28,7 +28,7 @@ export const isEmptyObject = (object: Object_): boolean =>
 const isMergeableObject = (item: unknown): boolean =>
   isObject(item) && !Array.isArray(item)
 
-export const mergeObjects = <T extends Object_>(
+export const mergeObjects = <T extends ObjectType>(
   target: T,
   ...sources: T[]
 ): T => {
@@ -81,7 +81,7 @@ export const validNumberWithFallback = <T = number>(
   return fallbackValue
 }
 
-export const shallowRemoveObjNullishValues = (object: Object_): Object_ =>
+export const shallowRemoveObjNullishValues = (object: ObjectType): ObjectType =>
   Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null))
 
 /**

@@ -38,6 +38,8 @@ enum Size {
 let sizeName: string = Size[2]
 alert(sizeName) // Displays 'Medium' as its value is 2 above
 
+type animals = 'cat' | 'mouse' | 'dragon'
+
 // Any
 let whatever: any = 'aaaaghhhhhh noooooo!'
 

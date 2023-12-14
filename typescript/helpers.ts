@@ -67,7 +67,7 @@ export const removeFalsyValues = <Type>(arr: (Type | Value)[]): Type[] =>
   )
 
 export const isValidNumber = (num: unknown): num is number =>
-  num != null && typeof num === 'number' && Number.isFinite(num)
+  typeof num === 'number' && Number.isFinite(num)
 
 export const validNumberWithFallback = <T = number>(
   maybeNumber: unknown,
@@ -92,8 +92,21 @@ export const shallowRemoveObjNullishValues = (object: ObjectType): ObjectType =>
 export const datification = (date: string | Date): Date =>
   typeof date === 'string' ? new Date(date) : date
 
+/**
+ * Capitalizes the first letter of a word.
+ * @param {string} word - The word to be capitalized.
+ * @returns {string} - The word with the first letter capitalized.
+ */
 export const capitalize = (word: string): string =>
-  word[0].toUpperCase() + word.slice(1)
+  word === '' ? '' : word.charAt(0).toUpperCase() + word.slice(1)
+
+/**
+* Checks if a string is either empty, null, or undefined.
+* @param {undefined | null | string} s - The string to be checked.
+* @returns {boolean} - A boolean value indicating whether the string is empty, null, or undefined.
+*/
+export const isEmptyStringOrNullish = (s: undefined | null | string): boolean =>
+  s == null || s.trim() === ''
 
 export const addOrRemoveFromList =
   <T extends DefinedValue>(listOfThings: T[], aThing: T) =>
@@ -147,3 +160,80 @@ export const deduplicateObjects = <
   array: T[],
   key: Key,
 ): T[] => [...new Map(array.map(object => [object[key], object])).values()]
+
+export const deduplicateObjectsByAllKeys = <T extends object = ObjectType>(
+  array: T[],
+): T[] => [
+    ...new Map(array.map(object => [JSON.stringify(object), object])).values()]
+
+
+type ValueAndRange = {
+  value: number
+  minimum: number
+  maximum: number
+}
+
+/**
+ * Clamps the provided value within the specified range.
+ * @param {ValueAndRange} options - An object containing the maximum, minimum, and value to be clamped.
+ * @param {number} options.maximum - The maximum value of the range.
+ * @param {number} options.minimum - The minimum value of the range.
+ * @param {number} options.value - The value to be clamped within the range.
+ * @returns {number} - The clamped value within the specified range.
+ */
+export const clampValueInRange = ({
+  maximum,
+  minimum,
+  value,
+}: ValueAndRange): number => Math.max(Math.min(value, maximum), minimum)
+
+/**
+ * Checks if the provided value is outside the specified limits.
+ * @param {IsOutsideLimitsOptions} options - An object containing the maximum, minimum, and value to be checked.
+ * @param {number} options.maximum - The maximum value of the limit.
+ * @param {number} options.minimum - The minimum value of the limit.
+ * @param {number} options.value - The value to be checked against the limits.
+ * @returns {boolean} - A boolean value indicating whether the provided value is outside the specified limits.
+ */
+export const isOutsideRange = ({
+  maximum,
+  minimum,
+  value,
+}: ValueAndRange): boolean => value < minimum || maximum < value
+
+
+/**
+ * @description Updates an object in an array in an immutable way.
+ *
+ * @param {T[]} array - The original array.
+ * @param {keyof T} key - The key of the object to be updated.
+ * @param {Partial<T>} newData - The new data to be updated.
+ * @returns {T[]} - A new array with the specified object updated.
+ *
+ * @example
+ * const inputArray = [
+ *   { id: 1, name: 'John' },
+ *   { id: 2, name: 'Jane' },
+ * ];
+ *
+ * const updatedArray = updateObjectInArray(inputArray, 'id', { id: 1, name: 'Johnny' });
+ * // Result: [
+ * //   { id: 1, name: 'Johnny' },
+ * //   { id: 2, name: 'Jane' },
+ * // ]
+ *
+ * @remarks
+ * This function assumes that the `key` is unique across all objects in the array. If there are multiple objects with the same `key` value, this function will update all of them, which might not be the intended behavior.
+ * Lastly, the function assumes that `key` exists in `newData`. If `key` does not exist in `newData`, the function will not update any objects.
+ */
+export const updateObjectInArray = <T extends ObjectType = ObjectType>(
+  array: T[],
+  key: keyof T,
+  newData: Partial<T>,
+): T[] => {
+  if (newData[key] === undefined)
+    throw new Error(`The key ${key.toString()} does not exist in newData`)
+  return array.map(object =>
+    object[key] === newData[key] ? { ...object, ...newData } : object,
+  )
+}

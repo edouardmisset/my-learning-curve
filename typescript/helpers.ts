@@ -1,21 +1,26 @@
-import { DefinedValue, ObjectType, Value } from './type-helpers'
+import { DefinedValue, ObjectType, Value, objectKeys } from './type-helpers'
 
-export const shallowComparison = (
-  object1: ObjectType,
-  object2: ObjectType,
-): boolean =>
-  Object.keys(object1).length === Object.keys(object2).length &&
-  (Object.keys(object1) as (keyof typeof object1)[]).every(
-    key =>
-      Object.prototype.hasOwnProperty.call(object2, key) &&
-      object1[key] === object2[key],
+export const shallowComparison = <T extends object>(
+  leftObject: T,
+  rightObject: T,
+): boolean => {
+  const leftKeys = objectKeys(leftObject).sort()
+  const rightKeys = objectKeys(rightObject).sort()
+
+  if (leftKeys.length !== rightKeys.length) return false
+
+  return leftKeys.every(
+    (key, index) =>
+      key === rightKeys[index] && leftObject[key] === rightObject[key],
   )
+}
+export const isEqual = shallowComparison
 
 export const random = (min: number, max: number): number =>
   min + Math.random() * (max - min + 1)
 
-export const randomInt = (min: number, max: number): number =>
-  min + Math.floor(Math.random() * (max - min + 1))
+export const randomInt = (minInt: number, maxInt: number): number =>
+  minInt + Math.floor(Math.random() * (maxInt - minInt + 1))
 
 const isObject = (item: unknown): boolean =>
   item != null && typeof item === 'object'
@@ -101,10 +106,10 @@ export const capitalize = (word: string): string =>
   word === '' ? '' : word.charAt(0).toUpperCase() + word.slice(1)
 
 /**
-* Checks if a string is either empty, null, or undefined.
-* @param {undefined | null | string} s - The string to be checked.
-* @returns {boolean} - A boolean value indicating whether the string is empty, null, or undefined.
-*/
+ * Checks if a string is either empty, null, or undefined.
+ * @param {undefined | null | string} s - The string to be checked.
+ * @returns {boolean} - A boolean value indicating whether the string is empty, null, or undefined.
+ */
 export const isEmptyStringOrNullish = (s: undefined | null | string): boolean =>
   s == null || s.trim() === ''
 
@@ -125,7 +130,6 @@ export const stringIncludesCaseInsensitive = (
   string: string,
   searchString: string,
 ): boolean => string.toLowerCase().includes(searchString.toLowerCase())
-
 
 /**
  * @description Deduplicates an array of objects based on a specified property.
@@ -164,8 +168,8 @@ export const deduplicateObjects = <
 export const deduplicateObjectsByAllKeys = <T extends object = ObjectType>(
   array: T[],
 ): T[] => [
-    ...new Map(array.map(object => [JSON.stringify(object), object])).values()]
-
+    ...new Map(array.map(object => [JSON.stringify(object), object])).values(),
+  ]
 
 type ValueAndRange = {
   value: number
@@ -200,7 +204,6 @@ export const isOutsideRange = ({
   minimum,
   value,
 }: ValueAndRange): boolean => value < minimum || maximum < value
-
 
 /**
  * @description Updates an object in an array in an immutable way.

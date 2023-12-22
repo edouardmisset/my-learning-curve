@@ -1,20 +1,4 @@
-import { DefinedValue, ObjectType, Value, objectKeys } from './type-helpers'
-
-export const shallowComparison = <T extends object>(
-  leftObject: T,
-  rightObject: T,
-): boolean => {
-  const leftKeys = objectKeys(leftObject).sort()
-  const rightKeys = objectKeys(rightObject).sort()
-
-  if (leftKeys.length !== rightKeys.length) return false
-
-  return leftKeys.every(
-    (key, index) =>
-      key === rightKeys[index] && leftObject[key] === rightObject[key],
-  )
-}
-export const isEqual = shallowComparison
+import { DefinedValue, ObjectType, Value } from './type-helpers'
 
 export const random = (min: number, max: number): number =>
   min + Math.random() * (max - min + 1)

@@ -223,7 +223,11 @@ If it is not _already_ installed on you system, [install](https://github.com/ohm
 
 An awesome shell with autocompletion, history, alias, plugins, etc.
 
-Install it by running: `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+Install it by running:
+
+```sh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 
 ### Plugins
 

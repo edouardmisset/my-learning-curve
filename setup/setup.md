@@ -1,4 +1,37 @@
-# My setup
+- [My setup](#my-setup)
+  - [Intro](#intro)
+  - [Quote](#quote)
+  - [Summary](#summary)
+  - [GitHub](#github)
+    - [GitHub Template](#github-template)
+    - [GitHub Page](#github-page)
+  - [VS Code](#vs-code)
+    - [Font: Fira Code](#font-fira-code)
+    - [Extensions](#extensions)
+      - [All around](#all-around)
+      - [HTML](#html)
+      - [CSS](#css)
+      - [JS](#js)
+      - [TypeScript](#typescript)
+      - [React](#react)
+      - [Markdown](#markdown)
+      - [Shell](#shell)
+      - [Node](#node)
+      - [Deno](#deno)
+      - [Bun](#bun)
+      - [Git](#git)
+      - [Customization](#customization)
+    - [Settings](#settings)
+  - [Package manager: Homebrew](#package-manager-homebrew)
+  - [Terminal: iTerm2](#terminal-iterm2)
+    - [Shell: ZSH](#shell-zsh)
+    - [Framework: Oh My Zsh](#framework-oh-my-zsh)
+    - [Plugins](#plugins)
+    - [Theme: PowerLevel10k](#theme-powerlevel10k)
+    - [Aliases](#aliases)
+    - [Functions](#functions)
+
+# My setup 
 
 ## Intro
 

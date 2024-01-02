@@ -1,0 +1,23 @@
+/** Credits: Kevin Powell & CSS Remedy
+* https://www.kevinpowell.co/article/css-remedy/
+* https://github.com/mozdevs/cssremedy
+*/
+
+* {
+  box-sizing: border-box;
+} /* Switch to border-box for box-sizing. */
+
+body {
+  margin: 0; /* Remove the tiny space around the edge of the page */
+}
+
+img,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* Switch display mode to block, since that's what we usually want for images. */
+  vertical-align: middle; /* If you override, and make an image inline, it's likely you'll want middle vertical alignment. */
+}

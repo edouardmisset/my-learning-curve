@@ -1,0 +1,574 @@
+/** Credits Stephanie Eckles
+* https://smolcss.dev
+*/
+
+/** Responsive CSS Grid (RAM v2) */
+.css-grid {
+  --min: 15ch;
+  --gap: 1rem;
+
+  display: grid;
+  grid-gap: var(--gap);
+  /* min() with 100% prevents overflow
+  in extra narrow spaces */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+}
+
+/** Responsive Flexbox Grid */
+.flexbox-grid {
+  --min: 10ch;
+  --gap: 1rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+.flexbox-grid > * {
+  flex: 1 1 var(--min);
+}
+
+/** Intrinsic Container */
+.container {
+  width: min(100% - 3rem, var(--container-max, 60ch));
+  margin-inline: auto;
+}
+
+/** Breakout Grid */
+.breakout-grid {
+  --max-content-width: 50ch;
+  --breakout-difference: 0.2;
+
+  /*  Compute total allowed grid width to `--breakout-difference` 
+      larger than content area  */
+  --breakout-grid-width: calc(
+    var(--max-content-width) +
+      (var(--max-content-width) * var(--breakout-difference))
+  );
+
+  display: grid;
+  grid-template-columns:
+    [grid-start] 1fr
+    [content-start] minmax(min(100%, var(--max-content-width)), 1fr)
+    [content-end] 1fr
+    [grid-end];
+  width: min(100% - 2rem, var(--breakout-grid-width));
+  row-gap: 1rem;
+  margin: 5vb auto;
+}
+
+.breakout-grid > *:not(.breakout) {
+  grid-column: content;
+}
+
+.breakout-grid > .breakout {
+  grid-column: grid;
+}
+
+/** Responsive Padding */
+.responsive-padding {
+  padding: 1.5rem clamp(1rem, 5%, 3rem);
+}
+
+/** Responsive Sidebar Layout */
+.sidebar {
+  display: grid;
+  grid-template-columns: fit-content(20ch) minmax(min(50vw, 30ch), 1fr);
+}
+
+/** Aspect Ratio Gallery */
+.aspect-ratio-gallery {
+  --min: 15rem;
+  --aspect-ratio: 4/3;
+  --gap: 0;
+}
+
+.aspect-ratio-gallery li {
+  height: max(25vh, 15rem);
+}
+
+@supports (aspect-ratio: 1) {
+  .aspect-ratio-gallery li {
+    aspect-ratio: var(--aspect-ratio);
+    height: auto;
+  }
+}
+
+.aspect-ratio-gallery img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/** Flexible Unbreakable Boxes */
+.unbreakable-box {
+  --color-light: #e0d4f6;
+  --color-dark: #675883;
+
+  margin: 2rem auto;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+  font-size: 1.15rem;
+  /* Smol Responsive Padding FTW! */
+  padding: clamp(0.75rem, 3%, 2rem);
+  /* Provide a max-width and prevent overflow */
+  width: min(50ch, 90%);
+  /* Help prevent overflow of long words/names/URLs */
+  word-break: break-word;
+  /* Optional, not supported for all languages */
+  hyphens: auto;
+}
+
+.unbreakable-box footer {
+  padding: 0.25em 0.5em;
+  margin-top: 1rem;
+  color: var(--color-light);
+  background-color: var(--color-dark);
+  font-size: 0.9rem;
+  /* Creates a visual box shrunk to `max-content` */
+  width: fit-content;
+}
+
+/** Background Picture */
+.background-picture img {
+  --background-img-brightness: 0.45;
+  --background-img-saturate: 1.25;
+
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  /* decrease brightness to improve text contrast */
+  filter: brightness(var(--background-img-brightness))
+    saturate(var(--background-img-saturate));
+}
+
+/* Necessary if not already within a reset */
+.background-picture :is(img, picture) {
+  display: block;
+}
+
+.background-picture__content {
+  /* ensure stacking context above the picture */
+  position: relative;
+  align-self: center;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+.background-picture__content p {
+  font-size: clamp(1.35rem, 5vw, 1.75rem);
+  line-height: 1.3;
+}
+
+/** Composable Card Component */
+.card-component {
+  --img-ratio: 3/2;
+
+  display: flex;
+  flex-direction: column;
+  /* Supported for flexbox in modern browsers since April 2021 */
+  gap: 1rem;
+  box-shadow: 0 0 0.5rem hsl(0 0% 0% / 35%);
+  border-radius: 0.5rem;
+}
+
+.card-component > img {
+  aspect-ratio: var(--img-ratio);
+  object-fit: cover;
+  width: 100%;
+}
+
+.card-component > img:first-child {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.card-component > img:last-child {
+  border-radius: 0 0 0.5rem 0.5rem;
+  margin-top: auto;
+}
+
+.card-component > :not(img) {
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  /* Prevent typography "orphans" */
+  text-wrap: pretty;
+}
+
+.card-component > :not(img):first-child {
+  margin-top: 1rem;
+}
+
+/* Enhanced `:not()` accepts a selector list,
+but as a fallback you can chain `:not()` instead */
+.card-component > :last-of-type:not(img, h2, h3, h4) {
+  margin-bottom: 1rem;
+}
+
+.card-component > :not(h2, h3, h4) {
+  font-size: 0.9rem;
+}
+
+.card-component > a {
+  align-self: start;
+}
+
+/** Avatar List Component */
+.avatar-list {
+  --avatar-size: 3rem;
+  --avatar-count: 3;
+
+  display: grid;
+  /* Default to displaying most of the avatar to
+  enable easier access on touch devices, ensuring
+  the WCAG touch target size is met or exceeded */
+  grid-template-columns: repeat(
+    var(--avatar-count),
+    max(44px, calc(var(--avatar-size) / 1.15))
+  );
+  /* `padding` matches added visual dimensions of
+  the `box-shadow` to help create a more accurate
+  computed component size */
+  padding: 0.08em;
+  font-size: var(--avatar-size);
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  .avatar-list {
+    /* We create 1 extra cell to enable the computed 
+    width to match the final visual width */
+    grid-template-columns: repeat(
+      calc(var(--avatar-count) + 1),
+      calc(var(--avatar-size) / 1.75)
+    );
+  }
+}
+
+.avatar-list li {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+}
+
+.avatar-list li:hover ~ li a,
+.avatar-list li:focus-within ~ li a {
+  transform: translateX(33%);
+}
+
+.avatar-list img,
+.avatar-list a {
+  display: block;
+  border-radius: 50%;
+}
+
+.avatar-list a {
+  transition: transform 180ms ease-in-out;
+}
+
+.avatar-list img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #fff;
+  box-shadow: 0 0 0 0.05em #fff, 0 0 0 0.08em rgba(0, 0, 0, 0.15);
+}
+
+.avatar-list a:focus {
+  outline: 2px solid transparent;
+  /* Double-layer trick to work for dark and light backgrounds */
+  box-shadow: 0 0 0 0.08em #29344b, 0 0 0 0.12em white;
+}
+
+/** Scroll Snap */
+.scroll-snap {
+  /* Set up container positioning */
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 1.5rem;
+  /* Enable overflow along our scroll axis */
+  overflow-x: auto;
+  /* Define axis and scroll type, where
+  `mandatory` means any scroll attempt will
+  cause a scroll to the next item */
+  scroll-snap-type: x mandatory;
+  padding: 0 0 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap > * {
+  width: min(45ch, 60vw);
+  /* Choose how to align children on scroll */
+  scroll-snap-align: center;
+  /* Prevents scrolling past more than one child */
+  scroll-snap-stop: always;
+}
+
+/** Focus Style */
+/* For "real-world" usage, you do not need to scope
+these custom properties */
+.focus-styles :is(a, button, input, textarea, summary) {
+  /* Using max() ensures at least a value of 2px, 
+  while allowing the possibility of scaling 
+  relative to the component */
+  --outline-size: max(2px, 0.08em);
+  --outline-style: solid;
+  --outline-color: currentColor;
+}
+
+/* Base :focus styles for fallback purposes */
+.focus-styles :is(a, button, input, textarea, summary):focus {
+  outline: var(--outline-size) var(--outline-style) var(--outline-color);
+  outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+/* Final :focus-visible styles */
+.focus-styles :is(a, button, input, textarea):focus-visible {
+  outline: var(--outline-size) var(--outline-style) var(--outline-color);
+  outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+/* Remove base :focus styles when :focus-visible is available */
+.focus-styles :is(a, button, input, textarea):focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Demonstration of customizing */
+.focus-styles li:nth-of-type(2) a {
+  --outline-style: dashed;
+}
+
+.focus-styles input {
+  --outline-color: red;
+}
+
+.focus-styles textarea {
+  --outline-size: 0.25em;
+  --outline-style: dotted;
+  --outline-color: green;
+}
+
+.focus-styles li:nth-of-type(4) button {
+  font-size: 2.5rem;
+}
+
+/** Visited Styles */
+ul.visited-styles {
+  --color-background: #fff;
+  --color-accent: green;
+
+  display: grid;
+  grid-gap: 0.5rem;
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-accent);
+}
+
+.visited-styles a {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  color: #222;
+  text-decoration-color: var(--color-accent);
+  text-decoration-style: dotted;
+  text-underline-offset: 0.15em;
+}
+
+.visited-styles a span {
+  margin-right: 0.25em;
+  /* Remove from normal document flow
+  which excludes it from receiving 
+  the underline ✨ */
+  float: left;
+}
+
+.visited-styles a span::after {
+  content: '✔';
+  color: var(--color-background);
+}
+
+.visited-styles a:visited span::after {
+  color: var(--color-accent);
+}
+
+/** Document Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 5vh clamp(1rem, 5vw, 3rem) 1rem;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: #222;
+}
+
+body > * {
+  --layout-spacing: max(8vh, 3rem);
+  --max-width: 70ch;
+  width: min(100%, var(--max-width));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main {
+  margin-top: var(--layout-spacing);
+}
+
+footer {
+  margin-top: auto;
+  padding-top: var(--layout-spacing);
+}
+
+footer p {
+  border-top: 1px solid #ccc;
+  padding-top: 0.25em;
+  font-size: 0.9rem;
+  color: #767676;
+}
+
+:is(h1, h2, h3) {
+  line-height: 1.2;
+}
+
+:is(h2, h3):not(:first-child) {
+  margin-top: 2em;
+}
+
+article * + * {
+  margin-top: 1em;
+}
+
+a {
+  color: navy;
+  text-underline-offset: 0.15em;
+}
+
+/** Transitions */
+.transitions > * {
+  --transition-property: transform;
+  --transition-duration: 180ms;
+
+  transition: var(--transition-property) var(--transition-duration) ease-in-out;
+}
+
+.rise:hover > * {
+  transform: translateY(-25%);
+}
+
+.rotate:hover > * {
+  transform: rotate(15deg);
+}
+
+.zoom:hover > * {
+  transform: scale(1.1);
+}
+
+.fade > * {
+  --transition-property: opacity;
+  --transition-duration: 500ms;
+}
+
+.fade:hover > * {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transitions > * {
+    --transition-duration: 0.01ms;
+  }
+}
+
+/** Article Anchor */
+.article-anchor {
+  display: grid;
+  grid-template-columns: min-content auto;
+  position: relative;
+  margin-top: 2em;
+  /* You could pull this property out and
+  generalize it under the selector `[id]` as
+  it won't affect flow layout or regular margins */
+  scroll-margin-top: 2em;
+}
+
+.article-anchor:target::before {
+  content: "Is it me you're looking for?";
+  position: absolute;
+  font-size: 0.9rem;
+  top: -1.25rem;
+  left: 0;
+  font-style: italic;
+  color: currentColor;
+}
+
+.article-anchor a {
+  grid-row-start: 1;
+  align-self: start;
+  font-size: 1rem;
+  line-height: 1;
+  /* We're using `transform` vs. margins */
+  transform: translateX(-50%) translateY(25%);
+  text-decoration: none;
+  /* Be sure to check that your own colors still meet
+  or exceed 4.5:1 contrast when using lowering opacity */
+  opacity: 0.75;
+}
+
+.article-anchor a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  opacity: 1;
+}
+
+.article-anchor a:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 0.15em;
+}
+
+/* Visually hidden while remaining accessible to
+assistive tech like screen readers */
+.article-anchor-hidden {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+/** List Markers */
+.list-markers {
+  --marker-color: #a150fb;
+
+  padding: 0;
+  margin: 0 0 0 2em;
+}
+
+.list-markers li {
+  padding-left: 0.5em;
+}
+
+.list-markers li + li {
+  margin-top: 0.5em;
+}
+
+.list-markers li::marker {
+  color: var(--marker-color);
+}
+
+ul.list-markers li::marker {
+  content: attr(data-icon);
+  font-size: 1.15em;
+}
+
+ol.list-markers li::marker {
+  /* The `list-item`  counter is provided by 
+  the browser for lists */
+  content: counter(list-item);
+  font-family: cursive;
+  font-size: 1.5em;
+}

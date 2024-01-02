@@ -1,0 +1,80 @@
+/** 10 Single line CSS layouts
+/* https://web.dev/articles/one-line-layouts
+/* by Una Kravets
+*/
+
+/** Super Centered */
+.parent {
+  display: grid;
+  place-items: center;
+}
+
+/** Deconstructed Pancake */
+.parent {
+  display: flex;
+}
+
+.child {
+  flex: 0 1 150px;
+}
+
+/* Or */
+
+.parent {
+  display: flex;
+}
+
+.child {
+  flex: 1 1 150px;
+}
+
+/** Sidebar Says */
+.parent {
+  display: grid;
+  grid-template-columns: minmax(150px, 25%) 1fr;
+}
+
+/** Pancake Stack */
+.parent {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/** Classic Holy Grail Layout */
+.parent {
+  display: grid;
+  grid-template: auto 1fr auto / auto 1fr auto;
+}
+
+/** 12-Span Grid */
+.parent {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.child-span-12 {
+  grid-column: 1 / 13;
+}
+
+/** RAM (Repeat, Auto, MinMax) */
+.parent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/** Line Up */
+.parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/** Clamping My Style */
+.parent {
+  width: clamp(23ch, 60%, 46ch);
+}
+
+/** Respect for Aspect */
+.video {
+  aspect-ratio: 16 / 9;
+}

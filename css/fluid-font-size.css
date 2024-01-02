@@ -1,0 +1,80 @@
+/** Credits Stephanie Eckles
+* https://moderncss.dev/generating-font-size-css-rules-and-creating-a-fluid-type-scale/
+* https://moderncss.dev/container-query-units-and-fluid-typography/
+*/
+
+body {
+  line-height: 1.5;
+}
+
+p,
+li,
+h1,
+h2,
+h3,
+h4 {
+  /* Help prevent overflow of long words/names/URLs */
+  overflow-wrap: break-word;
+
+  /* Optional, not supported for all languages */
+  hyphens: auto;
+}
+
+.fluid-type {
+  font-size: clamp(1rem, 4vw + 1rem, 3rem);
+}
+
+/* Progressive enhancement */
+
+:root {
+  --headline-1: 2.75rem;
+  --headline-2: 2.35rem;
+  --headline-3: 1.5rem;
+  --headline-4: 1.15rem;
+}
+
+h1,
+.h1 {
+  --font-size: var(--headline-1);
+
+  font-size: var(--headline-1);
+}
+
+h2,
+.h2 {
+  --font-size: var(--headline-2);
+  --font-size-fluid: 4.5cqi;
+
+  font-size: var(--headline-2);
+}
+
+h3,
+.h3 {
+  --font-size: var(--headline-3);
+  --font-size-fluid: 4.25cqi;
+  --font-size-diff: 0.2;
+
+  font-size: var(--headline-3);
+}
+
+h4,
+.h4 {
+  --font-size: var(--headline-4);
+  --font-size-fluid: 4cqi;
+  --font-size-diff: 0.2;
+
+  font-size: var(--headline-4);
+}
+
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    font-size: clamp(
+      max(
+        1rem,
+        var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)
+      ),
+      var(--font-size-fluid, 5cqi),
+      var(--font-size)
+    );
+  }
+}

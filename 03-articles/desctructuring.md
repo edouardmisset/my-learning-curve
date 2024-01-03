@@ -1,3 +1,7 @@
+---
+tags: ["JavaScript", "ES6", "Destructuring", "Nested Property", "Function Arguments", "Variables Swapping"]
+---
+
 # Destructuring Assignment
 
 ## The concept
@@ -18,7 +22,7 @@ OR
 #### The bascis
 
 ```javascript
-// The bascics
+// The basics
 const food = ['🥓', '🍕', '🍟', '🍔', '🌮'];
 const [bacon, , , , taco] = food;
 
@@ -47,10 +51,10 @@ console.log(bacon); // 🐖
 
 ### With objects
 
-#### The bascis
+#### The basics
 
 ```javascript
-// The bascis
+// The basics
 const animals = {
   snake: '🐍',
   monkey: '🐵',
@@ -172,7 +176,7 @@ const obj = {
 const { [rando]: myKey } = obj;
 ```
 
-#### Conditionnally added property / value
+#### Conditionally added property / value
 
 ```javascript
 const trueCondition = true

@@ -1,3 +1,7 @@
+---
+tags: ['generics', 'typescript', 'programming']
+---
+
 # Generics
 
 ## Example with a class

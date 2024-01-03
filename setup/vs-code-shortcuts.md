@@ -22,7 +22,8 @@
   `cmd + ù` (remapped to `cmd + $`)
 
 - Multiple cursors:
-  `cmd + alt + up/down arrow`
+  `cmd + alt + up/down`
+  `ctrl + shift + up/down`
 
 - Search:
   `cmd + f`
@@ -33,10 +34,10 @@
 - File search:
   `cmd + shift + f / h`
 
-- Duplicate:
+- Duplicate up/down:
   `shift + alt + up/down`
 
-- Go down one line:
+- Move line up/down once:
   `alt + up/down`
 
 - Multiple cursors:
@@ -54,3 +55,9 @@
 
 - Select entire words:
   `cmd + shift + left / right`
+
+- Display Main Sidebar:
+  `cmd + b`
+
+- Display Secondary Sidebar:
+  `cmd + ctrl + b`

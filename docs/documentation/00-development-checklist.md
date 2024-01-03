@@ -1,3 +1,5 @@
+# Development Checklist
+
 ## Before you commit any changes, check your work against these requirements:
 
 1. Config
@@ -10,8 +12,8 @@ cypress.env.json.dev cypress.env.json` & modify the required values...) for
 
 2. Dev
 
-- Please make sure you follow the **[folder](./folder-structure.md) and [component](./component-structure.md) structure**
-- Please make sure you follow the **[naming](./naming-conventions.md) conventions**
+- Please make sure you follow the **[folder](./02-folder-structure.md) and [component](./03-component-structure.md) structure**
+- Please make sure you follow the **[naming](./01-naming-conventions.md) conventions**
 
 3. Test
 
@@ -25,7 +27,7 @@ cypress.env.json.dev cypress.env.json` & modify the required values...) for
 - Please make sure you do not have **unused variables** or **unused imports** (check your linter)
 - Please make sure your code is **formatted** (`yarn format`)
 - Please make sure your code passes **static code analysis** checks (`yarn type:checking`)
-- Please make sure your commit message follows the [**conventional commits**](./conventional-commits.md) guidelines
+- Please make sure your commit message follows the [**conventional commits**](./04-conventional-commits.md) guidelines
 
 5. Merge
 

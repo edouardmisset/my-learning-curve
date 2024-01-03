@@ -1,3 +1,5 @@
+# Component Structure
+
 **Source**: This is from this [medium article](https://rahuulmiishra.medium.com/react-worst-practices-bdf924efe470)
 
 ## **Import** Order:

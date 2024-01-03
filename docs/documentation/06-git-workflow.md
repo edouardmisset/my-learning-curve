@@ -23,7 +23,7 @@ In order of complexity, they are:
 
 [GitFlow cheatsheet & **tool** (_avh_)](https://danielkummer.github.io/git-flow-cheatsheet/)
 
-![GitFlow Diagram](uploads/git-branching-model.png)
+![GitFlow Diagram](https://nvie.com/img/git-model@2x.png)
 
 ## GitHub Flow Branch Strategy:
 

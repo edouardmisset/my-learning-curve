@@ -1,4 +1,5 @@
 ---
+authors: ['Edouard']
 tags: ['generics', 'typescript', 'programming']
 ---
 

@@ -1,6 +1,10 @@
+---
+authors: ['Edouard']
+---
+
 # Typescript types
 
-## Primitive types:
+## Primitive types
 
 ```typescript
 // boolean
@@ -18,7 +22,7 @@ let meh: undefined = undefined
 let noo: null = null
 ```
 
-## Complex types:
+## Complex types
 
 ```typescript
 // Array

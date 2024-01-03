@@ -1,5 +1,14 @@
 ---
-tags: ["JavaScript", "ES6", "Destructuring", "Nested Property", "Function Arguments", "Variables Swapping"]
+authors: ['Edouard']
+tags:
+  [
+    'JavaScript',
+    'ES6',
+    'Destructuring',
+    'Nested Property',
+    'Function Arguments',
+    'Variables Swapping',
+  ]
 ---
 
 # Destructuring Assignment
@@ -23,30 +32,30 @@ OR
 
 ```javascript
 // The basics
-const food = ['🥓', '🍕', '🍟', '🍔', '🌮'];
-const [bacon, , , , taco] = food;
+const food = ['🥓', '🍕', '🍟', '🍔', '🌮']
+const [bacon, , , , taco] = food
 
-console.log(bacon, taco); // 🥓 🌮
+console.log(bacon, taco) // 🥓 🌮
 ```
 
 #### Using the spread operator
 
 ```javascript
 // Using the spread operator
-const food = ['🥓', '🍕', '🍟', '🥬', '🥦'];
-const [, , , ...noJunkFood] = food;
+const food = ['🥓', '🍕', '🍟', '🥬', '🥦']
+const [, , , ...noJunkFood] = food
 
-console.log(noJunkFood); // [ '🥬', '🥦' ]
+console.log(noJunkFood) // [ '🥬', '🥦' ]
 ```
 
 #### Using a default value
 
 ```javascript
 // Using a default value
-const food = [undefined, '🍕', '🍟'];
-const [bacon = '🐖', pizza, fries] = food;
+const food = [undefined, '🍕', '🍟']
+const [bacon = '🐖', pizza, fries] = food
 
-console.log(bacon); // 🐖
+console.log(bacon) // 🐖
 ```
 
 ### With objects
@@ -59,10 +68,10 @@ const animals = {
   snake: '🐍',
   monkey: '🐵',
   octopus: '🐙',
-};
-const { octopus } = animals;
+}
+const { octopus } = animals
 
-console.log(octopus); // 🐙
+console.log(octopus) // 🐙
 ```
 
 #### Using the spread operator
@@ -73,20 +82,20 @@ const animals = {
   snake: '🐍',
   monkey: '🐵',
   octopus: '🐙',
-};
-const { ...rest } = animals;
+}
+const { ...rest } = animals
 
-console.log(rest); // { snake: '🐍', monkey: '🐵', octopus: '🐙' }
+console.log(rest) // { snake: '🐍', monkey: '🐵', octopus: '🐙' }
 
 // Overriding a value using the spread operator
 const animals = {
   snake: '🐍',
   monkey: '🐵',
   octopus: '🐙',
-};
-const newAnimals = { ...animals, snake: '🦎' };
+}
+const newAnimals = { ...animals, snake: '🦎' }
 
-console.log(newAnimals); // { snake: '🦎', monkey: '🐵', octopus: '🐙' }
+console.log(newAnimals) // { snake: '🦎', monkey: '🐵', octopus: '🐙' }
 ```
 
 #### Using a default value
@@ -97,10 +106,10 @@ const animals = {
   snake: '🐍',
   monkey: '🐵',
   octopus: undefined,
-};
-const { octopus = '🦑' } = animals;
+}
+const { octopus = '🦑' } = animals
 
-console.log(octopus); // 🦑
+console.log(octopus) // 🦑
 ```
 
 #### Renaming property
@@ -111,10 +120,10 @@ const animals = {
   snake: '🐍',
   monkey: '🐵',
   octopus: '🦑',
-};
-const { octopus: squid } = animals;
+}
+const { octopus: squid } = animals
 
-console.log(squid); // 🦑
+console.log(squid) // 🦑
 ```
 
 #### Nested property
@@ -125,12 +134,12 @@ const family = {
   parent: {
     child: '👶',
   },
-};
+}
 const {
   parent: { child },
-} = family;
+} = family
 
-console.log(child); // 👶
+console.log(child) // 👶
 ```
 
 #### Desctructuring within function arguments
@@ -140,13 +149,13 @@ console.log(child); // 👶
 const user = {
   id: 0,
   name: 'John',
-};
-
-function sayHi({ id, name }) {
-  console.log(`Hi ${name}!`);
 }
 
-sayHi(user); // Hi John!
+function sayHi({ id, name }) {
+  console.log(`Hi ${name}!`)
+}
+
+sayHi(user) // Hi John!
 ```
 
 ## Bonus
@@ -155,25 +164,25 @@ sayHi(user); // Hi John!
 
 ```javascript
 // Variables swapping
-let a = 'foo';
-let b = 'bar';
+let a = 'foo'
+let b = 'bar'
 
-[a, b] = [b, a];
+;[a, b] = [b, a]
 
-console.log('a:', a, 'b:', b); // a: bar b: foo
+console.log('a:', a, 'b:', b) // a: bar b: foo
 ```
 
 #### Computed property name
 
 ```javascript
 // Computed property name
-const rando = randomKey();
+const rando = randomKey()
 
 const obj = {
   [rando]: 42,
-};
+}
 
-const { [rando]: myKey } = obj;
+const { [rando]: myKey } = obj
 ```
 
 #### Conditionally added property / value

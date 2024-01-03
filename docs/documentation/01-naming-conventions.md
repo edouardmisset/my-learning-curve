@@ -77,7 +77,7 @@ export const clampValueInRange = (params: ValueAndRange): number => {
 }
 ```
 
-When defining a React Component, we use `props` for its "*properties*".
+When defining a React Component, we use `props` for its "_properties_".
 
 For example:
 

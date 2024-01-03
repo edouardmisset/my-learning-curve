@@ -2,7 +2,7 @@
 logs
 
 # Dependency directories
-node_modules/
+node_modules
 
 # Optional npm cache directory
 .npm
@@ -13,12 +13,21 @@ node_modules/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variables file
-.env
-.env.test
+# Production
+/build
 
-# parcel-bundler cache (https://parceljs.org/)
-.cache
+# Generated files
+.docusaurus
+.cache-loader
 
-# MacOS files
+# Misc
 .DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

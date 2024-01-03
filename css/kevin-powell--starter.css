@@ -2,6 +2,8 @@
  * https://github.com/kevin-powell/website-starter-template-v3/
  * &
  * https://github.com/kevin-powell/demo-starter-template-with-sass/blob/main/src/sass/base/_reset.scss
+ * &
+ * https://www.youtube.com/shorts/ydGti7sLVOc
 */
 
 :root {
@@ -42,10 +44,21 @@ html:focus-within {
 }
 
 body {
-  min-height: 100dvh;
+  min-height: 100vh;
   font-family: system-ui;
   font-size: 1.125rem;
   line-height: 1.6;
+}
+
+main {
+  width: min(65ch, 100% - 4rem);
+  margin-inline: auto;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
 }
 
 img,
@@ -53,11 +66,6 @@ svg,
 picture {
   max-width: 100%;
   display: block;
-}
-
-main {
-  width: min(65ch, 100% - 4rem);
-  margin-inline: auto;
 }
 
 a {

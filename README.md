@@ -8,7 +8,7 @@ This repository is a collection of various programming concepts, snippets, and b
 - `02-snippets`: Contains code snippets for various languages and concepts, such
   as TypeScript, CSS and shell scripting.
 - `03-articles`: Contains articles on specific topics like destructuring, generics, and memoization in JavaScript.
-- `04-docs`: Contains documentation and guidelines for best practices in software development, such as conventional commits, development checklists, and naming conventions.
+- `04-documentation`: Contains documentation and guidelines for best practices in software development, such as conventional commits, development checklists, and naming conventions.
 
 ## Usage
 

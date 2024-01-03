@@ -108,7 +108,7 @@ lion.greet() // Displays 'Hello, Lion'
 //is used to provide type information when there is no explicit
 //type annotation. For example, in this code
 let x = 3
-// automatimally detects x is a number.
+// automatically detects x is a number.
 
 // Union Type
 let confused: string | number = 'hello'

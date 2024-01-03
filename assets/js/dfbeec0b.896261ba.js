@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_learning_curve=self.webpackChunkmy_learning_curve||[]).push([[6468],{1972:e=>{e.exports=JSON.parse('{"label":"Closures","permalink":"/my-learning-curve/blog/tags/closures","allTagsPath":"/my-learning-curve/blog/tags","count":1,"unlisted":false}')}}]);

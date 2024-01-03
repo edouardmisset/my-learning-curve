@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_learning_curve=self.webpackChunkmy_learning_curve||[]).push([[5394],{7195:e=>{e.exports=JSON.parse('{"label":"Optimization","permalink":"/my-learning-curve/blog/tags/optimization","allTagsPath":"/my-learning-curve/blog/tags","count":1,"unlisted":false}')}}]);

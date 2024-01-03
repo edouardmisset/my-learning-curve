@@ -8,16 +8,17 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://edouardmisset.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/my-learning-curve',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'edouardmisset', // Usually your GitHub org/user name.
   projectName: 'my-learning-curve', // Usually your repo name.
-  trailingSlash: false,
+  trailingSlash: true,
+  deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -55,7 +56,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    // image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'My Learning Curve',
       // logo: {
@@ -68,21 +69,18 @@ const config: Config = {
           sidebarId: 'setupSidebar',
           position: 'left',
           label: 'My Setup',
-          to: '/docs/setup',
         },
         {
           type: 'docSidebar',
           sidebarId: 'documentationSidebar',
           position: 'left',
           label: 'Documentation',
-          to: '/docs/documentation',
         },
         {
           type: 'docSidebar',
           sidebarId: 'snippetsSidebar',
           position: 'left',
           label: 'Snippets',
-          to: '/docs/snippets/',
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
@@ -104,11 +102,11 @@ const config: Config = {
             },
             {
               label: 'Documentation',
-              to: '/docs/documentation',
+              to: '/docs/documentation/development-checklist',
             },
             {
               label: 'Snippets',
-              to: '/docs/snippets',
+              to: '/docs/snippets/typescript/helpers',
             },
           ],
         },
@@ -138,9 +136,9 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Edouard Misset.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-      additionalLanguages: ['bash'],
+      theme: prismThemes.oneDark,
+      darkTheme: prismThemes.oneDark,
+      additionalLanguages: ['bash', 'JSON'],
     },
   } satisfies Preset.ThemeConfig,
 }

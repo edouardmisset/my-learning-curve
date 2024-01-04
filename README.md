@@ -4,11 +4,10 @@ This repository is a collection of various programming concepts, snippets, and b
 
 ## Structure
 
-- `01-setup`: Contains setup instructions and useful VS Code shortcuts.
-- `02-snippets`: Contains code snippets for various languages and concepts, such
-  as TypeScript, CSS and shell scripting.
-- `03-articles`: Contains articles on specific topics like destructuring, generics, and memoization in JavaScript.
-- `04-documentation`: Contains documentation and guidelines for best practices in software development, such as conventional commits, development checklists, and naming conventions.
+- `blog`: Contains articles on TypeScript topics like types, generics, destructuring, memoization, and higher-order functions.
+- `docs`: Contains documentation and guidelines for best practices in software development, such as development checklists, naming conventions, and component structure.
+- `src`: Contains the source code for a React application, including components and styles.
+- `static`: Contains static files for the application, such as images.
 
 ## Usage
 

@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic'
 
 const config: Config = {
   title: 'My Learning Curve',
-  tagline: 'Bits and pieces from my learning journey',
+  tagline: 'Bits and pieces I learned during my coding journey',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

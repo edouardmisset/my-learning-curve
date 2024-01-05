@@ -4,6 +4,8 @@
  * https://github.com/kevin-powell/demo-starter-template-with-sass/blob/main/src/sass/base/_reset.scss
  * &
  * https://www.youtube.com/shorts/ydGti7sLVOc
+ *
+ * https://www.youtube.com/watch?v=cCAtD_BAHNw
 */
 
 :root {
@@ -36,15 +38,15 @@
 
 html {
   color-scheme: light dark;
+  hanging-punctuation: first last;
 }
 
-/* Set core root defaults */
 html:focus-within {
   scroll-behavior: smooth;
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100svh;
   font-family: system-ui;
   font-size: 1.125rem;
   line-height: 1.6;
@@ -57,8 +59,16 @@ main {
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
+}
+
+p {
+  max-width: 65ch;
+  text-wrap: pretty;
 }
 
 img,
@@ -90,5 +100,12 @@ a:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :has(:target) {
+    scroll-behavior: smooth;
+    scroll-padding-top: 3rem;
   }
 }

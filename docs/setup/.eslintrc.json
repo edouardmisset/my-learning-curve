@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc.json",
+  "plugins": [
+    // "react",
+    // "react-hooks",
+    "@typescript-eslint",
+    "prettier"
+    // "deprecation",
+    // "promise",
+    // "sort-exports",
+    // "testing-library",
+    // "jsx-a11y",
+    // "unicorn"
+  ],
+  "extends": [
+    // "react-app",
+    // "plugin:react/recommended",
+    // "plugin:react-hooks/recommended",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    // "plugin:testing-library/react",
+    // "plugin:jsx-a11y/recommended",
+    "plugin:prettier/recommended"
+    // "plugin:promise/recommended",
+    // "plugin:unicorn/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      // "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    // "deprecation/deprecation": "warn",
+    "max-depth": [
+      "warn",
+      {
+        "max": 2
+      }
+    ],
+    "max-params": [
+      "warn",
+      {
+        "max": 3
+      }
+    ],
+    "no-restricted-syntax": "off",
+    "no-unexpected-multiline": "error",
+    "no-unused-vars": "off",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "varsIgnorePattern": "[iI]gnored|[uU]nused|^_",
+        "argsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_"
+      }
+    ],
+    // "jsx-a11y/label-has-associated-control": [
+    //   "error",
+    //   {
+    //     "depth": 3
+    //   }
+    // ],
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "@typescript-eslint/prefer-function-type": "error",
+    // "react/jsx-props-no-spreading": "off",
+    // "react/require-default-props": "off",
+    // "react/react-in-jsx-scope": "off",
+    "prettier/prettier": "warn",
+    // "react-hooks/rules-of-hooks": "error",
+    // "react-hooks/exhaustive-deps": "warn",
+    // "react/jsx-filename-extension": [
+    //   1,
+    //   {
+    //     "extensions": [
+    //       ".tsx"
+    //     ]
+    //   }
+    // ],
+    // "react/jsx-sort-props": "warn",
+    "import/prefer-default-export": "off",
+    // "import/no-cycle": "off",
+    // "import/extensions": [
+    //   "error",
+    //   "ignorePackages",
+    //   {
+    //     "ts": "never",
+    //     "tsx": "never"
+    //   }
+    // ],
+    // "import/order": [
+    //   "error",
+    //   {
+    //     "groups": [
+    //       "builtin",
+    //       "external",
+    //       "internal",
+    //       [
+    //         "parent",
+    //         "sibling"
+    //       ]
+    //     ],
+    //     "pathGroups": [
+    //       {
+    //         "pattern": "react",
+    //         "group": "external",
+    //         "position": "before"
+    //       }
+    //     ],
+    //     "pathGroupsExcludedImportTypes": [
+    //       "react"
+    //     ],
+    //     "newlines-between": "always",
+    //     "alphabetize": {
+    //       "order": "asc",
+    //       "caseInsensitive": true
+    //     }
+    //   }
+    // ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "vars-on-top": "warn",
+    // "unicorn/no-abusive-eslint-disable": "warn",
+    // "unicorn/expiring-todo-comments": "off",
+    // "unicorn/prevent-abbreviations": "off",
+    // "unicorn/no-null": "off",
+    // "unicorn/prefer-node-protocol": "off",
+    // "unicorn/no-array-reduce": "off",
+    // "unicorn/no-useless-undefined": [
+    //   "off",
+    //   {
+    //     "checkArguments": false
+    //   }
+    // ],
+    // "unicorn/no-array-for-each": "off",
+    // "unicorn/prefer-top-level-await": "off",
+    // "unicorn/no-unused-properties": "warn",
+    // "unicorn/prefer-at": "warn",
+    "yoda": [
+      "error",
+      "never",
+      {
+        "exceptRange": true
+      }
+    ]
+  },
+  "reportUnusedDisableDirectives": true,
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}

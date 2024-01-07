@@ -1,0 +1,41 @@
+import CodeBlock from '@theme/CodeBlock'
+import Source from '!!raw-loader!./.eslintrc.json'
+
+# ESLint
+
+## [Installation](https://eslint.org/docs/latest/use/getting-started#manual-set-up)
+
+Using yarn
+
+```sh
+yarn add -D eslint
+
+# Install the related configs and plugins
+# yarn add -D eslint-config-airbnb @typescript-eslint/eslint-plugin eslint-plugin-prettier eslint-config-prettier eslint-plugin-import eslint-plugin-import eslint-plugin-react eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y
+```
+
+## Settings
+
+These are my basic settings ([`.eslintrc.json`](https://eslint.org/docs/latest/use/configure/)).
+
+> :warning: **Work in progress!**
+
+<CodeBlock language="json">{Source}</CodeBlock>
+
+Create an ignore file (`.eslintignore`):
+
+```
+build
+dist
+coverage
+analysis
+```
+
+## Usage
+
+and here is a script to run eslint on a javascript project:
+
+```sh
+# package.json
+"lint": "yarn eslint --ext .js,jsx,.ts,tsx src --cache",
+```

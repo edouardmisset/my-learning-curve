@@ -4,6 +4,7 @@
   "private": false,
   "scripts": {
     "docusaurus": "docusaurus",
+    "format": "prettier \"./**/*.{html,css,js,jsx,ts,tsx,md,mdx,json}\" --write --cache --log-level=warn",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
@@ -28,6 +29,7 @@
     "@docusaurus/module-type-aliases": "3.0.1",
     "@docusaurus/tsconfig": "3.0.1",
     "@docusaurus/types": "3.0.1",
+    "prettier": "^3.1.1",
     "typescript": "~5.2.2"
   },
   "browserslist": {

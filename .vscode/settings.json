@@ -1,6 +1,4 @@
 {
-  "conventionalCommits.scopes": [
-    "CSS"
-  ],
+  "conventionalCommits.scopes": ["CSS"],
   "cSpell.language": "en,fr"
 }

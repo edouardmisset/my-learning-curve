@@ -20,7 +20,7 @@ type SearchTreeListParameters<NodeType extends BasicNode = BasicNode> = Omit<
  * It returns the first matching node, or `undefined` if no such node is found.
  *
  * This function uses the {@link searchTreeList} function to search a list of nodes.
- * 
+ *
  * @template NodeType A type that extends `BasicNode`. This is the type of the nodes in the tree.
  *
  * @param {SearchTreeParameters<NodeType>} params The parameters for the search. This is an object that contains:
@@ -69,7 +69,7 @@ export const searchTree = <NodeType extends BasicNode = BasicNode>(
  * It returns the first node where `node[searchItemField]` equals `searchTerm`, or `undefined` if no such node is found.
  *
  * This function uses the {@link searchTree} function to search each node.
- * 
+ *
  * @template NodeType A type that extends `BasicNode`. This is the type of the nodes in the list.
  *
  * @param {SearchTreeListParameters<NodeType>} params The parameters for the search. This is an object that contains:

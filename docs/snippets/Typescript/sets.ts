@@ -62,7 +62,9 @@ export const union = mergeUnique
  * const result = uniqueInFirst(array1, array2, array3); // [1]
  */
 export const uniqueInFirst = <T>(firstArray: T[], ...otherArrays: T[][]): T[] =>
-  firstArray.filter(item => !otherArrays.some(array => new Set(array).has(item)))
+  firstArray.filter(
+    item => !otherArrays.some(array => new Set(array).has(item)),
+  )
 export const setDifference = uniqueInFirst
 
 /**

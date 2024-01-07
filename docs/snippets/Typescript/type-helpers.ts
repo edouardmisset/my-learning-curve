@@ -27,7 +27,11 @@ export type DefinedValue = string | number | boolean
  * type EmployeePerson = Override<Person, Employee>;
  * // Equivalent to: { name: string; age: string; company: string; }
  */
-export type Override<OriginalType, OverrideType> = Omit<OriginalType, keyof OverrideType> & OverrideType
+export type Override<OriginalType, OverrideType> = Omit<
+  OriginalType,
+  keyof OverrideType
+> &
+  OverrideType
 
 /**
  * Constructs a type by making some properties of an existing type required.
@@ -48,31 +52,33 @@ export type Override<OriginalType, OverrideType> = Omit<OriginalType, keyof Over
  * // Equivalent to: { name: string; age: number; }
  */
 export type RequireKey<T extends object, Key extends keyof T = keyof T> = Omit<
-	T,
-	Key
+  T,
+  Key
 > &
-	Required<Pick<T, Key>>
+  Required<Pick<T, Key>>
 
 /**
-* Constructs a type by making some properties of an existing type optional.
-*
-* This type helper uses the `Omit` and `Partial` utility types from TypeScript.
-* It first omits the specified keys from the original type, and then makes those keys optional.
-*
-* @template T The original type.
-* @template K The keys of the properties that should be made optional. It extends `keyof T`, which means it can be any key of `T`. The default value is `keyof T`, which means all keys of `T`.
-*
-* @example
-* type Person = {
-*   name: string;
-*   age: number;
-* };
-*
-* type PersonWithOptionalAge = PartialProperty<Person, 'age'>;
-* // Equivalent to: { name: string; age?: number; }
-*/
-export type PartialProperty<T extends object, K extends keyof T = keyof T> = Omit<T, K> &
-	Partial<Pick<T, K>>
+ * Constructs a type by making some properties of an existing type optional.
+ *
+ * This type helper uses the `Omit` and `Partial` utility types from TypeScript.
+ * It first omits the specified keys from the original type, and then makes those keys optional.
+ *
+ * @template T The original type.
+ * @template K The keys of the properties that should be made optional. It extends `keyof T`, which means it can be any key of `T`. The default value is `keyof T`, which means all keys of `T`.
+ *
+ * @example
+ * type Person = {
+ *   name: string;
+ *   age: number;
+ * };
+ *
+ * type PersonWithOptionalAge = PartialProperty<Person, 'age'>;
+ * // Equivalent to: { name: string; age?: number; }
+ */
+export type PartialProperty<
+  T extends object,
+  K extends keyof T = keyof T,
+> = Omit<T, K> & Partial<Pick<T, K>>
 
 /**
  * Constructs a type by excluding `null` from the possible values of some properties of an existing type.
@@ -93,7 +99,7 @@ export type PartialProperty<T extends object, K extends keyof T = keyof T> = Omi
  * // Equivalent to: { name: string; age: number; }
  */
 export type NotNullProperty<T extends object, K extends keyof T = keyof T> = {
-	[P in K]: Exclude<T[K], null>
+  [P in K]: Exclude<T[K], null>
 }
 
 /**
@@ -102,7 +108,7 @@ export type NotNullProperty<T extends object, K extends keyof T = keyof T> = {
  * but the properties are not intersected. This means that the new type is easier to read and understand.
  */
 export type Prettify<T> = {
-	[K in keyof T]: T[K]
+  [K in keyof T]: T[K]
 } & {}
 
 /**
@@ -141,6 +147,5 @@ export type ObjectValues<T> = T[keyof T]
  * const person = { name: 'Alice', age: 25 };
  * const keys = objectKeys(person); // ['name', 'age']
  */
-export const objectKeys = <T extends ObjectType>(
-	object: T,
-): (keyof T)[] => Object.keys(object) as (keyof T)[]
+export const objectKeys = <T extends ObjectType>(object: T): (keyof T)[] =>
+  Object.keys(object) as (keyof T)[]

@@ -99,10 +99,10 @@ export const isEmptyStringOrNullish = (s: undefined | null | string): boolean =>
 
 export const addOrRemoveFromList =
   <T extends DefinedValue>(listOfThings: T[], aThing: T) =>
-    (add: boolean): T[] =>
-      add
-        ? [...listOfThings, aThing]
-        : listOfThings.filter(thing => thing !== aThing)
+  (add: boolean): T[] =>
+    add
+      ? [...listOfThings, aThing]
+      : listOfThings.filter(thing => thing !== aThing)
 
 export const addWhenAbsentOtherwiseRemove = <T extends DefinedValue>(
   listOfThings: T[],
@@ -152,8 +152,8 @@ export const deduplicateObjects = <
 export const deduplicateObjectsByAllKeys = <T extends object = ObjectType>(
   array: T[],
 ): T[] => [
-    ...new Map(array.map(object => [JSON.stringify(object), object])).values(),
-  ]
+  ...new Map(array.map(object => [JSON.stringify(object), object])).values(),
+]
 
 type ValueAndRange = {
   value: number

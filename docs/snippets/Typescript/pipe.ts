@@ -15,8 +15,10 @@ type UnaryFunction<T> = (arg: T) => T
  * const addOneThenDouble = compose(double, addOne);
  * const result = addOneThenDouble(5); // 12
  */
-export const compose = <T>(...functions: (UnaryFunction<T>)[]) => (data:T) =>
-  functions.reduceRight((value, func) => func(value), data);
+export const compose =
+  <T>(...functions: UnaryFunction<T>[]) =>
+  (data: T) =>
+    functions.reduceRight((value, func) => func(value), data)
 
 /**
  * Pipes any number of unary functions into a single unary function.
@@ -33,5 +35,7 @@ export const compose = <T>(...functions: (UnaryFunction<T>)[]) => (data:T) =>
  * const addOneThenDouble = pipe(double, addOne);
  * const result = addOneThenDouble(5); // 11
  */
-export const pipe = <T>(...functions: (UnaryFunction<T>)[]) => (data:T) =>
-  functions.reduce((value, func) => func(value), data);
+export const pipe =
+  <T>(...functions: UnaryFunction<T>[]) =>
+  (data: T) =>
+    functions.reduce((value, func) => func(value), data)

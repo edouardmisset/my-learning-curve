@@ -1,9 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc.json",
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "prettier"],
   "extends": [
     "airbnb",
     "plugin:@typescript-eslint/recommended",
@@ -59,15 +56,11 @@
       "error",
       {
         "props": true,
-        "ignorePropertyModificationsFor": [
-          "state"
-        ]
+        "ignorePropertyModificationsFor": ["state"]
       }
     ],
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": [
-      "error"
-    ],
+    "@typescript-eslint/no-shadow": ["error"],
     "vars-on-top": "warn",
     "yoda": [
       "error",

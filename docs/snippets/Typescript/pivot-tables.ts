@@ -180,19 +180,19 @@ export const countOperation: Operation = (currentValue, _row) =>
   currentValue + 1
 
 // Sum operation
-export const sumOperationCreator =
+export const sumOperationBuilder =
   (valueKey: string): Operation =>
   (currentValue, row) =>
     currentValue + row[valueKey]
 
 // Max operation
-export const maxOperationCreator =
+export const maxOperationBuilder =
   (valueKey: string): Operation =>
   (currentValue, row) =>
     Math.max(currentValue, row[valueKey])
 
 // Min operation
-export const minOperationCreator =
+export const minOperationBuilder =
   (valueKey: string): Operation =>
   (currentValue, row) =>
     currentValue === 0 ? row[valueKey] : Math.min(currentValue, row[valueKey])
@@ -209,7 +209,7 @@ const pivotTableSum = createPivotTable({
   data: ascentList,
   rowKey: 'topoGrade',
   columnKey: 'numberOfTries',
-  operation: sumOperationCreator('topoGrade'),
+  operation: sumOperationBuilder('topoGrade'),
 })
 // window.console.log('🚀 ~ pivotTableSum:', pivotTableSum)
 
@@ -217,25 +217,24 @@ const pivotTableMax = createPivotTable({
   data: ascentList,
   rowKey: 'topoGrade',
   columnKey: 'numberOfTries',
-  operation: maxOperationCreator('topoGrade'),
+  operation: maxOperationBuilder('topoGrade'),
 })
 // window.console.log('🚀 ~ pivotTableMax:', pivotTableMax)
 const pivotTableMin = createPivotTable({
   data: ascentList,
   rowKey: 'topoGrade',
   columnKey: 'numberOfTries',
-  operation: minOperationCreator('topoGrade'),
+  operation: minOperationBuilder('topoGrade'),
 })
 // window.console.log('🚀 ~ pivotTableMin:', pivotTableMin)
 
 // Sort
 
-export const sortStringsCreator =
-  (key?: string) =>
+export const sortStringsBuilder =
+  (key?: string, ascending = true) =>
   (
     left: Record<string, unknown> | string,
     right: Record<string, unknown> | string,
-    ascending = true,
   ): number => {
     // Check if left and right are strings or objects
     const isString =
@@ -249,15 +248,14 @@ export const sortStringsCreator =
 
 // window.console.log(
 //   '🚀 ~ sortStrings:',
-//   ascentList.sort(sortStringsCreator('routeName')),
+//   ascentList.sort(sortStringsBuilder('routeName')),
 // )
 
-export const sortNumberCreator =
-  (key?: string) =>
+export const sortNumberBuilder =
+  (key?: string, ascending = true) =>
   (
     left: Record<string, unknown> | number,
     right: Record<string, unknown> | number,
-    ascending = true,
   ): number => {
     const isNumber =
       typeof left === 'number' && typeof right === 'number' && key !== undefined
@@ -272,14 +270,13 @@ export const sortNumberCreator =
 
 // window.console.log(
 //   '🚀 ~ sortNumber:',
-//   ascentList.sort(sortNumberCreator('numberOfTries')),
+//   ascentList.sort(sortNumberBuilder('numberOfTries')),
 // )
 
-export const sortDateCreator = (key?: string) => {
+export const sortDateBuilder = (key?: string, ascending = true) => {
   return (
     left: Record<string, unknown> | Date,
     right: Record<string, unknown> | Date,
-    ascending = true,
   ): number => {
     const isDate =
       left instanceof Date && right instanceof Date && key !== undefined
@@ -292,20 +289,20 @@ export const sortDateCreator = (key?: string) => {
   }
 }
 
-// window.console.log('🚀 ~ sortDate:', ascentList.sort(sortDateCreator('date')))
+// window.console.log('🚀 ~ sortDate:', ascentList.sort(sortDateBuilder('date')))
 
 // Filter
 
 // Date
-type FilterDateCreator = (
-  params: // TODO add another type of param where we filter between two dates
-  | { startDate: Date; endDate: Date }
+type FilterDateBuilder = (
+  params:
+    | { startDate: Date; endDate: Date }
     | { referenceDate?: Date; durationInMilliseconds?: number }
     | { year: number }
     | undefined,
 ) => (date: Date) => boolean
 
-export const filterDateCreator: FilterDateCreator = (params = {}) => {
+export const filterDateBuilder: FilterDateBuilder = (params = {}) => {
   if ('year' in params) return date => date.getFullYear() === params.year
 
   if ('startDate' in params && 'endDate' in params)
@@ -322,12 +319,12 @@ export const filterDateCreator: FilterDateCreator = (params = {}) => {
     date.getTime() >= referenceDate.getTime() - durationInMilliseconds
 }
 
-export const filter2018 = filterDateCreator({ year: 2018 })
-export const filter2023 = filterDateCreator({ year: 2023 })
-export const filterLast12Months = filterDateCreator({
+export const filter2018 = filterDateBuilder({ year: 2018 })
+export const filter2023 = filterDateBuilder({ year: 2023 })
+export const filterLast12Months = filterDateBuilder({
   durationInMilliseconds: oneYearInMilliseconds,
 })
-export const filterLast5years = filterDateCreator({
+export const filterLast5years = filterDateBuilder({
   durationInMilliseconds: 5 * oneYearInMilliseconds,
 })
 
@@ -342,7 +339,7 @@ export const filterLast5years = filterDateCreator({
 
 // Boolean
 
-export const filterBooleanCreator =
+export const filterBooleanBuilder =
   (key?: string) =>
   (value: boolean | Record<string, unknown>): boolean => {
     if (typeof value === 'boolean') return value
@@ -354,7 +351,7 @@ export const filterBooleanCreator =
 
 // Find
 
-export const findCreator =
+export const findBuilder =
   <Obj extends Record<string, unknown>>(key: keyof Obj) =>
   (value: unknown) =>
   (obj: Obj): boolean => {
@@ -364,8 +361,8 @@ export const findCreator =
     return obj[key] === value
   }
 
-export const findById = findCreator('id')
-export const findByRouteName = findCreator('routeName')
+export const findById = findBuilder('id')
+export const findByRouteName = findBuilder('routeName')
 
 // window.console.log(ascentList.find(findById(1)))
 // window.console.log(ascentList.find(findByRouteName('Bodybuilder')))
@@ -392,3 +389,141 @@ export function transposePivotTable(table: {
   }
   return transposed
 }
+
+// ----------------
+// Filtering dates
+// ----------------
+
+type milliseconds = number
+type integer = number
+
+type StartAndEndDate = {
+  startDate: Date
+  endDate: Date
+}
+
+type Year = {
+  year: integer
+}
+
+type DurationAndRefDate = {
+  referenceDate: Date
+  duration: milliseconds
+}
+
+type FilterOptions = Year | StartAndEndDate | DurationAndRefDate
+
+const isYearOption = (option: FilterOptions): option is Year => 'year' in option
+
+const isDateRangeOption = (option: FilterOptions): option is StartAndEndDate =>
+  'startDate' in option && 'endDate' in option
+
+const isReferenceDateOption = (
+  option: FilterOptions,
+): option is DurationAndRefDate =>
+  'referenceDate' in option && 'duration' in option
+
+const isValidDate = (...dates: unknown[]): boolean => {
+  for (const date of dates)
+    if (!(date instanceof Date) || Number.isNaN(date)) return false
+
+  return true
+}
+
+const isYearMatch = (dateValue: Date, year: number): boolean =>
+  dateValue.getFullYear() === year
+
+const isWithinDateRange = (
+  dateValue: Date,
+  startDate: Date,
+  endDate: Date,
+): boolean => startDate <= dateValue && dateValue <= endDate
+
+const isWithinDuration = (
+  dateValue: Date,
+  referenceDate: Date,
+  duration: number,
+): boolean => {
+  const refTime = referenceDate.getTime()
+  const valueTime = dateValue.getTime()
+  return refTime - duration <= valueTime && valueTime <= refTime
+}
+
+const isDateCompatible = (val: unknown): val is Date | number | string =>
+  typeof val === 'string' || val instanceof Date || typeof val === 'number'
+
+export const createFilterFunction =
+  <Obj>(dateKey: keyof Obj, options: FilterOptions = {} as FilterOptions) =>
+  (obj: Obj): boolean => {
+    const val = obj[dateKey]
+    if (!isDateCompatible(val)) return true
+    const dateValue = new Date(val)
+    if (!isValidDate(dateValue)) return true
+
+    if (isYearOption(options)) return isYearMatch(dateValue, options.year)
+
+    if (
+      isDateRangeOption(options) &&
+      isValidDate(options.startDate, options.endDate)
+    )
+      return isWithinDateRange(dateValue, options.startDate, options.endDate)
+
+    if (isReferenceDateOption(options) && isValidDate(options.referenceDate))
+      return isWithinDuration(
+        dateValue,
+        options.referenceDate,
+        options.duration,
+      )
+
+    // If no valid options are provided, include the item in the result
+    return true
+  }
+
+// Define the type for our objects
+interface MyObject {
+  date: string | Date
+  value: number
+}
+
+// Create an array of objects
+const data: MyObject[] = [
+  { date: '2018-01-01', value: 10 },
+  { date: '2018-06-01', value: 15 },
+  { date: '2018-12-01', value: 20 },
+  { date: '2019-01-01', value: 25 },
+  { date: '2019-06-01', value: 30 },
+  { date: '2019-12-01', value: 35 },
+  { date: '2020-01-01', value: 40 },
+  { date: '2020-06-01', value: 45 },
+  { date: '2020-12-01', value: 50 },
+  { date: '2021-01-01', value: 55 },
+  { date: '2021-06-01', value: 60 },
+  { date: '2021-12-01', value: 65 },
+  { date: '2022-01-01', value: 70 },
+  { date: '2022-06-01', value: 75 },
+  { date: '2022-12-01', value: 80 },
+  { date: new Date('2023-01-01'), value: 85 },
+  { date: '2023-06-01', value: 90 },
+  { date: '2023-12-01', value: 95 },
+  { date: '2024-01-01', value: 100 },
+  { date: '2024-06-01', value: 105 },
+  { date: '2024-12-01', value: 110 },
+]
+
+// // Create a filter function to get items from the year 2023
+// const filterByYear2023 = createFilterFunction<MyObject>('date', { year: 2023 })
+// const resultByYear = data.filter(filterByYear2023)
+// console.log(resultByYear)
+
+// // Create a filter function to get items between two dates
+// const filterByDateRange = createFilterFunction<MyObject>('date', { startDate: new Date('2021-06-01'), endDate: new Date() });
+// const resultByDateRange = data.filter(filterByDateRange);
+// console.log(resultByDateRange);
+
+// Create a filter function to get items within a duration from a reference date
+const filterByDuration = createFilterFunction('date', {
+  referenceDate: new Date('2022-01-01'),
+  duration: 365 * 24 * 60 * 60 * 1000,
+})
+const resultByDuration = data.filter(filterByDuration)
+console.log(resultByDuration)

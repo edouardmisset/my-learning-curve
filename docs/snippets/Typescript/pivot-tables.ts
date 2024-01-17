@@ -1,128 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import ascentList from '../../../data/ascents.json'
+import { convertStringDate } from './convert-string-date'
 
-type Ascent = {
-  routeName: string
-  topoGrade: string
-  date: Date
-  crag: string
-  climber: string
-  routeOrBoulder: string
-  numberOfTries: number
-  id: number
-}
-
-const ascentList: Ascent[] = [
-  {
-    id: 0,
-    routeName: 'Bodybuilder',
-    topoGrade: '7a',
-    date: new Date('2015-08-01'),
-    crag: 'Gorges de la Jonte',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 5,
-  },
-  {
-    id: 2,
-    routeName: 'Le Plongeoir',
-    topoGrade: '7b',
-    date: new Date('2015-08-02'),
-    crag: 'Gorges de la Jonte',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 5,
-  },
-  {
-    id: 1,
-    routeName: 'Siegfried Gauche',
-    topoGrade: '7a',
-    date: new Date('2017-06-25'),
-    crag: 'Vieux-Château',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 1,
-  },
-  {
-    id: 3,
-    routeName: 'Highway Paradise',
-    topoGrade: '7b+',
-    date: new Date('2017-08-04'),
-    crag: 'Bouilland',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 1,
-  },
-  {
-    id: 4,
-    routeName: 'Ballade pour Vincent',
-    topoGrade: '7a+',
-    date: new Date('2018-03-25'),
-    crag: 'Calanques',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 1,
-  },
-  {
-    id: 6,
-    routeName: 'Le Loire',
-    topoGrade: '7a',
-    date: new Date('2018-06-17'),
-    crag: 'Buoux',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 2,
-  },
-  {
-    id: 5,
-    routeName: 'Cococaline',
-    topoGrade: '7a+',
-    date: new Date('2018-06-17'),
-    crag: 'Buoux',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 1,
-  },
-  {
-    id: 8,
-    routeName: 'Exquise Esquisse',
-    topoGrade: '7b',
-    date: new Date('2018-06-18'),
-    crag: 'Buoux',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 1,
-  },
-  {
-    id: 7,
-    routeName: 'Baby',
-    topoGrade: '8a',
-    date: new Date('2018-11-03'),
-    crag: 'Siurana',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 3,
-  },
-  {
-    id: 9,
-    routeName: 'Cannibale',
-    topoGrade: '8a+',
-    date: new Date('2020-10-04'),
-    crag: 'Balme de Yenne',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 10,
-  },
-  {
-    id: 10,
-    routeName: "L'homme faible du moment",
-    topoGrade: '8a',
-    date: new Date('2019-03-23'),
-    crag: 'Beausoleil',
-    climber: 'Edouard Misset',
-    routeOrBoulder: 'route',
-    numberOfTries: 10,
-  },
-]
+const ascents = ascentList.map(ascent => ({
+  ...ascent,
+  Date: new Date(convertStringDate(`${ascent.Date} 00:00`)).toDateString(),
+}))
 
 const oneYearInMilliseconds = 365 * 24 * 60 * 60 * 1000
 
@@ -479,51 +362,23 @@ export const createFilterFunction =
     return true
   }
 
-// Define the type for our objects
-interface MyObject {
-  date: string | Date
-  value: number
-}
-
-// Create an array of objects
-const data: MyObject[] = [
-  { date: '2018-01-01', value: 10 },
-  { date: '2018-06-01', value: 15 },
-  { date: '2018-12-01', value: 20 },
-  { date: '2019-01-01', value: 25 },
-  { date: '2019-06-01', value: 30 },
-  { date: '2019-12-01', value: 35 },
-  { date: '2020-01-01', value: 40 },
-  { date: '2020-06-01', value: 45 },
-  { date: '2020-12-01', value: 50 },
-  { date: '2021-01-01', value: 55 },
-  { date: '2021-06-01', value: 60 },
-  { date: '2021-12-01', value: 65 },
-  { date: '2022-01-01', value: 70 },
-  { date: '2022-06-01', value: 75 },
-  { date: '2022-12-01', value: 80 },
-  { date: new Date('2023-01-01'), value: 85 },
-  { date: '2023-06-01', value: 90 },
-  { date: '2023-12-01', value: 95 },
-  { date: '2024-01-01', value: 100 },
-  { date: '2024-06-01', value: 105 },
-  { date: '2024-12-01', value: 110 },
-]
-
-// // Create a filter function to get items from the year 2023
-// const filterByYear2023 = createFilterFunction<MyObject>('date', { year: 2023 })
-// const resultByYear = data.filter(filterByYear2023)
+// const resultByYear = ascents.filter(
+//   createFilterFunction('Date', { year: 2023 }),
+// )
 // console.log(resultByYear)
 
-// // Create a filter function to get items between two dates
-// const filterByDateRange = createFilterFunction<MyObject>('date', { startDate: new Date('2021-06-01'), endDate: new Date() });
-// const resultByDateRange = data.filter(filterByDateRange);
-// console.log(resultByDateRange);
+// const resultByDateRange = ascents.filter(
+//   createFilterFunction('Date', {
+//     startDate: new Date('2023-07-26'),
+//     endDate: new Date(),
+//   }),
+// )
+// console.log(resultByDateRange)
 
-// Create a filter function to get items within a duration from a reference date
-const filterByDuration = createFilterFunction('date', {
-  referenceDate: new Date('2022-01-01'),
-  duration: 365 * 24 * 60 * 60 * 1000,
-})
-const resultByDuration = data.filter(filterByDuration)
-console.log(resultByDuration)
+// const resultByDuration = ascents.filter(
+//   createFilterFunction('Date', {
+//     referenceDate: new Date(),
+//     duration: 30 * 24 * 60 * 60 * 1000,
+//   }),
+// )
+// console.log(resultByDuration)

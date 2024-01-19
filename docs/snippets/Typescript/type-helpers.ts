@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ObjectType<T = any> = Record<string, T>
 
 export type Value = string | number | boolean | null | undefined
@@ -109,6 +110,7 @@ export type NotNullProperty<T extends object, K extends keyof T = keyof T> = {
  */
 export type Prettify<T> = {
   [K in keyof T]: T[K]
+  // eslint-disable-next-line @typescript-eslint/ban-types
 } & {}
 
 /**
@@ -129,6 +131,24 @@ export type Prettify<T> = {
  * // Equivalent to: string | number
  */
 export type ObjectValues<T> = T[keyof T]
+
+/**
+ * Represents a type that can be either a specific string (or union of strings) `T` or any string.
+ *
+ * @template T - A string literal type.
+ * @typedef {T | Omit<string, T>} LooseAutoComplete
+ *
+ * @example
+ * // Define a type that can be either "red" or any string excluding "red"
+ * type RedOrOther = LooseAutoComplete<"red">;
+ *
+ * // This is valid because "red" is one of the allowed values
+ * let example3: RedOrOther = "red";
+ *
+ * // This is also valid because any string excluding "red" is allowed
+ * let example4: RedOrOther = "blue";
+ */
+export type LooseAutoComplete<T extends string> = T | Omit<string, T>
 
 // This code snippet defines a function called `objectKeys` that takes an object as input and returns an array of its keys. It ensures that the TypeScript compiler knows the keys are of type `keyof T`, not just `string`.
 /**

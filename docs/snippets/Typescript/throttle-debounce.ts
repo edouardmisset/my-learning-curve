@@ -1,3 +1,4 @@
+// biome-ignore lint/suspicious/noExplicitAny: ... because it's a helper file
 type AnyVoidFunction = (...arg: any[]) => void
 interface DebounceParams {
   callback: AnyVoidFunction

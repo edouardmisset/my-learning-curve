@@ -31,7 +31,7 @@ console.timeEnd('Push and reverse')
 
 console.time('New spread array')
 
-let spreadCreated
+let spreadCreated: unknown[]
 const someLength = someValues.length
 if (someValues.length < arrayLength) {
   spreadCreated = [
@@ -47,7 +47,7 @@ console.timeEnd('New spread array') // 39.906982421875 ms
 
 console.time('New concat array')
 
-let concatCreated
+let concatCreated: unknown[]
 if (someValues.length < arrayLength) {
   concatCreated = Array(arrayLength - someValues.length)
     .fill(NaN)

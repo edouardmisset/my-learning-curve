@@ -1,3 +1,4 @@
+// biome-ignore lint/suspicious/noExplicitAny: ... because it's a helper file
 type BasicNode = Record<string, any>
 
 interface SearchTreeParameters<NodeType extends BasicNode = BasicNode> {

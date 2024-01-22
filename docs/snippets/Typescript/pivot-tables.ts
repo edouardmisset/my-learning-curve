@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+// biome-ignore lint/suspicious/noExplicitAny: ... because it's a type helper file
 type Operation<T = any, R = number> = (currentValue: R, row: T) => R
 
 type CreatePivotTableParams<
@@ -31,13 +30,11 @@ export const createPivotTable = <
       const existingValue = existingRow[colKeyValue] || (0 as Returned)
       const updatedValue = operation(existingValue, row)
 
-      return {
-        ...acc,
-        [rowKeyValue]: {
-          ...existingRow,
+      return Object.assign(acc, {
+        [rowKeyValue]: Object.assign({}, existingRow, {
           [colKeyValue]: updatedValue,
-        },
-      }
+        }),
+      })
     },
     {} as {
       [key in keyof Obj]: {

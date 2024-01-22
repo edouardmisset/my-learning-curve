@@ -1,4 +1,4 @@
-import { objectKeys, ObjectType } from './type-helpers'
+import { ObjectType, objectKeys } from './type-helpers'
 
 /**
  * @description Performs a shallow comparison between two objects of the same type.

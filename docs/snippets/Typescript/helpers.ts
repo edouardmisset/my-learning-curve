@@ -17,29 +17,37 @@ export const isEmptyObject = (object: ObjectType): boolean =>
 const isMergeableObject = (item: unknown): boolean =>
   isObject(item) && !Array.isArray(item)
 
+function mergeSourceIntoTarget<T extends ObjectType>(
+  target: T,
+  source: T,
+): void {
+  for (const key of Object.keys(source)) {
+    if (isMergeableObject(source[key])) {
+      if (target[key] == null) {
+        Object.assign(target, { [key]: {} })
+      }
+      mergeObjects(target[key], source[key])
+    } else {
+      Object.assign(target, { [key]: source[key] })
+    }
+  }
+}
+
 export const mergeObjects = <T extends ObjectType>(
   target: T,
   ...sources: T[]
 ): T => {
-  if (sources.length <= 0) return target
-
-  const source = sources.shift()
-  if (source === undefined) return target
-
-  if (isMergeableObject(target) && isMergeableObject(source)) {
-    Object.keys(source).forEach((key: string) => {
-      if (isMergeableObject(source[key])) {
-        if (target[key] == null) {
-          Object.assign(target, { [key]: {} })
-        }
-        mergeObjects(target[key], source[key])
-      } else {
-        Object.assign(target, { [key]: source[key] })
-      }
-    })
+  while (sources.length > 0) {
+    const source = sources.shift()
+    if (
+      source !== undefined &&
+      isMergeableObject(target) &&
+      isMergeableObject(source)
+    ) {
+      mergeSourceIntoTarget(target, source)
+    }
   }
-
-  return mergeObjects(target, ...sources)
+  return target
 }
 
 export const removeNullValues = <Type>(arr: (Type | null)[]): Type[] =>

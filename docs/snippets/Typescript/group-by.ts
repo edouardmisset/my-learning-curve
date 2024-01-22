@@ -15,9 +15,9 @@ export const groupBy = <
   key: keyof Obj,
 ): GroupedObject =>
   arr.reduce(
-    (grouped, element) => ({
-      ...grouped,
-      [element[key]]: [...(grouped[element[key] as string] || []), element],
-    }),
+    (grouped, element) =>
+      Object.assign(grouped, {
+        [element[key]]: [...(grouped[element[key] as string] || []), element],
+      }),
     {} as GroupedObject,
   )

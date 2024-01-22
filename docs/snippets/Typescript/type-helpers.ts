@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: ...because it's a type helper file
 export type ObjectType<T = any> = Record<string, T>
 
 export type Value = string | number | boolean | null | undefined

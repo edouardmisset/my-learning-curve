@@ -1,0 +1,45 @@
+import CodeBlock from '@theme/CodeBlock'
+import Source from '!!raw-loader!./biome.json'
+
+# Biome
+
+Biome is a replacement for ESLint and Prettier that is designed to be more
+flexible and easier to configure.
+
+## Biome Configuration
+
+Here is a basic configuration for Biome:
+
+<CodeBlock language="ts">{Source}</CodeBlock>
+
+Along with VS Code configuration:
+
+```json
+{
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": true,
+    "source.organizeImports.biome": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  }
+}
+```
+
+NOTE: At this time (`2024-01-22`), Biome (`v1.5.3`) does not support formatting HTML or
+CSS. So you should still use Prettier as the default formatter.

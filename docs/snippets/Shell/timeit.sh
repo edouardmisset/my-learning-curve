@@ -36,4 +36,4 @@ printf "\e[34m%-50s %15s\e[0m\n" "Command" "Average Time (s)"
 printf "%-66s\n" "-------------------------------------------------------------------"
 
 # Call the 'timeit' function with the commands to be timed.
-timeit "bun install && rm -rf bun.lockb node_modules" "yarn install && rm -rf yarn.lock node_modules " "npm install && rm -rf package-lock.json node_modules" "pnpm install && rm -rf pnpm-lock.yaml node_modules" 
+timeit "bun install --backend=hardlink && rm -rf bun.lockb node_modules" "yarn install --no-scripts && rm -rf yarn.lock node_modules " "npm install --no-scripts --ignore-scriptd && rm -rf package-lock.json node_modules" "pnpm install --ignore-scripts && rm -rf pnpm-lock.yaml node_modules"

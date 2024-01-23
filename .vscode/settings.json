@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/wraith13/vscode-schemas/master/en/latest/schemas/settings/user.json",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
@@ -6,7 +7,7 @@
     "source.organizeImports.biome": true
   },
   "editor.tabSize": 2,
-  "eslint.enable": true,
+  "eslint.enable": false,
   "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
   "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
   "javascript.format.semicolons": "remove",
@@ -28,7 +29,9 @@
           "template": "UnitTest"
         }
       ],
-      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
+      "openFilesWhenDone": [
+        "__tests__/<FTName>.test.tsx"
+      ]
     },
     {
       "name": "Component Tests",
@@ -40,7 +43,9 @@
           "template": "BascicTestImports"
         }
       ],
-      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
+      "openFilesWhenDone": [
+        "__tests__/<FTName>.test.tsx"
+      ]
     }
   ],
   "folderTemplates.fileTemplates": {
@@ -130,5 +135,7 @@
     }
   ],
   "cSpell.language": "en,fr",
-  "cSpell.words": ["MULILINETEXT"]
+  "cSpell.words": [
+    "MULILINETEXT"
+  ]
 }

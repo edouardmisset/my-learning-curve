@@ -1,0 +1,11 @@
+/** 
+* First discovered through Theo Browne (t3.gg)
+* As suggested by Adam Wathan in a twit
+* For more info read up this in depth article
+* (https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/#the-minimum-size-gotcha-11)
+* by Josh Comeau
+*/
+
+* {
+  min-width: 0;
+}

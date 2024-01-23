@@ -62,15 +62,17 @@ Add this to your VS Code `settings.JSON`:
 - Better Comments
 - Code Spell Checker
 - Conventional Commits
-- ESLint
 - Folder Templates
 - indent-rainbow
 - Live Server
 - Live Share
 - Path Intellisense
-- Prettier
 - Restore Terminals
 - Rewrap
+
+- Biome
+- ESLint
+- Prettier
 
 #### HTML
 

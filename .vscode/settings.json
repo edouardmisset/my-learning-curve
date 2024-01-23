@@ -1,8 +1,13 @@
 {
+  "$schema": "https://raw.githubusercontent.com/wraith13/vscode-schemas/master/en/latest/schemas/settings/user.json",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": true,
+    "source.organizeImports.biome": true
+  },
   "editor.tabSize": 2,
-  "eslint.enable": true,
+  "eslint.enable": false,
   "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
   "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
   "javascript.format.semicolons": "remove",
@@ -11,7 +16,7 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.tsdk": "node_modules/typescript/lib",
   "search.exclude": {
-    "**/*.tgz": true,
+    "**/*.tgz": true
   },
   "folderTemplates.structures": [
     {
@@ -96,26 +101,21 @@
     "Network",
     "Error-Handling"
   ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "conventionalCommits.emojiFormat": "emoji",
   "conventionalCommits.promptBody": false,

@@ -122,7 +122,11 @@ And because each function is responsible for only one thing, it makes this code 
 
 ## HOFs in practice
 
-(TBC)
+See the following TypeScript array snippets:
+
+- Filter
+- Sort
+- Find
 
 ## Sources
 

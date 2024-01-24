@@ -54,6 +54,10 @@ This is often done in order to make a 'specific' function from a 'parent' functi
 <li>Alex Devero on <a href="https://blog.alexdevero.com/higher-order-functions-javascript/" target="_blank" rel="noopener noreferrer">HOF in JS</a></li>
 <li>Javascript.info on <a href="https://javascript.info/currying-partials" target="_blank" rel="noopener noreferrer">Currying</a></li>
 </ul>]]></content:encoded>
+            <category>JavaScript</category>
+            <category>Closure</category>
+            <category>Currying</category>
+            <category>Higher Order Functions</category>
         </item>
         <item>
             <title><![CDATA[Typescript types]]></title>
@@ -96,8 +100,8 @@ This is often done in order to make a 'specific' function from a 'parent' functi
 </blockquote>
 <p>Memoization is built upon two key JS concepts:</p>
 <ul>
-<li><strong>Closures</strong> (function and the lexical environment where it was declared)</li>
-<li><strong>Higher Order Functions</strong> (returning / accepting functions from functions)</li>
+<li><strong>Closure</strong> (function and the lexical environment where it was declared)</li>
+<li><strong><a href="https://edouardmisset.github.io/my-learning-curve/blog/05-higher-order-functions/">Higher Order Functions</a></strong> (returning / accepting functions from functions)</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="examples">Examples<a href="https://edouardmisset.github.io/my-learning-curve/blog/04-memoization#examples" class="hash-link" aria-label="Direct link to Examples" title="Direct link to Examples">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="basic-example">Basic example<a href="https://edouardmisset.github.io/my-learning-curve/blog/04-memoization#basic-example" class="hash-link" aria-label="Direct link to Basic example" title="Direct link to Basic example">​</a></h3>
@@ -113,7 +117,7 @@ This is often done in order to make a 'specific' function from a 'parent' functi
             <category>JavaScript</category>
             <category>Optimization</category>
             <category>Memoization</category>
-            <category>Closures</category>
+            <category>Closure</category>
             <category>Higher Order Functions</category>
         </item>
         <item>

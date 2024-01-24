@@ -45,7 +45,12 @@ This is often done in order to make a 'specific' function from a 'parent' functi
 <p>The outer functions, average for example, always take as an input the output from the inner functions. Therefore, the only condition to composition is to make sure that the output and input match (⚠️ type checking).</p>
 <p>And because each function is responsible for only one thing, it makes this code easier to debug and to test.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="hofs-in-practice">HOFs in practice<a href="https://edouardmisset.github.io/my-learning-curve/blog/05-higher-order-functions#hofs-in-practice" class="hash-link" aria-label="Direct link to HOFs in practice" title="Direct link to HOFs in practice">​</a></h2>
-<p>(TBC)</p>
+<p>See the following TypeScript array snippets:</p>
+<ul>
+<li>Filter</li>
+<li>Sort</li>
+<li>Find</li>
+</ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="sources">Sources<a href="https://edouardmisset.github.io/my-learning-curve/blog/05-higher-order-functions#sources" class="hash-link" aria-label="Direct link to Sources" title="Direct link to Sources">​</a></h2>
 <ul>
 <li>Eloquent Javascript on <a href="https://eloquentjavascript.net/05_higher_order.html" target="_blank" rel="noopener noreferrer">higher order</a></li>

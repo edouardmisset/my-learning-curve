@@ -1,4 +1,4 @@
-import { DefinedValue, ObjectType, Value } from './type-helpers'
+import { DefinedValue, ObjectType, Value } from './Type/type-helpers'
 
 export const random = (min: number, max: number): number =>
   min + Math.random() * (max - min + 1)

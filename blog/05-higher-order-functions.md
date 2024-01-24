@@ -1,3 +1,8 @@
+---
+authors: ['Edouard']
+tags: ['JavaScript', 'Closure', 'Currying', 'Higher Order Functions']
+---
+
 # Higher Order Functions
 
 ## Introduction

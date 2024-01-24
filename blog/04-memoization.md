@@ -5,7 +5,7 @@ tags:
     'JavaScript',
     'Optimization',
     'Memoization',
-    'Closures',
+    'Closure',
     'Higher Order Functions',
   ]
 ---
@@ -26,8 +26,8 @@ tags:
 
 Memoization is built upon two key JS concepts:
 
-- **Closures** (function and the lexical environment where it was declared)
-- **Higher Order Functions** (returning / accepting functions from functions)
+- **Closure** (function and the lexical environment where it was declared)
+- **[Higher Order Functions](./05-higher-order-functions.md)** (returning / accepting functions from functions)
 
 ## Examples
 

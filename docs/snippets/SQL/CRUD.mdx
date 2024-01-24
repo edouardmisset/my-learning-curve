@@ -1,0 +1,37 @@
+# SQL Create Read Update Delete (CRUD) operations
+
+## Create Table
+
+```sql
+CREATE TABLE users (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, name VARCHAR(100) NOT NULL, age INT);
+```
+
+## Insert into a Table (C)
+
+```sql
+INSERT INTO users (name, age) VALUES (Andrei, 20), (Sally, 5);
+```
+
+## Read (R)
+
+```sql
+SELECT name, age FROM users WHERE age = 20 AND name LIKE 'A%';
+```
+
+## Update (U)
+
+```sql
+UPDATE users SET age = 30 WHERE name = 'Andrei';
+```
+
+## Delete (D)
+
+```sql
+DELETE FROM users WHERE name = 'Sally';
+```
+
+## Alter Table
+
+```sql
+ALTER TABLE users ADD height smallint;
+```

@@ -1,5 +1,4 @@
 {
-  "$schema": "https://raw.githubusercontent.com/wraith13/vscode-schemas/master/en/latest/schemas/settings/user.json",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
@@ -29,7 +28,9 @@
           "template": "UnitTest"
         }
       ],
-      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
+      "openFilesWhenDone": [
+        "__tests__/<FTName>.test.tsx"
+      ]
     },
     {
       "name": "Component Tests",
@@ -41,7 +42,9 @@
           "template": "BascicTestImports"
         }
       ],
-      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
+      "openFilesWhenDone": [
+        "__tests__/<FTName>.test.tsx"
+      ]
     }
   ],
   "folderTemplates.fileTemplates": {
@@ -122,14 +125,12 @@
         {
           "name": "Dev server",
           "icon": "run"
-        },
-        {
-          "name": "Git",
-          "icon": "git-branch"
         }
       ]
     }
   ],
   "cSpell.language": "en,fr",
-  "cSpell.words": ["MULILINETEXT"]
+  "cSpell.words": [
+    "MULILINETEXT"
+  ]
 }

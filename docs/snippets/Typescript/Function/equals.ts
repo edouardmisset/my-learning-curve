@@ -53,3 +53,5 @@ const equals = <T>(left: T, right: T): boolean => {
 
   return leftKeys.every(key => equals(leftObject[key], rightObject[key]))
 }
+
+export const deepEquals = equals

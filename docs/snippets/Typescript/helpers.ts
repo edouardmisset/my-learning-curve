@@ -61,14 +61,6 @@ export const shallowRemoveObjNullishValues = (object: ObjectType): ObjectType =>
   Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null))
 
 /**
- * Capitalizes the first letter of a word.
- * @param {string} word - The word to be capitalized.
- * @returns {string} - The word with the first letter capitalized.
- */
-export const capitalize = (word: string): string =>
-  word === '' ? '' : word.charAt(0).toUpperCase() + word.slice(1)
-
-/**
  * Checks if a string is either empty, null, or undefined.
  * @param {undefined | null | string} s - The string to be checked.
  * @returns {boolean} - A boolean value indicating whether the string is empty, null, or undefined.

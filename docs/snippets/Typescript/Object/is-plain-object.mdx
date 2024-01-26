@@ -4,6 +4,10 @@ import Source from '!!raw-loader!./is-plain-object.ts'
 
 # Check if a value is a plain object
 
+Objects in javascript are 'object' type, but `arrays`, `null`, `Dates`, and other
+non-primitive types are also 'object' type. This function checks if a value is a
+plain object (none of the above).
+
 <CodeBlock language="ts">{Source}</CodeBlock>
 
 Credits: [Angelos

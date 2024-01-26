@@ -68,11 +68,6 @@ export const addWhenAbsentOtherwiseRemove = <T extends DefinedValue>(
 ): T[] =>
   addOrRemoveFromList(listOfThings, aThing)(!listOfThings.includes(aThing))
 
-export const stringIncludesCaseInsensitive = (
-  string: string,
-  searchString: string,
-): boolean => string.toLowerCase().includes(searchString.toLowerCase())
-
 /**
  * @description Deduplicates an array of objects based on a specified property.
  *

@@ -1,22 +1,17 @@
+import { isPlainObject } from './Object/is-plain-object'
 import { DefinedValue, ObjectType, Value } from './Type/type-helpers'
-
-const isObject = (item: unknown): boolean =>
-  item != null && typeof item === 'object'
 
 export const isEmptyObject = (object: ObjectType): boolean =>
   object &&
   Object.keys(object).length === 0 &&
   Object.getPrototypeOf(object) === Object.prototype
 
-const isMergeableObject = (item: unknown): boolean =>
-  isObject(item) && !Array.isArray(item)
-
 function mergeSourceIntoTarget<T extends ObjectType>(
   target: T,
   source: T,
 ): void {
   for (const key of Object.keys(source)) {
-    if (isMergeableObject(source[key])) {
+    if (isPlainObject(source[key])) {
       if (target[key] == null) {
         Object.assign(target, { [key]: {} })
       }
@@ -35,8 +30,8 @@ export const mergeObjects = <T extends ObjectType>(
     const source = sources.shift()
     if (
       source !== undefined &&
-      isMergeableObject(target) &&
-      isMergeableObject(source)
+      isPlainObject(target) &&
+      isPlainObject(source)
     ) {
       mergeSourceIntoTarget(target, source)
     }
@@ -59,14 +54,6 @@ export const removeFalsyValues = <Type>(arr: (Type | Value)[]): Type[] =>
 
 export const shallowRemoveObjNullishValues = (object: ObjectType): ObjectType =>
   Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null))
-
-/**
- * Checks if a string is either empty, null, or undefined.
- * @param {undefined | null | string} s - The string to be checked.
- * @returns {boolean} - A boolean value indicating whether the string is empty, null, or undefined.
- */
-export const isEmptyStringOrNullish = (s: undefined | null | string): boolean =>
-  s == null || s.trim() === ''
 
 export const addOrRemoveFromList =
   <T extends DefinedValue>(listOfThings: T[], aThing: T) =>

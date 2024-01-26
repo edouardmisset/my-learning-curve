@@ -138,7 +138,7 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Edouard Misset.`,
     },
     prism: {
-      theme: prismThemes.oneDark,
+      theme: prismThemes.oneLight,
       darkTheme: prismThemes.oneDark,
       additionalLanguages: ['bash', 'JSON'],
     },

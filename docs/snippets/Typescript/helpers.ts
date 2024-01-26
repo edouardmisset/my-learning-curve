@@ -61,14 +61,6 @@ export const shallowRemoveObjNullishValues = (object: ObjectType): ObjectType =>
   Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null))
 
 /**
- * @description Takes a string or a Date object. If it's a string, it assumes UTC string format (YYYY-MM-DDTHH:MM)
- * @param {(string | Date)} date
- * @returns {Date}  {Date}
- */
-export const datification = (date: string | Date): Date =>
-  typeof date === 'string' ? new Date(date) : date
-
-/**
  * Capitalizes the first letter of a word.
  * @param {string} word - The word to be capitalized.
  * @returns {string} - The word with the first letter capitalized.

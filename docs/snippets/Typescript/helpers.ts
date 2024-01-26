@@ -1,11 +1,5 @@
 import { DefinedValue, ObjectType, Value } from './Type/type-helpers'
 
-export const random = (min: number, max: number): number =>
-  min + Math.random() * (max - min + 1)
-
-export const randomInt = (minInt: number, maxInt: number): number =>
-  minInt + Math.floor(Math.random() * (maxInt - minInt + 1))
-
 const isObject = (item: unknown): boolean =>
   item != null && typeof item === 'object'
 
@@ -62,21 +56,6 @@ export const removeFalsyValues = <Type>(arr: (Type | Value)[]): Type[] =>
   arr.filter((val): val is Type =>
     typeof val === 'object' && val != null ? isEmptyObject(val) : val != null,
   )
-
-export const isValidNumber = (num: unknown): num is number =>
-  typeof num === 'number' && Number.isFinite(num)
-
-export const validNumberWithFallback = <T = number>(
-  maybeNumber: unknown,
-  fallbackValue: T,
-): T | number => {
-  if (isValidNumber(maybeNumber)) return maybeNumber
-
-  if (typeof maybeNumber === 'string' && isValidNumber(Number(maybeNumber)))
-    return Number(maybeNumber)
-
-  return fallbackValue
-}
 
 export const shallowRemoveObjNullishValues = (object: ObjectType): ObjectType =>
   Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null))
@@ -162,40 +141,6 @@ export const deduplicateObjectsByAllKeys = <T extends object = ObjectType>(
 ): T[] => [
   ...new Map(array.map(object => [JSON.stringify(object), object])).values(),
 ]
-
-type ValueAndRange = {
-  value: number
-  minimum: number
-  maximum: number
-}
-
-/**
- * Clamps the provided value within the specified range.
- * @param {ValueAndRange} options - An object containing the maximum, minimum, and value to be clamped.
- * @param {number} options.maximum - The maximum value of the range.
- * @param {number} options.minimum - The minimum value of the range.
- * @param {number} options.value - The value to be clamped within the range.
- * @returns {number} - The clamped value within the specified range.
- */
-export const clampValueInRange = ({
-  maximum,
-  minimum,
-  value,
-}: ValueAndRange): number => Math.max(Math.min(value, maximum), minimum)
-
-/**
- * Checks if the provided value is outside the specified limits.
- * @param {IsOutsideLimitsOptions} options - An object containing the maximum, minimum, and value to be checked.
- * @param {number} options.maximum - The maximum value of the limit.
- * @param {number} options.minimum - The minimum value of the limit.
- * @param {number} options.value - The value to be checked against the limits.
- * @returns {boolean} - A boolean value indicating whether the provided value is outside the specified limits.
- */
-export const isOutsideRange = ({
-  maximum,
-  minimum,
-  value,
-}: ValueAndRange): boolean => value < minimum || maximum < value
 
 /**
  * @description Updates an object in an array in an immutable way.

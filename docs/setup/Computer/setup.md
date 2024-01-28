@@ -14,23 +14,9 @@ This is a small file to show you what my setup looks like. 😀
 
 ## Summary
 
-1. [GitHub](#Github)
-2. [VS Code](#VS-Code)
-3. [Terminal](#Terminal)
-
-## GitHub
-
-### GitHub Template
-
-In the repo you want to make into a template go to `Settings` > `Options` > `Settings`.
-Activate the [ ] Template repository checkbox
-
-### GitHub Page
-
-In your new repo go to `Settings` > `Options` > `GitHub Pages`.
-Activate it by choosing which branch to publish (ie. `Main`).
-Copy the `url` newly displayed in the `GitHub Pages` section.
-Paste it in the `About` > `Website` of your project's main page (Code).
+1. [VS Code](#VS-Code)
+2. [Terminal](#Terminal)
+3. [GitHub](#Github)
 
 ## VS Code
 
@@ -414,3 +400,17 @@ function kebabify() {
   done
 }
 ```
+
+## GitHub
+
+### GitHub Template
+
+In the repo you want to make into a template go to `Settings` > `Options` > `Settings`.
+Activate the [ ] Template repository checkbox
+
+### GitHub Page
+
+In your new repo go to `Settings` > `Options` > `GitHub Pages`.
+Activate it by choosing which branch to publish (ie. `Main`).
+Copy the `url` newly displayed in the `GitHub Pages` section.
+Paste it in the `About` > `Website` of your project's main page (Code).

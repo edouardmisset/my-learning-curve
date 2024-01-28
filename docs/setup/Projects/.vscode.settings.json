@@ -116,20 +116,6 @@
   "conventionalCommits.emojiFormat": "emoji",
   "conventionalCommits.promptBody": false,
   "conventionalCommits.promptFooter": false,
-  "restoreTerminals.terminals": [
-    {
-      "splitTerminals": [
-        {
-          "name": "Dev server",
-          "icon": "run"
-        },
-        {
-          "name": "Git",
-          "icon": "git-branch"
-        }
-      ]
-    }
-  ],
   "cSpell.language": "en,fr",
   "cSpell.words": ["MULILINETEXT"]
 }

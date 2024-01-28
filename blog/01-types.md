@@ -1,5 +1,6 @@
 ---
 authors: ['Edouard']
+tags: ['typescript', 'types']
 ---
 
 # Typescript types

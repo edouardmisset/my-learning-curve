@@ -37,14 +37,12 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/edouardmisset/my-learning-curve/tree/main',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/edouardmisset/my-learning-curve/tree/main',
@@ -100,7 +98,7 @@ const config: Config = {
           items: [
             {
               label: 'My Setup',
-              to: '/docs/setup',
+              to: '/docs/setup/Computer/setup',
             },
             {
               label: 'Documentation',

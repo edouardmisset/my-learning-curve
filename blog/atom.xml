@@ -81,6 +81,8 @@ This is often done in order to make a 'specific' function from a 'parent' functi
             <name>Edouard Misset</name>
             <uri>https://github.com/edouardmisset</uri>
         </author>
+        <category label="typescript" term="typescript"/>
+        <category label="types" term="types"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[Generics]]></title>

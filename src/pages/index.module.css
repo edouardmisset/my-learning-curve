@@ -3,15 +3,16 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+.hero-banner {
   position: relative;
   overflow: hidden;
+  text-align: center;
+  padding-block: 4rem;
+  padding-inline: 0;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
+@media screen and (width <= 996px) {
+  .hero-banner {
     padding: 2rem;
   }
 }

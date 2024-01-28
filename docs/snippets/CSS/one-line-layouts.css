@@ -71,7 +71,7 @@
 
 /** Clamping My Style */
 .parent {
-  width: clamp(23ch, 60%, 46ch);
+  inline-size: clamp(23ch, 60%, 46ch);
 }
 
 /** Respect for Aspect */

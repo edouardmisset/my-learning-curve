@@ -35,35 +35,35 @@ h4 {
 
 h1,
 .h1 {
-  --font-size: var(--headline-1);
+  --font-size: var(--headline-1, 2.75rem);
 
-  font-size: var(--headline-1);
+  font-size: var(--headline-1, 2.75rem);
 }
 
 h2,
 .h2 {
-  --font-size: var(--headline-2);
+  --font-size: var(--headline-2, 2.35rem);
   --font-size-fluid: 4.5cqi;
 
-  font-size: var(--headline-2);
+  font-size: var(--headline-2, 2.35rem);
 }
 
 h3,
 .h3 {
-  --font-size: var(--headline-3);
+  --font-size: var(--headline-3, 1.5rem);
   --font-size-fluid: 4.25cqi;
   --font-size-diff: 0.2;
 
-  font-size: var(--headline-3);
+  font-size: var(--headline-3, 1.5rem);
 }
 
 h4,
 .h4 {
-  --font-size: var(--headline-4);
+  --font-size: var(--headline-4, 1.15rem);
   --font-size-fluid: 4cqi;
   --font-size-diff: 0.2;
 
-  font-size: var(--headline-4);
+  font-size: var(--headline-4, 1.15rem);
 }
 
 @supports (font-size: 1cqi) {

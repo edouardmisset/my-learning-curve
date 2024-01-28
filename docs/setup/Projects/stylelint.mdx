@@ -1,0 +1,40 @@
+import CodeBlock from '@theme/CodeBlock'
+import Source from '!!raw-loader!./.stylelintrc.json'
+
+# StyleLint
+
+## [Installation](https://stylelint.io/user-guide/get-started)
+
+Using yarn
+
+```sh
+yarn add -D stylelint
+
+# Install the related configs and plugins
+# yarn add -D stylelint-a11y stylelint-config-standard stylelint-order stylelint-plugin-defensive-css stylelint-use-logical-spec
+```
+
+## Settings
+
+These are my basic `.stylelintrc.json` settings.
+
+<CodeBlock language="json">{Source}</CodeBlock>
+
+Create an ignore file (`.stylelintignore`) with the following:
+
+```
+build
+dist
+coverage
+analysis
+```
+
+## Usage
+
+and here is a script to run stlintlint on your project:
+
+```sh
+# package.json
+"style:lint": "yarn run stylelint './src/**/*.css' --cache",
+"style:lint:fix": "yarn run style:lint --fix",
+```

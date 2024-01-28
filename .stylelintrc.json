@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/stylelintrc.json",
+  "extends": ["stylelint-config-standard"],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-use-logical-spec",
+    "stylelint-plugin-defensive-css"
+  ],
+  "rules": {
+    "color-no-hex": true,
+    "liberty/use-logical-spec": true,
+    "plugin/use-defensive-css": [
+      true,
+      {
+        "accidental-hover": true,
+        "background-repeat": true,
+        "custom-property-fallbacks": true,
+        "scroll-chaining": true
+      }
+    ]
+  },
+  "reportNeedlessDisables": true,
+  "reportInvalidScopeDisables": true
+}

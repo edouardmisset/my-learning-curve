@@ -16,16 +16,16 @@
 /** object-fit */
 .cover-image {
   object-fit: cover;
-
   aspect-ratio: 1;
+
   /* Optional: constrain image size */
   max-block-size: 250px;
 }
 
 .scale-image {
   object-fit: scale-down;
-
   aspect-ratio: 1;
+
   /* Optional: constrain image size */
   max-block-size: 250px;
 }
@@ -48,6 +48,7 @@ a:not([class]) {
 }
 
 /** outline-offset */
+
 /* Reminder: 
 outlines are not computed as part of the element’s box size, so
 increasing the distance will not increase the amount of space an element
@@ -65,23 +66,19 @@ element size as well.
   scroll-margin-top: var(--scroll-margin, 2rem);
 }
 
-/** color-scheme */
+/** color-scheme & accent-color */
 :root {
   color-scheme: dark light;
+  accent-color: purple;
 }
 
 .dark-background {
   color-scheme: dark;
 }
 
-/** accent-color */
-:root {
-  accent-color: purple;
-}
-
 /** width: fit-content */
 .fit-content {
-  width: fit-content;
+  inline-size: fit-content;
 }
 
 /** Progressive Enhancements */
@@ -108,6 +105,7 @@ p {
 }
 
 /** scrollbar-gutter */
+
 /* Consider which element this applies to... */
 
 /* From https://moderncss.dev/12-modern-css-one-line-upgrades/#scrollbar-gutter

@@ -3,8 +3,10 @@
 export const createStringSorter =
   <Obj extends Record<string, unknown>>(key?: keyof Obj, ascending = true) =>
   (left: Obj | string, right: Obj | string): number => {
-    const leftStr = typeof left === 'string' ? left : (left[key] as string)
-    const rightStr = typeof right === 'string' ? right : (right[key] as string)
+    const leftStr =
+      typeof left === 'string' ? left : (left[key as keyof Obj] as string)
+    const rightStr =
+      typeof right === 'string' ? right : (right[key as keyof Obj] as string)
 
     return leftStr.localeCompare(rightStr) * (ascending ? 1 : -1)
   }
@@ -40,8 +42,10 @@ export const createNumberSorter =
 export const createDateSorter =
   <Obj extends Record<string, unknown>>(key?: keyof Obj, ascending = true) =>
   (left: Obj | Date, right: Obj | Date): number => {
-    const leftDate = left instanceof Date ? left : (left[key] as Date)
-    const rightDate = right instanceof Date ? right : (right[key] as Date)
+    const leftDate =
+      left instanceof Date ? left : (left[key as keyof Obj] as Date)
+    const rightDate =
+      right instanceof Date ? right : (right[key as keyof Obj] as Date)
 
     if (Number.isNaN(leftDate.getTime())) return 1
     if (Number.isNaN(rightDate.getTime())) return -1

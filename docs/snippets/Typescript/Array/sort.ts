@@ -19,8 +19,10 @@ export const createStringSorter =
 export const createNumberSorter =
   <Obj extends Record<string, unknown>>(key?: keyof Obj, ascending = true) =>
   (left: Obj | number, right: Obj | number): number => {
-    const leftNum = typeof left === 'number' ? left : (left[key] as number)
-    const rightNum = typeof right === 'number' ? right : (right[key] as number)
+    const leftNum =
+      typeof left === 'number' ? left : (left[key as keyof Obj] as number)
+    const rightNum =
+      typeof right === 'number' ? right : (right[key as keyof Obj] as number)
 
     if (Number.isNaN(leftNum)) return 1
     if (Number.isNaN(rightNum)) return -1

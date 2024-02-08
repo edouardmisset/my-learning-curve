@@ -4,8 +4,11 @@
 * For more info read up this in depth article
 * (https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/#the-minimum-size-gotcha-11)
 * by Josh Comeau
+* With a twist from Kevin Powell 
+* (https://www.youtube.com/watch?v=FD3aC_Ke8uk)
 */
 
-* {
+input,
+textarea {
   min-width: 0;
 }

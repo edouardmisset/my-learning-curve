@@ -1,11 +1,17 @@
 /** Kevin Powell's reset CSS
  * https://github.com/kevin-powell/website-starter-template-v3/
- * &
+ * 
+ * Remove all animations, transitions and smooth scroll for people that prefer not to see them:
  * https://github.com/kevin-powell/demo-starter-template-with-sass/blob/main/src/sass/base/_reset.scss
- * &
+ * 
+ * 25 lines of CSS is all you need (to start with, anyway):
  * https://www.youtube.com/shorts/ydGti7sLVOc
  *
+ * Under the radar CSS features for your CSS reset:
  * https://www.youtube.com/watch?v=cCAtD_BAHNw
+ * 
+ * A better image reset for your CSS:
+ * https://www.youtube.com/watch?v=345V2MU3E_w
 */
 
 :root {
@@ -16,7 +22,7 @@
   background-color: hsl(0deg 0% 14%);
   color-scheme: light dark;
   font-synthesis: none;
-  text-rendering: optimizelegibility;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
@@ -44,10 +50,10 @@ html:focus-within {
 }
 
 body {
+  min-height: 100svh;
   font-size: 1.125rem;
   font-family: system-ui;
   line-height: 1.6;
-  min-block-size: 100svh;
 }
 
 main {
@@ -72,17 +78,21 @@ p {
 img,
 svg,
 picture {
-  max-inline-size: 100%;
+  max-width: 100%;
+  height: auto;
+
   display: block;
+  vertical-align: middle;
+  font-style: italic;
 }
 
 a {
-  color: hsl(237deg 100% 70%);
+  color: hsl(235deg 100% 70%);
   font-weight: 500;
 }
 
 a:hover {
-  color: hsl(237deg 86% 64%);
+  color: hsl(235deg 85% 65%);
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */

@@ -3,6 +3,10 @@
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
     "target": "ESNext",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
   }
 }

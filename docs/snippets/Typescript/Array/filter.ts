@@ -46,12 +46,22 @@ export const filterLast5years = createDateFilter({
 
 // Boolean
 
+/**
+ * Creates a boolean filter function.
+ * The filter function expects an object and checks if the specified key's value is true.
+ *
+ * @template Obj - The type of the object.
+ * @template Key - The type of the key of the object.
+ * @param {Key} key - The key of the property to check in the value object.
+ * @returns {(value: Obj) => boolean} The filter function.
+ *
+ * @example
+ * const filterByKey = createBooleanFilter('key');
+ *  return filterByKey({ key: true }); // true
+ *  return filterByKey({ key: false }); // false
+ *  return filterByKey({ key: 'string' }); // false
+ */
 export const createBooleanFilter =
-  (key?: string) =>
-  (value: boolean | Record<string, unknown>): boolean => {
-    if (typeof value === 'boolean') return value
-
-    if (typeof value?.[key] === 'boolean') return value[key] === true
-
-    throw new Error(`Invalid key (${key}) or value (${value})`)
-  }
+  <Obj extends Record<string, unknown>, Key extends keyof Obj>(key: Key) =>
+  (value: Obj): boolean =>
+    typeof value?.[key] === 'boolean' ? value[key] === true : false

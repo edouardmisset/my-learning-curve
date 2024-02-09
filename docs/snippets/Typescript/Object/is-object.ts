@@ -1,6 +1,6 @@
 /**
  * Checks if a given value is an object.
- * 
+ *
  * **Note**: `Date`s, `Array`s and other data structures are also considered objects.
  *
  * @param {unknown} val - The value to check.
@@ -13,5 +13,4 @@
  * isObject('Hello, world!') // returns false
  */
 export const isObject = (val: unknown): val is Record<string, unknown> =>
-  !!val &&
-  typeof val === 'object'
+  !!val && typeof val === 'object'

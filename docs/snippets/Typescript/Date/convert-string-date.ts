@@ -22,14 +22,15 @@
 export const convertStringDate = (dateString: string): string => {
   if (dateString === '') return dateString
   if (!/^\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}$/gi.test(dateString))
-    throw new Error('Invalid date format. It should be in the form: `dd/mm/yyyy hh:mm`')
+    throw new Error(
+      'Invalid date format. It should be in the form: `dd/mm/yyyy hh:mm`',
+    )
 
   const [shortDate, shortTime = ''] = dateString.split(' ')
   const [days, months, years] = shortDate.split('/')
   const [hours = 0, minutes = 0] = shortTime.split(':')
   return `${years}-${months}-${days}T${hours}:${minutes}`
 }
-
 
 /**
  * @description Takes a string or a Date object. If it's a string, it assumes UTC string format (YYYY-MM-DDTHH:MM)

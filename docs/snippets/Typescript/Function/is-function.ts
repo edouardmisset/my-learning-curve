@@ -12,5 +12,7 @@
  * isFunction('not a function');
  * // => false
  */
+
+// biome-ignore lint/complexity/noBannedTypes: this is a very generic function
 export const isFunction = (maybeFunction: unknown): maybeFunction is Function =>
-  typeof maybeFunction === 'function';
+  typeof maybeFunction === 'function'

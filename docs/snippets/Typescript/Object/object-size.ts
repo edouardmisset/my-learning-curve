@@ -9,6 +9,6 @@
  * // => 3
  */
 export const objectSize = (obj: Record<string, unknown>): number =>
-  Object.keys(obj).length;
+  Object.keys(obj).length
 
-  export const objectLength = objectSize
+export const objectLength = objectSize

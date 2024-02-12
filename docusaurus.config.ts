@@ -101,7 +101,7 @@ const config: Config = {
             },
             {
               label: 'Documentation',
-              to: '/docs/documentation/development-checklist',
+              to: '/docs/documentation/Project Collaboration/development-checklist',
             },
             {
               label: 'Snippets',

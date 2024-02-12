@@ -17,10 +17,8 @@
  * sum([])
  * // returns 0
  */
-export const sum = (...num: (number[] | number)[]): number => {
-  const numbers = Array.isArray(num[0])
-    ? (num[0] as number[])
-    : (num as number[])
-
-  return numbers.reduce((accumulator, value) => accumulator + value, 0)
-}
+export const sum = (...num: (number[] | number)[]): number =>
+  (Array.isArray(num[0]) ? num[0] : (num as number[])).reduce(
+    (accumulator, value) => accumulator + value,
+    0,
+  )

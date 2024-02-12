@@ -18,3 +18,5 @@ export const average = (...num: (number[] | number)[]): number => {
     numbers.length
   )
 }
+
+export const mean = average

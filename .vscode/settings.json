@@ -2,8 +2,8 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "quickfix.biome": true,
-    "source.organizeImports.biome": true
+    "quickfix.biome": "always",
+    "source.organizeImports.biome": "explicit"
   },
   "editor.tabSize": 2,
   "eslint.enable": false,
@@ -28,7 +28,9 @@
           "template": "UnitTest"
         }
       ],
-      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
+      "openFilesWhenDone": [
+        "__tests__/<FTName>.test.tsx"
+      ]
     },
     {
       "name": "Component Tests",
@@ -40,7 +42,9 @@
           "template": "BascicTestImports"
         }
       ],
-      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
+      "openFilesWhenDone": [
+        "__tests__/<FTName>.test.tsx"
+      ]
     }
   ],
   "folderTemplates.fileTemplates": {
@@ -126,5 +130,7 @@
     }
   ],
   "cSpell.language": "en,fr",
-  "cSpell.words": ["MULILINETEXT"]
+  "cSpell.words": [
+    "MULILINETEXT"
+  ]
 }

@@ -23,5 +23,8 @@
       "arrowParentheses": "asNeeded",
       "quoteStyle": "single"
     }
+  },
+  "files": {
+    "ignore": ["node_modules"]
   }
 }

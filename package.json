@@ -23,6 +23,7 @@
   "dependencies": {
     "@docusaurus/core": "~3.0.0",
     "@docusaurus/preset-classic": "~3.0.0",
+    "@docusaurus/theme-mermaid": "~3.0.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
@@ -44,11 +45,7 @@
     "zod": "^3.22.4"
   },
   "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.5%", "not dead", "not op_mini all"],
     "development": [
       "last 3 chrome version",
       "last 3 firefox version",

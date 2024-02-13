@@ -24,6 +24,19 @@ export const selectBy = <
 ): Obj[Key][] =>
   arr.flatMap(item => (Object.hasOwn(item, key) ? [item[key]] : []))
 
+/**
+ * Creates a function that selects a specific key's value from a given object.
+ *
+ * @template Obj - The type of the object.
+ * @template Key - The type of the key to select.
+ * @param {Key} key - The key to select.
+ * @returns {function} A function that takes an object and returns the value of the selected key.
+ *
+ * @example
+ * const selectById = createSelectBy<{ id: number, name: string }>('id');
+ * const obj = { id: 1, name: 'John' };
+ * console.log(selectById(obj)); // 1
+ */
 export const createSelectBy =
   <Obj extends Record<string, unknown>, Key extends keyof Obj>(key: Key) =>
   (item: Obj): Obj[Key] =>

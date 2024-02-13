@@ -19,4 +19,7 @@ export const average = (...num: (number[] | number)[]): number => {
   )
 }
 
+/**
+ * @description Alias for the {@link average} function.
+ */
 export const mean = average

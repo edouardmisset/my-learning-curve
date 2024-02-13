@@ -11,4 +11,7 @@
 export const objectSize = (obj: Record<string, unknown>): number =>
   Object.keys(obj).length
 
+/**
+ * @description Alias for the {@link objectSize} function.
+ */
 export const objectLength = objectSize

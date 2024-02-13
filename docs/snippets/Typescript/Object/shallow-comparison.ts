@@ -1,12 +1,13 @@
-import { ObjectType, objectKeys } from '../Type/type-helpers'
+import { ObjectType } from '../Type/type-helpers'
+import { objectKeys } from './object-keys'
 
 /**
  * @description Performs a shallow comparison between two objects of the same type.
  * It checks if both objects have the same keys and if the values for these keys are the same in both objects.
  *
- * @template T The type of the objects to compare.
- * @param {T} leftObject The first object to compare.
- * @param {T} rightObject The second object to compare.
+ * @template Obj The type of the objects to compare.
+ * @param {Obj} leftObject The first object to compare.
+ * @param {Obj} rightObject The second object to compare.
  * @returns {boolean} True if the objects have the same keys and the same values for each key, false otherwise.
  *
  * @example
@@ -16,9 +17,9 @@ import { ObjectType, objectKeys } from '../Type/type-helpers'
  * console.log(shallowComparison(obj1, obj2)); // Outputs: true
  * console.log(shallowComparison(obj1, obj3)); // Outputs: false
  */
-export const shallowComparison = <T extends ObjectType>(
-  leftObject: T,
-  rightObject: T,
+export const shallowComparison = <Obj extends ObjectType>(
+  leftObject: Obj,
+  rightObject: Obj,
 ): boolean => {
   const leftKeys = objectKeys(leftObject).sort()
   const rightKeys = objectKeys(rightObject).sort()
@@ -35,3 +36,8 @@ export const shallowComparison = <T extends ObjectType>(
  * @description Alias for the {@link shallowComparison} function.
  */
 export const isEqual = shallowComparison
+
+/**
+ * @description Alias for the {@link shallowComparison} function.
+ */
+export const shallowEqual = shallowComparison

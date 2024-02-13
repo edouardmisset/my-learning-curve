@@ -6,10 +6,10 @@ export const isEmptyObject = (object: ObjectType): boolean =>
   Object.keys(object).length === 0 &&
   Object.getPrototypeOf(object) === Object.prototype
 
-function mergeSourceIntoTarget<T extends ObjectType>(
-  target: T,
-  source: T,
-): void {
+const mergeSourceIntoTarget = <Obj extends ObjectType>(
+  target: Obj,
+  source: Obj,
+): void => {
   for (const key of Object.keys(source)) {
     if (isPlainObject(source[key])) {
       if (target[key] == null) {
@@ -71,13 +71,13 @@ export const addWhenAbsentOtherwiseRemove = <T extends DefinedValue>(
 /**
  * @description Deduplicates an array of objects based on a specified property.
  *
- * @template TObject - The type of objects in the array.
+ * @template Obj - The type of objects in the array.
  * @template Key - The type of the property used for deduplication.
  *
- * @param {T[]} array - The array of objects to deduplicate.
+ * @param {Obj[]} array - The array of objects to deduplicate.
  * @param {Key} key - The property used for deduplication.
  *
- * @returns {T[]} - An array containing unique objects based on the specified property.
+ * @returns {Obj[]} - An array containing unique objects based on the specified property.
  *
  * @example
  * const inputArray = [
@@ -95,26 +95,26 @@ export const addWhenAbsentOtherwiseRemove = <T extends DefinedValue>(
  * // ]
  */
 export const deduplicateObjects = <
-  T extends object = ObjectType,
-  Key extends keyof T = keyof T,
+  Obj extends object = ObjectType,
+  Key extends keyof Obj = keyof Obj,
 >(
-  array: T[],
+  array: Obj[],
   key: Key,
-): T[] => [...new Map(array.map(object => [object[key], object])).values()]
+): Obj[] => [...new Map(array.map(object => [object[key], object])).values()]
 
-export const deduplicateObjectsByAllKeys = <T extends object = ObjectType>(
-  array: T[],
-): T[] => [
+export const deduplicateObjectsByAllKeys = <Obj extends object = ObjectType>(
+  array: Obj[],
+): Obj[] => [
   ...new Map(array.map(object => [JSON.stringify(object), object])).values(),
 ]
 
 /**
  * @description Updates an object in an array in an immutable way.
  *
- * @param {T[]} array - The original array.
- * @param {keyof T} key - The key of the object to be updated.
- * @param {Partial<T>} newData - The new data to be updated.
- * @returns {T[]} - A new array with the specified object updated.
+ * @param {Obj[]} array - The original array.
+ * @param {keyof Obj} key - The key of the object to be updated.
+ * @param {Partial<Obj>} newData - The new data to be updated.
+ * @returns {Obj[]} - A new array with the specified object updated.
  *
  * @example
  * const inputArray = [
@@ -132,11 +132,11 @@ export const deduplicateObjectsByAllKeys = <T extends object = ObjectType>(
  * This function assumes that the `key` is unique across all objects in the array. If there are multiple objects with the same `key` value, this function will update all of them, which might not be the intended behavior.
  * Lastly, the function assumes that `key` exists in `newData`. If `key` does not exist in `newData`, the function will not update any objects.
  */
-export const updateObjectInArray = <T extends ObjectType = ObjectType>(
-  array: T[],
-  key: keyof T,
-  newData: Partial<T>,
-): T[] => {
+export const updateObjectInArray = <Obj extends ObjectType = ObjectType>(
+  array: Obj[],
+  key: keyof Obj,
+  newData: Partial<Obj>,
+): Obj[] => {
   if (newData[key] === undefined)
     throw new Error(`The key ${key.toString()} does not exist in newData`)
   return array.map(object =>

@@ -7,11 +7,11 @@
  *
  * This function can be useful when you need to reverse a mapping, or when you need to look up keys by their associated values.
  *
- * @template T - An object with string or number keys.
+ * @template Obj - An object with string or number keys.
  * @template Key - The keys of the object T.
  * @template Return - The inverted object.
  *
- * @param {T} object - The original object to invert.
+ * @param {Obj} object - The original object to invert.
  * @returns {Return} The new object with inverted keys and values.
  *
  * @example
@@ -23,11 +23,11 @@
  * // => { '1': 'b' } - 'a' is overridden by 'b'
  */
 export const invert = <
-  T extends Record<string, string | number>,
-  Key extends keyof T,
-  Return extends { [K in T[Key]]: Key },
+  Obj extends Record<string, string | number>,
+  Key extends keyof Obj,
+  Return extends { [K in Obj[Key]]: Key },
 >(
-  object: T,
+  object: Obj,
 ): Return =>
   Object.entries(object).reduce((acc, current) => {
     acc[current[1]] = current[0]

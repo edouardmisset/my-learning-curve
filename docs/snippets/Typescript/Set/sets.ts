@@ -18,6 +18,10 @@
  */
 export const commonElements = <T>(leftArray: T[], rightArray: T[]): T[] =>
   leftArray.filter(item => new Set(rightArray).has(item))
+
+/**
+ * @description Alias for the {@link commonElements} function.
+ */
 export const intersection = commonElements
 
 /**
@@ -40,6 +44,10 @@ export const intersection = commonElements
  */
 export const mergeUnique = <T>(leftArray: T[], rightArray: T[]): T[] =>
   Array.from(new Set([...leftArray, ...rightArray]))
+
+/**
+ * @description Alias for the {@link mergeUnique} function.
+ */
 export const union = mergeUnique
 
 /**
@@ -65,6 +73,10 @@ export const uniqueInFirst = <T>(firstArray: T[], ...otherArrays: T[][]): T[] =>
   firstArray.filter(
     item => !otherArrays.some(array => new Set(array).has(item)),
   )
+
+/**
+ * @description Alias for the {@link uniqueInFirst} function.
+ */
 export const setDifference = uniqueInFirst
 
 /**
@@ -90,25 +102,8 @@ export const uniqueElements = <T>(...arrays: T[][]): T[] =>
     ...uniqueInFirst(previousArray, currentArray),
     ...uniqueInFirst(currentArray, previousArray),
   ])
+
+/**
+ * @description Alias for the {@link uniqueElements} function.
+ */
 export const symmetricDifference = uniqueElements
-
-// const left = [1, 2, 3]
-// const right = [2, 3, 4]
-
-// const one = [1, 2, 3, 4, 5, 6]
-// const two = [3, 4]
-// const three = [6]
-
-// console.log(intersection(left, right)) // [2, 3]
-// console.log(commonElements(left, right)) // [2, 3]
-
-// console.log(union(left, right)) // [1, 2, 3, 4]
-// console.log(mergeUnique(left, right)) // [1, 2, 3, 4]
-
-// console.log(uniqueInFirst(left, right)) // [1]
-// console.log(setDifference(left, right)) // [1]
-// console.log(uniqueInFirst(one, two, three)) // [1, 2, 5]
-// console.log(setDifference(one, two, three)) // [1, 2, 5]
-
-// console.log(uniqueElements(left, right))  // [1, 4]
-// console.log(symmetricDifference(left, right)) // [1, 4]

@@ -40,7 +40,7 @@ export type Override<OriginalType, OverrideType> = Omit<
  * This type helper uses the `Omit`, `Pick`, and `Required` utility types from TypeScript.
  * It first omits the specified keys from the original type, and then makes those keys required.
  *
- * @template T The original type.
+ * @template Obj The original type.
  * @template Key The keys of the properties that should be made required. It extends `keyof T`, which means it can be any key of `T`. The default value is `keyof T`, which means all keys of `T`.
  *
  * @example
@@ -52,11 +52,10 @@ export type Override<OriginalType, OverrideType> = Omit<
  * type PersonWithRequiredAge = RequireKey<Person, 'age'>;
  * // Equivalent to: { name: string; age: number; }
  */
-export type RequireKey<T extends object, Key extends keyof T = keyof T> = Omit<
-  T,
-  Key
-> &
-  Required<Pick<T, Key>>
+export type RequireKey<
+  Obj extends ObjectType<unknown>,
+  Key extends keyof Obj = keyof Obj,
+> = Omit<Obj, Key> & Required<Pick<Obj, Key>>
 
 /**
  * Constructs a type by making some properties of an existing type optional.
@@ -64,8 +63,8 @@ export type RequireKey<T extends object, Key extends keyof T = keyof T> = Omit<
  * This type helper uses the `Omit` and `Partial` utility types from TypeScript.
  * It first omits the specified keys from the original type, and then makes those keys optional.
  *
- * @template T The original type.
- * @template K The keys of the properties that should be made optional. It extends `keyof T`, which means it can be any key of `T`. The default value is `keyof T`, which means all keys of `T`.
+ * @template Obj The original type.
+ * @template Key The keys of the properties that should be made optional. It extends `keyof T`, which means it can be any key of `T`. The default value is `keyof T`, which means all keys of `T`.
  *
  * @example
  * type Person = {
@@ -77,9 +76,9 @@ export type RequireKey<T extends object, Key extends keyof T = keyof T> = Omit<
  * // Equivalent to: { name: string; age?: number; }
  */
 export type PartialProperty<
-  T extends object,
-  K extends keyof T = keyof T,
-> = Omit<T, K> & Partial<Pick<T, K>>
+  Obj extends ObjectType<unknown>,
+  Key extends keyof Obj = keyof Obj,
+> = Omit<Obj, Key> & Partial<Pick<Obj, Key>>
 
 /**
  * Constructs a type by excluding `null` from the possible values of some properties of an existing type.
@@ -87,8 +86,8 @@ export type PartialProperty<
  * This type helper uses the `Exclude` utility type from TypeScript.
  * It iterates over the keys of the original type, and for each key, it creates a new type that excludes `null` from the possible values of that property.
  *
- * @template T The original type. It extends `object`, which means it can be any object type.
- * @template K The keys of the properties that should exclude `null`. It extends `keyof T`, which means it can be any key of `T`. The default value is `keyof T`, which means all keys of `T`.
+ * @template Obj The original type. It extends `object`, which means it can be any object type.
+ * @template Key The keys of the properties that should exclude `null`. It extends `keyof T`, which means it can be any key of `T`. The default value is `keyof T`, which means all keys of `T`.
  *
  * @example
  * type Person = {
@@ -99,8 +98,11 @@ export type PartialProperty<
  * type PersonWithoutNull = NotNullProperty<Person>;
  * // Equivalent to: { name: string; age: number; }
  */
-export type NotNullProperty<T extends object, K extends keyof T = keyof T> = {
-  [P in K]: Exclude<T[K], null>
+export type NotNullProperty<
+  Obj extends ObjectType<unknown>,
+  Key extends keyof Obj = keyof Obj,
+> = {
+  [P in Key]: Exclude<Obj[Key], null>
 }
 
 /**
@@ -108,8 +110,8 @@ export type NotNullProperty<T extends object, K extends keyof T = keyof T> = {
  * It takes a type as its argument and returns a new type that has the same properties as the original type,
  * but the properties are not intersected. This means that the new type is easier to read and understand.
  */
-export type Prettify<T> = {
-  [K in keyof T]: T[K]
+export type Prettify<Obj> = {
+  [Key in keyof Obj]: Obj[Key]
   // eslint-disable-next-line @typescript-eslint/ban-types
 } & {}
 
@@ -119,7 +121,7 @@ export type Prettify<T> = {
  * This type helper uses the `keyof` and indexed access (`[]`) types from TypeScript.
  * It creates a new type that includes the types of all values of the properties of the original type.
  *
- * @template T The original type.
+ * @template Obj The original type.
  *
  * @example
  * type Person = {
@@ -130,13 +132,13 @@ export type Prettify<T> = {
  * type PersonValues = ObjectValues<Person>;
  * // Equivalent to: string | number
  */
-export type ObjectValues<T> = T[keyof T]
+export type ObjectValues<Obj> = Obj[keyof Obj]
 
 /**
  * Represents a type that can be either a specific string (or union of strings) `T` or any string.
  *
- * @template T - A string literal type.
- * @typedef {T | Omit<string, T>} LooseAutoComplete
+ * @template S - A string literal type.
+ * @typedef {S | Omit<string, S>} LooseAutoComplete
  *
  * @example
  * // Define a type that can be either "red" or any string excluding "red"
@@ -148,4 +150,4 @@ export type ObjectValues<T> = T[keyof T]
  * // This is also valid because any string excluding "red" is allowed
  * let example4: RedOrOther = "blue";
  */
-export type LooseAutoComplete<T extends string> = T | Omit<string, T>
+export type LooseAutoComplete<S extends string> = S | Omit<string, S>

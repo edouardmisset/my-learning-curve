@@ -1,11 +1,11 @@
 /**
- * Selects a specific property from each object in an array.
+ * Selects a specific key from each object in an array.
  *
- * @template T - The type of the objects in the array.
- * @template K - The type of the key to select from the objects.
- * @param {T[]} arr - The array of objects.
- * @param {K} property - The property to select from each object.
- * @returns {Array<T[K]>} - An array of the selected properties.
+ * @template Obj - The type of the objects in the array.
+ * @template Key - The type of the key to select from the objects.
+ * @param {Obj[]} arr - The array of objects.
+ * @param {Key} key - The key to select from each object.
+ * @returns {Array<Obj[Key]>} - An array of the selected properties.
  *
  * @example
  * selectBy([{ a: 1, b: 2 }, { a: 3, b: 4 }], 'b')
@@ -15,21 +15,29 @@
  * selectBy([{ name: 'John', age: 30 }, { name: 'Jane', age: 25 }], 'name')
  * // Returns ['John', 'Jane']
  */
-export const selectBy = <T extends Record<string, unknown>, K extends keyof T>(
-  arr: T[],
-  property: K,
-): T[K][] =>
-  arr.flatMap(item => (Object.hasOwn(item, property) ? [item[property]] : []))
+export const selectBy = <
+  Obj extends Record<string, unknown>,
+  Key extends keyof Obj,
+>(
+  arr: Obj[],
+  key: Key,
+): Obj[Key][] =>
+  arr.flatMap(item => (Object.hasOwn(item, key) ? [item[key]] : []))
+
+export const createSelectBy =
+  <Obj extends Record<string, unknown>, Key extends keyof Obj>(key: Key) =>
+  (item: Obj): Obj[Key] =>
+    item[key]
 
 /**
- * Applies a transformation function to a specific property of each object in an array.
+ * Applies a transformation function to a specific key of each object in an array.
  *
- * @template T - The type of the objects in the array.
- * @template K - The type of the key to select from the objects.
+ * @template Obj - The type of the objects in the array.
+ * @template Key - The type of the key to select from the objects.
  * @template R - The type of the result of the transformation function.
- * @param {T[]} arr - The array of objects.
- * @param {K} property - The property to select from each object.
- * @param {(value: T[K]) => R} transform - The transformation function to apply to each selected property.
+ * @param {Obj[]} arr - The array of objects.
+ * @param {Key} key - The key to select from each object.
+ * @param {(value: Obj[Key]) => R} transform - The transformation function to apply to each selected key.
  * @returns {Array<R>} - An array of the transformed properties.
  *
  * @example
@@ -41,14 +49,12 @@ export const selectBy = <T extends Record<string, unknown>, K extends keyof T>(
  * // Returns ['JOHN', 'JANE']
  */
 export const selectAndTransform = <
-  T extends Record<string, unknown>,
-  K extends keyof T,
+  Obj extends Record<string, unknown>,
+  Key extends keyof Obj,
   R,
 >(
-  arr: T[],
-  property: K,
-  transform: (value: T[K]) => R,
+  arr: Obj[],
+  key: Key,
+  transform: (value: Obj[Key]) => R,
 ): R[] =>
-  arr.flatMap(item =>
-    Object.hasOwn(item, property) ? [transform(item[property])] : [],
-  )
+  arr.flatMap(item => (Object.hasOwn(item, key) ? [transform(item[key])] : []))

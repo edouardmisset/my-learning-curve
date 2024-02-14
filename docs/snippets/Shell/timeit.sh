@@ -7,8 +7,9 @@ function timeit() {
   for cmd in "$@"; do
     # Initialize a variable to hold the total execution time of the command.
     total=0
-    # Run the command 10 times.
-    for i in {1..10}; do
+    iterations=100
+    # Run the command 100 times.
+    for i in {1..$iterations}; do
       # Get the start time in nanoseconds.
       start=$(date +%s%N)
       # Execute the command, suppressing its output.
@@ -22,7 +23,7 @@ function timeit() {
     done
 
     # Calculate the average execution time of the command in seconds.
-    average=$(echo "scale=3; $total / 10 / 1000000000" | bc -l)
+    average=$(echo "scale=0; $total / $iterations / 1000000" | bc -l)
     # Print the command and its average execution time, coloring the output.
     printf "\e[32m%-50s\e[0m \e[33m%15s\e[0m\n" "$cmd" "$average"
   done
@@ -31,7 +32,7 @@ function timeit() {
 # Clear the terminal.
 clear
 # Print the headers for the output table, coloring the output.
-printf "\e[34m%-50s %15s\e[0m\n" "Command" "Average Time (s)"
+printf "\e[34m%-50s %15s\e[0m\n" "Command" "Average Time (ms)"
 # Print a line to separate the headers from the data.
 printf "%-66s\n" "-------------------------------------------------------------------"
 

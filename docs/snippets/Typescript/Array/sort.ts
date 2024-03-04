@@ -11,11 +11,6 @@ export const createStringSorter =
     return leftStr.localeCompare(rightStr) * (ascending ? 1 : -1)
   }
 
-// window.console.log(
-//   '🚀 ~ sortStrings:',
-//   ascentList.sort(sortStringsBuilder('routeName')),
-// )
-
 // Number
 
 export const createNumberSorter =
@@ -32,11 +27,6 @@ export const createNumberSorter =
     return (leftNum - rightNum) * (ascending ? 1 : -1)
   }
 
-// window.console.log(
-//   '🚀 ~ sortNumber:',
-//   ascentList.sort(sortNumberBuilder('numberOfTries')),
-// )
-
 // Date
 
 export const createDateSorter =
@@ -51,5 +41,3 @@ export const createDateSorter =
     if (Number.isNaN(rightDate.getTime())) return -1
     return (leftDate.getTime() - rightDate.getTime()) * (ascending ? 1 : -1)
   }
-
-// window.console.log('🚀 ~ sortDate:', ascentList.sort(sortDateBuilder('date')))

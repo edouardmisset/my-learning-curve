@@ -12,8 +12,11 @@ export const sortBy = <Obj extends Record<string, string | number>>(
   property: keyof Obj,
   ascending = true,
 ): Obj[] =>
-  arr.sort((left, right) => {
-    if (left[property] === right[property]) return 0
-    if (ascending) return left[property] > right[property] ? 1 : -1
-    return left[property] < right[property] ? 1 : -1
+  [...arr].sort((left, right) => {
+    const leftValue = left[property]
+    const rightValue = right[property]
+    const order = ascending ? 1 : -1
+
+    if (leftValue === rightValue) return 0
+    return leftValue > rightValue ? order : -order
   })

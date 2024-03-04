@@ -23,13 +23,14 @@
  * // => { '1': 'b' } - 'a' is overridden by 'b'
  */
 export const invert = <
-  Obj extends Record<string, string | number>,
+  Obj extends Record<string, unknown>,
   Key extends keyof Obj,
-  Return extends { [K in Obj[Key]]: Key },
+  Value extends Obj[Key] & (string | number),
+  Return extends { [K in Value]: Key },
 >(
   object: Obj,
 ): Return =>
   Object.entries(object).reduce((acc, current) => {
-    acc[current[1]] = current[0]
+    acc[current[1] as string] = current[0]
     return acc
   }, {} as Return)

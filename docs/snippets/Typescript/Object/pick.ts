@@ -25,19 +25,3 @@ export const pick = <
   Object.fromEntries(keys.map(key => [key, obj[key]])) as Prettify<
     Pick<Obj, Key>
   >
-
-// Alternative
-
-// export const pickReduce = <Obj extends Record<string, unknown>, Key extends keyof T>(
-//   obj: Obj,
-//   keys: Key[],
-// ): Prettify<Pick<Obj, Key>> =>
-//   keys.reduce(
-//     (obj, key) => {
-//       if (Object.hasOwn(obj, key)) {
-//         obj[key] = obj[key]
-//       }
-//       return obj
-//     },
-//     {} as Prettify<Pick<Obj, Key>>,
-//   )

@@ -17,7 +17,7 @@
 :root {
   color: hsl(0deg 0% 100% / 90%);
   font-weight: 400;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, sans-serif;
   line-height: 1.5;
   background-color: hsl(0deg 0% 14%);
   color-scheme: light dark;
@@ -52,7 +52,7 @@ html:focus-within {
 body {
   min-height: 100svh;
   font-size: 1.125rem;
-  font-family: system-ui;
+  font-family: system-ui, sans-serif;
   line-height: 1.6;
 }
 

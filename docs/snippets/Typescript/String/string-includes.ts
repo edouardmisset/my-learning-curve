@@ -8,3 +8,5 @@ export const stringIncludesCaseInsensitive = (
   string: string,
   subString: string,
 ): boolean => string.toLowerCase().includes(subString.toLowerCase())
+
+export const stringIncludes = stringIncludesCaseInsensitive

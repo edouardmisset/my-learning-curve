@@ -6,7 +6,7 @@ import type { Prettify } from '../Type/type-helpers'
  * @template Obj - The type of the object.
  * @template Key - The type of the keys to pick.
  * @param {Obj} obj - The object to pick keys from.
- * @param {Key[]} arr - The array of keys to pick.
+ * @param {Key[]} keys - The array of keys to pick.
  * @returns {Prettify<Pick<Obj, Key>>} A new object with the picked keys.
  *
  * @example
@@ -20,26 +20,8 @@ export const pick = <
   Key extends keyof Obj,
 >(
   obj: Obj,
-  arr: Key[],
-): Prettify<Pick<Obj, Key>> => {
-  const keysToPick = new Set(arr)
-  return Object.fromEntries(
-    Object.entries(obj).filter(([key]) => keysToPick.has(key as Key)),
-  ) as Prettify<Pick<Obj, Key>>
-}
-
-// Alternative
-
-// export const pickReduce = <Obj extends Record<string, unknown>, Key extends keyof T>(
-//   obj: Obj,
-//   keys: Key[],
-// ): Prettify<Pick<Obj, Key>> =>
-//   keys.reduce(
-//     (obj, key) => {
-//       if (Object.hasOwn(obj, key)) {
-//         obj[key] = obj[key]
-//       }
-//       return obj
-//     },
-//     {} as Prettify<Pick<Obj, Key>>,
-//   )
+  keys: Key[],
+): Prettify<Pick<Obj, Key>> =>
+  Object.fromEntries(keys.map(key => [key, obj[key]])) as Prettify<
+    Pick<Obj, Key>
+  >

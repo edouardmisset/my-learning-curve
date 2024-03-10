@@ -6,7 +6,7 @@ import type { Prettify } from '../Type/type-helpers'
  * @template Obj - The type of the object.
  * @template Key - The type of the keys to omit.
  * @param {Obj} obj - The object to omit keys from.
- * @param {Key[]} arr - The array of keys to omit.
+ * @param {Key[]} keys - The array of keys to omit.
  * @returns {Prettify<omit<Obj, Key>>} A new object with the omitted keys.
  *
  * @example
@@ -20,9 +20,9 @@ export const omit = <
   Key extends keyof Obj,
 >(
   obj: Obj,
-  arr: Key[],
+  keys: Key[],
 ): Prettify<Omit<Obj, Key>> => {
-  const keysToOmit = new Set(arr)
+  const keysToOmit = new Set(keys)
   return Object.fromEntries(
     Object.entries(obj).filter(([key]) => !keysToOmit.has(key as Key)),
   ) as Prettify<Omit<Obj, Key>>

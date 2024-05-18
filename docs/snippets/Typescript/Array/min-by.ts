@@ -25,5 +25,8 @@ export const minBy = <Obj extends Record<string, unknown>>(
 ): Obj | undefined => {
   if (array.length === 0) return undefined
 
-  return array.reduce((previous, current) => (previous[key] < current[key] ? previous : current), array[0])
+  return array.reduce(
+    (previous, current) => (previous[key] < current[key] ? previous : current),
+    array[0],
+  )
 }

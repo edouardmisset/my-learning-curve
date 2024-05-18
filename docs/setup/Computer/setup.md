@@ -292,7 +292,6 @@ Here are the ones I've setup:
 # Shell
 alias c='clear'
 alias copy='rsync -ah --info=progress2'
-alias cdi='cd ~/code/innova-web-ui'
 alias cwd='pwd'
 
 # ZSH

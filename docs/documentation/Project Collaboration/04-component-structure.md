@@ -1,8 +1,6 @@
 # Component Structure
 
-**Source**: This is from this [medium article](https://rahuulmiishra.medium.com/react-worst-practices-bdf924efe470)
-
-## **Import** Order:
+## **Import** Order
 
 - Third Party Libraries
 - Custom Components
@@ -11,9 +9,12 @@
 - Image Imports
 - Create file specific Constants
 
-(Separate each import category by one empty line)
+Separate each import category by one empty line.
 
-## Rules for **Components**:
+This should be handled automatically by the
+[eslint-plugin-import](https://github.com/import-js/eslint-plugin-import) plugin
+
+## Rules for **Components**
 
 - Very first line — destructure Props (if any)
 - Grab the translation function — `useTranslation` / `useT` (if used)
@@ -21,8 +22,12 @@
 - Initialize State Variables — `useState`
 - Create Refs — `useRef`
 - Initialize hooks — `useAppDispatch`
-- Write all side effects — `useEffects`
+- Write all side effects — `useEffect`s
 - Create `const`/`let` specific to the Component
 - Function definition — (if any)
 
-(Separate each section by one empty line)
+Separate each section by one empty line
+
+Resources:
+
+**Source**: This is from this [medium article](https://rahuulmiishra.medium.com/react-worst-practices-bdf924efe470)

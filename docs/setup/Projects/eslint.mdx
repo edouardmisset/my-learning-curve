@@ -5,13 +5,13 @@ import Source from '!!raw-loader!./.eslintrc.json'
 
 ## [Installation](https://eslint.org/docs/latest/use/getting-started#manual-set-up)
 
-Using yarn
+Using pnpm
 
 ```sh
-yarn add -D eslint
+pnpm add -D eslint
 
 # Install the related configs and plugins
-# yarn add -D eslint-config-airbnb @typescript-eslint/eslint-plugin eslint-plugin-prettier eslint-config-prettier eslint-plugin-import eslint-plugin-import eslint-plugin-react eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y
+# pnpm add -D eslint-config-airbnb @typescript-eslint/eslint-plugin eslint-plugin-prettier eslint-config-prettier eslint-plugin-import eslint-plugin-import eslint-plugin-react eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y
 ```
 
 ## Settings
@@ -37,5 +37,5 @@ and here is a script to run eslint on a javascript project:
 
 ```sh
 # package.json
-"lint": "yarn eslint --ext .js,jsx,.ts,tsx src --cache",
+"lint": "pnpm eslint --ext .js,jsx,.ts,tsx src --cache",
 ```

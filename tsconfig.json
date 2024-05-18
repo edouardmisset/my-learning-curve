@@ -4,9 +4,6 @@
   "compilerOptions": {
     "target": "ESNext",
     "baseUrl": ".",
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
+    "lib": ["DOM", "ESNext"]
   }
 }

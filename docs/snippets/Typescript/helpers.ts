@@ -1,5 +1,5 @@
 import { isPlainObject } from './Object/is-plain-object'
-import { DefinedValue, ObjectType, Value } from './Type/type-helpers'
+import type { DefinedValue, ObjectType, Value } from './Type/type-helpers'
 
 export const isEmptyObject = (object: ObjectType): boolean =>
   object &&

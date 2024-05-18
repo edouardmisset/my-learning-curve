@@ -1,4 +1,4 @@
-import { ObjectType } from '../Type/type-helpers'
+import type { ObjectType } from '../Type/type-helpers'
 import { objectKeys } from './object-keys'
 
 /**

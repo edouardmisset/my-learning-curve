@@ -7,7 +7,7 @@ const unshifted = [...someValues]
 console.time('Unshift')
 
 while (unshifted.length < arrayLength) {
-  unshifted.unshift(NaN)
+  unshifted.unshift(Number.NaN)
 }
 
 console.log(unshifted)
@@ -19,7 +19,7 @@ console.time('Push and reverse')
 const pushed = [...someValues].reverse() // 38.06005859375 ms
 
 while (pushed.length < arrayLength) {
-  pushed.push(NaN)
+  pushed.push(Number.NaN)
 }
 
 pushed.reverse()
@@ -35,7 +35,7 @@ let spreadCreated: unknown[]
 const someLength = someValues.length
 if (someValues.length < arrayLength) {
   spreadCreated = [
-    ...Array(arrayLength - someValues.length).fill(NaN),
+    ...Array(arrayLength - someValues.length).fill(Number.NaN),
     ...someValues,
   ]
 }
@@ -50,7 +50,7 @@ console.time('New concat array')
 let concatCreated: unknown[]
 if (someValues.length < arrayLength) {
   concatCreated = Array(arrayLength - someValues.length)
-    .fill(NaN)
+    .fill(Number.NaN)
     .concat(someValues)
 }
 

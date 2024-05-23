@@ -63,46 +63,6 @@ Use `react-error-boundary` as a wrapper functional component
 
 ### Selection
 
-- [Tailwind CSS](https://tailwindcss.com/) - [examples](https://tailwindui.com/) some are paid
-- [Daisy UI](https://daisyui.com/) (Tailwind plugin) - [examples](https://daisyui.com/components/)
-- [Material UI](https://mui.com/) - [examples](https://mui.com/components/tables/)
-- [Styled Components](https://styled-components.com/) - [examples](https://styled-components.com/docs/basics#styling-any-component)
-- [Emotion](https://emotion.sh/docs/introduction) - [examples](https://emotion.sh/docs/styled)
-
-### Pros / Cons
-
-|                        |          **Tailwind CSS** &nbsp; _Utility_          | **Daisy UI** &nbsp; _Utility + Components_  |         **Material UI** &nbsp; _Components_         |      **Styled Components** &nbsp; _CSS-in-JS_      | **Emotion** &nbsp; _CSS-in-JS_ |
-| :--------------------: | :-------------------------------------------------: | :-----------------------------------------: | :-------------------------------------------------: | :------------------------------------------------: | :----------------------------: |
-|         **+**          |     modular, rapid proto, lightweight, tooling      | same as Tailwind + components, cleaner HTML |                components, animation                | programmatic css, dynamic & scopes styles, dev exp |   same as Styled Components    |
-|         **-**          | no components, learning curve, config, verbose HTML |           learning curve, config            | config, complex, heavy, learning curve, nested HTML |               syntax, learning curve               |   same as Styled Components    |
-|         npm ↓          |                        2.5 M                        |                    25 k                     |                        900 k                        |                       3.7 M                        |             5.2 M              |
-|       GitHub ⭐        |                        54 k                         |                     9 k                     |                        75 k                         |                        36 k                        |              15 k              |
-|        # dev👩‍💻         |                         200                         |                     27                      |                         2 k                         |                        300                         |              270               |
-|        License         |                         MIT                         |                     MIT                     |                         MIT                         |                        MIT                         |              MIT               |
-|          Size          |                        4 MB                         |                   740 kB                    |                        9 MB                         |                        3 MB                        |             270 kB             |
-| Initial Learning Curve |          moderate &nbsp; easy with tooling          |      moderate &nbsp; easy with tooling      |                        easy                         |                        hard                        |        moderate / hard         |
-| Ease of customization  |                        easy                         |                    easy                     |                   moderate / hard                   |            easy with good CSS knowledge            |  easy with good CSS knowledge  |
-
-=> The decision is made for a Material UI component library to save development time.
-
-The two compared libraries are:
-
-- [KendoUI](https://www.telerik.com/kendo-react-ui/components/)
-- [SyncFusion](https://www.syncfusion.com/react-ui-components)
-
-See the [Excel file](spec/kendoUIvsSyncFusion.xlsx)
-
-**tldr**  
-~~The SyncFusion library is more advanced and could help us avoid being stuck when customizing components.
-The downside is that it is more expensive in the long run.~~
-After trying `SyncFusion`, we opted for `Kendo` for more stable components, easier consumption, and faster development (components and documentation in "Functional Components").
-
-=> `Styled Components` to restyle `Kendo` components and make `InView` components configurable.
-
-### Theme / Graphic Charter
-
-All support themes to unify the UI.
-
 ## Form
 
 - **`react-hook-form`** [link](https://react-hook-form.com/)

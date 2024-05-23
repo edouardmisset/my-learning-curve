@@ -11,7 +11,7 @@ features, fixes, and breaking changes made in commit messages.
 The commit message should be structured as follows:
 
 ```txt
-<type>[optional scope]: <description>
+type[optional scope]: description
 
 [optional body]
 
@@ -37,7 +37,7 @@ CHANGE can be part of commits of any type.
 types other than fix: and feat: are allowed, @commitlint/config-conventional
 recommends **build:, chore:, ci:, docs:, style:, refactor:, perf:, test:**, and
 others.
-footers other than BREAKING CHANGE: <description> may be provided and follow a
+footers other than BREAKING CHANGE: description may be provided and follow a
 convention similar to git trailer
 [format](https://git-scm.com/docs/git-interpret-trailers).
 

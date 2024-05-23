@@ -12,6 +12,10 @@
  * 
  * A better image reset for your CSS:
  * https://www.youtube.com/watch?v=345V2MU3E_w
+ *
+ * Animation and transitions' timing function values inspired by the
+ * "exponential smoothing" from lisyarus'
+ * [blog](https://lisyarus.github.io/blog/posts/exponential-smoothing.html)
 */
 
 :root {
@@ -26,6 +30,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
+  animation-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
+  transition-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
 }
 
 *,

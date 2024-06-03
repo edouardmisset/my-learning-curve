@@ -151,3 +151,23 @@ export type ObjectValues<Obj> = Obj[keyof Obj]
  * let example4: RedOrOther = "blue";
  */
 export type LooseAutoComplete<S extends string> = S | Omit<string, S>
+
+/**
+ * Constructs a type consisting of the values of the properties of an existing type.
+ *
+ * This type helper is similar to `ObjectValues`, but it works with generic types.
+ * It extracts the values of the properties of the generic type `T`.
+ * If `T` is a record type, it returns the union of the values of the properties of `T`.
+ * If `T` is not a record type, it returns `never`.
+ *
+ * @template T The generic type.
+ * @example
+ * ```ts
+ * const person = {
+ *  name: Adam;
+ *  age: 21;
+ * };
+ * type PersonValues = GetObjectValues<person>;
+ * // Equivalent to: 'Adam' | 21
+ */
+export type GetObjectValues<T> = T extends Record<string, infer V> ? V : never

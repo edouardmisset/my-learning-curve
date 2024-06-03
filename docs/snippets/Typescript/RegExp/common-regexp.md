@@ -42,6 +42,20 @@ const regexp = /\s+/g
 const regexp = /\r|\n|\r\n/gm
 ```
 
+## Match email
+
+- Use the `^` and `$` anchors to match the **start** and **end** of the string,
+  respectively.
+- Add the **ignore case** flag `i` to match both uppercase and lowercase
+  characters.
+- Use the `+` quantifier to match **one or more** occurrences of the previous
+  character.
+
+```js
+const regexp =
+  /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-\.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\-]*\.)+[A-Z]{2,}$/i
+```
+
 ## Match non-word characters
 
 - Use negation `^` to match any character that is not a word character `\w` or a whitespace character `\s`.

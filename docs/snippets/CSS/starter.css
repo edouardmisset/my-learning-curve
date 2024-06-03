@@ -131,7 +131,7 @@ a:hover {
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
-  text-underline-offset: 0.125em;
+  text-underline-offset: 0.25em;
   color: currentColor;
 }
 

@@ -67,7 +67,7 @@ element size as well.
 }
 
 /** color-scheme & accent-color */
-:root {
+:where(html) {
   color-scheme: dark light;
   accent-color: purple;
 }

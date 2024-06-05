@@ -5,7 +5,7 @@
  */
 
 /* You can override the default Infima variables here. */
-:root {
+:where(html) {
   --ifm-color-primary: hsl(150deg 80% 20%);
   --ifm-color-primary-dark: hsl(150deg 80% 18%);
   --ifm-color-primary-darker: hsl(150deg 81% 17%);

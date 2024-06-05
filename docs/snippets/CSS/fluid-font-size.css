@@ -26,7 +26,7 @@ h4 {
 
 /* Progressive enhancement */
 
-:root {
+:where(html) {
   --headline-1: 2.75rem;
   --headline-2: 2.35rem;
   --headline-3: 1.5rem;

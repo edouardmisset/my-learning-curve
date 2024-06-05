@@ -26,7 +26,7 @@
  * [blog](https://lisyarus.github.io/blog/posts/exponential-smoothing.html)
 */
 
-:root {
+:where(html) {
   font-weight: 400;
   font-family: system-ui, sans-serif;
 
@@ -136,7 +136,7 @@ a:not([class]) {
 
 /* Respects user preferences for dark mode */
 @media (prefers-color-scheme: light) {
-  :root {
+  :where(html) {
     color: var(--color-dark, black);
     background-color: var(--color-light, white);
   }

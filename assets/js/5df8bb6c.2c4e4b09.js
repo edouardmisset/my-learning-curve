@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_learning_curve=self.webpackChunkmy_learning_curve||[]).push([[2523],{8470:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/my-learning-curve/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":5,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

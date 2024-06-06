@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_learning_curve=self.webpackChunkmy_learning_curve||[]).push([[3986],{8222:e=>{e.exports=JSON.parse('{"permalink":"/my-learning-curve/blog/tags/higher-order-functions","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

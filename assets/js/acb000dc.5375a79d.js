@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_learning_curve=self.webpackChunkmy_learning_curve||[]).push([[8616],{4446:e=>{e.exports=JSON.parse('{"label":"types","permalink":"/my-learning-curve/blog/tags/types","allTagsPath":"/my-learning-curve/blog/tags","count":1,"unlisted":false}')}}]);

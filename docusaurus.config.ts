@@ -103,10 +103,6 @@ const config: Config = {
               label: 'Documentation',
               to: '/docs/documentation/Project Collaboration/getting-started',
             },
-            {
-              label: 'Snippets',
-              to: '/docs/snippets/typescript/Array/collection-key-by',
-            },
           ],
         },
         {

@@ -1,4 +1,6 @@
-# [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) 1.0.0
+# Conventional Commits
+
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) 1.0.0
 
 ## Summary
 

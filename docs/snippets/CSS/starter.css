@@ -127,6 +127,12 @@ a:hover {
   color: hsl(235deg 85% 65%);
 }
 
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-block-size: 10em
+}
+
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;

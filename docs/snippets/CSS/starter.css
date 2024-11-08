@@ -55,10 +55,6 @@
     transition-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
   }
 
-  :where(html:focus-within) {
-    scroll-behavior: smooth;
-  }
-
   ::selection {
     background-color: var(--color-light, white);
     color: var(--color-dark, black);
@@ -138,6 +134,11 @@
 
   :where(a:hover) {
     color: hsl(235deg 85% 65%);
+  }
+
+  /* Make sure textareas without a rows attribute are not tiny */
+  textarea:not([rows]) {
+    min-block-size: 10em;
   }
 
   /* A elements that don't have a class get default styles */

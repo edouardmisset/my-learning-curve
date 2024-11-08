@@ -47,13 +47,12 @@ a:not([class]) {
   text-underline-offset: 0.25em;
 }
 
-/** outline-offset */
-
-/* Reminder: 
-outlines are not computed as part of the element’s box size, so
-increasing the distance will not increase the amount of space an element
-occupies. This is similar to how box-shadow is rendered without impacting the
-element size as well. 
+/** outline-offset
+ * Reminder: 
+ * outlines are not computed as part of the element’s box size, so
+ * increasing the distance will not increase the amount of space an element
+ * occupies. This is similar to how box-shadow is rendered without impacting the
+ * element size as well. 
 */
 .outline-offset {
   outline: 2px dashed blue;
@@ -93,14 +92,14 @@ element size as well.
 :is(h1, h2, h3, h4, .text-balance) {
   text-wrap: balance;
 
-  /* For demonstration */
+  /* ! For demonstration */
   max-inline-size: 25ch;
 }
 
 p {
   text-wrap: pretty;
 
-  /* For demonstration */
+  /* ! For demonstration */
   max-inline-size: 35ch;
 }
 

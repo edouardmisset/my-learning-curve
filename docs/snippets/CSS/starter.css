@@ -1,4 +1,5 @@
-/** Kevin Powell's reset CSS
+/*
+ * Kevin Powell's reset CSS:
  * https://github.com/kevin-powell/website-starter-template-v3/
  * 
  * Remove all animations, transitions and smooth scroll for people that prefer not to see them:
@@ -18,155 +19,213 @@
  * &
  * https://piccalil.li/blog/a-more-modern-css-reset/
  * 
- * Josh Comeau
+ * Josh Comeau:
  * https://www.joshwcomeau.com/css/custom-css-reset/
+ *
+ * Modern CSS for dynamic component-based architecture by Stephanie Eckles:
+ * https://moderncss.dev/modern-css-for-dynamic-component-based-architecture/#css-reset-additions
+ *
+ * Jake Lazaroff:
+ * https://jakelazaroff.com/words/my-modern-css-reset/
  *
  * Animation and transitions' timing function values inspired by the
  * "exponential smoothing" from lisyarus'
  * [blog](https://lisyarus.github.io/blog/posts/exponential-smoothing.html)
 */
 
-:where(html) {
-  font-weight: 400;
-  font-family: system-ui, sans-serif;
-
-  --color-dark: hsl(0deg 0% 14%);
-  --color-light: hsl(0, 0%, 94%);
-  /* By default we enable dark mode */
-  color-scheme: light dark;
-  background-color: var(--color-dark, black);
-  color: var(--color-light, white);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  animation-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
-  transition-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
-}
-
-::selection {
-  background-color: var(--color-light, white);
-  color: var(--color-dark, black);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  font: inherit;
-}
-
-html {
-  hanging-punctuation: first last;
-}
-
-html:focus-within {
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100svh;
-  font-size: 1.125rem;
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-}
-
-main {
-  inline-size: min(65ch, 100% - 4rem);
-  margin-inline: auto;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  text-wrap: balance;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-p {
-  max-inline-size: 65ch;
-  text-wrap: pretty;
-}
-
-img,
-svg,
-picture {
-  max-width: 100%;
-  height: auto;
-
-  display: block;
-  vertical-align: middle;
-  font-style: italic;
-}
-
-a {
-  color: hsl(235deg 100% 70%);
-  font-weight: 500;
-}
-
-a:hover {
-  color: hsl(235deg 85% 65%);
-}
-
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-  text-underline-offset: 0.25em;
-  color: currentColor;
-}
-
-/* Respects user preferences for dark mode */
-@media (prefers-color-scheme: light) {
+@layer reset {
   :where(html) {
-    color: var(--color-dark, black);
-    background-color: var(--color-light, white);
+    font-weight: 400;
+    font-family: system-ui, sans-serif;
+
+    --color-dark: hsl(0deg 0% 14%);
+    --color-light: hsl(0, 0%, 94%);
+    /* By default we enable dark mode */
+    color-scheme: light dark;
+    background-color: var(--color-dark, black);
+    color: var(--color-light, white);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    hanging-punctuation: first last;
+    animation-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
+    transition-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
+  }
+
+  :where(html:focus-within) {
+    scroll-behavior: smooth;
   }
 
   ::selection {
-    background-color: var(--color-dark, black);
-    color: var(--color-light, white);
-  }
-}
-
-/* Remove all animations, transitions and smooth scroll for people that prefer
-not to see them */
-@media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-    scroll-behavior: auto;
+    background-color: var(--color-light, white);
+    color: var(--color-dark, black);
   }
 
   *,
   *::before,
   *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
+    box-sizing: border-box;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  :has(:target) {
-    scroll-behavior: smooth;
-    scroll-padding-top: 3rem;
+  * {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+  }
+
+  :where(body) {
+    min-block-size: 100svh;
+    font-size: 1.125rem;
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+  }
+
+  :where(ul, ol)[role='list'] {
+    list-style: none;
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    line-height: calc(1em + 0.5rem);
+    text-wrap: balance;
+  }
+
+  :where(p, h1, h2, h3, h4, h5, h6) {
+    overflow-wrap: break-word;
+  }
+
+  :where(p) {
+    /* ! This might cause some unexpected problems */
+    max-inline-size: 65ch;
+    text-wrap: pretty;
+  }
+
+  :where(img, svg, picture, video) {
+    max-inline-size: 100%;
+    block-size: auto;
+
+    display: block;
+    vertical-align: middle;
+    font-style: italic;
+  }
+
+  /* Remove stroke and set fill color to the inherited font color */
+  :where(svg) {
+    stroke: none;
+    fill: currentColor;
+  }
+  /* SVG's without a fill attribute */
+  :where(svg):where(:not([fill])) {
+    /* Remove fill and set stroke color to the inherited font color */
+    stroke: currentColor;
+    fill: none;
+    /* Rounded stroke */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Set a size for SVG's without a width attribute */
+  :where(svg):where(:not([width])) {
+    inline-size: 5rem;
+  }
+
+  :where(a) {
+    color: hsl(235deg 100% 70%);
+    font-weight: 500;
+  }
+
+  :where(a:hover) {
+    color: hsl(235deg 85% 65%);
+  }
+
+  /* A elements that don't have a class get default styles */
+  :where(a:not([class])) {
+    color: currentColor;
+    text-decoration-skip-ink: auto;
+    /* Relatively sized thickness and offset */
+    text-decoration-thickness: max(0.08em, 1px);
+    text-underline-offset: 0.15em;
+  }
+
+  :where(input, button, textarea, select) {
+    letter-spacing: inherit;
+    word-spacing: inherit;
+    color: currentColor;
+  }
+
+  :where(button, label, select, summary, [role='button'], [role='option']) {
+    cursor: pointer;
+  }
+
+  :where(:disabled) {
+    cursor: not-allowed;
+  }
+
+  :where(label:has(> input:disabled), label:has(+ input:disabled)) {
+    cursor: not-allowed;
+  }
+
+  /* Change textarea resize to vertical only and block only if the browser supports that */
+  :where(textarea) {
+    resize: vertical;
+  }
+  @supports (resize: block) {
+    :where(textarea) {
+      resize: block;
+    }
+  }
+
+  /* Respects user preferences for dark mode */
+  @media (prefers-color-scheme: light) {
+    :where(html) {
+      color: var(--color-dark, black);
+      background-color: var(--color-light, white);
+    }
+
+    ::selection {
+      background-color: var(--color-dark, black);
+      color: var(--color-light, white);
+    }
+  }
+
+  /* Remove all animations, transitions and smooth scroll for people that prefer
+not to see them */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-delay: 0s !important;
+      transition-duration: 0s !important;
+    }
+  }
+
+  :focus-visible {
+    --outline-size: max(2px, 0.15em);
+
+    outline: var(--outline-width, var(--outline-size))
+      var(--outline-style, solid) var(--outline-color, currentColor);
+    outline-offset: var(--outline-offset, var(--outline-size));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :has(:target, :focus-visible) {
+      scroll-behavior: smooth;
+      scroll-padding-block: 8vh;
+    }
+  }
+
+  /* Create a root stacking context */
+  :where(#root, #__next, #app) {
+    isolation: isolate;
   }
 }

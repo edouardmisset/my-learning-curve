@@ -3,11 +3,11 @@
 }
 
 .image {
-  grid-area: 1 / -1 / 1 /-1;
+  grid-area: 1 / -1 / 1 / -1;
 }
 
 .overlay {
-  grid-area: 1 / -1 / 1 /-1;
+  grid-area: 1 / -1 / 1 / -1;
   inline-size: 100%;
   block-size: 100%;
   background-color: hsl(0deg 0% 0% / 20%);

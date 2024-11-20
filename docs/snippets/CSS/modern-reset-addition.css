@@ -1,6 +1,6 @@
 /** Credits Stephanie Eckles
-* https://moderncss.dev/modern-css-for-dynamic-component-based-architecture/#css-reset-additions
-*/
+ * https://moderncss.dev/modern-css-for-dynamic-component-based-architecture/#css-reset-additions
+ */
 
 @layer reset, base, theme, components, utilities;
 

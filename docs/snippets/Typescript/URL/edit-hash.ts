@@ -24,18 +24,18 @@ export function editHash(
         : new URL(url.toString())
   }
 
-  let newURL: URL | undefined
+  let newUrl: URL | undefined
 
   if (typeof url === 'string') {
     if (!isValidURL(url)) {
       throw new Error('Invalid URL')
     }
-    newURL = new URL(url)
+    newUrl = new URL(url)
   } else {
-    newURL = replace ? url : new URL(url.toString())
+    newUrl = replace ? url : new URL(url.toString())
   }
 
-  newURL.hash = newHash
+  newUrl.hash = newHash
 
-  return newURL
+  return newUrl
 }

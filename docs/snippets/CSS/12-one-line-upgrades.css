@@ -1,12 +1,12 @@
 /** Credits to Stephanie Eckles
-* (https://moderncss.dev/12-modern-css-one-line-upgrades) 
-*/
+ * (https://moderncss.dev/12-modern-css-one-line-upgrades)
+ */
 
 /** Stable Upgrade */
 
 /** Aspect Ratio */
 .aspect-ratio-hd {
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
 }
 
 .aspect-ratio-square {
@@ -48,12 +48,12 @@ a:not([class]) {
 }
 
 /** outline-offset
- * Reminder: 
+ * Reminder:
  * outlines are not computed as part of the element’s box size, so
  * increasing the distance will not increase the amount of space an element
  * occupies. This is similar to how box-shadow is rendered without impacting the
- * element size as well. 
-*/
+ * element size as well.
+ */
 .outline-offset {
   outline: 2px dashed blue;
   outline-offset: var(--outline-offset, 0.5em);

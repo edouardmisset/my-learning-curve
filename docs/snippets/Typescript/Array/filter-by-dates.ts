@@ -1,5 +1,5 @@
-type milliseconds = number
-type integer = number
+type Milliseconds = number
+type Integer = number
 
 type StartAndEndDate = {
   startDate: Date
@@ -7,12 +7,12 @@ type StartAndEndDate = {
 }
 
 type Year = {
-  year: integer
+  year: Integer
 }
 
 type DurationAndRefDate = {
   referenceDate: Date
-  duration: milliseconds
+  duration: Milliseconds
 }
 
 type FilterOptions = Year | StartAndEndDate | DurationAndRefDate
@@ -28,8 +28,11 @@ const isReferenceDateOption = (
   'referenceDate' in option && 'duration' in option
 
 const isValidDate = (...dates: unknown[]): boolean => {
-  for (const date of dates)
-    if (!(date instanceof Date) || Number.isNaN(date)) return false
+  for (const date of dates) {
+    if (!(date instanceof Date) || Number.isNaN(date)) {
+      return false
+    }
+  }
 
   return true
 }
@@ -60,24 +63,32 @@ export const createFilter =
   <Obj>(dateKey: keyof Obj, options: FilterOptions = {} as FilterOptions) =>
   (obj: Obj): boolean => {
     const val = obj[dateKey]
-    if (!isDateCompatible(val)) return true
+    if (!isDateCompatible(val)) {
+      return true
+    }
     const dateValue = new Date(val)
-    if (!isValidDate(dateValue)) return true
+    if (!isValidDate(dateValue)) {
+      return true
+    }
 
-    if (isYearOption(options)) return isYearMatch(dateValue, options.year)
+    if (isYearOption(options)) {
+      return isYearMatch(dateValue, options.year)
+    }
 
     if (
       isDateRangeOption(options) &&
       isValidDate(options.startDate, options.endDate)
-    )
+    ) {
       return isWithinDateRange(dateValue, options.startDate, options.endDate)
+    }
 
-    if (isReferenceDateOption(options) && isValidDate(options.referenceDate))
+    if (isReferenceDateOption(options) && isValidDate(options.referenceDate)) {
       return isWithinDuration(
         dateValue,
         options.referenceDate,
         options.duration,
       )
+    }
 
     // If no valid options are provided, include the item in the result
     return true

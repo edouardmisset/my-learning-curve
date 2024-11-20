@@ -1,7 +1,7 @@
 /** Credits Stephanie Eckles
-* https://moderncss.dev/generating-font-size-css-rules-and-creating-a-fluid-type-scale/
-* https://moderncss.dev/container-query-units-and-fluid-typography/
-*/
+ * https://moderncss.dev/generating-font-size-css-rules-and-creating-a-fluid-type-scale/
+ * https://moderncss.dev/container-query-units-and-fluid-typography/
+ */
 
 body {
   line-height: 1.5;
@@ -71,7 +71,9 @@ h4,
     font-size: clamp(
       max(
         1rem,
-        var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)
+        var(--font-size) -
+        var(--font-size) *
+        var(--font-size-diff, 0.3)
       ),
       var(--font-size-fluid, 5cqi),
       var(--font-size)

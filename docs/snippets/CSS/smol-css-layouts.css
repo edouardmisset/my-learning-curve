@@ -1,6 +1,6 @@
 /** Credits Stephanie Eckles
-* https://smolcss.dev
-*/
+ * https://smolcss.dev
+ */
 
 /** Responsive CSS Grid (RAM v2) */
 .css-grid {
@@ -13,9 +13,9 @@
   /* min() with 100% prevents overflow
   in extra narrow spaces */
   grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, var(--min, 15ch)), 1fr)
-  );
+      auto-fit,
+      minmax(min(100%, var(--min, 15ch)), 1fr)
+    );
 }
 
 /** Responsive Flexbox Grid */
@@ -50,7 +50,7 @@
       larger than content area  */
   --breakout-grid-width: calc(
     var(--max-content-width, 50ch) +
-      (var(--max-content-width, 50ch) * var(--breakout-difference, 0.2))
+    (var(--max-content-width, 50ch) * var(--breakout-difference, 0.2))
   );
 
   display: grid;
@@ -88,7 +88,7 @@
 /** Aspect Ratio Gallery */
 .aspect-ratio-gallery {
   --min: 15rem;
-  --aspect-ratio: 4/3;
+  --aspect-ratio: 4 / 3;
   --gap: 0;
 }
 
@@ -98,7 +98,7 @@
 
 @supports (aspect-ratio: 1) {
   .aspect-ratio-gallery li {
-    aspect-ratio: var(--aspect-ratio, 4/3);
+    aspect-ratio: var(--aspect-ratio, 4 / 3);
     block-size: auto;
   }
 }
@@ -180,7 +180,7 @@
 
 /** Composable Card Component */
 .card-component {
-  --img-ratio: 3/2;
+  --img-ratio: 3 / 2;
 
   display: flex;
   flex-direction: column;
@@ -242,9 +242,9 @@ but as a fallback you can chain `:not()` instead */
   enable easier access on touch devices, ensuring
   the WCAG touch target size is met or exceeded */
   grid-template-columns: repeat(
-    var(--avatar-count, 3),
-    max(44px, calc(var(--avatar-size, 3rem) / 1.15))
-  );
+      var(--avatar-count, 3),
+      max(44px, calc(var(--avatar-size, 3rem) / 1.15))
+    );
 
   /* `padding` matches added visual dimensions of
   the `box-shadow` to help create a more accurate
@@ -258,9 +258,9 @@ but as a fallback you can chain `:not()` instead */
     /* We create 1 extra cell to enable the computed 
     width to match the final visual width */
     grid-template-columns: repeat(
-      calc(var(--avatar-count, 3) + 1),
-      calc(var(--avatar-size, 3rem) / 1.75)
-    );
+        calc(var(--avatar-count, 3) + 1),
+        calc(var(--avatar-size, 3rem) / 1.75)
+      );
   }
 }
 
@@ -412,7 +412,7 @@ ul.visited-styles {
 
 .visited-styles a span::after {
   color: var(--color-background);
-  content: '✔';
+  content: "✔";
 }
 
 .visited-styles a:visited span::after {

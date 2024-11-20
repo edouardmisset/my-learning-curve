@@ -34,7 +34,7 @@
     --_bg: var(--_bg-light);
     --_ink-shadow: var(--_ink-shadow-light);
 
-    & :where([type='reset']) {
+    & :where([type="reset"]) {
       --_text: var(--red-6);
       --_border: var(--red-3);
     }
@@ -44,7 +44,7 @@
     :where(
       button,
       .btn,
-      input:is([type='button'], [type='submit'], [type='reset'])
+      input:is([type="button"], [type="submit"], [type="reset"])
     )[disabled] {
     --_text: var(--gray-6);
   }
@@ -53,7 +53,7 @@
     :where(
       textarea,
       select,
-      input:not([type='button'], [type='submit'], [type='reset'])
+      input:not([type="button"], [type="submit"], [type="reset"])
     ) {
     background-color: var(--surface-2);
   }

@@ -6,7 +6,25 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "nursery": {
+        "all": true
+      },
+      "correctness": {
+        "all": true
+      },
+      "style": {
+        "all": true
+      },
+      "complexity": {
+        "all": true
+      },
+      "performance": {
+        "all": true
+      },
+      "security": {
+        "all": true
+      }
     }
   },
   "formatter": {

@@ -7,6 +7,7 @@
   },
   "editor.tabSize": 2,
   "eslint.enable": false,
+  "prettier.enable": false,
   "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
   "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
   "javascript.format.semicolons": "remove",
@@ -28,9 +29,7 @@
           "template": "UnitTest"
         }
       ],
-      "openFilesWhenDone": [
-        "__tests__/<FTName>.test.tsx"
-      ]
+      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
     },
     {
       "name": "Component Tests",
@@ -42,9 +41,7 @@
           "template": "BascicTestImports"
         }
       ],
-      "openFilesWhenDone": [
-        "__tests__/<FTName>.test.tsx"
-      ]
+      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
     }
   ],
   "folderTemplates.fileTemplates": {
@@ -100,7 +97,6 @@
     "Network",
     "Error-Handling"
   ],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
@@ -130,9 +126,7 @@
     }
   ],
   "cSpell.language": "en,fr",
-  "cSpell.words": [
-    "MULILINETEXT"
-  ],
+  "cSpell.words": ["MULILINETEXT"],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#93e6fc",
     "activityBar.background": "#93e6fc",

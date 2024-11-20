@@ -55,18 +55,17 @@ export const removeFalsyValues = <Type>(arr: (Type | Value)[]): Type[] =>
 export const shallowRemoveObjNullishValues = (object: ObjectType): ObjectType =>
   Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null))
 
-export const addOrRemoveFromList =
+export const addRemoveItem =
   <T extends DefinedValue>(listOfThings: T[], aThing: T) =>
   (add: boolean): T[] =>
     add
       ? [...listOfThings, aThing]
       : listOfThings.filter(thing => thing !== aThing)
 
-export const addWhenAbsentOtherwiseRemove = <T extends DefinedValue>(
+export const toggleItemInList = <T extends DefinedValue>(
   listOfThings: T[],
   aThing: T,
-): T[] =>
-  addOrRemoveFromList(listOfThings, aThing)(!listOfThings.includes(aThing))
+): T[] => addRemoveItem(listOfThings, aThing)(!listOfThings.includes(aThing))
 
 /**
  * @description Deduplicates an array of objects based on a specified property.

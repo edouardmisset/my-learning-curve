@@ -34,16 +34,20 @@
 */
 
 @layer reset {
+  :where(:root) {
+    color-scheme: light dark;
+  }
+
   :where(html) {
     font-weight: 400;
     font-family: system-ui, sans-serif;
 
-    --color-dark: hsl(0deg 0% 14%);
-    --color-light: hsl(0, 0%, 94%);
+    --text-1: light-dark(hsl(0deg 0% 14%), hsl(0, 0%, 94%));
+    --surface-1: light-dark(hsl(0, 0%, 94%), hsl(0deg 0% 14%));
+
     /* By default we enable dark mode */
-    color-scheme: light dark;
-    background-color: var(--color-dark, black);
-    color: var(--color-light, white);
+    background-color: var(--surface-1, black);
+    color: var(--text-1, white);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -65,8 +69,8 @@
   }
 
   ::selection {
-    background-color: var(--color-light, white);
-    color: var(--color-dark, black);
+    background-color: var(--surface-1, white);
+    color: var(--text-1, black);
   }
 
   *,
@@ -158,6 +162,13 @@
     text-underline-offset: 0.15em;
   }
 
+  :where(input:user-invalid) {
+    outline-offset: 2px;
+    outline-color: red;
+    outline-style: solid;
+    outline-width: 2px;
+  }
+
   /* Progressive enhancements */
   @supports (field-sizing: content) {
     :where(textarea, select, input) {
@@ -197,7 +208,9 @@
     }
   }
 
-  /* Respects user preferences for dark mode */
+  /* Using light-dark() css function, the following becomes obsolete */
+
+  /* Respects user preferences for dark mode
   @media (prefers-color-scheme: light) {
     :where(html) {
       color: var(--color-dark, black);
@@ -208,7 +221,7 @@
       background-color: var(--color-dark, black);
       color: var(--color-light, white);
     }
-  }
+  } */
 
   /* Remove all animations, transitions and smooth scroll for people that prefer
 not to see them */
@@ -247,4 +260,13 @@ not to see them */
   :where(#root, #__next, #app) {
     isolation: isolate;
   }
+}
+
+.light {
+  /* forces light color-scheme */
+  color-scheme: light;
+}
+.dark {
+  /* forces dark color-scheme */
+  color-scheme: dark;
 }

@@ -133,12 +133,11 @@
   }
 
   :where(a:hover) {
-    color: hsl(235deg 85% 65%);
+    color: hsl(235deg 85% 75%);
   }
 
-  /* Make sure textareas without a rows attribute are not tiny */
-  textarea:not([rows]) {
-    min-block-size: 10em;
+  :where(a:visited) {
+    color: hsl(235deg 80% 75%);
   }
 
   /* A elements that don't have a class get default styles */
@@ -148,6 +147,13 @@
     /* Relatively sized thickness and offset */
     text-decoration-thickness: max(0.08em, 1px);
     text-underline-offset: 0.15em;
+  }
+
+  /* Progressive enhancements */
+  @supports (field-sizing: content) {
+    :where(textarea, select, input) {
+      field-sizing: content;
+    }
   }
 
   :where(input, button, textarea, select) {
@@ -168,6 +174,10 @@
     cursor: not-allowed;
   }
 
+  /* Make sure textareas without a rows attribute are not tiny */
+  :where(textarea:not([rows])) {
+    min-block-size: 10em;
+  }
   /* Change textarea resize to vertical only and block only if the browser supports that */
   :where(textarea) {
     resize: vertical;

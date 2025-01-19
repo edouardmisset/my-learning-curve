@@ -148,21 +148,17 @@
     color: var(--a-color);
     font-weight: 500;
 
+    text-decoration-skip-ink: auto;
+    /* Relatively sized thickness and offset */
+    text-decoration-thickness: max(0.08em, 1px);
+    text-underline-offset: 0.15em;
+
     &:hover {
       color: color-mix(in oklab, var(--a-color), white 10%);
     }
 
     &:visited {
       color: color-mix(in oklab, var(--a-color), white 20%);
-    }
-
-    /* A elements that don't have a class get default styles */
-    &:not([class]) {
-      color: var(--a-color, currentColor);
-      text-decoration-skip-ink: auto;
-      /* Relatively sized thickness and offset */
-      text-decoration-thickness: max(0.08em, 1px);
-      text-underline-offset: 0.15em;
     }
   }
 

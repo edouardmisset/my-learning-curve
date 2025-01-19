@@ -39,15 +39,15 @@
   }
 
   :where(html) {
-    font-weight: 400;
-    font-family: system-ui, sans-serif;
-
     --text-1: light-dark(hsl(0deg 0% 14%), hsl(0, 0%, 94%));
     --surface-1: light-dark(hsl(0, 0%, 94%), hsl(0deg 0% 14%));
 
+    font-weight: 400;
+    font-family: system-ui, sans-serif;
+
     /* By default we enable dark mode */
-    background-color: var(--surface-1, black);
-    color: var(--text-1, white);
+    background-color: var(--surface-1);
+    color: var(--text-1);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -69,8 +69,8 @@
   }
 
   ::selection {
-    background-color: var(--surface-1, white);
-    color: var(--text-1, black);
+    background-color: var(--surface-1);
+    color: var(--text-1);
   }
 
   *,
@@ -106,8 +106,9 @@
   }
 
   :where(p) {
-    /* ! This might cause some unexpected problems */
+    /* ! WARNING the following might cause some unexpected problems */
     max-inline-size: 65ch;
+    margin-block: 1lh; /* It's a good idea to use `margin-trim: block;` on the containing element to prevent margins + paddings stacking */
     text-wrap: pretty;
   }
 
@@ -140,33 +141,47 @@
     inline-size: 5rem;
   }
 
+  /* !!!!!!! THIS NEEDS TESTING !!!!!*/
   :where(a) {
-    color: hsl(235deg 100% 70%);
+    --a-color: hsl(235deg 100% 70%);
+
+    color: var(--a-color);
     font-weight: 500;
+
+    &:hover {
+      color: color-mix(in oklab, var(--a-color), white 10%);
+    }
+
+    &:visited {
+      color: color-mix(in oklab, var(--a-color), white 20%);
+    }
+
+    /* A elements that don't have a class get default styles */
+    &:not([class]) {
+      color: var(--a-color, currentColor);
+      text-decoration-skip-ink: auto;
+      /* Relatively sized thickness and offset */
+      text-decoration-thickness: max(0.08em, 1px);
+      text-underline-offset: 0.15em;
+    }
   }
 
-  :where(a:hover) {
-    color: hsl(235deg 85% 75%);
-  }
-
-  :where(a:visited) {
-    color: hsl(235deg 80% 75%);
-  }
-
-  /* A elements that don't have a class get default styles */
-  :where(a:not([class])) {
-    color: currentColor;
-    text-decoration-skip-ink: auto;
-    /* Relatively sized thickness and offset */
-    text-decoration-thickness: max(0.08em, 1px);
-    text-underline-offset: 0.15em;
+  :where(input:user-valid) {
+    outline-offset: 2px;
+    outline-color: greenyellow;
+    outline-style: solid;
+    outline-width: 2px;
   }
 
   :where(input:user-invalid) {
     outline-offset: 2px;
-    outline-color: red;
+    outline-color: tomato;
     outline-style: solid;
     outline-width: 2px;
+  }
+
+  :where(input:is(:-webkit-autofill, :autofill)) {
+    border: 2px solid darkorange;
   }
 
   /* Progressive enhancements */
@@ -208,21 +223,6 @@
     }
   }
 
-  /* Using light-dark() css function, the following becomes obsolete */
-
-  /* Respects user preferences for dark mode
-  @media (prefers-color-scheme: light) {
-    :where(html) {
-      color: var(--color-dark, black);
-      background-color: var(--color-light, white);
-    }
-
-    ::selection {
-      background-color: var(--color-dark, black);
-      color: var(--color-light, white);
-    }
-  } */
-
   /* Remove all animations, transitions and smooth scroll for people that prefer
 not to see them */
   @media (prefers-reduced-motion: reduce) {
@@ -244,9 +244,8 @@ not to see them */
   :focus-visible {
     --outline-size: max(2px, 0.15em);
 
-    outline: var(--outline-width, var(--outline-size))
-      var(--outline-style, solid) var(--outline-color, currentColor);
-    outline-offset: var(--outline-offset, var(--outline-size));
+    outline: var(--outline-size) solid currentColor;
+    outline-offset: var(--outline-size);
   }
 
   @media (prefers-reduced-motion: no-preference) {

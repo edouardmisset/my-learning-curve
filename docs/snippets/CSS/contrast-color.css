@@ -3,7 +3,7 @@
  * 
  * We can emulate the upcoming CSS contrast-color() function via CSS features 
  * that have already widely shipped
- *
+ * See Lea Verrou's excellent blog post:
  * https://lea.verou.me/blog/2024/contrast-color
  */
 
@@ -19,13 +19,16 @@
   text-shadow: 0 0 0.05em black, 0 0 0.05em black, 0 0 0.05em black, 0 0 0.05em
     black;
 
+  /* biome-ignore lint/nursery/noDuplicateProperties: progressive enhancement */
   @supports (color: oklch(from red l c h)) {
     --l: clamp(0, (var(--l-threshold, 0.623) / l - 1) * infinity, 1);
     color: oklch(from var(--color) var(--l) 0 h);
     text-shadow: none;
   }
 
+  /* biome-ignore lint/correctness/noUnknownFunction: Futur-proofing */
   @supports (color: contrast-color(red)) {
+    /* biome-ignore lint/correctness/noUnknownFunction: Futur-proofing */
     color: contrast-color(var(--color));
     text-shadow: none;
   }

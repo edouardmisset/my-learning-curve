@@ -33,6 +33,9 @@
  * [blog](https://lisyarus.github.io/blog/posts/exponential-smoothing.html)
 */
 
+/* establish layer-order: last takes precedence */
+@layer reset, base, theme, components, utilities;
+
 @layer reset {
   :where(:root) {
     color-scheme: light dark;

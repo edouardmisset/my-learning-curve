@@ -1,7 +1,8 @@
 /** 10 Single line CSS layouts
-/* https://web.dev/articles/one-line-layouts
-/* by Una Kravets
-*/
+ * https://web.dev/articles/one-line-layouts
+ * by Una Kravets
+ * https://1linelayouts.glitch.me
+ */
 
 /** Super Centered */
 .parent {
@@ -13,18 +14,12 @@
 .parent {
   display: flex;
 }
-
 .child {
+  /* Children will not stretch */
   flex: 0 1 150px;
-}
 
-/* Or */
-
-.parent {
-  display: flex;
-}
-
-.child {
+  /* Children will stretch */
+  /* biome-ignore lint/nursery/noDuplicateProperties: We repeat the property is for explanation purpose */
   flex: 1 1 150px;
 }
 
@@ -51,7 +46,6 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 }
-
 .child-span-12 {
   grid-column: 1 / 13;
 }

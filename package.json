@@ -21,39 +21,39 @@
     "check": "biome check --write ."
   },
   "dependencies": {
-    "@docusaurus/core": "~3.3.2",
-    "@docusaurus/preset-classic": "~3.3.2",
-    "@docusaurus/theme-mermaid": "~3.3.2",
+    "@docusaurus/core": "^3.7.0",
+    "@docusaurus/preset-classic": "^3.7.0",
+    "@docusaurus/theme-mermaid": "^3.7.0",
     "@mdx-js/react": "^3.0.0",
-    "caniuse-lite": "^1.0.30001695",
+    "caniuse-lite": "^1.0.30001696",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
     "raw-loader": "^4.0.2",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@docusaurus/module-type-aliases": "~3.3.2",
-    "@docusaurus/tsconfig": "~3.3.2",
-    "@docusaurus/types": "~3.3.2",
+    "@docusaurus/module-type-aliases": "^3.7.0",
+    "@docusaurus/tsconfig": "^3.7.0",
+    "@docusaurus/types": "^3.7.0",
     "stylelint": "^16.2.0",
-    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard": "^37.0.0",
     "stylelint-order": "^6.0.4",
     "stylelint-plugin-defensive-css": "^1.0.2",
     "stylelint-use-logical-spec": "^5.0.1",
     "typescript": "^5.4.5",
-    "zod": "^3.22.4"
+    "zod": "^3.24.1"
   },
   "browserslist": {
     "production": [">0.5%", "not dead", "not op_mini all"],
     "development": [
       "last 3 chrome version",
       "last 3 firefox version",
-      "last 5 safari version"
+      "last 3 safari version"
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=20.0"
   }
 }

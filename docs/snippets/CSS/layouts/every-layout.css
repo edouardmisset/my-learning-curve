@@ -1,0 +1,242 @@
+/**
+ * Every Layout from Andy Bell and Heydon Pickering
+ * https://every-layout.dev/
+ *
+ * Please go to the website and purchase the latest version of their work.
+ */
+
+/* Stack */
+.stack {
+  --gap: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap);
+}
+
+/* Icon */
+.icon {
+  width: 0.75em;
+  width: 1cap;
+  height: 0.75em;
+  height: 1cap;
+}
+.with-icon {
+  display: inline-flex;
+  align-items: baseline;
+
+  & .icon {
+    /* Space between the icon and the text */
+    margin-inline-end: 1rem;
+  }
+}
+
+/* Cluster */
+.cluster {
+  --gap: 1rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Switcher */
+.switcher {
+  --gap: 1.5rem;
+  --threshold: 30rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  & > * {
+    flex-grow: 1;
+    flex-basis: calc((var(--threshold) - 100%) * 999);
+  }
+  /* Adjust the ":nth-child() number - 1" to allow the appropriate max number of
+  elements on a line */
+  & > :nth-last-child(n + 5) {
+    flex-basis: 100%;
+  }
+  & > :nth-last-child(n + 5) ~ * {
+    flex-basis: 100%;
+  }
+}
+
+/* Sidebar */
+.with-sidebar {
+  --gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+
+  & > :first-child {
+    flex-grow: 1;
+  }
+  & > :last-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: 50%;
+  }
+}
+
+/* Center */
+.center {
+  --max-size: 60ch;
+  box-sizing: content-box;
+  margin-inline: auto;
+  max-inline-size: var(--max-size);
+  padding-inline-start: 1rem;
+  padding-inline-end: 1rem;
+}
+
+/* Box */
+.box {
+  --color-light: hsl(0, 0%, 93%);
+  --color-dark: hsl(0, 0%, 13%);
+  --border-width: 1px;
+  --gap: 1.5rem;
+
+  padding: var(--gap);
+
+  outline: 0.125rem solid transparent;
+  outline-offset: -0.125rem;
+
+  color: var(--color-dark);
+  background-color: var(--color-light);
+  & * {
+    color: inherit;
+  }
+  &.invert {
+    color: var(--color-light);
+    background-color: var(--color-dark);
+  }
+}
+
+/* Grid */
+.grid {
+  --gap: 1rem;
+  --min-size: 250px;
+
+  display: grid;
+  grid-gap: var(--gap);
+  grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(var(--min-size), 100%), 1fr)
+    );
+}
+
+/* Frame */
+.frame {
+  --numerator: 16;
+  --denominator: 9;
+  aspect-ratio: var(--numerator) / var(--denominator);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > img,
+  & > video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Cover */
+.cover {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100vh;
+  padding: 1rem;
+  & > * {
+    margin-block: 1rem;
+  }
+  /* Adjust the HTML tag (h1) / class selector to whatever is in the element that
+  should be towards the vertical center of the space  */
+  & > h1 {
+    margin-block: auto;
+  }
+  & > :first-child:not(h1) {
+    margin-block-start: 0;
+  }
+  & > :last-child:not(h1) {
+    margin-block-end: 0;
+  }
+}
+
+/* Reel */
+.reel {
+  --color-light: hsl(0, 0%, 93%);
+  --color-dark: hsl(0, 0%, 13%);
+  --item-width: auto;
+  --gap: 1rem;
+  --height: auto;
+
+  display: flex;
+  block-size: var(--height, auto);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-color: var(--color-light) var(--color-dark);
+
+  &::-webkit-scrollbar {
+    block-size: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--color-dark);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-dark);
+    background-image: linear-gradient(
+      var(--color-dark) 0,
+      var(--color-dark) 0.25rem,
+      var(--color-light) 0.25rem,
+      var(--color-light) 0.75rem,
+      var(--color-dark) 0.75rem
+    );
+  }
+
+  & > * {
+    flex: 0 0 var(--item-width, auto);
+  }
+
+  & > img {
+    block-size: 100%;
+    flex-basis: auto;
+    width: auto;
+  }
+
+  & > * + * {
+    margin-inline-start: var(--gap, 1rem);
+  }
+
+  &.overflowing {
+    padding-block-end: var(--gap, 1rem);
+  }
+}
+
+/* Imposter */
+.imposter {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+
+  &.contain {
+    --margin: 1rem;
+    overflow: auto;
+    max-inline-size: calc(100% - (var(--margin) * 2));
+    max-block-size: calc(100% - (var(--margin) * 2));
+  }
+}
+
+/* Container */
+.container {
+  container-name: container-name;
+  container-type: inline-size;
+}

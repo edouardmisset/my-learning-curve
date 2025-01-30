@@ -24,6 +24,8 @@ OR
 >
 > ~ Fireship.io
 
+<!-- truncate -->
+
 ## Examples
 
 ### With arrays

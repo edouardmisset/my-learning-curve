@@ -19,6 +19,8 @@ const giveMeRandom = random // assigns random to a variable
 
 This single piece of knowledge allows us to write functional programming in this language. In functional programming, we heavily use higher-order functions.
 
+<!-- truncate -->
+
 ## The concept
 
 **Higher Order Functions** is simply a function that takes another function as an argument or returns a function.

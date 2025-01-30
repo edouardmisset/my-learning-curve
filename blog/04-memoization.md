@@ -16,6 +16,8 @@ tags:
 >
 > ~ Wikipedia
 
+<!-- truncate -->
+
 ## The concept
 
 > As our applications grow and begin to carry out heavier computations, there comes an increasing need for speed (🏎️) and the optimization of processes becomes a necessity. When we ignore this concern, we end up with programs that take a lot of time and consume a monstrous chunk of system resources during execution.

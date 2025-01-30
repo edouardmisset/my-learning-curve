@@ -22,6 +22,7 @@ let favoriteQuote: string = `I'm not old, I'm only ${age}`
 let meh: undefined = undefined
 let noo: null = null
 ```
+<!-- truncate -->
 
 ## Complex types
 

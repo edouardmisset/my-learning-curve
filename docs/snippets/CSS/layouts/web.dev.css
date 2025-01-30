@@ -1,0 +1,30 @@
+/**
+ * For more information on the following CSS snippets, visit:
+ * https://web.dev/patterns/layout
+ */
+
+/* Centering using flex */
+.gentle-flex {
+  --gap: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap);
+}
+
+/* Centering using position: absolute; */
+.pop-n-plop {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Line up (great for cards and inline nav links) */
+.line-up {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

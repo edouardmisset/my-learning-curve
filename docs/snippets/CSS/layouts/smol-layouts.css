@@ -576,7 +576,7 @@ assistive tech like screen readers */
 
   padding: 0;
   margin-block: 0;
-  margin-inline: 2em 0;
+  margin-inline-start: 2em;
 }
 
 .list-markers li {

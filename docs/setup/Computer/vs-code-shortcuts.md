@@ -19,7 +19,7 @@
   `cmd + alt + s`
 
 - Terminal:
-  `cmd + ù` (remapped to `cmd + $`)
+  `cmd + ù` (remapped to `ctrl + $`)
 
 - Multiple cursors:
   `cmd + alt + up/down`
@@ -54,7 +54,7 @@
   `cmd + x`
 
 - Select entire words:
-  `cmd + shift + left / right`
+  `alt + shift + left / right`
 
 - Display Main Sidebar:
   `cmd + b`

@@ -14,9 +14,9 @@ This is a small file to show you what my setup looks like. 😀
 
 ## Summary
 
-1. [VS Code](#VS-Code)
+1. [VS Code](#vs-code)
 2. [Terminal](#Terminal)
-3. [GitHub](#Github)
+3. [GitHub](#github)
 
 ## VS Code
 
@@ -48,12 +48,10 @@ Add this to your VS Code `settings.JSON`:
 - Better Comments
 - Code Spell Checker
 - Conventional Commits
-- Folder Templates
 - indent-rainbow
 - Live Server
 - Live Share
 - Path Intellisense
-- Restore Terminals
 - Rewrap
 
 - Biome
@@ -69,8 +67,6 @@ Add this to your VS Code `settings.JSON`:
 
 - CSS Peek
 - Stylelint
-- (Tailwind CSS IntelliSense)
-- (vscode-styled-components)
 
 #### JS
 
@@ -78,16 +74,11 @@ Add this to your VS Code `settings.JSON`:
 - JavaScript (ES6) code snippets
 - Quokka.js (Pro) + Wallaby.js + Console Ninja
 - JS Refactoring Assistant (P42 v3 +)
-- Document This
 - Vitest
 
 #### TypeScript
 
 - Pretty TypeScript Errors
-
-#### React
-
-- ~~ES7 React/Reduc/GraphQL/React-Native Snippets~~
 
 #### Markdown
 
@@ -195,13 +186,13 @@ To install `brew`:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-## Terminal: [iTerm2](https://iterm2.com)
+## Terminal: [ghostty](https://ghostty.org)
 
-> iTerm2 is a replacement for Terminal
+> Ghostty is a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration.
 >
-> **iTerm2**
+> **Ghostty**
 
-To install it using `brew`: `brew install iterm2`
+To install it using `brew`: `brew install ghostty`
 
 ### Shell: [ZSH](https://www.zsh.org)
 
@@ -223,18 +214,15 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 ### Plugins
 
-To install a plugin in ZSH, open your `.zshrc` file: `code ~/.zshrc` or `open ~/.zshrc`.
+To install a plugin in ZSH, open your `.zshrc` file: `code ~/.zshrc`, or `nano ~/.zshrc` or `open ~/.zshrc`.
 In this file, locate the line which starts with `plugins=` and simply write the name of the plugins you want to use.
 Then save.
 
 Here is a list of some of the plugins I use:
 
-- (brew)
-- (bun)
-- (osx)
-- (ubuntu)
-- (zsh-nvm)
 - alias-tips
+- aliases
+- bun
 - colored-man-pages
 - colorize
 - command-not-found
@@ -242,7 +230,8 @@ Here is a list of some of the plugins I use:
 - git
 - history
 - vscode
-- yarn
+- zoxide
+- zsh-autocomplete
 - zsh-autosuggestions
 - zsh-syntax-highlighting
 
@@ -267,20 +256,20 @@ Below is what the interactive configuration looks like:
 
 ![P10k 'Interactive' Configuration](https://raw.githubusercontent.com/romkatv/powerlevel10k-media/master/configuration-wizard.gif)
 
-A good overview of the terminal setup can be found here: [HowToGeek](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/)
+A good overview of the terminal setup can be found here: [HowToGeek](https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/#install-oh-my-zsh)
 
 ### Aliases
 
 Aliases are shortcuts for other terminal commands.
 
-The simplest way to see all the available aliases on your system
+The simplest way to list all the available aliases on your system
 
 ```sh
 alias
 ```
 
-Usually there will be lots of them. You can show specific aliases using the pipe and `grep`.
-For example
+Usually there will be lots of them. You can search for specific aliases using
+the pipe operator  `|` and `grep`.
 
 ```sh
 alias | grep git
@@ -290,9 +279,23 @@ Here are the ones I've setup:
 
 ```sh
 # Shell
-alias c='clear'
-alias copy='rsync -ah --info=progress2'
-alias cwd='pwd'
+alias as="alias | grep "
+alias c="clear"
+alias cat="bat"
+alias cd-="z -"
+alias cd="z"
+alias copy="rsync -ah --info=progress2"
+alias cwd="pwd"
+alias htop="btop"
+alias la="eza -laF --git  --icons --group-directories-first"
+alias ll="eza -lF --git --icons --group-directories-first"
+alias ls="eza -F --git --icons --group-directories-first"
+alias lst="eza -lF --git --tree --icons --level=2"
+alias top="btop"
+alias trail="<<<${(F)path}"
+alias z-="z -"
+alias zz="z -"
+alias update="brew update && brew upgrade && tldr --update && omz update && mas upgrade && sudo softwareupdate -ia --verbose"
 
 # ZSH
 alias p10k="code ~/.p10k.zsh"
@@ -303,29 +306,47 @@ alias gac="git add -A && git commit -m"
 alias gbr+="git branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate"
 alias gca="git commit --amend --no-edit"
 alias gclean="git remote prune origin && git switch main | git branch --merged | egrep -v '(^\*|master|main|dev)' | xargs git branch -d"
+alias gco---="git checkout @{-3}"
 alias gco--="git checkout @{-2}"
 alias gco-="git checkout -"
 alias gco-2="gco--"
-alias gco---="git checkout @{-3}"
 alias gco-3="gco---"
 alias gcod="git checkout dev"
 alias gcom="git checkout main"
 alias gdel="git branch -D"
-alias githome='cd `git rev-parse --show-toplevel`'
 alias gla="git pull --all && git fetch --all"
+alias glm="glol main..HEAD"
+alias glol1m="glol --since='1 month ago'"
+alias glol1w="glol --since='1 week ago'"
+alias glol1y="glol --since='1 year ago'"
+alias glolg-="glol --grep="
 alias glolm="git log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset\" main..HEAD"
 alias glolsm="glolm --stat"
 alias gmm="git merge main"
-alias gmu="git switch main && git fetch --all && git pull --all"
-alias gpo='git push --set-upstream origin $(git_current_branch)'
+alias gmu="git switch main && git pull --all && git fetch --all"
+alias gpo="git push --set-upstream origin $(git_current_branch)"
 alias gt="git tag"
 alias gta="git tag -a"
 alias gundo="git reset --soft HEAD^"
 
-# YARN
-alias ylf="yarn lint:fix"
-alias yst="BROWSER=none yarn start"
-alias yta="yarn test:all"
+# Brew
+alias bbd="brew bundle dump --force --describe --file='~/.dotfiles/Brewfile'"
+alias bubu="brew update && brew upgrade"
+
+# PNPM
+alias pm="pnpm"
+alias pad="pnpm add -d"
+alias pb="pnpm build"
+alias pd="pnpm dev"
+alias pdev="pnpm dev"
+alias pf="pnpm format"
+alias pi="pnpm install"
+alias plf="pnpm lint:fix"
+alias pln="pnpm lint"
+alias prm="pnpm remove"
+alias prun="pnpm run"
+alias pst="pnpm start"
+alias pt="pnpm test"
 
 # BUN
 alias b="bun"
@@ -341,6 +362,19 @@ alias brm="bun remove"
 alias brun="bun run"
 alias bst="bun run start"
 alias bt="bun test"
+
+# Deno
+alias dd="deno doc"
+alias df="deno fmt"
+alias dl="deno lint"
+alias dr="deno run"
+alias dta="deno task"
+alias dt="deno test"
+alias dtw="deno test --watch"
+alias dtc="deno task check" # something like "deno lint && deno fmt && deno test --reporter=dot --coverage --parallel"
+alias dtd="deno task dev" # something like "deno lint --watch & deno fmt --watch & deno run --allow-net --allow-env --allow-read --watch ./path/to/entry.ts" 
+alias dtd="deno task docs" # something like "deno doc --html --name='name-of-my-app' ./path/to/entry.ts" 
+alias dtl="deno task cache" # something like "deno cache --lock=deno.lock --lock-write ./path/to/entry.ts" 
 ```
 
 See `.zshrc` file for a more complete description, sources, functions, etc.
@@ -405,11 +439,11 @@ function kebabify() {
 ### GitHub Template
 
 In the repo you want to make into a template go to `Settings` > `Options` > `Settings`.
-Activate the [ ] Template repository checkbox
+Activate the `[ ]` Template repository checkbox
 
 ### GitHub Page
 
 In your new repo go to `Settings` > `Options` > `GitHub Pages`.
-Activate it by choosing which branch to publish (ie. `Main`).
+Activate it by choosing which branch to publish (ie. `main`).
 Copy the `url` newly displayed in the `GitHub Pages` section.
 Paste it in the `About` > `Website` of your project's main page (Code).

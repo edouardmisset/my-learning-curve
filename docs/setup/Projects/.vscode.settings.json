@@ -13,84 +13,22 @@
   "search.exclude": {
     "**/*.tgz": true
   },
-  "folderTemplates.structures": [
-    {
-      "name": "Component",
-      "customVariables": [],
-      "omitParentDirectory": true,
-      "structure": [
-        {
-          "fileName": "__tests__/<FTName>.test.tsx",
-          "template": "UnitTest"
-        }
-      ],
-      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
-    },
-    {
-      "name": "Component Tests",
-      "customVariables": [],
-      "omitParentDirectory": true,
-      "structure": [
-        {
-          "fileName": "__tests__/<FTName>.test.tsx",
-          "template": "BascicTestImports"
-        }
-      ],
-      "openFilesWhenDone": ["__tests__/<FTName>.test.tsx"]
-    }
-  ],
-  "folderTemplates.fileTemplates": {
-    "Typescript Functional Component": [
-      "export function <FTName>(): React.JSX.Element {",
-      "return <div><FTName></div>",
-      "}"
-    ],
-    "IndexFile": "export * from './<FTName>'",
-    "UnitTest": [
-      "import { screen, render } from 'test-utils'",
-      "",
-      "import <FTName|pascalcase> from '../<FTName|kebabcase>'",
-      "import { <FTName|pascalcase>Props} from '../types'",
-      "",
-      "const default<FTName|pascalcase>Props: <FTName|pascalcase>Props = {",
-      "",
-      "",
-      "}",
-      "",
-      "const custom<FTName|pascalcase>Props: <FTName|pascalcase>Props = {",
-      "",
-      "",
-      "}",
-      "",
-      "describe('<FTName|pascalcase> should render with', () => {",
-      "it('default properties', () => {",
-      "render(<<FTName|pascalcase> {...default<FTName|pascalcase>Props",
-      "} />)",
-      "screen.debug()",
-      "const <FTName|camelcase> = screen.getByRole()",
-      "expect(<FTName|camelcase>).toMatchSnapshot()",
-      "})",
-      "})"
-    ],
-    "BascicTestImports": "import { thinRender, screen } from 'test-utils'"
-  },
   "conventionalCommits.scopes": [
     "API",
-    "Nav",
+    "Auth",
     "Configuration",
     "Dev-Env",
+    "Docs",
+    "Error-Handling",
+    "Helper",
     "Lib",
     "License",
     "Localization",
     "Maintenance",
-    "Package-Update",
-    "Script",
-    "Style",
-    "Doc",
-    "Helper",
-    "Auth",
+    "Nav",
     "Network",
-    "Error-Handling"
+    "Script",
+    "Style"
   ],
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

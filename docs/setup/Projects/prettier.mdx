@@ -11,12 +11,6 @@ Using pnpm
 pnpm add --dev --exact prettier
 ```
 
-or using npm
-
-```sh
-npm install --save-dev --save-exact prettier
-```
-
 ## Settings
 
 These are my basic prettier settings (`.prettierrc.json`).
@@ -37,7 +31,8 @@ analysis
 and here is a script to run prettier on a javascript project:
 
 ```sh
-# package.json
+# File: package.json
+
 "format": "prettier \"./**/*.{html,css,js,jsx,ts,tsx,md,mdx,json}\" --write --cache --log-level=warn",
 ```
 

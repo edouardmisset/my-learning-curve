@@ -19,8 +19,10 @@ Along with VS Code configuration:
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "quickfix.biome": true,
-    "source.organizeImports.biome": true
+    "quickfix.biome": "explicit",
+    "source.fixAll.biome": "explicit",
+    "source.addMissingImports.ts": "explicit",
+    "source.organizeImports.biome": "explicit",
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
@@ -37,6 +39,11 @@ Along with VS Code configuration:
   },
   "[json]": {
     "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[css]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    }
   }
 }
 ```

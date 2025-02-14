@@ -27,8 +27,13 @@
 
 /** Sidebar Says */
 .sidebar {
+  --sidebar-min: 25ch;
+  --sidebar-max: 25%;
   display: grid;
-  grid-template-columns: minmax(min(150px, 100%), 25%) 1fr;
+  grid-template-columns: minmax(
+      min(var(--sidebar-min), 100%),
+      var(--sidebar-max)
+    ) 1fr;
 }
 
 /** Pancake Stack */
@@ -48,8 +53,8 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 }
-.child-span-12 {
-  grid-column: 1 / 13;
+.child-full-with {
+  grid-column: 1 / -1;
 }
 
 /** RAM (Repeat, Auto, MinMax) */

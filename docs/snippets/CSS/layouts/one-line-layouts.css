@@ -28,7 +28,7 @@
 /** Sidebar Says */
 .sidebar {
   display: grid;
-  grid-template-columns: minmax(150px, 25%) 1fr;
+  grid-template-columns: minmax(min(150px, 100%), 25%) 1fr;
 }
 
 /** Pancake Stack */
@@ -59,7 +59,7 @@
 
   display: grid;
   gap: var(--gap);
-  grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min), 100%), 1fr));
 }
 
 /** Line Up */

@@ -1,0 +1,65 @@
+/**
+ * Layouts from Kevin Powell 👑
+ * Useful & Responsive Layouts, no Media Queries required
+ * https://www.youtube.com/watch?v=p3_xN2Zp1TY
+ *
+ * Simplify your CSS with these 3 grid layout solutions
+ * https://www.youtube.com/watch?v=JHregeIsjPQ
+ */
+
+/* Reel */
+.reel {
+  --gap: 1rem;
+  --elements: 2;
+
+  display: grid;
+  gap: var(--gap);
+  grid-auto-flow: column;
+  grid-auto-columns: calc(
+    (100% / var(--elements)) -
+    (var(--gap) * (var(--elements) + 1))
+  );
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: var(--gap);
+
+  & > * {
+    scroll-snap-align: start;
+  }
+}
+
+/* Flex Grid */
+.flex-grid {
+  --gap: 1rem;
+
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--gap);
+
+  & > * {
+    flex: 1;
+  }
+}
+
+/* Grid for forms */
+.form {
+  --gap: 1.5rem;
+
+  display: grid;
+
+  gap: var(--gap);
+
+  @media (width >= 40ch) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  & > .group {
+    display: grid;
+    gap: calc(var(--gap) / 2);
+  }
+
+  & > .full-width {
+    grid-column: 1 / -1;
+  }
+}

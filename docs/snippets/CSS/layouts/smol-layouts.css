@@ -8,14 +8,11 @@
   --gap: 1rem;
 
   display: grid;
-  gap: var(--gap, 1rem);
+  gap: var(--gap);
 
   /* min() with 100% prevents overflow
   in extra narrow spaces */
-  grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(100%, var(--min, 15ch)), 1fr)
-    );
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
 }
 
 /** Responsive Flexbox Grid */
@@ -37,7 +34,7 @@
   --container-max: 60ch;
   --margin: 3rem;
 
-  inline-size: min(100% - var(--margin, 3rem), var(--container-max, 60ch));
+  inline-size: min(100% - var(--margin), var(--container-max));
   margin-inline: auto;
 }
 
@@ -49,14 +46,14 @@
   /*  Compute total allowed grid width to `--breakout-difference` 
       larger than content area  */
   --breakout-grid-width: calc(
-    var(--max-content-width, 50ch) +
-    (var(--max-content-width, 50ch) * var(--breakout-difference, 0.2))
+    var(--max-content-width) +
+    (var(--max-content-width) * var(--breakout-difference))
   );
 
   display: grid;
   grid-template-columns:
     [grid-start] 1fr
-    [content-start] minmax(min(100%, var(--max-content-width, 50ch)), 1fr)
+    [content-start] minmax(min(100%, var(--max-content-width)), 1fr)
     [content-end] 1fr
     [grid-end];
   inline-size: min(100% - 2rem, var(--breakout-grid-width));
@@ -82,7 +79,7 @@
 /** Responsive Sidebar Layout */
 .sidebar {
   display: grid;
-  grid-template-columns: fit-content(20ch) minmax(min(50vw, 30ch), 1fr);
+  grid-template-columns: fit-content(20ch) minmax(min(50%, 30ch), 1fr);
 }
 
 /** Aspect Ratio Gallery */
@@ -242,15 +239,15 @@ but as a fallback you can chain `:not()` instead */
   enable easier access on touch devices, ensuring
   the WCAG touch target size is met or exceeded */
   grid-template-columns: repeat(
-      var(--avatar-count, 3),
-      max(44px, calc(var(--avatar-size, 3rem) / 1.15))
+      var(--avatar-count),
+      max(44px, calc(var(--avatar-size) / 1.15))
     );
 
   /* `padding` matches added visual dimensions of
   the `box-shadow` to help create a more accurate
   computed component size */
   padding: 0.08em;
-  font-size: var(--avatar-size, 3rem);
+  font-size: var(--avatar-size);
 }
 
 @media (any-hover: hover) and (any-pointer: fine) {
@@ -258,8 +255,8 @@ but as a fallback you can chain `:not()` instead */
     /* We create 1 extra cell to enable the computed 
     width to match the final visual width */
     grid-template-columns: repeat(
-        calc(var(--avatar-count, 3) + 1),
-        calc(var(--avatar-size, 3rem) / 1.75)
+        calc(var(--avatar-count) + 1),
+        calc(var(--avatar-size) / 1.75)
       );
   }
 }
@@ -313,8 +310,7 @@ but as a fallback you can chain `:not()` instead */
   `mandatory` means any scroll attempt will
   cause a scroll to the next item */
   scroll-snap-type: x mandatory;
-  padding-block: 0 1.5rem;
-  padding-inline: 0;
+  padding-block-end: 1.5rem;
   -webkit-overflow-scrolling: touch;
 }
 

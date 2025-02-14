@@ -67,6 +67,8 @@
 
 /* Sidebar */
 .with-sidebar {
+  /* We assume the first child to be the sidebar and the content to be the last
+  child */
   --gap: 1rem;
   display: flex;
   flex-wrap: wrap;
@@ -78,6 +80,7 @@
   & > :last-child {
     flex-basis: 0;
     flex-grow: 999;
+    /* The content takes up at least half the width */
     min-inline-size: 50%;
   }
 }
@@ -118,7 +121,7 @@
 /* Grid */
 .grid {
   --gap: 1rem;
-  --min-size: 250px;
+  --min-size: 30ch;
 
   display: grid;
   grid-gap: var(--gap);

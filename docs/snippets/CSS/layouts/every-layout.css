@@ -7,7 +7,7 @@
 
 /* Stack */
 .stack {
-  --gap: 1.5rem;
+  --gap: 1rem;
 
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
 
 /* Switcher */
 .switcher {
-  --gap: 1.5rem;
+  --gap: 1rem;
   --threshold: 30rem;
 
   display: flex;
@@ -99,13 +99,13 @@
 .box {
   --color-light: hsl(0, 0%, 93%);
   --color-dark: hsl(0, 0%, 13%);
-  --border-width: 1px;
-  --gap: 1.5rem;
+  --border-width: 2px;
+  --gap: 1rem;
 
   padding: var(--gap);
 
-  outline: 0.125rem solid transparent;
-  outline-offset: -0.125rem;
+  outline: var(--border-width) solid transparent;
+  outline-offset: calc(var(--border-width) * -1);
 
   color: var(--color-dark);
   background-color: var(--color-light);
@@ -215,11 +215,11 @@
   }
 
   & > * + * {
-    margin-inline-start: var(--gap, 1rem);
+    margin-inline-start: var(--gap);
   }
 
   &.overflowing {
-    padding-block-end: var(--gap, 1rem);
+    padding-block-end: var(--gap);
   }
 }
 
@@ -238,7 +238,7 @@
   }
 }
 
-/* Container */
+/* Container Query */
 .container {
   container-name: container-name;
   container-type: inline-size;

@@ -136,8 +136,9 @@ export const updateObjectInArray = <Obj extends ObjectType = ObjectType>(
   key: keyof Obj,
   newData: Partial<Obj>,
 ): Obj[] => {
-  if (newData[key] === undefined)
+  if (newData[key] === undefined) {
     throw new Error(`The key ${key.toString()} does not exist in newData`)
+  }
   return array.map(object =>
     object[key] === newData[key] ? { ...object, ...newData } : object,
   )

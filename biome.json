@@ -8,23 +8,23 @@
     "rules": {
       "recommended": true,
       "nursery": {
-        "all": true,
+        "recommended": true,
         "noDuplicateProperties": "off"
       },
       "correctness": {
-        "all": true
+        "recommended": true
       },
       "style": {
-        "all": true
+        "recommended": true
       },
       "complexity": {
-        "all": true
+        "recommended": true
       },
       "performance": {
-        "all": true
+        "recommended": true
       },
       "security": {
-        "all": true
+        "recommended": true
       }
     }
   },

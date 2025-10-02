@@ -20,9 +20,7 @@
   flex: 0 1 var(--width, 150px);
 
   /* Children will stretch */
-  /* biome-ignore lint/nursery/noDuplicateProperties: We repeat the property is
-  for explanation purpose */
-  flex: 1 1 var(--width, 150px);
+  /* flex: 1 1 var(--width, 150px); */
 }
 
 /** Sidebar Says */

@@ -19,7 +19,6 @@
   text-shadow: 0 0 0.05em black, 0 0 0.05em black, 0 0 0.05em black, 0 0 0.05em
     black;
 
-  /* biome-ignore lint/nursery/noDuplicateProperties: progressive enhancement */
   @supports (color: oklch(from red l c h)) {
     --l: clamp(0, (var(--l-threshold, 0.623) / l - 1) * infinity, 1);
     color: oklch(from var(--color) var(--l) 0 h);

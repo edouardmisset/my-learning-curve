@@ -1,0 +1,15 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.publicFolder": {
+    "path": "src/assets",
+    "relative": true
+  },
+  "frontMatter.extends": [
+    ".frontmatter/starlight/contenttypes.json",
+    ".frontmatter/starlight/pagefolders.json",
+    ".frontmatter/starlight/aside.json"
+  ],
+  "frontMatter.framework.startCommand": "pnpm run dev"
+}

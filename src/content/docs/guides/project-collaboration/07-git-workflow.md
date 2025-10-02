@@ -41,7 +41,7 @@ git add --all
 ```
 
 - Commit them `git commit --message "fix: fix the slider"` (please follow
-  the [conventional commit](./05-conventional-commits.md) convention when writing
+  the [conventional commit](/my-learning-curve/guides/project-collaboration/05-conventional-commits) convention when writing
   your commit message)
 - Go to github / gitlab's interface and merge from there.
   - **Feature / bug**: everything is already in place

@@ -16,7 +16,7 @@ next:
 - Install [Node](https://nodejs.org/en/download) and npm (see [this article](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm))
 - Install the package manager
   - This project uses [pnpm](https://pnpm.io/installation) as a package manager
-    (see benchmark [here](./XX-package-manager-benchmark.md))
+    ([see benchmark here](/my-learning-curve/guides/project-collaboration/xx-package-manager-benchmark))
 
 ## Clone the repo
 
@@ -32,16 +32,16 @@ In a terminal clone the repo locally using `git`
 
 Please have a look at the following before you start coding:
 
-- [CSS style](./10-style.md)
-- [Testing](./09-testing.md)
+- [CSS style](/my-learning-curve/guides/project-collaboration/10-style)
+- [Testing](/my-learning-curve/guides/project-collaboration/09-testing)
 
-- [Naming convention](./02-naming-conventions.md)
-- [Folder structure](./03-folder-structure.md)
-- [Component structure](./04-component-structure.md)
+- [Naming convention](/my-learning-curve/guides/project-collaboration/02-naming-conventions)
+- [Folder structure](/my-learning-curve/guides/project-collaboration/03-folder-structure)
+- [Component structure](/my-learning-curve/guides/project-collaboration/04-component-structure)
 
-- [Git workflow](./07-git-workflow.md)
-- [Conventional commits](./05-conventional-commits.md)
-- [Merge request recommandations](./06-merge-request-recommandations.md)
+- [Git workflow](/my-learning-curve/guides/project-collaboration/07-git-workflow)
+- [Conventional commits](/my-learning-curve/guides/project-collaboration/05-conventional-commits)
+- [Merge request recommandations](/my-learning-curve/guides/project-collaboration/06-merge-request-recommandations)
 
 ## Optional : install the recommended VS Code Extensions
 

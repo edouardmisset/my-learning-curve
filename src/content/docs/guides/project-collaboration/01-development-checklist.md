@@ -15,7 +15,7 @@ Before you commit any changes, please check your work against these requirements
 
 ## 0. Prerequisites
 
-See the [Getting Started](./00-getting-started.md)
+See the [Getting Started](/my-learning-curve/guides/project-collaboration/00-getting-started)
 
 ## 1. Config
 
@@ -27,8 +27,8 @@ cypress.env.json.dev cypress.env.json` & modify the required values...) for
 
 ## 2. Dev
 
-- Make sure you follow the **[folder](./03-folder-structure.md) and [component](./04-component-structure.md) structure**
-- Make sure you follow the **[naming](./02-naming-conventions.md) conventions**
+- Make sure you follow the **[folder](/my-learning-curve/guides/project-collaboration/03-folder-structure) and [component](/my-learning-curve/guides/project-collaboration/04-component-structure) structure**
+- Make sure you follow the **[naming](/my-learning-curve/guides/project-collaboration/02-naming-conventions) conventions**
 
 ## 3. Test
 
@@ -43,7 +43,7 @@ cypress.env.json.dev cypress.env.json` & modify the required values...) for
 - Make sure you do not have **unused imports** (check your linter)
 - Make sure your code is **formatted** (`pnpm format`)
 - Make sure your code passes **static code analysis** checks (`pnpm type:checking`)
-- Make sure your commit message follows the [**conventional commits**](./05-conventional-commits.md) guidelines
+- Make sure your commit message follows the [**conventional commits**](/my-learning-curve/guides/project-collaboration/05-conventional-commits) guidelines
 
 ## 5. Merge
 

@@ -125,7 +125,7 @@ Add this to your VS Code `settings.JSON`:
 Here are some VS Code Settings.
 Only copy the line you **understand** and **want** to use.
 
-```JSON
+```json
 {
   "diffEditor.codeLens": true,
   "docthis.includeDateTag": true,
@@ -227,7 +227,7 @@ Install it by running:
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-### Plugins
+#### Plugins
 
 To install a plugin in ZSH, open your `.zshrc` file: `code ~/.zshrc`, or `nano ~/.zshrc` or `open ~/.zshrc`.
 In this file, locate the line which starts with `plugins=` and simply write the name of the plugins you want to use.
@@ -250,7 +250,7 @@ Here is a list of some of the plugins I use:
 - zsh-autosuggestions
 - zsh-syntax-highlighting
 
-### Theme: [PowerLevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
+#### Theme: [PowerLevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
 
 > Powerlevel10k is a theme for Zsh. It emphasizes speed, flexibility and out-of-the-box experience.
 >

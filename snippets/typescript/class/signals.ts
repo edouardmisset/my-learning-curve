@@ -24,9 +24,9 @@ class Signal extends EventTarget {
 }
 
 const signal = new Signal(42)
-signal.addEventListener('notify', (event: CustomEvent) => {
+signal.addEventListener('notify', ((event: CustomEvent) => {
   console.log(`Signal changed to ${event.detail}`)
-})
+}) as EventListener)
 
 signal.value = 42
 // No change, no event

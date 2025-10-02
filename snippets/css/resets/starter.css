@@ -249,6 +249,11 @@ not to see them */
       scroll-behavior: smooth;
       scroll-padding-block: 8vh;
     }
+
+    /* Enable view transitions in supporting browsers */
+    @view-transition {
+      navigation: auto;
+    }
   }
 
   /* Create a root stacking context */

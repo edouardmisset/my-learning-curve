@@ -34,6 +34,7 @@ export default defineConfig({
       title: 'My Learning Curve',
       description: 'Bits and pieces I learned during my coding journey!',
       favicon: '/favicon.ico',
+      customCss: ['./src/styles/custom.css'],
       locales: {
         root: {
           label: 'English',

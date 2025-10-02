@@ -4,10 +4,10 @@ title: "Conventional Commits"
 description: "Guidelines for writing clear and structured commit messages."
 tags: [commits, conventions, git]
 prev:
-  link: ./04-component-structure
+  link: /my-learning-curve/guides/project-collaboration/04-component-structure
   label: Component Structure
 next:
-  link: ./06-merge-request-recommandations
+  link: /my-learning-curve/guides/project-collaboration/06-merge-request-recommandations
   label: Merge Request Recommendations
 ---
 

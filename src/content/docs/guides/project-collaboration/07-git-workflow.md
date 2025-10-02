@@ -4,10 +4,10 @@ title: "Git Workflow"
 description: "Overview of branching strategies and workflows for Git."
 tags: [git, workflow, branching]
 prev:
-  link: ./06-merge-request-recommandations
+  link: /my-learning-curve/guides/project-collaboration/06-merge-request-recommandations
   label: Merge Request Recommendations
 next: 
-  link: ./08-tech-stack
+  link: /my-learning-curve/guides/project-collaboration/08-tech-stack
   label: Tech Stack
 ---
 

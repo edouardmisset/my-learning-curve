@@ -4,10 +4,10 @@ title: "Tech Stack"
 description: "Overview of the technologies and tools used in the project."
 tags: [tech-stack, tools, technologies]
 prev:
-  link: ./07-git-workflow
+  link: /my-learning-curve/guides/project-collaboration/07-git-workflow
   label: Git Workflow
 next: 
-  link: ./09-testing
+  link: /my-learning-curve/guides/project-collaboration/09-testing
   label: Testing
 ---
 

@@ -5,7 +5,7 @@ description: "Guide to setting up tools and understanding project recommendation
 tags: [setup, tools, recommendations]
 prev: false
 next:
-  link: ./01-development-checklist
+  link: /my-learning-curve/guides/project-collaboration/01-development-checklist
   label: Development Checklist
 ---
 

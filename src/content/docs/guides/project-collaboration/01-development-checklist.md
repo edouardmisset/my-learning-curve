@@ -4,10 +4,10 @@ title: "Dev Checklist"
 description: "Checklist to ensure code quality and adherence to project standards before committing."
 tags: [checklist, development, quality]
 prev:
-  link: ./00-getting-started
+  link: /my-learning-curve/guides/project-collaboration/00-getting-started
   label: Getting Started
 next:
-  link: ./02-naming-conventions
+  link: /my-learning-curve/guides/project-collaboration/02-naming-conventions
   label: Naming Conventions
 ---
 

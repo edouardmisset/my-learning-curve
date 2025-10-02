@@ -30,7 +30,8 @@
   },
   "vcs": {
     "enabled": true,
-    "clientKind": "git"
+    "clientKind": "git",
+    "useIgnoreFile": true
   },
   "javascript": {
     "formatter": {
@@ -51,5 +52,11 @@
       "enabled": true,
       "indentStyle": "space"
     }
+  },
+  "assist": {
+    "enabled": true
+  },
+  "files": {
+    "ignoreUnknown": true
   }
 }

@@ -1,6 +1,7 @@
 {
   "$schema": "https://beta.frontmatter.codes/frontmatter.schema.json",
-  "frontMatter.content.pageFolders": [{
+  "frontMatter.content.pageFolders": [
+    {
       "title": "Guides",
       "path": "[[workspace]]/src/content/docs/guides",
       "previewPath": "guides"

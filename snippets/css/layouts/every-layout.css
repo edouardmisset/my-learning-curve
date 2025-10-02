@@ -17,9 +17,16 @@
 
 /* Icon */
 .icon {
-  width: 0.75em;
+  /**
+   * For older browsers use em units
+   * Cap unit is supported in most modern browsers
+   * 86% as of writing (2025-10-03)
+   * For more information on cap units see Can I Use:
+   * https://caniuse.com/mdn-css_types_length_cap
+   */
+  /* width: 0.75em; */
+  /* height: 0.75em; */
   width: 1cap;
-  height: 0.75em;
   height: 1cap;
 }
 .with-icon {

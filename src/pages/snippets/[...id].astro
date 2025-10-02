@@ -1,20 +1,20 @@
 ---
 // biome-ignore lint/correctness/noUnusedImports: it is being used !
-// biome-ignore assist/source/organizeImports: Import the `<StarlightPage>` component first to set up cascade layers. 
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import { getCollection, render } from 'astro:content';
+// biome-ignore assist/source/organizeImports: Import the `<StarlightPage>` component first to set up cascade layers.
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import { getCollection, render } from 'astro:content'
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const snippets = await getCollection('snippets');
+  const snippets = await getCollection('snippets')
   return snippets.map(snippet => ({
     params: { id: snippet.id },
     props: { snippet },
-  }));
+  }))
 }
 // 2. For your template, you can get the entry directly from the prop
-const { snippet } = Astro.props;
+const { snippet } = Astro.props
 // biome-ignore lint/correctness/noUnusedVariables: it is being used !
-const { Content } = await render(snippet);
+const { Content } = await render(snippet)
 ---
 
 <StarlightPage frontmatter={{ title: snippet.data.title, }}>

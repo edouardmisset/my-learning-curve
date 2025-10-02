@@ -23,7 +23,7 @@
  */
 export const createArray = <T = number>(
   length: number,
-  // @ts-ignore
+  // @ts-expect-error
   transform: Parameters<typeof Array.from<T, U>>[1] = (_, index) => index,
 ): T[] => Array.from({ length }, transform)
 

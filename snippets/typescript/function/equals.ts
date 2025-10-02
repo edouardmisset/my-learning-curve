@@ -28,7 +28,7 @@
  * deepEquals(new Date('2021-01-01'), new Date('2021-01-01')) // returns true
  * deepEquals(new Date('2021-01-01'), new Date('2022-01-01')) // returns false
  */
-const deepEquals = <T>(left: T, right: T): boolean => {
+export const deepEquals = <T>(left: T, right: T): boolean => {
   if (left === right) return true
 
   if (left instanceof Date && right instanceof Date)

@@ -97,12 +97,12 @@ class ComputedValue extends EventTarget {
 }
 
 const newerSignal = new Signal(42)
-const signalEffect = new Effect(() => {
+const _signalEffect = new Effect(() => {
   console.log(`Signal changed to ${newerSignal.value}`)
 }, [newerSignal])
 // LOGS: Signal changed to 42
 const computed = new ComputedValue(() => newerSignal.value * 2, [newerSignal])
-const computedEffect = new Effect(() => {
+const _computedEffect = new Effect(() => {
   console.log(`Computed value changed to ${computed.value}`)
 }, [computed])
 // LOGS: Computed value changed to 84

@@ -1,10 +1,10 @@
 ---
 // biome-ignore lint/correctness/noUnusedImports: it is being used !
-// biome-ignore assist/source/organizeImports: Import the `<StarlightPage>` component first to set up cascade layers. 
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import { getCollection } from 'astro:content';
+// biome-ignore assist/source/organizeImports: Import the `<StarlightPage>` component first to set up cascade layers.
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import { getCollection } from 'astro:content'
 
-const snippets = await getCollection('snippets');
+const snippets = await getCollection('snippets')
 ---
 
 <StarlightPage frontmatter={{ title: 'Snippets', }}>

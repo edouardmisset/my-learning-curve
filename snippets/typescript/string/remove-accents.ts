@@ -14,7 +14,4 @@
  * // => 'resume'
  */
 export const removeAccents = (str: string): string =>
-  str
-    .normalize('NFD')
-    // biome-ignore lint/suspicious/noMisleadingCharacterClass: this is precisely what we want to do
-    .replace(/[\u0300-\u036f]/g, '')
+  str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')

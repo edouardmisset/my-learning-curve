@@ -286,14 +286,18 @@ but as a fallback you can chain `:not()` instead */
   block-size: 100%;
   object-fit: cover;
   background-color: white;
-  box-shadow: 0 0 0 0.05em white, 0 0 0 0.08em rgb(0 0 0 / 15%);
+  box-shadow:
+    0 0 0 0.05em white,
+    0 0 0 0.08em rgb(0 0 0 / 15%);
 }
 
 .avatar-list a:focus {
   outline: 2px solid transparent;
 
   /* Double-layer trick to work for dark and light backgrounds */
-  box-shadow: 0 0 0 0.08em hsl(221deg 29% 23%), 0 0 0 0.12em white;
+  box-shadow:
+    0 0 0 0.08em hsl(221deg 29% 23%),
+    0 0 0 0.12em white;
 }
 
 /** Scroll Snap */

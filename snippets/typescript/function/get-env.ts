@@ -35,7 +35,7 @@ export async function getEnv(
   if (env === 'deno') {
     try {
       const { load } = await import(
-        // @ts-ignore
+        // @ts-expect-error
         'https://deno.land/std@0.213.0/dotenv/mod.ts'
       )
       const env = await load()

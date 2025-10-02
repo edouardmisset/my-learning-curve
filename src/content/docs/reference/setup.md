@@ -37,7 +37,7 @@ This is a small file to show you what my setup looks like. 😀
 >
 > **Fira Code**
 
-You can download it from [here](https://github.com/tonsky/FiraCode/wiki/Installing)
+You can [download it from here](https://github.com/tonsky/FiraCode/wiki/Installing)
 To use it in `VS Code`, follow [these explanations](https://github.com/tonsky/FiraCode/wiki/VS-Code-Instructions)
 
 **TL;DR**:
@@ -250,7 +250,9 @@ Here is a list of some of the plugins I use:
 - zsh-autosuggestions
 - zsh-syntax-highlighting
 
-#### Theme: [PowerLevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
+#### Theme
+
+**[PowerLevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)**
 
 > Powerlevel10k is a theme for Zsh. It emphasizes speed, flexibility and out-of-the-box experience.
 >

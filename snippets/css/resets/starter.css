@@ -62,11 +62,8 @@
     transition-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
   }
 
-  /* biome-ignore lint/correctness/noUnknownProperty: this is a newer CSS feature */
   @supports (interpolate-size: allow-keywords) {
     :where(:root) {
-      /* biome-ignore lint/correctness/noUnknownProperty: this is a newer CSS
-      feature, this allows for transitioning to 'auto' for example */
       interpolate-size: allow-keywords;
     }
   }

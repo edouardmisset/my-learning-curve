@@ -10,16 +10,12 @@
       ],
       "openingTags": "<<",
       "closingTags": ">>",
-      "fields": [{
+      "fields": [
+        {
           "name": "type",
           "title": "type",
           "type": "choice",
-          "choices": [
-            "note",
-            "tip",
-            "caution",
-            "danger"
-          ],
+          "choices": ["note", "tip", "caution", "danger"],
           "default": "note"
         },
         {

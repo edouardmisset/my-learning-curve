@@ -1,0 +1,47 @@
+---
+date: 2025-10-02
+title: ESLint
+description: Configuration and usage of ESLint for JavaScript and TypeScript linting.
+tags: ['eslint', 'typescript', 'javascript', 'linting']
+---
+
+import { Code } from '@astrojs/starlight/components'
+import Source from './.eslintrc.json?raw'
+
+## [Installation](https://eslint.org/docs/latest/use/getting-started#manual-set-up)
+
+Using pnpm
+
+```sh
+pnpm add -D eslint
+
+# Install the related configs and plugins
+# pnpm add -D eslint-config-airbnb @typescript-eslint/eslint-plugin eslint-plugin-prettier eslint-config-prettier eslint-plugin-import eslint-plugin-import eslint-plugin-react eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y
+```
+
+## Settings
+
+These are my basic settings ([`.eslintrc.json`](https://eslint.org/docs/latest/use/configure/)).
+
+> :warning: **Work in progress!**
+
+<Code code={Source} lang="json" title=".eslintrc.json" wrap />
+
+Create an ignore file (`.eslintignore`):
+
+```
+build
+dist
+coverage
+analysis
+```
+
+## Usage
+
+And here is a script to run eslint on a javascript project:
+
+```sh
+# File: `./package.json`
+
+"lint": "pnpm eslint --cache ./src"
+```

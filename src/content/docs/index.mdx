@@ -1,0 +1,30 @@
+---
+title: Welcome to my Learning Curve
+description: Bits and pieces I learned during my coding journey!
+prev: false
+next: false
+template: splash
+hero:
+  tagline: Bits and pieces I learned during my coding journey!
+  image:
+    file: ../../assets/coder.png
+  actions:
+    - text: Blog
+      link: /my-learning-curve/blog
+      icon: right-arrow
+    - text: Look at my other projects
+      link: https://github.com/edouardmisset
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## Content
+
+<CardGrid >
+	<LinkCard title="Read my blog" href={"/my-learning-curve/blog"} />
+	<LinkCard title="Browse snippets" href={"/my-learning-curve/snippets"} />
+	<LinkCard title="My setup" href={"/my-learning-curve/reference/setup"} />
+	<LinkCard title="Follow the guide" href={"/my-learning-curve/guides"} />
+</CardGrid>

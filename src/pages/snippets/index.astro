@@ -1,0 +1,16 @@
+---
+// biome-ignore lint/correctness/noUnusedImports: it is being used !
+// biome-ignore assist/source/organizeImports: Import the `<StarlightPage>` component first to set up cascade layers. 
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getCollection } from 'astro:content';
+
+const snippets = await getCollection('snippets');
+---
+
+<StarlightPage frontmatter={{ title: 'Snippets', }}>
+	<ul>
+		{snippets.map(snippet => (
+			<li><a href={`/my-learning-curve/snippets/${snippet.id}`}>{snippet.data.title}</a></li>
+		))}
+	</ul>
+</StarlightPage>

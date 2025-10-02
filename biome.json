@@ -1,15 +1,11 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "nursery": {
-        "recommended": true,
-        "noDuplicateProperties": "off"
+        "recommended": true
       },
       "correctness": {
         "recommended": true
@@ -55,8 +51,5 @@
       "enabled": true,
       "indentStyle": "space"
     }
-  },
-  "files": {
-    "ignore": ["node_modules", "build"]
   }
 }

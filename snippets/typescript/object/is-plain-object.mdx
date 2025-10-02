@@ -1,0 +1,21 @@
+---
+date: 2025-10-02
+title: Check Plain Object
+
+description: Verify if a value is a plain object in TypeScript.
+tags: ['typescript', 'object', 'plain', 'frontend']
+---
+
+import { Code } from '@astrojs/starlight/components'
+import Source from './is-plain-object.ts?raw'
+
+## Check if a value is a plain object
+
+Objects in javascript are 'object' type, but `arrays`, `null`, `Dates`, and other
+non-primitive types are also 'object' type. This function checks if a value is a
+plain object (none of the above).
+
+<Code code={Source} lang="ts" title='is-plain-object.ts' wrap />
+
+Credits: [Angelos
+Chalaris](https://www.30secondsofcode.org/js/s/is-plain-object/)

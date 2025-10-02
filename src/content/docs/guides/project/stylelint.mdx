@@ -1,0 +1,46 @@
+---
+date: 2025-10-02
+title: StyleLint
+description: Configuration and usage of StyleLint for CSS linting.
+tags: ['stylelint', 'css', 'linting', 'frontend']
+---
+
+import { Code } from '@astrojs/starlight/components'
+import Source from './.stylelintrc.json?raw'
+
+## [Installation](https://stylelint.io/user-guide/get-started)
+
+Using pnpm
+
+```sh
+pnpm add -D stylelint
+
+# Install the related configs and plugins
+pnpm add -D stylelint-a11y stylelint-config-standard stylelint-order stylelint-plugin-defensive-css stylelint-use-logical-spec
+```
+
+## Settings
+
+These are my basic `.stylelintrc.json` settings.
+
+<Code code={Source} lang="json" title=".stylelintrc.json" wrap />
+
+Create an ignore file (`.stylelintignore`) with the following:
+
+```
+build
+dist
+coverage
+analysis
+```
+
+## Usage
+
+and here is a script to run stlintlint on your project:
+
+```sh
+# File: package.json
+
+"style:lint": "pnpm run stylelint --cache './src/**/*.css'",
+"style:lint:fix": "pnpm run style:lint --fix",
+```

@@ -1,0 +1,46 @@
+---
+date: 2025-10-02
+title: Prettier
+description: Configuration and usage of Prettier for code formatting.
+tags: ['prettier', 'code', 'formatting', 'frontend']
+---
+
+import { Code } from '@astrojs/starlight/components'
+import Source from './.prettierrc.json?raw'
+
+## [Installation](https://prettier.io/docs/en/install)
+
+Using pnpm
+
+```sh
+pnpm add --dev --exact prettier
+```
+
+## Settings
+
+These are my basic prettier settings (`.prettierrc.json`).
+
+<Code code={Source} lang="json" title=".prettierrc.json" wrap />
+
+Create an ignore file (`.prettierignore`):
+
+```text
+build
+dist
+coverage
+analysis
+```
+
+## Usage
+
+and here is a script to run prettier on a javascript project:
+
+```sh
+# File: package.json
+
+"format": "prettier \"./**/*.{html,css,js,jsx,ts,tsx,md,mdx,json}\" --write --cache --log-level=warn",
+```
+
+More [CLI docs](https://prettier.io/docs/en/cli)
+
+[Integration](https://prettier.io/docs/en/integrating-with-linters) with a linter

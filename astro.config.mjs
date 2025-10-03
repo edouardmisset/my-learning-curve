@@ -35,6 +35,7 @@ export default defineConfig({
       description: 'Bits and pieces I learned during my coding journey!',
       favicon: '/favicon.ico',
       customCss: ['./src/styles/custom.css'],
+      routeMiddleware: './src/route-data.ts',
       locales: {
         root: {
           label: 'English',

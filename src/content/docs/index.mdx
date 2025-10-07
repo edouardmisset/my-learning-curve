@@ -18,13 +18,14 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { LINKS } from '../../constants/links'
 
 ## Content
 
 <CardGrid >
-	<LinkCard title="Read my blog" href={"/my-learning-curve/blog"} />
-	<LinkCard title="Browse snippets" href={"/my-learning-curve/snippets"} />
-	<LinkCard title="My setup" href={"/my-learning-curve/reference/setup"} />
-	<LinkCard title="Follow the guide" href={"/my-learning-curve/guides"} />
+	<LinkCard title="Read my blog" href={LINKS.blog()} />
+	<LinkCard title="Browse snippets" href={LINKS.snippets()} />
+	<LinkCard title="My setup" href={LINKS.reference("setup")} />
+	<LinkCard title="Follow the guide" href={LINKS.guides()} />
 </CardGrid>

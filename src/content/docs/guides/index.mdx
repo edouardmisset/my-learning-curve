@@ -3,10 +3,11 @@ title: Guides
 description: A collection of guides to help you on your learning journey.
 ---
 
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { LINKS } from '../../../constants/links'
 
 <CardGrid >
-	<LinkCard title="Data Analysis" href={"/my-learning-curve/guides/data-analysis/00-workflow"} />
-	<LinkCard title="Project Collaboration" href={"/my-learning-curve/guides/project-collaboration/00-getting-started"} />
-	<LinkCard title="Project Setup" href={"/my-learning-curve/guides/project"} />
+	<LinkCard title="Data Analysis" href={LINKS.guides("data-analysis/00-workflow")} />
+	<LinkCard title="Project Collaboration" href={LINKS.guides("project-collaboration/00-getting-started")} />
+	<LinkCard title="Project Setup" href={LINKS.guides("project")} />
 </CardGrid>

@@ -3,9 +3,10 @@ title: References
 description: A collection of reference materials and resources (setup, tools, shortcuts...).
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { LINKS } from '../../../constants/links'
 
 <CardGrid >
-	<LinkCard title="My setup" href={"/my-learning-curve/reference/setup"} />
-	<LinkCard title="VS Code Shortcuts" href={"/my-learning-curve/reference/vs-code-shortcuts"} />
+	<LinkCard title="My setup" href={LINKS.reference("setup")} />
+	<LinkCard title="VS Code Shortcuts" href={LINKS.reference("vs-code-shortcuts")} />
 </CardGrid>

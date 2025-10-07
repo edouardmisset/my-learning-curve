@@ -3,13 +3,14 @@ title: Project Setup
 description: Resources and tools to set up a modern web development project.
 ---
 
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { LINKS } from '../../../../constants/links';
 
 <CardGrid >
-	<LinkCard title="Biome" href={"project/biome"} />
-	<LinkCard title="ESLint" href={"project/eslint"} />
-	<LinkCard title="Prettier" href={"project/prettier"} />
-	<LinkCard title="StyleLint" href={"project/stylelint"} />
-	<LinkCard title="TypeScript" href={"project/tsconfig"} />
-	<LinkCard title="VS Code Settings" href={"project/vscode-settings"} />
+	<LinkCard title="Biome" href={LINKS.guides("project/biome")} />
+	<LinkCard title="ESLint" href={LINKS.guides("project/eslint")} />
+	<LinkCard title="Prettier" href={LINKS.guides("project/prettier")} />
+	<LinkCard title="StyleLint" href={LINKS.guides("project/stylelint")} />
+	<LinkCard title="TypeScript" href={LINKS.guides("project/tsconfig")} />
+	<LinkCard title="VS Code Settings" href={LINKS.guides("project/vscode-settings")} />
 </CardGrid>

@@ -12,10 +12,7 @@ export const collections = {
     }),
   }),
   snippets: defineCollection({
-    loader: glob({
-      base: 'snippets',
-      pattern: ['**/**/*.md', '**/**/*.mdx'],
-    }),
+    loader: docsLoader(),
     schema: docsSchema({
       extend: context => blogSchema(context),
     }),

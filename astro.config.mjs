@@ -13,8 +13,14 @@ export default defineConfig({
   prefetch: true,
   integrations: [
     starlight({
+      title: 'My Learning Curve',
+      description: 'Bits and pieces I learned during my coding journey!',
+      favicon: '/favicon.ico',
       plugins: [
-        catppuccin(),
+        catppuccin({
+          dark: { flavor: 'macchiato', accent: 'mauve' },
+          light: { flavor: 'latte', accent: 'mauve' },
+        }),
         starlightLinksValidator(),
         starlightBlog({
           authors: {
@@ -31,9 +37,7 @@ export default defineConfig({
           },
         }),
       ],
-      title: 'My Learning Curve',
-      description: 'Bits and pieces I learned during my coding journey!',
-      favicon: '/favicon.ico',
+      tagline: 'Bits and pieces I learned during my coding journey!',
       customCss: ['./src/styles/custom.css'],
       routeMiddleware: './src/route-data.ts',
       locales: {
@@ -60,24 +64,7 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Snippets',
-          items: [
-            {
-              label: 'CSS',
-              link: '/snippets/css/components/blur-backdrop',
-            },
-            {
-              label: 'Shell',
-              link: '/snippets/shell/timeit',
-            },
-            {
-              label: 'SQL',
-              link: '/snippets/sql/crud',
-            },
-            {
-              label: 'TypeScript',
-              link: '/snippets/typescript/date/relative-time',
-            },
-          ],
+          autogenerate: { directory: 'snippets' },
           collapsed: true,
         },
         {
@@ -101,6 +88,7 @@ export default defineConfig({
               link: '/guides/project-collaboration/00-getting-started',
             },
           ],
+          collapsed: true,
         },
         {
           label: 'Reference',

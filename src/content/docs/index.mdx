@@ -18,14 +18,18 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { CardGrid, LinkCard } from '@astrojs/starlight/components'
 import { LINKS } from '../../constants/links'
 
 ## Content
 
 <CardGrid >
-	<LinkCard title="Read my blog" href={LINKS.blog()} />
-	<LinkCard title="Browse snippets" href={LINKS.snippets()} />
-	<LinkCard title="My setup" href={LINKS.reference("setup")} />
-	<LinkCard title="Follow the guide" href={LINKS.guides()} />
+	<LinkCard title="Read my blog" href={LINKS.blog()} description='Insights and experiences from my coding journey.' />
+	<LinkCard title="Browse snippets"
+	href={LINKS.snippets("css/layouts/every-layout")} description='A collection of
+	useful code snippets (CSS, TypeScript, SQL, Shell).' />
+	<LinkCard title="My setup" href={LINKS.reference("setup")} description='Details about my development setup.' />
+	<LinkCard title="Follow the guide" href={LINKS.guides()}
+	description='Step-by-step guides on development topics (data analysis, project
+	setup, collaboration...).' />
 </CardGrid>

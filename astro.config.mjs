@@ -65,12 +65,10 @@ export default defineConfig({
         {
           label: 'Snippets',
           autogenerate: { directory: 'snippets' },
-          collapsed: true,
         },
         {
           label: 'Blog',
           autogenerate: { directory: 'blog/en' },
-          collapsed: true,
         },
         {
           label: 'Guides',
@@ -88,7 +86,6 @@ export default defineConfig({
               link: '/guides/project-collaboration/00-getting-started',
             },
           ],
-          collapsed: true,
         },
         {
           label: 'Reference',
@@ -102,7 +99,6 @@ export default defineConfig({
               link: '/reference/vs-code-shortcuts',
             },
           ],
-          collapsed: true,
         },
       ],
       lastUpdated: true,

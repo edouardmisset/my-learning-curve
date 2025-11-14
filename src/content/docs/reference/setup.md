@@ -43,7 +43,7 @@ To use it in `VS Code`, follow [these explanations](https://github.com/tonsky/Fi
 **TL;DR**:
 Add this to your VS Code `settings.JSON`:
 
-```JSON
+```json
 "editor.fontFamily": "Fira Code",
 "editor.fontLigatures": true,
 ```

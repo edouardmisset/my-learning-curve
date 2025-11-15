@@ -5,6 +5,7 @@ description: A collection of reference materials and resources (setup, tools, sh
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components'
 import { getCollection } from 'astro:content'
+import { LINKS } from '../../../constants/links'
 
 export const referencePages = (await getCollection('docs'))
 	.filter(entry => entry.id.startsWith('reference/') && entry.id !== 'reference/index.mdx')
@@ -14,7 +15,7 @@ export const referencePages = (await getCollection('docs'))
 	{referencePages.map(page => (
 		<LinkCard 
 			title={page.data.title} 
-			href={`/my-learning-curve/reference/${page.id.replace('reference/', '').replace('.md', '').replace('.mdx', '')}`} 
+			href={`${LINKS.reference(page.id.replace('reference/', '').replace('.md', '').replace('.mdx', ''))}`} 
 		/>
 	))}
 </CardGrid>

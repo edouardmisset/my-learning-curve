@@ -24,5 +24,3 @@ tags: ['template', 'feature', 'issue']
 ## Architecture Guidelines
 
 (Useful guidelines for the implementation: reuse, style, theme...)
-
-/label ~Feature

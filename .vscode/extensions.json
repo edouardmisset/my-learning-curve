@@ -1,0 +1,31 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "biomejs.biome",
+    "bradgashler.htmltagwrap",
+    "chakrounanas.turbo-console-log",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "clinyong.vscode-css-modules",
+    "dbaeumer.vscode-eslint",
+    "dotiful.dotfiles-syntax-highlighting",
+    "dsznajder.es7-react-js-snippets",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "github.copilot",
+    "github.copilot-chat",
+    "github.vscode-pull-request-github",
+    "mgmcdermott.vscode-language-babel",
+    "naumovs.color-highlight",
+    "oderwat.indent-rainbow",
+    "p42ai.refactor",
+    "phoenisx.cssvar",
+    "pucelle.vscode-css-navigation",
+    "stkb.rewrap",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-french",
+    "stylelint.vscode-stylelint",
+    "wix.vscode-import-cost",
+    "xabikos.javascriptsnippets"
+  ]
+}

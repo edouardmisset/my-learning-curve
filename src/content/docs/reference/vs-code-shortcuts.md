@@ -6,6 +6,9 @@ tags: ['vscode', 'shortcuts', 'macos', 'productivity']
 prev: 
   link: /my-learning-curve/reference/setup
   label: My setup
+next:
+  link: /my-learning-curve/reference/vscode-extensions
+  label: Recommended VS Code Extensions
 ---
 
 ## List of Useful Shortcuts

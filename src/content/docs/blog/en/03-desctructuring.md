@@ -8,7 +8,9 @@ lastUpdated: 2025-10-02
 
 ## The concept
 
-The **destructuring assignment** syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.
+The **destructuring assignment** syntax is a JavaScript expression that makes it
+possible to unpack values from arrays, or properties from objects, into distinct
+variables.
 Available from ES6 (2015) onward.
 
 OR
@@ -207,6 +209,7 @@ console.log(arr)
 
 Introduction by [Fireship.io](https://www.youtube.com/watch?v=UgEaJBz3bjY)
 
-Official documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+Official documentation on
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
 Adoption on [CanIUse](https://caniuse.com/mdn-javascript_operators_destructuring)

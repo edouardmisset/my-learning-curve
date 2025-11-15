@@ -89,16 +89,7 @@ export default defineConfig({
         },
         {
           label: 'Reference',
-          items: [
-            {
-              label: 'My setup',
-              link: '/reference/setup',
-            },
-            {
-              label: 'VS Code Shortcuts',
-              link: '/reference/vs-code-shortcuts',
-            },
-          ],
+          autogenerate: { directory: 'reference' },
         },
       ],
       lastUpdated: true,

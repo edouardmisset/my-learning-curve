@@ -3,8 +3,15 @@ date: 2025-11-15
 title: Bug Report Template
 description: A template for submitting bug reports
 tags: ['template', 'bug', 'issue']
+prev: 
+  link: /my-learning-curve/reference/vs-code-shortcuts
+  label: VS Code Shortcuts
+next: 
+  link: /my-learning-curve/reference/feature-request-template
+  label: Feature Request Template
 ---
 
+```markdown
 ## Summary
 
 (Summarize the bug encountered concisely)
@@ -29,3 +36,4 @@ it's very hard to read otherwise.)
 ## Possible fixes
 
 (If you can, link to the line of code that might be responsible for the problem)
+```

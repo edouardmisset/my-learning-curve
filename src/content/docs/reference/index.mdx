@@ -4,9 +4,17 @@ description: A collection of reference materials and resources (setup, tools, sh
 ---
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components'
-import { LINKS } from '../../../constants/links'
+import { getCollection } from 'astro:content'
 
-<CardGrid >
-	<LinkCard title="My setup" href={LINKS.reference("setup")} />
-	<LinkCard title="VS Code Shortcuts" href={LINKS.reference("vs-code-shortcuts")} />
+export const referencePages = (await getCollection('docs'))
+	.filter(entry => entry.id.startsWith('reference/') && entry.id !== 'reference/index.mdx')
+	.sort((a, b) => a.id.localeCompare(b.id))
+
+<CardGrid>
+	{referencePages.map(page => (
+		<LinkCard 
+			title={page.data.title} 
+			href={`/my-learning-curve/reference/${page.id.replace('reference/', '').replace('.md', '').replace('.mdx', '')}`} 
+		/>
+	))}
 </CardGrid>

@@ -4,10 +4,11 @@ title: Pull Request / Merge Request Template
 description: A standardized template for creating clear and comprehensive pull requests and merge requests.
 tags: ['pull-request', 'merge-request', 'template', 'git', 'collaboration']
 prev: 
-  link: /my-learning-curve/reference/vs-code-shortcuts
-  label: VS Code Shortcuts
+  link: /my-learning-curve/reference/feature-request-template
+  label: Feature Request Template
 ---
 
+```markdown
 ## Description
 
 <!-- Provide a clear and concise description of your changes -->
@@ -47,9 +48,9 @@ Related to #
 
 <!-- List the specific changes you made -->
 
-- 
-- 
-- 
+-
+-
+-
 
 ## Testing
 
@@ -66,9 +67,9 @@ Related to #
 
 <!-- Describe your test environment if relevant -->
 
-- **OS**: 
-- **Browser** (if applicable): 
-- **Node version** (if applicable): 
+- **OS**:
+- **Browser** (if applicable):
+- **Node version** (if applicable):
 
 ## Screenshots / Demo
 
@@ -106,3 +107,4 @@ Related to #
 ---
 
 **Remember**: Keep PRs small and focused. If you're changing multiple unrelated things, consider splitting them into separate PRs.
+```

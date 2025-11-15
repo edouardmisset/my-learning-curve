@@ -10,7 +10,45 @@ prev:
 
 ## Overview
 
-This document lists the recommended VS Code extensions that enhance the development experience. These extensions are automatically suggested when you open this project in VS Code.
+This document lists recommended VS Code extensions for web development that enhance productivity and the development experience. These are generic extensions suitable for most web development projects.
+
+## Extensions Configuration
+
+You can use the following configuration in your own projects by creating a `.vscode/extensions.json` file:
+
+```json
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "biomejs.biome",
+    "bradgashler.htmltagwrap",
+    "chakrounanas.turbo-console-log",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "clinyong.vscode-css-modules",
+    "dbaeumer.vscode-eslint",
+    "dotiful.dotfiles-syntax-highlighting",
+    "dsznajder.es7-react-js-snippets",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "github.copilot",
+    "github.copilot-chat",
+    "github.vscode-pull-request-github",
+    "mgmcdermott.vscode-language-babel",
+    "naumovs.color-highlight",
+    "oderwat.indent-rainbow",
+    "p42ai.refactor",
+    "phoenisx.cssvar",
+    "pucelle.vscode-css-navigation",
+    "stkb.rewrap",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-french",
+    "stylelint.vscode-stylelint",
+    "wix.vscode-import-cost",
+    "xabikos.javascriptsnippets"
+  ]
+}
+```
 
 ## Extension Categories
 
@@ -67,12 +105,15 @@ This document lists the recommended VS Code extensions that enhance the developm
 
 ## Installation
 
-When you open this project in VS Code, you'll be prompted to install these recommended extensions. Alternatively, you can:
+To use these recommended extensions in your project:
 
-1. Open the Extensions view (`Cmd+Shift+X` on macOS or `Ctrl+Shift+X` on Windows/Linux)
-2. Type `@recommended` in the search box
-3. Install all workspace recommendations
+1. Create a `.vscode/extensions.json` file in your project root with the configuration shown above
+2. When you open your project in VS Code, you'll be prompted to install the recommended extensions
+3. Alternatively, you can manually install extensions:
+   - Open the Extensions view (`Cmd+Shift+X` on macOS or `Ctrl+Shift+X` on Windows/Linux)
+   - Type `@recommended` in the search box to see workspace recommendations
+   - Install the extensions you need
 
-## Configuration
+## Using the Configuration
 
-The list of recommended extensions is maintained in `.vscode/extensions.json` in the project root.
+Copy the JSON configuration above into a `.vscode/extensions.json` file in your project. This will prompt team members to install these extensions when they open the project, ensuring consistent tooling across the team.

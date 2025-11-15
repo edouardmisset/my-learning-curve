@@ -8,7 +8,9 @@ lastUpdated: 2025-10-02
 
 ## Definition
 
-> Memoization is an optimization technique used primarily to speed up computer programs by storing the results of expensive function calls and returning the cached result when the same inputs occur again.
+> Memoization is an optimization technique used primarily to speed up computer
+> programs by storing the results of expensive function calls and returning the
+> cached result when the same inputs occur again.
 >
 > ~ Wikipedia
 
@@ -16,16 +18,24 @@ lastUpdated: 2025-10-02
 
 ## The concept
 
-> As our applications grow and begin to carry out heavier computations, there comes an increasing need for speed (🏎️) and the optimization of processes becomes a necessity. When we ignore this concern, we end up with programs that take a lot of time and consume a monstrous chunk of system resources during execution.
+> As our applications grow and begin to carry out heavier computations, there
+> comes an increasing need for speed (🏎️) and the optimization of processes
+> becomes a necessity. When we ignore this concern, we end up with programs that
+> take a lot of time and consume a monstrous chunk of system resources during
+> execution.
 >
-> Memoization is an optimization technique that speeds up applications by storing the results of expensive function calls and returning the cached result when the same inputs occur again.
+> Memoization is an optimization technique that speeds up applications by
+> storing the results of expensive function calls and returning the cached
+> result when the same inputs occur again.
 >
 > ~ Philip Obosi
 
 Memoization is built upon two key JS concepts:
 
 - **Closure** (function and the lexical environment where it was declared)
-- **[Higher Order Functions](https://edouardmisset.github.io/my-learning-curve/blog/en/05-higher-order-functions)** (returning / accepting functions from functions)
+- **[Higher Order
+  Functions](https://edouardmisset.github.io/my-learning-curve/blog/en/05-higher-order-functions)**
+  (returning / accepting functions from functions)
 
 ## Examples
 
@@ -73,7 +83,8 @@ function memoize(fn) {
 
 ## Resources
 
-Understanding Memoization in JavaScript by [better.dev](https://www.better.dev/understanding-memoization-in-javascript)
+Understanding Memoization in JavaScript by
+[better.dev](https://www.better.dev/understanding-memoization-in-javascript)
 
 Memoization [Wikipedia](https://en.wikipedia.org/wiki/Memoization)
 

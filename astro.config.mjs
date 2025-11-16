@@ -13,6 +13,13 @@ export default defineConfig({
   site: 'https://edouardmisset.github.io',
   base: BASE_URL,
   prefetch: true,
+  vite: {
+    resolve: {
+      alias: {
+        '~': '/src',
+      },
+    },
+  },
   integrations: [
     starlight({
       title: 'My Learning Curve',

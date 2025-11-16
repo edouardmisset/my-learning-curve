@@ -5,7 +5,7 @@ description: Resources and tools to set up a modern web development project.
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components'
 import { getCollection } from 'astro:content'
-import { LINKS } from '../../../../../constants/links'
+import { LINKS } from '~/constants/links'
 
 export const projectGuides = (await getCollection('docs'))
 	.filter(entry => entry.id.startsWith('learn/guides/project/') && entry.id !== 'learn/guides/project/index.mdx')

@@ -4,13 +4,18 @@ description: Resources and tools to set up a modern web development project.
 ---
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { getCollection } from 'astro:content'
 import { LINKS } from '../../../../../constants/links'
 
-<CardGrid >
-	<LinkCard title="Biome" href={LINKS.guides("project/biome")} />
-	<LinkCard title="ESLint" href={LINKS.guides("project/eslint")} />
-	<LinkCard title="Prettier" href={LINKS.guides("project/prettier")} />
-	<LinkCard title="StyleLint" href={LINKS.guides("project/stylelint")} />
-	<LinkCard title="TypeScript" href={LINKS.guides("project/tsconfig")} />
-	<LinkCard title="VS Code Settings" href={LINKS.guides("project/vscode-settings")} />
+export const projectGuides = (await getCollection('docs'))
+	.filter(entry => entry.id.startsWith('learn/guides/project/') && entry.id !== 'learn/guides/project/index.mdx')
+	.sort((a, b) => a.data.title.localeCompare(b.data.title))
+
+<CardGrid>
+	{projectGuides.map(guide => (
+		<LinkCard 
+			title={guide.data.title} 
+			href={LINKS.guides(guide.id.replace('learn/guides/', ''))} 
+		/>
+	))}
 </CardGrid>

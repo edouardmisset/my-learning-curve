@@ -1,0 +1,60 @@
+---
+date: 2025-11-16
+title: Husky
+description: Configuration and usage of Husky for Git hooks management.
+tags: ['husky', 'git', 'hooks', 'automation']
+lastUpdated: 2025-11-16
+---
+
+import { Code } from '@astrojs/starlight/components'
+import PreCommit from './.husky-pre-commit.sh?raw'
+import CommitMsg from './.husky-commit-msg.sh?raw'
+import PackageManagers from '../../../../../components/PackageManagers.astro'
+import Disclaimer from '../../../../../components/Disclaimer.astro'
+
+## Installation
+
+See the [official documentation](https://typicode.github.io/husky/).
+
+<PackageManagers pkg="husky" dev />
+
+Initialize husky:
+
+<PackageManagers type='dlx' pkg="husky" args='init' />
+
+## Settings
+
+### Pre-commit Hook
+
+This hook runs before each commit to lint and format your staged files.
+
+<Code code={PreCommit} lang="sh" title=".husky/pre-commit" wrap />
+
+### Commit-msg Hook
+
+This hook runs after you enter a commit message to validate its format.
+
+<Code code={CommitMsg} lang="sh" title=".husky/commit-msg" wrap />
+
+## Usage
+
+Once configured, husky will automatically run the hooks at the appropriate times during your git workflow:
+
+- `pre-commit`: Runs before `git commit` completes
+- `commit-msg`: Validates the commit message format
+
+Add this script to your `package.json` to ensure husky is set up when installing dependencies:
+
+```json
+// File: package.json
+
+"prepare": "husky"
+```
+
+To skip hooks temporarily (use sparingly):
+
+```sh
+git commit --no-verify -m "message"
+```
+
+<Disclaimer />

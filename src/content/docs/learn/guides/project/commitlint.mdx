@@ -1,0 +1,51 @@
+---
+date: 2025-11-16
+title: Commitlint
+description: Configuration and usage of commitlint for enforcing commit message conventions.
+tags: ['commitlint', 'git', 'conventional-commits', 'linting']
+lastUpdated: 2025-11-16
+---
+
+import { Code } from '@astrojs/starlight/components'
+import Source from './.commitlintrc.json?raw'
+import PackageManagers from '../../../../../components/PackageManagers.astro'
+import Disclaimer from '../../../../../components/Disclaimer.astro'
+
+## Installation
+
+See the [official documentation](https://commitlint.js.org).
+
+<PackageManagers pkg="@commitlint/cli @commitlint/config-conventional" dev />
+
+## Settings
+
+These are basic `.commitlintrc.json` settings.
+
+<Code code={Source} lang="json" title=".commitlintrc.json" wrap />
+
+## Usage
+
+Commitlint checks if your commit messages meet the [conventional commit
+format](https://www.conventionalcommits.org/). 
+
+Example of valid commit messages:
+
+```txt
+feat: add new feature
+fix: resolve bug in component
+docs: update README
+chore: update dependencies
+style: format code
+```
+
+When configured with husky's [commit-msg
+hook](https://commitlint.js.org/guides/local-setup.html), it will automatically
+validate commit messages: 
+
+```sh
+# .husky/commit-msg
+
+npx --no -- commitlint --edit $1
+```
+
+<Disclaimer />

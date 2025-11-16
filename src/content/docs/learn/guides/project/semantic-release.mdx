@@ -1,0 +1,51 @@
+---
+date: 2025-11-16
+title: Semantic Release
+description: Configuration and usage of Semantic Release for automated versioning and package publishing.
+tags: ['semantic-release', 'ci-cd', 'versioning', 'automation']
+lastUpdated: 2025-11-16
+draft: true
+---
+
+import { Code } from '@astrojs/starlight/components'
+import Source from './.releaserc.json?raw'
+import PackageManagers from '../../../../../components/PackageManagers.astro'
+import Disclaimer from '../../../../../components/Disclaimer.astro'
+
+## Installation
+
+See the [official
+documentation](https://semantic-release.gitbook.io/semantic-release/usage/installation#installation).
+
+<PackageManagers pkg="semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github @semantic-release/release-notes-generator @semantic-release/commit-analyzer" dev />
+
+## Settings
+
+These are basic `.releaserc.json` settings.
+
+<Code code={Source} lang="json" title=".releaserc.json" wrap />
+
+## Usage
+
+Semantic Release automates the whole package release workflow including:
+determining the next version number, generating the release notes, and
+publishing the package. 
+
+Add this script to your `package.json`:
+
+```json
+// File: package.json
+
+"release": "semantic-release"
+```
+
+This is typically run in CI/CD environments. For GitHub Actions, add:
+
+```yaml
+- name: Release
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  run: pnpm run release
+```
+
+<Disclaimer />

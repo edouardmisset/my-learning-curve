@@ -1,0 +1,46 @@
+---
+date: 2025-11-16
+title: Lint-Staged
+description: Configuration and usage of lint-staged for running linters on git staged files.
+tags: ['lint-staged', 'git', 'linting', 'pre-commit']
+lastUpdated: 2025-11-16
+---
+
+import { Code } from '@astrojs/starlight/components'
+import Source from './.lintstagedrc.json?raw'
+import PackageManagers from '../../../../../components/PackageManagers.astro'
+import Disclaimer from '../../../../../components/Disclaimer.astro'
+
+## Installation
+
+See the [official documentation](https://github.com/lint-staged/lint-staged).
+
+<PackageManagers pkg="lint-staged" dev />
+
+## Settings
+
+These are basic `.lintstagedrc.json` settings.
+
+<Code code={Source} lang="json" title=".lintstagedrc.json" wrap />
+
+## Usage
+
+Lint-staged runs linters against staged git files. This is typically used with git hooks (via husky) to prevent committing code that doesn't meet your linting standards.
+
+Add this script to your `package.json`:
+
+```json
+// File: package.json
+
+"lint-staged": "lint-staged"
+```
+
+When configured with husky's pre-commit hook, it will automatically run before each commit:
+
+```sh
+# .husky/pre-commit
+
+pnpm run lint-staged
+```
+
+<Disclaimer />

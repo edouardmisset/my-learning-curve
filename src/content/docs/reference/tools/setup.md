@@ -5,7 +5,7 @@ description: Learn about my development setup and tools.
 tags: ['setup', 'development', 'tools']
 lastUpdated: 2025-10-02
 next: 
-  link: /my-learning-curve/reference/vs-code-shortcuts
+  link: /my-learning-curve/reference/cheatsheets/vs-code-shortcuts
   label: VS Code Shortcuts
 ---
 

@@ -4,10 +4,10 @@ title: Bug Report Template
 description: A template for submitting bug reports
 tags: ['template', 'bug', 'issue']
 prev: 
-  link: /my-learning-curve/reference/vs-code-shortcuts
+  link: /my-learning-curve/reference/cheatsheets/vs-code-shortcuts
   label: VS Code Shortcuts
 next: 
-  link: /my-learning-curve/reference/feature-request-template
+  link: /my-learning-curve/reference/templates/feature-request-template
   label: Feature Request Template
 ---
 

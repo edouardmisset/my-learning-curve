@@ -1,0 +1,26 @@
+---
+export interface Props {
+  text?: string;
+}
+
+const { text = "This article was drafted with the assistance of AI and reviewed/edited by the author." } = Astro.props;
+---
+
+<aside class="disclaimer">
+  <h2>Disclaimer</h2>
+  <p><em>{text}</em></p>
+</aside>
+
+<style>
+  .disclaimer {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+    font-size: 1rem;
+    color: var(--text-muted, #6b7280);
+  }
+  
+  .disclaimer p {
+    margin: 0;
+  }
+</style>

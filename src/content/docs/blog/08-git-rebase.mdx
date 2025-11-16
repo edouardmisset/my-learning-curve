@@ -6,6 +6,8 @@ tags: ['Git', 'Rebase', 'Version Control', 'Git History']
 lastUpdated: 2025-11-16
 ---
 
+import Disclaimer from '../../../components/Disclaimer.astro';
+
 ## TL;DR
 
 ```bash
@@ -35,7 +37,7 @@ git push --force-with-lease
 commits to a new base commit. This creates a cleaner, linear history compared to
 merge commits.
 
-<!-- truncate -->
+{/* <!-- truncate --> */}
 
 ## How it works
 
@@ -267,8 +269,4 @@ GitHub guide on [interactive rebase](https://docs.github.com/en/get-started/usin
 
 Julia Evans' zine on [git rebase](https://wizardzines.com/comics/rules-for-rebasing/)
 
----
-
-## Disclaimer
-
-_This article was drafted with the assistance of AI and reviewed/edited by the author._
+<Disclaimer />

@@ -4,6 +4,7 @@ import starlight from '@astrojs/starlight'
 import catppuccin from '@catppuccin/starlight'
 import { defineConfig } from 'astro/config'
 import starlightBlog from 'starlight-blog'
+import starlightKbd from 'starlight-kbd'
 import starlightLinksValidator from 'starlight-links-validator'
 import { BASE_URL, PATHS } from './src/constants/links.ts'
 
@@ -21,6 +22,13 @@ export default defineConfig({
         catppuccin({
           dark: { flavor: 'macchiato', accent: 'mauve' },
           light: { flavor: 'latte', accent: 'mauve' },
+        }),
+        starlightKbd({
+          types: [
+            { id: 'mac', label: 'macOS', default: true },
+            { id: 'windows', label: 'Windows' },
+            { id: 'linux', label: 'Linux' },
+          ],
         }),
         starlightLinksValidator(),
         starlightBlog({

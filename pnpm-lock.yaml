@@ -32,6 +32,9 @@ importers:
       starlight-blog:
         specifier: ^0.24.1
         version: 0.24.1(@astrojs/starlight@0.36.0(astro@5.14.1(@types/node@24.6.2)(rollup@4.52.3)(typescript@5.9.3)))(astro@5.14.1(@types/node@24.6.2)(rollup@4.52.3)(typescript@5.9.3))
+      starlight-kbd:
+        specifier: ^0.2.1
+        version: 0.2.1(@astrojs/starlight@0.36.0(astro@5.14.1(@types/node@24.6.2)(rollup@4.52.3)(typescript@5.9.3)))
       starlight-links-validator:
         specifier: ^0.18.0
         version: 0.18.0(@astrojs/starlight@0.36.0(astro@5.14.1(@types/node@24.6.2)(rollup@4.52.3)(typescript@5.9.3)))
@@ -2006,6 +2009,12 @@ packages:
     engines: {node: '>=18.20.8'}
     peerDependencies:
       '@astrojs/starlight': '>=0.33.0'
+
+  starlight-kbd@0.2.1:
+    resolution: {integrity: sha512-kFDWkB99GSk1korUrHezRxcjLhQ53axDyI9oZakEPB5ZNU3b+uwp2kVMhEg6B5yzekwFgf84UlNiWu9lYpfMoA==}
+    engines: {node: '>=18.17.1'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.32.0'
 
   starlight-links-validator@0.18.0:
     resolution: {integrity: sha512-R0gLdrKWdpAEqux3DL2B3QvNJM8Zpys8CQu1BGLD9hc+66nt/Q6aJDkvvkvoCVky9JKmBEnmL4PhFkyz13lK5g==}
@@ -4848,6 +4857,10 @@ snapshots:
     transitivePeerDependencies:
       - astro
       - supports-color
+
+  starlight-kbd@0.2.1(@astrojs/starlight@0.36.0(astro@5.14.1(@types/node@24.6.2)(rollup@4.52.3)(typescript@5.9.3))):
+    dependencies:
+      '@astrojs/starlight': 0.36.0(astro@5.14.1(@types/node@24.6.2)(rollup@4.52.3)(typescript@5.9.3))
 
   starlight-links-validator@0.18.0(@astrojs/starlight@0.36.0(astro@5.14.1(@types/node@24.6.2)(rollup@4.52.3)(typescript@5.9.3))):
     dependencies:

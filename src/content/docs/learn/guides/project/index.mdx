@@ -16,6 +16,7 @@ export const projectGuides = (await getCollection('docs'))
 		<LinkCard 
 			title={guide.data.title} 
 			href={LINKS.guides(guide.id.replace('learn/guides/', ''))} 
+			description={guide.data.description}
 		/>
 	))}
 </CardGrid>

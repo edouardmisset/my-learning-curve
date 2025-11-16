@@ -63,7 +63,7 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Blog',
-          autogenerate: { directory: 'blog' },
+          link: PATHS.blog(),
         },
         {
           label: 'Learn',

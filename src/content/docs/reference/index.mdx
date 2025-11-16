@@ -1,21 +1,25 @@
 ---
-title: References
-description: A collection of reference materials and resources (setup, tools, shortcuts...).
+title: Reference
+description: Quick lookups including cheatsheets, templates, and tools.
 ---
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components'
-import { getCollection } from 'astro:content'
 import { LINKS } from '../../../constants/links'
 
-export const referencePages = (await getCollection('docs'))
-	.filter(entry => entry.id.startsWith('reference/') && entry.id !== 'reference/index.mdx')
-	.sort((a, b) => a.id.localeCompare(b.id))
-
 <CardGrid>
-	{referencePages.map(page => (
-		<LinkCard 
-			title={page.data.title} 
-			href={`${LINKS.reference(page.id.replace('reference/', '').replace('.md', '').replace('.mdx', ''))}`} 
-		/>
-	))}
+	<LinkCard 
+		title="Cheatsheets" 
+		href={LINKS.reference('cheatsheets/vs-code-shortcuts')} 
+		description="Quick reference guides and keyboard shortcuts"
+	/>
+	<LinkCard 
+		title="Templates" 
+		href={LINKS.reference('templates/bug-report-template')} 
+		description="Issue and PR templates for consistent documentation"
+	/>
+	<LinkCard 
+		title="Tools" 
+		href={LINKS.reference('tools/vscode-extensions')} 
+		description="Recommended extensions and development setup"
+	/>
 </CardGrid>

@@ -269,6 +269,6 @@ Julia Evans' zine on [git rebase](https://wizardzines.com/comics/rules-for-rebas
 
 ---
 
-### Disclaimer
+## Disclaimer
 
 _This article was drafted with the assistance of AI and reviewed/edited by the author._

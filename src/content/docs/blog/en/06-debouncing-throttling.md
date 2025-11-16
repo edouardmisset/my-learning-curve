@@ -302,6 +302,6 @@ Debounce and throttle utilities by Sindre Sorhus:
 
 ---
 
-### Disclaimer
+## Disclaimer
 
 _This article was drafted with the assistance of AI and reviewed/edited by the author._

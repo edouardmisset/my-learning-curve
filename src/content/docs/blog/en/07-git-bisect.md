@@ -149,6 +149,6 @@ Julia Evans' zine on [git bisect](https://wizardzines.com/comics/look-at-recent-
 
 ---
 
-### Disclaimer
+## Disclaimer
 
 _This article was drafted with the assistance of AI and reviewed/edited by the author._

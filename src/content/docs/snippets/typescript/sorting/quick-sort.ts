@@ -1,16 +1,16 @@
 /**
  * Quick Sort Algorithm
- * 
+ *
  * Time Complexity:
  * - Best: O(n log n)
  * - Average: O(n log n)
  * - Worst: O(n²) with poor pivot selection
- * 
+ *
  * Space Complexity: O(log n) average, O(n) worst case
- * 
+ *
  * Stable: No
  * In-place: Yes
- * 
+ *
  * Best used when: Average-case performance is acceptable and in-place sorting is needed
  */
 
@@ -31,21 +31,21 @@ function quickSortHelper<T>(arr: T[], low: number, high: number): void {
 function partition<T>(arr: T[], low: number, high: number): number {
   const pivot = arr[high]
   let i = low - 1
-  
+
   for (let j = low; j < high; j++) {
     if (arr[j] < pivot) {
       i++
-      [arr[i], arr[j]] = [arr[j], arr[i]]
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
     }
   }
-  
-  [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]
+
+  ;[arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]
   return i + 1
 }
 
 export function quickSortBy<T>(
   arr: T[],
-  compareFn: (a: T, b: T) => number
+  compareFn: (a: T, b: T) => number,
 ): T[] {
   const result = [...arr]
   quickSortByHelper(result, 0, result.length - 1, compareFn)
@@ -56,7 +56,7 @@ function quickSortByHelper<T>(
   arr: T[],
   low: number,
   high: number,
-  compareFn: (a: T, b: T) => number
+  compareFn: (a: T, b: T) => number,
 ): void {
   if (low < high) {
     const pivotIndex = partitionBy(arr, low, high, compareFn)
@@ -69,19 +69,19 @@ function partitionBy<T>(
   arr: T[],
   low: number,
   high: number,
-  compareFn: (a: T, b: T) => number
+  compareFn: (a: T, b: T) => number,
 ): number {
   const pivot = arr[high]
   let i = low - 1
-  
+
   for (let j = low; j < high; j++) {
     if (compareFn(arr[j], pivot) < 0) {
       i++
-      [arr[i], arr[j]] = [arr[j], arr[i]]
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
     }
   }
-  
-  [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]
+
+  ;[arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]
   return i + 1
 }
 
@@ -121,30 +121,34 @@ export function quickSort3Way<T>(arr: T[]): T[] {
 
 function quickSort3WayHelper<T>(arr: T[], low: number, high: number): void {
   if (low >= high) return
-  
+
   const [lt, gt] = partition3Way(arr, low, high)
   quickSort3WayHelper(arr, low, lt - 1)
   quickSort3WayHelper(arr, gt + 1, high)
 }
 
-function partition3Way<T>(arr: T[], low: number, high: number): [number, number] {
+function partition3Way<T>(
+  arr: T[],
+  low: number,
+  high: number,
+): [number, number] {
   const pivot = arr[low]
   let lt = low
   let i = low + 1
   let gt = high
-  
+
   while (i <= gt) {
     if (arr[i] < pivot) {
-      [arr[lt], arr[i]] = [arr[i], arr[lt]]
+      ;[arr[lt], arr[i]] = [arr[i], arr[lt]]
       lt++
       i++
     } else if (arr[i] > pivot) {
-      [arr[i], arr[gt]] = [arr[gt], arr[i]]
+      ;[arr[i], arr[gt]] = [arr[gt], arr[i]]
       gt--
     } else {
       i++
     }
   }
-  
+
   return [lt, gt]
 }

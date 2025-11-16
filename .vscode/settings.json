@@ -40,11 +40,7 @@
   "conventionalCommits.promptBody": false,
   "conventionalCommits.promptFooter": false,
   "cSpell.language": "en,fr",
-  "cSpell.words": [
-    "frontmatter",
-    "Powerlevel",
-    "timeit"
-  ],
+  "cSpell.words": ["frontmatter", "Powerlevel", "timeit"],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#93e6fc",
     "activityBar.background": "#93e6fc",

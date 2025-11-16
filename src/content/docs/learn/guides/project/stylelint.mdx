@@ -3,21 +3,18 @@ date: 2025-10-02
 title: StyleLint
 description: Configuration and usage of StyleLint for CSS linting.
 tags: ['stylelint', 'css', 'linting', 'frontend']
+lastUpdated: 2025-11-16
 ---
 
 import { Code } from '@astrojs/starlight/components'
 import Source from './.stylelintrc.json?raw'
+import PackageManagers from '../../../../../components/PackageManagers.astro'
 
 ## [Installation](https://stylelint.io/user-guide/get-started)
 
-Using pnpm
+<PackageManagers pkg="stylelint" dev />
 
-```sh
-pnpm add -D stylelint
-
-# Install the related configs and plugins
-pnpm add -D stylelint-a11y stylelint-config-standard stylelint-order stylelint-plugin-defensive-css stylelint-use-logical-spec
-```
+<PackageManagers pkg="stylelint-a11y stylelint-config-standard stylelint-order stylelint-plugin-defensive-css stylelint-use-logical-spec" dev />
 
 ## Settings
 

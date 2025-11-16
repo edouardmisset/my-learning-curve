@@ -3,21 +3,20 @@ date: 2025-10-02
 title: ESLint
 description: Configuration and usage of ESLint for JavaScript and TypeScript linting.
 tags: ['eslint', 'typescript', 'javascript', 'linting']
+lastUpdated: 2025-11-16
 ---
 
 import { Code } from '@astrojs/starlight/components'
 import Source from './.eslintrc.json?raw'
+import PackageManagers from '../../../../../components/PackageManagers.astro'
 
 ## [Installation](https://eslint.org/docs/latest/use/getting-started#manual-set-up)
 
-Using pnpm
+<PackageManagers pkg="eslint" dev />
 
-```sh
-pnpm add -D eslint
+Optionally: Install the related configs and plugins
 
-# Install the related configs and plugins
-# pnpm add -D eslint-config-airbnb @typescript-eslint/eslint-plugin eslint-plugin-prettier eslint-config-prettier eslint-plugin-import eslint-plugin-import eslint-plugin-react eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y
-```
+<PackageManagers pkg="eslint-config-airbnb @typescript-eslint/eslint-plugin eslint-plugin-prettier eslint-config-prettier eslint-plugin-import eslint-plugin-import eslint-plugin-react eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y" dev />
 
 ## Settings
 

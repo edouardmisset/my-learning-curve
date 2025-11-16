@@ -3,18 +3,16 @@ date: 2025-10-02
 title: Prettier
 description: Configuration and usage of Prettier for code formatting.
 tags: ['prettier', 'code', 'formatting', 'frontend']
+lastUpdated: 2025-11-16
 ---
 
 import { Code } from '@astrojs/starlight/components'
 import Source from './.prettierrc.json?raw'
+import PackageManagers from '../../../../../components/PackageManagers.astro'
 
 ## [Installation](https://prettier.io/docs/en/install)
 
-Using pnpm
-
-```sh
-pnpm add --dev --exact prettier
-```
+<PackageManagers pkg="prettier" flags="--dev --exact" />
 
 ## Settings
 

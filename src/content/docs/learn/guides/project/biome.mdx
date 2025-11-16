@@ -3,15 +3,21 @@ date: 2025-10-02
 title: Biome
 description: Configuration and usage of Biome as a replacement for ESLint and Prettier.
 tags: ['biome', 'eslint', 'prettier', 'frontend']
+lastUpdated: 2025-11-16
 ---
 
 import { Code } from '@astrojs/starlight/components'
 import Source from './biome.json?raw'
 import { Aside } from '@astrojs/starlight/components'
+import PackageManagers from '../../../../../components/PackageManagers.astro'
 
 
 Biome is a replacement for ESLint and Prettier that is designed to be more
 flexible and easier to configure.
+
+## Installation
+
+<PackageManagers pkg="@biomejs/biome" flags="-D -E" />
 
 ## Biome Configuration
 

@@ -4,7 +4,7 @@ title: "Interpretation"
 description: "Guidelines for interpreting statistical analysis results."
 tags: ["data-analysis", "interpretation", "guide"]
 prev: 
-   link: /my-learning-curve/guides/data-analysis/05-analyze-data
+   link: /my-learning-curve/learn/tutorials/data-analysis/05-analyze-data
    label: Data Analysis
 ---
 

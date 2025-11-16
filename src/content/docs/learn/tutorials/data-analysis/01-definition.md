@@ -4,10 +4,10 @@ title: "Problem Definition"
 description: "Guidelines for defining the question in data analysis."
 tags: ["data-analysis", "problem-definition", "guide"]
 prev: 
-   link: /my-learning-curve/guides/data-analysis/00-workflow
+   link: /my-learning-curve/learn/tutorials/data-analysis/00-workflow
    label: Data Analysis Workflow
 next: 
-  link: /my-learning-curve/guides/data-analysis/02-data-gathering
+  link: /my-learning-curve/learn/tutorials/data-analysis/02-data-gathering
   label: Data Gathering
 ---
 

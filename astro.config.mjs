@@ -5,11 +5,12 @@ import catppuccin from '@catppuccin/starlight'
 import { defineConfig } from 'astro/config'
 import starlightBlog from 'starlight-blog'
 import starlightLinksValidator from 'starlight-links-validator'
+import { BASE_URL, PATHS } from './src/constants/links.ts'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://edouardmisset.github.io',
-  base: '/my-learning-curve',
+  base: BASE_URL,
   prefetch: true,
   integrations: [
     starlight({
@@ -53,33 +54,61 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: 'Snippets',
-          autogenerate: { directory: 'snippets' },
-        },
-        {
           label: 'Blog',
           autogenerate: { directory: 'blog' },
         },
         {
-          label: 'Guides',
+          label: 'Learn',
           items: [
             {
-              label: 'Data Analysis',
-              link: '/guides/data-analysis/00-workflow',
+              label: 'Tutorials',
+              collapsed: false,
+              items: [
+                {
+                  label: 'Data Analysis',
+                  link: PATHS.tutorials('data-analysis/00-workflow'),
+                },
+              ],
             },
             {
-              label: 'Project',
-              link: '/guides/project',
-            },
-            {
-              label: 'Project Collaboration',
-              link: '/guides/project-collaboration/00-getting-started',
+              label: 'Guides',
+              collapsed: false,
+              items: [
+                {
+                  label: 'Project Setup',
+                  link: PATHS.guides('project'),
+                },
+                {
+                  label: 'Team Collaboration',
+                  link: PATHS.guides(
+                    'project-collaboration/00-getting-started',
+                  ),
+                },
+              ],
             },
           ],
         },
         {
           label: 'Reference',
-          autogenerate: { directory: 'reference' },
+          items: [
+            {
+              label: 'Cheatsheets',
+              autogenerate: { directory: 'reference/cheatsheets' },
+            },
+            {
+              label: 'Templates',
+              autogenerate: { directory: 'reference/templates' },
+            },
+            {
+              label: 'Tools',
+              autogenerate: { directory: 'reference/tools' },
+            },
+          ],
+        },
+        {
+          label: 'Snippets',
+          autogenerate: { directory: 'snippets' },
+          collapsed: true,
         },
       ],
       lastUpdated: true,

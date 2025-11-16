@@ -4,7 +4,7 @@ title: "Package Manager Benchmark"
 description: "Comparison of package managers to optimize CI performance."
 tags: [package-managers, benchmark, CI-performance]
 prev:
-  link: /my-learning-curve/guides/project-collaboration/10-style
+  link: /my-learning-curve/learn/guides/project-collaboration/10-style
   label: Style
 ---
 

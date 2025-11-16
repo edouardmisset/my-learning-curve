@@ -1,0 +1,20 @@
+---
+title: Learn
+description: Educational content including tutorials and guides to help you on your learning journey.
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { LINKS } from '../../../constants/links'
+
+<CardGrid>
+	<LinkCard 
+		title="Tutorials" 
+		href={LINKS.tutorials()} 
+		description="Step-by-step learning paths for complex topics"
+	/>
+	<LinkCard 
+		title="Guides" 
+		href={LINKS.guides()} 
+		description="How-to guides for specific tasks and workflows"
+	/>
+</CardGrid>

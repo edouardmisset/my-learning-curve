@@ -1,0 +1,274 @@
+---
+date: 2025-11-16
+title: Git Rebase
+excerpt: "Git rebase is a powerful tool for rewriting commit history, allowing you to maintain a clean and linear project timeline."
+tags: ['Git', 'Rebase', 'Version Control', 'Git History']
+lastUpdated: 2025-11-16
+---
+
+## TL;DR
+
+```bash
+# Rebase current branch onto main
+git rebase main
+
+# Interactive rebase (last 3 commits)
+git rebase -i HEAD~3
+
+# Continue after resolving conflicts
+git rebase --continue
+
+# Abort rebase
+git rebase --abort
+
+# Force push after rebase (use with caution!)
+git push --force-with-lease
+```
+
+## The concept
+
+> Reapply commits on top of another base tip.
+>
+> ~ Git Documentation
+
+**Git rebase** rewrites commit history by moving or combining a sequence of
+commits to a new base commit. This creates a cleaner, linear history compared to
+merge commits.
+
+<!-- truncate -->
+
+## How it works
+
+When you rebase, Git:
+
+1. Finds the common ancestor between your branch and the target branch
+2. Saves your commits temporarily
+3. Resets your branch to the target branch
+4. Reapplies your commits one by one on top
+
+```text
+Before rebase:
+    A -- B -- C (main)
+          \
+           D -- E (feature)
+
+After git rebase main:
+    A -- B -- C (main)
+              \
+               D' -- E' (feature)
+```
+
+The commits `D'` and `E'` have the same changes as `D` and `E`, but different
+commit hashes.
+
+## Basic usage
+
+### Simple rebase
+
+```bash
+# Switch to your feature branch
+git switch feature-branch
+
+# Rebase onto main
+git rebase main
+
+# If there are conflicts, resolve them, then:
+git add .
+git rebase --continue
+
+# Push the rebased branch (rewrites history!)
+git push --force-with-lease
+```
+
+### Interactive rebase
+
+Interactive rebase lets you edit, reorder, squash, or delete commits:
+
+```bash
+# Rebase the last 5 commits interactively
+git rebase -i HEAD~5
+
+# Or rebase from a specific commit
+git rebase -i abc1234
+```
+
+This opens an editor with your commits:
+
+```text
+pick a1b2c3d Add user authentication
+pick d4e5f6g Fix typo in login form
+pick h7i8j9k Update tests
+pick l0m1n2o Refactor validation logic
+
+# Commands:
+# p, pick = use commit
+# r, reword = use commit, but edit message
+# e, edit = use commit, but stop for amending
+# s, squash = use commit, but meld into previous commit
+# f, fixup = like "squash", but discard commit message
+# d, drop = remove commit
+```
+
+**Common operations:**
+
+```text
+# Squash last two commits together
+pick a1b2c3d Add user authentication
+pick d4e5f6g Fix typo in login form
+squash h7i8j9k Update tests          # Combines with previous
+pick l0m1n2o Refactor validation logic
+
+# Change commit message
+pick a1b2c3d Add user authentication
+reword d4e5f6g Fix typo in login form  # Will prompt for new message
+pick h7i8j9k Update tests
+
+# Delete a commit
+pick a1b2c3d Add user authentication
+drop d4e5f6g Fix typo in login form    # Removes this commit
+pick h7i8j9k Update tests
+```
+
+## Common use cases
+
+### 1. Clean up commits before merging
+
+```bash
+# Clean up your feature branch before PR
+git checkout feature-branch
+git rebase -i main
+
+# Squash "WIP" and "fix typo" commits
+# Reword unclear commit messages
+# Remove debug commits
+```
+
+### 2. Update feature branch with latest main
+
+```bash
+# Get latest changes from main
+git checkout main
+git pull
+
+# Update feature branch
+git checkout feature-branch
+git rebase main
+```
+
+### 3. Fix commit message
+
+```bash
+# Change the last commit message
+git commit --amend
+
+# Change older commit messages
+git rebase -i HEAD~5
+# Change 'pick' to 'reword' for commits to edit
+```
+
+### 4. Squash multiple commits
+
+```bash
+# Squash last 3 commits into one
+git rebase -i HEAD~3
+# Change 'pick' to 'squash' for commits 2 and 3
+```
+
+## Resolving conflicts
+
+When conflicts occur during rebase:
+
+```bash
+# 1. Git stops and shows conflicting files
+# 2. Edit files to resolve conflicts
+# 3. Stage resolved files
+git add .
+
+# 4. Continue the rebase
+git rebase --continue
+
+# Or skip the commit causing issues
+git rebase --skip
+
+# Or abort and start over
+git rebase --abort
+```
+
+## Important commands
+
+```bash
+# Abort rebase and return to original state
+git rebase --abort
+
+# Skip current commit during rebase
+git rebase --skip
+
+# Continue after resolving conflicts
+git rebase --continue
+
+# Edit a specific commit
+git rebase -i HEAD~3
+# Change 'pick' to 'edit' for the commit
+
+# Rebase onto a different branch
+git rebase --onto main feature-branch
+```
+
+## Rebase vs Merge
+
+| Feature | Rebase | Merge |
+|---------|--------|-------|
+| **History** | Linear, clean | Shows true history with merge commits |
+| **Commits** | Rewrites commit hashes | Preserves original commits |
+| **Conflicts** | Resolve per commit | Resolve once |
+| **Use for** | Local cleanup, updating branches | Integrating completed features |
+| **Team use** | ⚠️ Never on public/shared branches | ✅ Safe for shared branches |
+
+## The Golden Rule
+
+> **Never rebase commits that have been pushed to a shared/public repository.**
+>
+> ~ Every Git tutorial ever
+
+Rebasing rewrites history. If others have based work on commits you rebase,
+you'll cause serious problems.
+
+✅ **Safe to rebase:**
+
+- Local commits not yet pushed
+- Feature branches only you're working on
+- After coordinating with your team
+
+❌ **Never rebase:**
+
+- The `main` or `master` branch
+- Commits others have based their work on
+- Public release tags
+
+## Tips
+
+- **Use `--force-with-lease`** instead of `--force`: It's safer because it
+  checks if someone else pushed changes
+- **Rebase often**: Keep your feature branch up-to-date with main
+- **Communicate**: Tell your team when you rebase shared branches
+- **Keep backups**: Create a backup branch before complex rebases: `git branch
+  backup-branch`
+- **Start simple**: Practice on local branches before rebasing pushed work
+
+## Resources
+
+Official Git documentation on [git rebase](https://git-scm.com/docs/git-rebase)
+
+Atlassian tutorial on [merging vs rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
+
+Git SCM book chapter on [rebasing](https://git-scm.com/book/en/v2/Git-Branching-Rebasing)
+
+GitHub guide on [interactive rebase](https://docs.github.com/en/get-started/using-git/about-git-rebase)
+
+Julia Evans' zine on [git rebase](https://wizardzines.com/comics/rules-for-rebasing/)
+
+---
+
+### Disclaimer
+
+_This article was drafted with the assistance of AI and reviewed/edited by the author._

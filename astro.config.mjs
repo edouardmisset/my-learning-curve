@@ -58,7 +58,7 @@ export default defineConfig({
         },
         {
           label: 'Blog',
-          autogenerate: { directory: 'blog/en' },
+          autogenerate: { directory: 'blog' },
         },
         {
           label: 'Guides',

@@ -40,16 +40,6 @@ export default defineConfig({
       tagline: 'Bits and pieces I learned during my coding journey!',
       customCss: ['./src/styles/custom.css'],
       routeMiddleware: './src/route-data.ts',
-      locales: {
-        root: {
-          label: 'English',
-          lang: 'en',
-        },
-        fr: {
-          label: 'Français',
-          lang: 'fr',
-        },
-      },
       editLink: {
         baseUrl:
           'https://github.com/edouardmisset/my-learning-curve/edit/main/',

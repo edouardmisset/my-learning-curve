@@ -11,6 +11,9 @@ next:
   label: Quick Sort
 ---
 
+import Disclaimer from '~/components/Disclaimer.astro'
+
+
 ## What is Merge Sort?
 
 Merge Sort is an efficient, stable sorting algorithm that uses the divide-and-conquer paradigm. It divides the array into two halves, recursively sorts them, and then merges the sorted halves back together.
@@ -363,3 +366,5 @@ export function bottomUpMergeSort<T>(arr: T[]): T[] {
 - Foundation for Timsort (Python's built-in sort)
 - Excellent for external sorting and parallel processing
 - Divide-and-conquer is a powerful algorithmic paradigm
+
+<Disclaimer />

@@ -9,6 +9,9 @@ prev:
 next: false
 ---
 
+import Disclaimer from '~/components/Disclaimer.astro'
+
+
 ## What is Heap Sort?
 
 Heap Sort is an efficient, comparison-based sorting algorithm that uses a binary heap data structure. It combines the better attributes of Merge Sort (guaranteed O(n log n)) and Quick Sort (in-place sorting).
@@ -425,3 +428,5 @@ function minHeapify<T>(arr: T[], heapSize: number, rootIndex: number): void {
 - Foundation for priority queues and many graph algorithms
 - Good choice when memory is limited and worst-case matters
 - Understanding heaps is valuable beyond just sorting
+
+<Disclaimer />

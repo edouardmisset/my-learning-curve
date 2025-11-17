@@ -29,18 +29,22 @@ Sorting algorithms are fundamental computer science algorithms that arrange elem
 Sorting algorithms can be categorized in several ways:
 
 ### By Complexity
+
 - **Simple Algorithms** (O(n²)): Bubble Sort, Selection Sort, Insertion Sort
 - **Efficient Algorithms** (O(n log n)): Merge Sort, Quick Sort, Heap Sort
 
 ### By Method
+
 - **Comparison-based**: Compare elements to determine order
 - **Non-comparison-based**: Use properties of keys (e.g., Counting Sort, Radix Sort)
 
 ### By Stability
+
 - **Stable**: Maintain relative order of equal elements (Merge Sort, Insertion Sort)
 - **Unstable**: May change relative order of equal elements (Quick Sort, Heap Sort)
 
 ### By Memory Usage
+
 - **In-place**: Use O(1) extra space (Bubble Sort, Selection Sort, Quick Sort)
 - **Out-of-place**: Require additional memory (Merge Sort)
 
@@ -58,28 +62,34 @@ Sorting algorithms can be categorized in several ways:
 ## When to Use Each Algorithm
 
 ### Bubble Sort
+
 - **Use when**: Dataset is very small or nearly sorted
 - **Avoid when**: Performance matters or dataset is large
 
 ### Selection Sort
+
 - **Use when**: Memory writes are expensive (minimizes swaps)
 - **Avoid when**: Stability is required or dataset is large
 
 ### Insertion Sort
+
 - **Use when**: Dataset is small or nearly sorted
 - **Good for**: Online sorting (as elements arrive)
 
 ### Merge Sort
+
 - **Use when**: Stability is required or consistent O(n log n) is needed
 - **Good for**: Linked lists, external sorting
 - **Avoid when**: Memory is limited
 
 ### Quick Sort
+
 - **Use when**: Average-case performance is acceptable
 - **Good for**: General-purpose sorting, in-place sorting
 - **Avoid when**: Worst-case O(n²) is unacceptable
 
 ### Heap Sort
+
 - **Use when**: Guaranteed O(n log n) with O(1) space is needed
 - **Avoid when**: Stability is required or cache performance matters
 
@@ -110,7 +120,8 @@ A sorting algorithm is **stable** if it preserves the relative order of equal el
 - Building on previous sorts
 
 **Example**:
-```
+
+```txt
 Original: [(Alice, 25), (Bob, 25), (Charlie, 25)]
 Stable sort by age: [(Alice, 25), (Bob, 25), (Charlie, 25)]
 Unstable sort by age: [(Charlie, 25), (Alice, 25), (Bob, 25)]
@@ -126,16 +137,19 @@ When comparing sorting algorithms visually, consider:
 4. **Recursion Depth**: For divide-and-conquer algorithms
 
 ### Bubble Sort Pattern
+
 - Repeatedly passes through array
 - "Bubbles" largest elements to the end
 - Many swaps, especially in worst case
 
 ### Merge Sort Pattern
+
 - Divides array into halves recursively
 - Merges sorted subarrays
 - Predictable, tree-like structure
 
 ### Quick Sort Pattern
+
 - Partitions around pivot
 - Recursively sorts partitions
 - Variable depth based on pivot selection
@@ -155,6 +169,7 @@ JavaScript's `Array.sort()` method is implemented differently across browser eng
 #### How Array.sort() Works
 
 **Without a comparator function:**
+
 ```javascript
 const numbers = [10, 5, 40, 25, 1000, 1]
 numbers.sort()
@@ -165,6 +180,7 @@ numbers.sort()
 By default, `Array.sort()` converts elements to strings and compares their UTF-16 code unit sequences. This can lead to unexpected results with numbers.
 
 **With a comparator function:**
+
 ```javascript
 const numbers = [10, 5, 40, 25, 1000, 1]
 numbers.sort((a, b) => a - b)
@@ -173,6 +189,7 @@ numbers.sort((a, b) => a - b)
 ```
 
 When you provide a comparator function, the algorithm uses your custom comparison logic. The comparator should:
+
 - Return a **negative number** if `a` should come before `b`
 - Return **zero** if `a` and `b` are equal
 - Return a **positive number** if `a` should come after `b`
@@ -187,12 +204,14 @@ When you provide a comparator function, the algorithm uses your custom compariso
 #### Timsort in Detail
 
 Timsort, used by V8, is particularly efficient because it:
+
 1. Identifies existing sorted subsequences (called "runs")
 2. Uses Insertion Sort for small runs (< 64 elements)
 3. Merges runs using a modified Merge Sort
 4. Adapts to patterns in real-world data
 
 This makes it excellent for:
+
 - Partially sorted data
 - Data with natural ordering patterns
 - Real-world datasets that aren't completely random

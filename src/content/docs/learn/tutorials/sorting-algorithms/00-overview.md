@@ -142,14 +142,69 @@ When comparing sorting algorithms visually, consider:
 
 ## Practical Considerations
 
-### Real-World Usage
+### JavaScript's Array.sort()
 
-Most programming languages use hybrid algorithms:
+JavaScript's `Array.sort()` method is implemented differently across browser engines, but modern engines use sophisticated hybrid algorithms:
 
-- **JavaScript (V8)**: Timsort (hybrid of Merge Sort and Insertion Sort)
-- **Python**: Timsort
+#### Browser Implementations
+
+- **V8 (Chrome, Node.js, Edge)**: Uses **Timsort** - a hybrid stable sorting algorithm combining Merge Sort and Insertion Sort
+- **SpiderMonkey (Firefox)**: Uses **Merge Sort** for stable sorting
+- **JavaScriptCore (Safari)**: Uses **Merge Sort**
+
+#### How Array.sort() Works
+
+**Without a comparator function:**
+```javascript
+const numbers = [10, 5, 40, 25, 1000, 1]
+numbers.sort()
+// Result: [1, 10, 1000, 25, 40, 5]
+// Elements are converted to strings and sorted lexicographically!
+```
+
+By default, `Array.sort()` converts elements to strings and compares their UTF-16 code unit sequences. This can lead to unexpected results with numbers.
+
+**With a comparator function:**
+```javascript
+const numbers = [10, 5, 40, 25, 1000, 1]
+numbers.sort((a, b) => a - b)
+// Result: [1, 5, 10, 25, 40, 1000]
+// Proper numeric sorting
+```
+
+When you provide a comparator function, the algorithm uses your custom comparison logic. The comparator should:
+- Return a **negative number** if `a` should come before `b`
+- Return **zero** if `a` and `b` are equal
+- Return a **positive number** if `a` should come after `b`
+
+#### Performance Characteristics
+
+- **Time Complexity**: O(n log n) average and worst case (due to Timsort/Merge Sort)
+- **Space Complexity**: O(n) for the merge operations
+- **Stability**: Yes - maintains relative order of equal elements
+- **Adaptive**: Timsort performs better on partially sorted data (O(n) best case)
+
+#### Timsort in Detail
+
+Timsort, used by V8, is particularly efficient because it:
+1. Identifies existing sorted subsequences (called "runs")
+2. Uses Insertion Sort for small runs (< 64 elements)
+3. Merges runs using a modified Merge Sort
+4. Adapts to patterns in real-world data
+
+This makes it excellent for:
+- Partially sorted data
+- Data with natural ordering patterns
+- Real-world datasets that aren't completely random
+
+### Real-World Usage in Other Languages
+
+Most modern programming languages use hybrid algorithms:
+
+- **Python**: Timsort (same as V8)
 - **Java**: Dual-Pivot Quick Sort for primitives, Timsort for objects
 - **C++ STL**: Introsort (hybrid of Quick Sort, Heap Sort, and Insertion Sort)
+- **Rust**: Pattern-defeating Quicksort (pdqsort)
 
 ### Performance Factors
 

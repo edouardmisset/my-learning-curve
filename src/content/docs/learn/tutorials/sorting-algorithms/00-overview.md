@@ -244,3 +244,54 @@ In the following sections, we'll implement each sorting algorithm in TypeScript 
 4. [Merge Sort](/my-learning-curve/learn/tutorials/sorting-algorithms/04-merge-sort)
 5. [Quick Sort](/my-learning-curve/learn/tutorials/sorting-algorithms/05-quick-sort)
 6. [Heap Sort](/my-learning-curve/learn/tutorials/sorting-algorithms/06-heap-sort)
+
+## Further Reading and Resources
+
+### Official Documentation
+
+- [MDN Web Docs: Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) - Comprehensive documentation on JavaScript's built-in sort method
+- [V8 Blog: Getting things sorted in V8](https://v8.dev/blog/array-sort) - Deep dive into V8's Timsort implementation
+- [ECMAScript Specification: Array.prototype.sort](https://tc39.es/ecma262/#sec-array.prototype.sort) - Official JavaScript specification
+
+### Educational Articles
+
+- [Sorting Algorithm Visualizations](https://www.toptal.com/developers/sorting-algorithms) - Compare algorithms side-by-side with animations
+- [Big-O Cheat Sheet](https://www.bigocheatsheet.com/) - Time and space complexity reference for common algorithms
+- [Understanding Timsort](https://skerritt.blog/timsort/) - Detailed explanation of the algorithm used by Python and V8
+- [Sorting Algorithms Explained](https://www.freecodecamp.org/news/sorting-algorithms-explained-with-examples-in-python-java-and-c/) - FreeCodeCamp's comprehensive guide
+- [The Sound of Sorting](http://panthema.net/2013/sound-of-sorting/) - Auditory representation of sorting algorithms
+
+### Interactive Visualizations
+
+- [VisuAlgo - Sorting](https://visualgo.net/en/sorting) - Interactive visualizations with step-by-step execution
+- [Sorting.at](http://sorting.at/) - Visual and auditory comparison of sorting algorithms
+- [USF Algorithm Visualizations](https://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html) - Step-through animations
+- [Algorithm Visualizer](https://algorithm-visualizer.org/) - Interactive code and visualization side-by-side
+- [Sorting Algorithm Animations](https://www.sorting-algorithms.com/) - Animated comparisons with detailed statistics
+
+### Video Tutorials
+
+- [CS50: Sorting Algorithms](https://www.youtube.com/watch?v=jUyQqLvg8Qw) - Harvard's CS50 lecture on sorting
+- [Computerphile: Quicksort](https://www.youtube.com/watch?v=XE4VP_8Y0BU) - Deep dive into Quick Sort
+- [15 Sorting Algorithms in 6 Minutes](https://www.youtube.com/watch?v=kPRA0W1kECg) - Visual comparison set to music
+- [Merge Sort vs Quick Sort](https://www.youtube.com/watch?v=es2T6KY45cA) - Detailed comparison
+- [Visualization and Comparison](https://www.youtube.com/watch?v=ZZuD6iUe3Pc) - Side-by-side algorithm comparison
+
+### Research Papers and Academic Resources
+
+- [Timsort — the fastest sorting algorithm you've never heard of](https://hackernoon.com/timsort-the-fastest-sorting-algorithm-youve-never-heard-of-36b28417f399) - Analysis of Python's sorting algorithm
+- [Introduction to Algorithms (CLRS)](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/) - The definitive textbook on algorithms
+- [Sorting Algorithm Stability](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) - Wikipedia's detailed explanation
+
+### Practice and Challenges
+
+- [LeetCode: Sorting Problems](https://leetcode.com/tag/sorting/) - Coding challenges involving sorting
+- [HackerRank: Sorting Challenges](https://www.hackerrank.com/domains/algorithms?filters%5Bsubdomains%5D%5B%5D=arrays-and-sorting) - Practice problems
+- [Codewars: Sorting Kata](https://www.codewars.com/kata/search/sorting) - Community-created challenges
+
+### Books
+
+- **Introduction to Algorithms** by Cormen, Leiserson, Rivest, and Stein (CLRS) - The comprehensive reference
+- **The Algorithm Design Manual** by Steven Skiena - Practical guide with real-world examples
+- **Algorithms** by Robert Sedgewick and Kevin Wayne - Clear explanations with visualizations
+- **Grokking Algorithms** by Aditya Bhargava - Beginner-friendly with illustrations

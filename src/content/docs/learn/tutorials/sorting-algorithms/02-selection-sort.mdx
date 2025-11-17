@@ -11,6 +11,9 @@ next:
   label: Insertion Sort
 ---
 
+import Disclaimer from '~/components/Disclaimer.astro'
+
+
 ## What is Selection Sort?
 
 Selection Sort divides the array into sorted and unsorted regions. It repeatedly finds the minimum element from the unsorted region and places it at the beginning of the unsorted region, thus expanding the sorted region.
@@ -264,3 +267,5 @@ export function doubleSelectionSort<T>(arr: T[]): T[] {
 - Not adaptive - doesn't benefit from partial sorting
 - Best when write operations are very expensive
 - Simpler than Bubble Sort in terms of swap operations
+
+<Disclaimer />

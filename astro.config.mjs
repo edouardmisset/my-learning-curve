@@ -83,10 +83,6 @@ export default defineConfig({
                   label: 'Data Analysis',
                   link: PATHS.tutorials('data-analysis/00-workflow'),
                 },
-                {
-                  label: 'Sorting Algorithms',
-                  link: PATHS.tutorials('sorting-algorithms/00-overview'),
-                },
               ],
             },
             {

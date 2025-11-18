@@ -1,0 +1,284 @@
+---
+date: 2025-11-16
+title: Understanding Sorting Algorithms
+excerpt: "A comprehensive guide to sorting algorithms, their time and space complexity, and when to use each one."
+tags: ['algorithms', 'sorting', 'complexity', 'computer-science', 'javascript', 'typescript']
+lastUpdated: 2025-11-16
+---
+
+import Disclaimer from '~/components/Disclaimer.astro';
+
+## TL;DR
+
+Sorting algorithms arrange elements in order. Choose based on your needs:
+- **Small/nearly sorted data**: Insertion Sort (O(n²) but fast in practice)
+- **General purpose**: Quick Sort (O(n log n) average, in-place)
+- **Guaranteed performance**: Merge Sort or Heap Sort (O(n log n) always)
+- **JavaScript's Array.sort()**: Uses Timsort (V8) or Merge Sort (Firefox/Safari) - O(n log n), stable
+
+## Quick Reference Table
+
+| Algorithm | Best | Average | Worst | Space | Stable | In-Place |
+|-----------|------|---------|-------|-------|--------|----------|
+| Bubble | O(n) | O(n²) | O(n²) | O(1) | ✓ | ✓ |
+| Selection | O(n²) | O(n²) | O(n²) | O(1) | ✗ | ✓ |
+| Insertion | O(n) | O(n²) | O(n²) | O(1) | ✓ | ✓ |
+| Merge | O(n log n) | O(n log n) | O(n log n) | O(n) | ✓ | ✗ |
+| Quick | O(n log n) | O(n log n) | O(n²) | O(log n) | ✗ | ✓ |
+| Heap | O(n log n) | O(n log n) | O(n log n) | O(1) | ✗ | ✓ |
+
+## The Algorithms
+
+### Bubble Sort
+Repeatedly steps through the list, compares adjacent elements, and swaps them if in wrong order. Simple but inefficient.
+
+```typescript
+function bubbleSort<T>(arr: T[]): T[] {
+  const result = [...arr];
+  for (let i = 0; i < result.length; i++) {
+    for (let j = 0; j < result.length - i - 1; j++) {
+      if (result[j] > result[j + 1]) {
+        [result[j], result[j + 1]] = [result[j + 1], result[j]];
+      }
+    }
+  }
+  return result;
+}
+```
+
+**When to use**: Educational purposes, very small datasets, nearly sorted data.
+
+### Selection Sort
+Finds the minimum element and places it at the beginning. Minimizes swaps.
+
+```typescript
+function selectionSort<T>(arr: T[]): T[] {
+  const result = [...arr];
+  for (let i = 0; i < result.length; i++) {
+    let minIdx = i;
+    for (let j = i + 1; j < result.length; j++) {
+      if (result[j] < result[minIdx]) minIdx = j;
+    }
+    if (minIdx !== i) {
+      [result[i], result[minIdx]] = [result[minIdx], result[i]];
+    }
+  }
+  return result;
+}
+```
+
+**When to use**: Memory writes are expensive, small datasets.
+
+### Insertion Sort
+Builds sorted array one item at a time. Efficient for small or nearly sorted data.
+
+```typescript
+function insertionSort<T>(arr: T[]): T[] {
+  const result = [...arr];
+  for (let i = 1; i < result.length; i++) {
+    const key = result[i];
+    let j = i - 1;
+    while (j >= 0 && result[j] > key) {
+      result[j + 1] = result[j];
+      j--;
+    }
+    result[j + 1] = key;
+  }
+  return result;
+}
+```
+
+**When to use**: Small datasets, nearly sorted data, online sorting (elements arrive one at a time).
+
+### Merge Sort
+Divides array into halves, recursively sorts them, then merges. Guaranteed O(n log n).
+
+```typescript
+function mergeSort<T>(arr: T[]): T[] {
+  if (arr.length <= 1) return arr;
+  
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+  
+  return merge(left, right);
+}
+
+function merge<T>(left: T[], right: T[]): T[] {
+  const result: T[] = [];
+  let i = 0, j = 0;
+  
+  while (i < left.length && j < right.length) {
+    if (left[i] <= right[j]) {
+      result.push(left[i++]);
+    } else {
+      result.push(right[j++]);
+    }
+  }
+  
+  return result.concat(left.slice(i)).concat(right.slice(j));
+}
+```
+
+**When to use**: Need guaranteed O(n log n), stability required, linked lists, external sorting.
+
+### Quick Sort
+Picks a pivot, partitions array around it, recursively sorts partitions. Fast in practice.
+
+```typescript
+function quickSort<T>(arr: T[]): T[] {
+  if (arr.length <= 1) return arr;
+  
+  const pivot = arr[Math.floor(arr.length / 2)];
+  const left = arr.filter(x => x < pivot);
+  const middle = arr.filter(x => x === pivot);
+  const right = arr.filter(x => x > pivot);
+  
+  return [...quickSort(left), ...middle, ...quickSort(right)];
+}
+```
+
+**When to use**: General-purpose sorting, average-case performance acceptable, in-place sorting needed.
+
+### Heap Sort
+Uses binary heap data structure. Guaranteed O(n log n) with O(1) space.
+
+```typescript
+function heapSort<T>(arr: T[]): T[] {
+  const result = [...arr];
+  const n = result.length;
+  
+  // Build max heap
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+    heapify(result, n, i);
+  }
+  
+  // Extract elements from heap
+  for (let i = n - 1; i > 0; i--) {
+    [result[0], result[i]] = [result[i], result[0]];
+    heapify(result, i, 0);
+  }
+  
+  return result;
+}
+
+function heapify<T>(arr: T[], n: number, i: number): void {
+  let largest = i;
+  const left = 2 * i + 1;
+  const right = 2 * i + 2;
+  
+  if (left < n && arr[left] > arr[largest]) largest = left;
+  if (right < n && arr[right] > arr[largest]) largest = right;
+  
+  if (largest !== i) {
+    [arr[i], arr[largest]] = [arr[largest], arr[i]];
+    heapify(arr, n, largest);
+  }
+}
+```
+
+**When to use**: Guaranteed O(n log n) with O(1) space, stability not required.
+
+## Key Concepts
+
+### Time Complexity
+- **O(1)**: Constant - same time regardless of input
+- **O(n)**: Linear - time grows proportionally
+- **O(n log n)**: Log-linear - very efficient for large datasets
+- **O(n²)**: Quadratic - becomes slow with large datasets
+
+### Space Complexity
+- **O(1)**: In-place algorithms (Bubble, Selection, Insertion, Heap, Quick)
+- **O(log n)**: Quick Sort's recursion stack
+- **O(n)**: Merge Sort requires extra array
+
+### Stability
+A stable sort preserves the relative order of equal elements. Important for multi-level sorting.
+- **Stable**: Bubble, Insertion, Merge
+- **Unstable**: Selection, Quick, Heap
+
+## JavaScript's Array.sort()
+
+Modern JavaScript engines use sophisticated algorithms:
+
+```javascript
+// Without comparator - lexicographic string sorting
+const numbers = [10, 5, 40, 25, 1000, 1];
+numbers.sort(); // [1, 10, 1000, 25, 40, 5] ⚠️
+
+// With comparator - numeric sorting
+numbers.sort((a, b) => a - b); // [1, 5, 10, 25, 40, 1000] ✓
+```
+
+**Browser implementations:**
+- **V8 (Chrome/Node.js/Edge)**: Timsort - hybrid of Merge and Insertion Sort
+- **SpiderMonkey (Firefox)**: Merge Sort
+- **JavaScriptCore (Safari)**: Merge Sort
+
+**Timsort** is particularly clever:
+- Identifies existing sorted subsequences ("runs")
+- Uses Insertion Sort for small arrays (< 64 elements)
+- Adapts to real-world data patterns
+- O(n log n) worst case, O(n) best case for partially sorted data
+- Stable and adaptive
+
+## Choosing the Right Algorithm
+
+```typescript
+// Small array or nearly sorted → Insertion Sort
+if (arr.length < 50 || isNearlySorted(arr)) {
+  return insertionSort(arr);
+}
+
+// Need stability and predictable performance → Merge Sort
+if (needsStability && needsGuarantee) {
+  return mergeSort(arr);
+}
+
+// General purpose, memory constrained → Quick Sort
+if (memoryLimited) {
+  return quickSort(arr);
+}
+
+// Guaranteed O(n log n) with O(1) space → Heap Sort
+if (needsGuarantee && memoryLimited) {
+  return heapSort(arr);
+}
+
+// Most cases → use Array.sort()
+return arr.sort((a, b) => a - b);
+```
+
+## Visual Comparison
+
+```
+Bubble Sort:     [5,3,8,4,2] → [3,5,4,2,8] → [3,4,2,5,8] → [3,2,4,5,8] → [2,3,4,5,8]
+                 Many passes, many swaps
+
+Merge Sort:      [5,3,8,4,2] → Split → [5,3,8] [4,2]
+                 → [5] [3,8] [4] [2]
+                 → Merge → [3,5,8] [2,4]
+                 → [2,3,4,5,8]
+                 Divide and conquer, predictable
+
+Quick Sort:      [5,3,8,4,2] → Pivot=4 → [3,2] [4] [5,8]
+                 → [2,3] [4] [5,8]
+                 Partition-based, fast average case
+```
+
+## Practical Tips
+
+1. **For JavaScript/TypeScript**: Use `Array.sort()` with a proper comparator
+2. **For learning**: Start with Bubble/Insertion, then Merge/Quick
+3. **For interviews**: Know all major algorithms and their trade-offs
+4. **For production**: Benchmark with your actual data - cache behavior matters
+5. **Consider data characteristics**: Nearly sorted? Lots of duplicates? Small or large?
+
+## Further Reading
+
+- [MDN: Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+- [V8 Blog: Timsort](https://v8.dev/blog/array-sort)
+- [VisuAlgo: Sorting Visualizations](https://visualgo.net/en/sorting)
+- [Big-O Cheat Sheet](https://www.bigocheatsheet.com/)
+
+<Disclaimer />

@@ -1,0 +1,165 @@
+---
+date: 2025-11-19
+title: Data Structures
+excerpt: "Data structures are specialized formats for organizing, processing, retrieving and storing data. Choosing the right one can significantly impact your application's performance and code readability."
+tags: [ 'TypeScript', 'Data Structures', 'Arrays', 'Objects', 'Maps', 'Sets' ]
+lastUpdated: 2025-11-19
+---
+import Disclaimer from '~/components/Disclaimer.astro';
+
+## Definition
+
+> In computer science, a data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.
+>
+> ~ Wikipedia
+
+{/* <!-- truncate --> */}
+
+## The concept
+
+As full-stack developers, we manipulate data constantly. Whether it's state management in a React component, processing API responses on the server, or optimizing database queries, the way we structure our data matters.
+
+Choosing the appropriate data structure isn't just about academic correctness; it's about writing code that is:
+1.  **Readable**: Intent is clear.
+2.  **Performant**: Operations like search, insertion, and deletion are optimized.
+3.  **Maintainable**: Easier to debug and extend.
+
+In the TypeScript/JavaScript ecosystem, we have several built-in structures at our disposal.
+
+## Common Structures
+
+### Arrays (Lists)
+
+The bread and butter of web development. Ordered collections of items.
+
+**Use case**: Rendering a list of components, managing a queue of notifications.
+
+```typescript
+// A simple todo list
+interface Todo {
+  id: number;
+  text: string;
+  done: boolean;
+}
+
+const todos: Todo[] = [
+  { id: 1, text: 'Learn TypeScript', done: true },
+  { id: 2, text: 'Master Data Structures', done: false },
+];
+
+// Iterating is cheap and easy
+todos.forEach(todo => console.log(todo.text));
+```
+
+### Objects (Hash Tables)
+
+Key-value pairs. Perfect for looking up values by a known key.
+
+**Use case**: Storing user profiles, configuration settings, or indexing data by ID for O(1) access.
+
+```typescript
+// Indexing users by ID for instant lookup
+const usersById: Record<string, { name: string; role: string }> = {
+  'u-123': { name: 'Alice', role: 'admin' },
+  'u-456': { name: 'Bob', role: 'editor' },
+};
+
+// Instant access without looping
+const alice = usersById['u-123'];
+```
+
+### Sets
+
+Collections of *unique* values.
+
+**Use case**: Managing selected filters, tracking visited URLs, ensuring no duplicate tags.
+
+```typescript
+// Managing selected tags in a filter component
+const selectedTags = new Set<string>();
+
+selectedTags.add('react');
+selectedTags.add('typescript');
+selectedTags.add('react'); // Duplicate is ignored!
+
+console.log(selectedTags.has('typescript')); // true
+console.log(selectedTags.size); // 2
+```
+
+### Maps
+
+Similar to Objects, but with some key differences: keys can be of any type (not just strings/symbols), maintains insertion order, and has a `size` property.
+
+**Use case**: Caching API responses where keys might be complex objects or when frequent additions/removals occur.
+
+```typescript
+// Simple in-memory cache
+const apiCache = new Map<string, any>();
+
+function getCachedData(url: string) {
+  if (apiCache.has(url)) {
+    return apiCache.get(url);
+  }
+  // ... fetch data ...
+}
+```
+
+### Stacks & Queues
+
+While not native classes in JS (usually implemented with Arrays), the *pattern* is vital.
+
+-   **Stack (LIFO)**: Last In, First Out. Think "Undo" functionality.
+-   **Queue (FIFO)**: First In, First Out. Think "Toast notifications" or background job processing.
+
+#### Usage with Arrays
+
+```typescript
+// Stack: Undo history
+const history: string[] = [];
+history.push('Type A');
+history.push('Type B');
+const lastAction = history.pop(); // 'Type B'
+
+// Queue: Task processing
+const taskQueue: string[] = [];
+taskQueue.push('Email User');
+taskQueue.push('Generate Report');
+const nextTask = taskQueue.shift(); // 'Email User'
+```
+
+#### Simple Class Implementation
+
+```typescript
+class Stack<T> {
+  private items: T[] = [];
+
+  push(item: T): void {
+    this.items.push(item);
+  }
+
+  pop(): T | undefined {
+    return this.items.pop();
+  }
+}
+
+class Queue<T> {
+  private items: T[] = [];
+
+  enqueue(item: T): void {
+    this.items.push(item);
+  }
+
+  dequeue(): T | undefined {
+    return this.items.shift();
+  }
+}
+```
+
+## Resources
+
+- Data Structures in JavaScript by
+  [freeCodeCamp](https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/) 
+- MDN Documentation on [Keyed
+  Collections](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections) 
+
+<Disclaimer />

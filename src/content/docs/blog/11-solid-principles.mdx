@@ -1,0 +1,189 @@
+---
+date: 2025-11-19
+title: SOLID Principles
+excerpt: "The SOLID principles are a set of five design principles intended to make software designs more understandable, flexible, and maintainable."
+tags: ['Architecture', 'Clean Code', 'SOLID', 'Design Patterns', 'TypeScript', 'Best Practices']
+lastUpdated: 2025-11-19
+---
+import Disclaimer from '../../../../components/Disclaimer.astro';
+
+## The concept
+
+The **SOLID** principles are a set of five design principles intended to make
+software designs more understandable, flexible, and maintainable.
+Promoted by Robert C. Martin (Uncle Bob), they can form a core philosophy
+for methodologies such as agile software development. 
+
+> SOLID is a mnemonic for five design principles intended to make software
+> designs more understandable, flexible, and maintainable. 
+>
+> ~ Wikipedia
+
+{/* <!-- truncate --> */}
+
+## The Principles
+
+### S - Single Responsibility Principle (SRP)
+
+A class (or function/component) should have only one reason to change.
+
+In a React context, avoid "God Components" that handle data fetching, complex
+logic, and UI rendering all at once.
+
+```tsx
+// ❌ Bad: Doing too much
+function UserProfile() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/user').then(r => r.json()).then(setUser);
+  }, []);
+
+  const handleLogin = () => { /* ... */ };
+
+  if (!user) return <Spinner />;
+
+  return (
+    <div className="card">
+      <h1>{user.name}</h1>
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  );
+}
+
+// ✅ Good: Separation of concerns
+// UserDataContainer handles fetching
+// UserCard handles UI
+function UserProfile() {
+  const { user, loading } = useUser(); // Custom hook for logic
+
+  if (loading) return <Spinner />;
+  return <UserCard user={user} />;
+}
+```
+
+### O - Open/Closed Principle (OCP)
+
+Software entities should be open for extension, but closed for modification.
+
+You should be able to add new functionality without changing existing code.
+
+```typescript
+// ❌ Bad: Modifying the function for every new role
+function getDashboardRoute(role: string) {
+  if (role === 'admin') return '/admin';
+  if (role === 'manager') return '/manager';
+  // Need to edit this file to add 'user'...
+  return '/';
+}
+
+// ✅ Good: Configuration object (Extension)
+const roleRoutes: Record<string, string> = {
+  admin: '/admin',
+  manager: '/manager',
+  user: '/dashboard',
+};
+
+function getDashboardRoute(role: string) {
+  return roleRoutes[role] || '/';
+}
+```
+
+### L - Liskov Substitution Principle (LSP)
+
+Objects of a superclass shall be replaceable with objects of its subclasses
+without breaking the application.
+
+If you have a generic `Database` class, swapping it for `PostgresDatabase` or
+`MongoDatabase` shouldn't crash your app if they implement the same interface.
+
+```typescript
+interface Storage {
+  save(data: string): void;
+}
+
+class LocalStorage implements Storage {
+  save(data: string) {
+    localStorage.setItem('key', data);
+  }
+}
+
+class CloudStorage implements Storage {
+  save(data: string) {
+    // ❌ Violation if this throws an error the parent doesn't expect
+    // or requires different parameters.
+    // But if it adheres to the contract, it's LSP compliant.
+    api.post('/save', { data });
+  }
+}
+```
+
+### I - Interface Segregation Principle (ISP)
+
+Clients should not be forced to depend upon interfaces that they do not use.
+
+Don't create massive interfaces. Break them down.
+
+```typescript
+// ❌ Bad: Forcing props that aren't needed
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  stripeId: string; // Not needed for a simple avatar
+  passwordHash: string;
+}
+
+function UserAvatar({ user }: { user: User }) {
+  return <img src={user.avatarUrl} />; // We only needed the URL!
+}
+
+// ✅ Good: Pick what you need
+interface AvatarProps {
+  avatarUrl: string;
+  name: string;
+}
+
+function UserAvatar({ avatarUrl, name }: AvatarProps) {
+  return <img src={avatarUrl} alt={name} />;
+}
+```
+
+### D - Dependency Inversion Principle (DIP)
+
+Depend upon abstractions, not concretions.
+
+High-level modules should not depend on low-level modules. Both should depend on
+abstractions.
+
+In a functional world, this often means passing dependencies as arguments
+(Dependency Injection) or using Higher Order Functions.
+
+```typescript
+// ❌ Bad: Hard dependency on a specific library (axios)
+const getUsers = () => {
+  return axios.get('/users');
+}
+
+// ✅ Good: Dependency Injection via Higher Order Function
+type HttpClient = (url: string) => Promise<unknown>;
+
+const createGetUsers = (httpClient: HttpClient) => () => {
+  return httpClient('/users');
+}
+
+// Usage
+const getUsers = createGetUsers(fetch);
+```
+
+## Resources
+
+- [Clean
+  Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
+  by Robert C. Martin 
+- Uncle Bob on [The Principles of
+  OOD](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod) 
+- DigitalOcean on [SOLID Principles in
+  TypeScript](https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design) 
+
+<Disclaimer />

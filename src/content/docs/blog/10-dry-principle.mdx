@@ -1,0 +1,139 @@
+---
+date: 2025-11-19
+title: The DRY Principle
+excerpt: Don't Repeat Yourself (DRY) - "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system"
+tags: ['Software Engineering', 'Best Practices', 'DRY', 'Refactoring', 'Web Development']
+lastUpdated: 2025-11-19
+---
+
+import Disclaimer from '~/components/Disclaimer.astro';
+
+## Definition
+
+> Every piece of knowledge must have a single, unambiguous, authoritative
+> representation within a system. 
+>
+> ~ in The Pragmatic Programmer by Andrew Hunt and David Thomas
+
+{/* <!-- truncate --> */}
+
+## The concept
+
+**DRY** stands for **Don't Repeat Yourself**. It is a fundamental principle of
+software development that aims to reduce repetition. 
+
+When you duplicate code, you create a maintenance burden. If the logic needs to
+change, you have to update it in multiple places. If you miss one, you introduce
+a bug. By keeping your code DRY, you ensure that a change in logic only needs to
+be made in one place. 
+
+However, DRY isn't just about code duplication. It's about knowledge
+duplication. If two pieces of code look different but represent the same
+business rule, they violate DRY. Conversely, if two pieces of code look
+identical but represent different concepts that just happen to coincide,
+combining them might be a mistake (often called "WET" - Write Everything Twice,
+or We Enjoy Typing). 
+
+### The Rule of Three
+
+A common rule of thumb is the **Rule of Three**: 
+> "Two instances of similar code is just a coincidence, but three is a pattern."
+
+It is often better to tolerate a little duplication than to create the wrong
+abstraction too early. 
+
+### Pitfalls: Incidental vs. Essential Duplication
+
+Be careful not to confuse **essential** duplication (same business logic) with
+**incidental** duplication (code that just happens to look the same). 
+
+If you combine two pieces of code that look similar but serve different business
+needs, you couple them. When one business need changes, you'll break the other.
+This is often worse than duplication. 
+
+## Examples
+
+### In JavaScript
+
+Refactoring repetitive logic into reusable functions.
+
+#### Bad
+
+```javascript
+const user1 = { firstName: 'John', lastName: 'Doe' };
+console.log(`Hello, ${user1.firstName} ${user1.lastName}!`);
+
+const user2 = { firstName: 'Jane', lastName: 'Smith' };
+console.log(`Hello, ${user2.firstName} ${user2.lastName}!`);
+```
+
+#### Good
+
+```javascript
+const getFullName = (user) => `${user.firstName} ${user.lastName}`;
+const greetUser = (user) => console.log(`Hello, ${getFullName(user)}!`);
+
+const user1 = { firstName: 'John', lastName: 'Doe' };
+const user2 = { firstName: 'Jane', lastName: 'Smith' };
+
+greetUser(user1);
+greetUser(user2);
+```
+
+### In CSS
+
+Instead of repeating the same color values throughout your
+stylesheets, use CSS variables (custom properties). 
+
+#### Bad
+
+```css
+.button-primary {
+  background-color: #007bff;
+}
+
+.link {
+  color: #007bff;
+}
+
+.card {
+  border: 1px solid #007bff;
+}
+```
+
+#### Good
+
+```css
+:root {
+  --primary-color: #007bff;
+}
+
+.button-primary {
+  background-color: var(--primary-color);
+}
+
+.link {
+  color: var(--primary-color);
+}
+
+.card {
+  border: 1px solid var(--primary-color);
+}
+```
+
+## A Note on Testing
+
+In testing, the DRY principle is often relaxed in favor of **DAMP** (Descriptive
+And Meaningful Phrases). Readable tests that clearly state their setup and
+expectations are often better than highly abstracted tests that are hard to
+debug, even if they contain some repetition. 
+
+## Resources
+
+- The Pragmatic Programmer
+  [Wikipedia](https://en.wikipedia.org/wiki/The_Pragmatic_Programmer) 
+- Don't Repeat Yourself
+  [Wikipedia](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+
+
+<Disclaimer />

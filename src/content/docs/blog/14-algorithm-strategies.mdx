@@ -1,0 +1,270 @@
+---
+date: 2025-11-19
+title: Algorithm Strategies
+excerpt: A deep dive into common algorithm strategies like Divide and Conquer, Sliding Window, and Two Pointers, tailored for the modern TypeScript developer.
+tags: ['Algorithms', 'TypeScript', 'Strategies', 'Optimization', 'Problem Solving']
+lastUpdated: 2025-11-19
+---
+
+import Disclaimer from '~/components/Disclaimer.astro';
+
+## Definition
+
+> An algorithm strategy is a general approach to solving a class of problems. It is a recipe for designing algorithms, not a specific algorithm itself.
+>
+> ~ Introduction to Algorithms
+
+{/* <!-- truncate --> */}
+
+## The concept
+
+As full-stack developers, we often rely on highly optimized libraries (like Lodash or React's reconciliation engine) to do the heavy lifting. However, understanding the underlying strategies can help us write more efficient code, debug performance bottlenecks, and solve complex problems when `npm install` isn't the answer.
+
+Choosing the right strategy can turn a sluggish $O(n^2)$ operation into a snappy $O(n \log n)$ or even $O(n)$ solution. 🚀
+
+Here are three fundamental strategies that every TypeScript developer should have in their toolkit.
+
+## Strategies
+
+### 1. Frequency Counter
+
+**The Mantra:** Use an object or set to collect frequencies of values. This often allows you to avoid nested loops ($O(n^2)$) in favor of linear time ($O(n)$).
+
+This is perfect for comparing data sets, finding duplicates, or checking if two strings are anagrams.
+
+#### Example: Anagram Checker
+
+Check if two strings contain the exact same characters with the same frequency.
+
+```typescript
+function areAnagrams(str1: string, str2: string): boolean {
+  if (str1.length !== str2.length) return false;
+
+  const lookup: Record<string, number> = {};
+
+  for (const char of str1) {
+    lookup[char] = (lookup[char] || 0) + 1;
+  }
+
+  for (const char of str2) {
+    if (!lookup[char]) {
+      return false;
+    }
+    lookup[char] -= 1;
+  }
+
+  return true;
+}
+```
+
+### 2. Two Pointers
+
+**The Mantra:** Use two distinct indices to traverse the data structure, often moving towards each other or in the same direction at different speeds.
+
+Great for searching pairs in sorted arrays or detecting cycles (like in a linked list).
+
+#### Example: E-commerce Budget Matcher
+
+Find two products in a sorted list that sum up exactly to a customer's gift card balance.
+
+```typescript
+function findProductPair(prices: number[], budget: number): [number, number] | null {
+  let left = 0;
+  let right = prices.length - 1;
+
+  while (left < right) {
+    const sum = prices[left] + prices[right];
+
+    if (sum === budget) {
+      return [prices[left], prices[right]];
+    } else if (sum < budget) {
+      // Need a larger sum, move left pointer up
+      left++;
+    } else {
+      // Need a smaller sum, move right pointer down
+      right--;
+    }
+  }
+
+  return null;
+}
+```
+
+### 3. Sliding Window
+
+**The Mantra:** Maintain a subset of data (a window) that slides over the input to calculate a continuous result.
+
+This is incredibly useful for data analysis, rate limiting, or string manipulation problems where you need to look at a contiguous sub-array.
+
+#### Example: Traffic Analysis
+
+Calculate the maximum number of requests in any `k` consecutive minutes.
+
+```typescript
+function maxRequestsInWindow(traffic: number[], k: number): number {
+  if (traffic.length < k) return 0;
+
+  let maxSum = 0;
+  let windowSum = 0;
+
+  // Calculate first window
+  for (let i = 0; i < k; i++) {
+    windowSum += traffic[i];
+  }
+  maxSum = windowSum;
+
+  // Slide the window
+  for (let i = k; i < traffic.length; i++) {
+    // Add the new element, remove the oldest element
+    windowSum = windowSum + traffic[i] - traffic[i - k];
+    maxSum = Math.max(maxSum, windowSum);
+  }
+
+  return maxSum;
+}
+```
+
+### 4. Divide and Conquer
+
+**The Mantra:** Divide the problem into smaller sub-problems, solve them recursively, and combine the results.
+
+This is the backbone of efficient sorting (Merge Sort, Quick Sort) and searching.
+
+#### Example: Binary Search
+
+Imagine you have a sorted array of user logs by timestamp, and you need to find a specific entry. A linear scan is $O(n)$, but binary search is $O(\log n)$.
+
+```typescript
+interface Log {
+  id: string;
+  timestamp: number;
+  message: string;
+}
+
+function findLogByTimestamp(logs: Log[], target: number): Log | undefined {
+  let left = 0;
+  let right = logs.length - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const current = logs[mid];
+
+    if (current.timestamp === target) {
+      return current;
+    } else if (current.timestamp < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return undefined;
+}
+```
+
+### 5. Greedy Algorithm
+
+**The Mantra:** Make the locally optimal choice at each stage with the hope of finding a global optimum.
+
+Greedy algorithms are fast and often used in optimization problems like scheduling, routing, or resource allocation.
+
+#### Example: Meeting Scheduler
+
+Given a list of meetings with start and end times, find the maximum number of meetings you can attend (assuming you can't be in two places at once).
+
+```typescript
+interface Meeting {
+  start: number;
+  end: number;
+}
+
+function maxMeetings(meetings: Meeting[]): number {
+  // Sort by end time to finish meetings as early as possible
+  // This leaves more room for subsequent meetings
+  meetings.sort((a, b) => a.end - b.end);
+
+  let count = 0;
+  let lastEndTime = -1;
+
+  for (const meeting of meetings) {
+    if (meeting.start >= lastEndTime) {
+      count++;
+      lastEndTime = meeting.end;
+    }
+  }
+
+  return count;
+}
+```
+
+### 6. Backtracking
+
+**The Mantra:** Explore all potential solutions incrementally and abandon ("backtrack") a candidate as soon as it determines that the candidate cannot possibly be completed to a valid solution.
+
+This is used for generating permutations, combinations, solving puzzles (Sudoku), or pathfinding.
+
+#### Example: Feature Toggles Combinations (Subsets)
+
+Generate all possible combinations of feature flags to test different states of your application.
+
+```typescript
+function getAllSubsets(features: string[]): string[][] {
+  const result: string[][] = [];
+  const subset: string[] = [];
+
+  function dfs(i: number) {
+    if (i >= features.length) {
+      result.push([...subset]);
+      return;
+    }
+
+    // Decision 1: Include the feature
+    subset.push(features[i]);
+    dfs(i + 1);
+
+    // Decision 2: Exclude the feature (backtrack)
+    subset.pop();
+    dfs(i + 1);
+  }
+
+  dfs(0);
+  return result;
+}
+
+// Usage: getAllSubsets(['darkMode', 'betaUI', 'newFeed'])
+```
+
+### 7. Dynamic Programming
+
+**The Mantra:** Break complex problems into simpler subproblems and store their results (memoization or tabulation) to avoid redundant computations.
+
+It's essentially "recursion with caching".
+
+#### Example: Climbing Stairs
+
+You are climbing a staircase. It takes `n` steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+```typescript
+function climbStairs(n: number): number {
+  if (n <= 2) return n;
+
+  // Tabulation approach (Bottom-Up)
+  const dp: number[] = new Array(n + 1);
+  dp[1] = 1;
+  dp[2] = 2;
+
+  for (let i = 3; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+
+  return dp[n];
+}
+```
+
+## Resources
+
+- Algorithms and Data Structures in TypeScript by [Oleksii Trekhleb](https://github.com/trekhleb/javascript-algorithms)
+- Grokking Algorithms (Book)
+- LeetCode Patterns - [Sliding Window](https://leetcode.com/tag/sliding-window/)
+
+<Disclaimer />

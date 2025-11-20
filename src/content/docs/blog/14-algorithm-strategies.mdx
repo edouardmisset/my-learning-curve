@@ -6,7 +6,8 @@ tags: ['Algorithms', 'TypeScript', 'Strategies', 'Optimization', 'Problem Solvin
 lastUpdated: 2025-11-19
 ---
 
-import Disclaimer from '~/components/Disclaimer.astro';
+import Disclaimer from '~/components/Disclaimer.astro'
+import { Aside } from '@astrojs/starlight/components'
 
 ## Definition
 
@@ -19,28 +20,26 @@ import Disclaimer from '~/components/Disclaimer.astro';
 
 ## The concept
 
-As full-stack developers, we often rely on highly optimized libraries (like
-Lodash or React's reconciliation engine) to do the heavy lifting. However,
-understanding the underlying strategies can help us write more efficient code,
-debug performance bottlenecks, and solve complex problems when `npm install`
-isn't the answer. 
+We often rely on highly optimized libraries (like Lodash or React's
+reconciliation engine) to do the heavy lifting. However, understanding the
+underlying strategies can help us write more efficient code, debug performance
+bottlenecks, and solve complex problems.
 
-Choosing the right strategy can turn a sluggish $O(n^2)$ operation into a snappy
-$O(n \log n)$ or even $O(n)$ solution. 🚀 
+Choosing the right strategy can turn a sluggish O(n^2) operation into a snappy
+O(n \log n) or even O(n) solution. 🚀 
 
-Here are three fundamental strategies that every TypeScript developer should
-have in their toolkit. 
+Here are *7* strategies that every developer should have in their toolkit. 
 
 ## Strategies
 
 ### 1. Frequency Counter
 
-**The Mantra:** Use an object or set to collect frequencies of values. This
-often allows you to avoid nested loops ($O(n^2)$) in favor of linear time
-($O(n)$). 
+**The Gist:** Use an object or set to collect frequencies of values. This
+often allows you to avoid nested loops (O(n^2)) in favor of linear time
+(O(n)). 
 
-This is perfect for comparing data sets, finding duplicates, or checking if two
-strings are anagrams. 
+This is perfect for comparing data sets, finding duplicates, checking if two
+strings are anagrams, counting, averaging, finding min or max values. 
 
 #### Example: Anagram Checker
 
@@ -69,7 +68,7 @@ function areAnagrams(str1: string, str2: string): boolean {
 
 ### 2. Two Pointers
 
-**The Mantra:** Use two distinct indices to traverse the data structure, often
+**The Gist:** Use two distinct indices to traverse the data structure, often
 moving towards each other or in the same direction at different speeds. 
 
 Great for searching pairs in sorted arrays or detecting cycles (like in a linked
@@ -105,34 +104,24 @@ function findProductPair(prices: number[], budget: number): [number, number] | n
 
 ### 3. Sliding Window
 
-**The Mantra:** Maintain a subset of data (a window) that slides over the input
+**The Gist:** Maintain a subset of data (a window) that slides over the input
 to calculate a continuous result. 
 
-This is incredibly useful for data analysis, rate limiting, or string
+This is very useful for data analysis, rate limiting, or string
 manipulation problems where you need to look at a contiguous sub-array. 
 
-#### Example: Traffic Analysis
+#### Example: Maximum Sum Subarray (Kadane's Algorithm)
 
-Calculate the maximum number of requests in any `k` consecutive minutes.
+Find the maximum sum of any contiguous subarray in an array of numbers.
 
 ```typescript
-function maxRequestsInWindow(traffic: number[], k: number): number {
-  if (traffic.length < k) return 0;
+function maxSubArray(nums: number[]): number {
+  let maxSum = nums[0];
+  let currentSum = nums[0];
 
-  let maxSum = 0;
-  let windowSum = 0;
-
-  // Calculate first window
-  for (let i = 0; i < k; i++) {
-    windowSum += traffic[i];
-  }
-  maxSum = windowSum;
-
-  // Slide the window
-  for (let i = k; i < traffic.length; i++) {
-    // Add the new element, remove the oldest element
-    windowSum = windowSum + traffic[i] - traffic[i - k];
-    maxSum = Math.max(maxSum, windowSum);
+  for (let i = 1; i < nums.length; i++) {
+    currentSum = Math.max(nums[i], currentSum + nums[i]);
+    maxSum = Math.max(maxSum, currentSum);
   }
 
   return maxSum;
@@ -141,16 +130,17 @@ function maxRequestsInWindow(traffic: number[], k: number): number {
 
 ### 4. Divide and Conquer
 
-**The Mantra:** Divide the problem into smaller sub-problems, solve them
+**The Gist:** Divide the problem into smaller sub-problems, solve them
 recursively, and combine the results. 
 
-This is the backbone of efficient sorting (Merge Sort, Quick Sort) and
-searching. 
+<Aside type="note">
+This is the backbone of efficient sorting (Merge Sort, Quick Sort) and searching. 
+</Aside>
 
 #### Example: Binary Search
 
 Imagine you have a sorted array of user logs by timestamp, and you need to find
-a specific entry. A linear scan is $O(n)$, but binary search is $O(\log n)$. 
+a specific entry. A linear scan is O(n), but binary search is O(log n). 
 
 ```typescript
 interface Log {
@@ -159,6 +149,7 @@ interface Log {
   message: string;
 }
 
+// NB: Assumes logs are sorted by timestamp
 function findLogByTimestamp(logs: Log[], target: number): Log | undefined {
   let left = 0;
   let right = logs.length - 1;
@@ -182,7 +173,7 @@ function findLogByTimestamp(logs: Log[], target: number): Log | undefined {
 
 ### 5. Greedy Algorithm
 
-**The Mantra:** Make the locally optimal choice at each stage with the hope of
+**The Gist:** Make the locally optimal choice at each stage with the hope of
 finding a global optimum. 
 
 Greedy algorithms are fast and often used in optimization problems like
@@ -220,7 +211,7 @@ function maxMeetings(meetings: Meeting[]): number {
 
 ### 6. Backtracking
 
-**The Mantra:** Explore all potential solutions incrementally and abandon
+**The Gist:** Explore all potential solutions incrementally and abandon
 ("backtrack") a candidate as soon as it determines that the candidate cannot
 possibly be completed to a valid solution. 
 
@@ -261,7 +252,7 @@ function getAllSubsets(features: string[]): string[][] {
 
 ### 7. Dynamic Programming
 
-**The Mantra:** Break complex problems into simpler subproblems and store their
+**The Gist:** Break complex problems into simpler subproblems and store their
 results (memoization or tabulation) to avoid redundant computations. 
 
 It's essentially "recursion with caching".

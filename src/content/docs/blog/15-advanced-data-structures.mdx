@@ -7,7 +7,7 @@ lastUpdated: 2025-11-20
 ---
 import Disclaimer from '~/components/Disclaimer.astro';
 
-## The concept
+## Introduction
 
 While [Arrays and Objects](../14-data-structures) handle 90% of needs,
 understanding advanced structures unlocks the ability to solve more complex
@@ -15,16 +15,15 @@ problems.
 
 {/* <!-- truncate --> */}
 
-### Stacks & Queues
+## Stacks & Queues
 
-While not native classes in JS (usually implemented with Arrays), the *pattern*
-is extremely useful. 
+While not native classes in JS (usually implemented with Arrays), these *patterns*
+are extremely useful. 
 
 - **Stack (LIFO)**: Last In, First Out. Think "Undo" functionality.
-- **Queue (FIFO)**: First In, First Out. Think "Toast notifications" or
-  background job processing. 
+- **Queue (FIFO)**: First In, First Out. Think background job processing. 
 
-#### Usage with Arrays
+### Usage with Arrays
 
 ```typescript
 // Stack: Undo history
@@ -40,16 +39,18 @@ taskQueue.push('Generate Report');
 const nextTask = taskQueue.shift(); // 'Email User'
 ```
 
-#### Simple Class Implementation
+### Simple Class Implementation
 
 ```typescript
 class Stack<T> {
   private items: T[] = [];
 
+  /** Add item on top of the stack */
   push(item: T): void {
     this.items.push(item);
   }
 
+  /** Remove and return the top item from the stack */
   pop(): T | undefined {
     return this.items.pop();
   }
@@ -58,10 +59,12 @@ class Stack<T> {
 class Queue<T> {
   private items: T[] = [];
 
+  /** Add item to the end of the queue */
   enqueue(item: T): void {
     this.items.push(item);
   }
 
+  /** Remove and return the item at the front of the queue */
   dequeue(): T | undefined {
     return this.items.shift();
   }
@@ -93,7 +96,7 @@ class ListNode<T> {
 class LinkedList<T> {
   head: ListNode<T> | null = null;
 
-  // O(1) insertion at the start
+  /** O(1) insertion at the start */
   prepend(value: T): void {
     const newNode = new ListNode(value);
     newNode.next = this.head;
@@ -112,8 +115,7 @@ list.prepend('First');
 
 Each node has pointers to both the **next** and **previous** nodes.
 
-**Use Case**: Browser history (Back/Forward buttons), or a music playlist
-player. 
+**Use Case**: Browser history (Back/Forward buttons), or a music playlist.
 
 ```typescript
 class DoublyNode<T> {
@@ -130,7 +132,7 @@ class DoublyLinkedList<T> {
   head: DoublyNode<T> | null = null;
   tail: DoublyNode<T> | null = null;
 
-  // O(1) insertion at the end
+  /** O(1) insertion at the end */
   append(value: T): void {
     const newNode = new DoublyNode(value);
     if (!this.tail) {
@@ -142,7 +144,7 @@ class DoublyLinkedList<T> {
     }
   }
 
-  // O(1) insertion at the start
+  /** O(1) insertion at the start */
   prepend(value: T): void {
     const newNode = new DoublyNode(value);
     if (!this.head) {
@@ -154,7 +156,7 @@ class DoublyLinkedList<T> {
     }
   }
 
-  // O(1) deletion from the end
+  /** O(1) deletion from the end */
   removeLast(): T | null {
     if (!this.tail) return null;
     const value = this.tail.value;
@@ -167,7 +169,7 @@ class DoublyLinkedList<T> {
     return value;
   }
 
-  // O(1) deletion from the start
+  /** O(1) deletion from the start */
   removeFirst(): T | null {
     if (!this.head) return null;
     const value = this.head.value;

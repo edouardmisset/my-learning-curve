@@ -1,18 +1,17 @@
 ---
-date: 2025-11-19
+date: 2025-11-20
 title: Data Structures
 excerpt: "Data structures are specialized formats for organizing, processing, retrieving and storing data. Choosing the right one can significantly impact your application's performance and code readability."
 tags: [ 'TypeScript', 'Data Structures', 'Arrays', 'Objects', 'Maps', 'Sets' ]
-lastUpdated: 2025-11-19
+lastUpdated: 2025-11-20
 ---
 import Disclaimer from '~/components/Disclaimer.astro'
 import { Aside } from '@astrojs/starlight/components'
 
-
 ## Definition
 
-> In computer science, a data structure is a data organization, management, and
-> storage format that is usually chosen for efficient access to data. 
+> Data structure is a data organization and storage format that is usually
+> chosen for efficient access to data.
 >
 > ~ Wikipedia
 
@@ -20,27 +19,26 @@ import { Aside } from '@astrojs/starlight/components'
 
 ## The concept
 
-As full-stack developers, we manipulate data constantly. Whether it's state
+As developers, we manipulate data constantly. Whether it's state
 management in a React component, processing API responses on the server, or
 optimizing database queries, the way we structure our data matters. 
 
-Choosing the appropriate data structure isn't just about academic correctness;
-it's about writing code that is: 
-1.  **Readable**: Intent is clear.
-2.  **Performant**: Operations like search, insertion, and deletion are
-    optimized. 
-3.  **Maintainable**: Easier to debug and extend.
+Choosing the appropriate data structure is about writing code that is: 
+1. **Readable**: Intent is clear.
+2. **Performant**: Operations like search, insertion, and deletion are
+   optimized.
+3. **Maintainable**: Easy to debug and extend.
 
 In the TypeScript/JavaScript ecosystem, we have several built-in structures at
 our disposal. 
 
-## Common Structures
+## JS Built-in Data Structures
 
 ### Arrays (Lists)
 
 **Ordered** collections of items.
 
-**Use case**: Rendering a list of components, managing a queue of notifications.
+**Use case**: Rendering a list of components.
 
 ```typescript
 // A simple todo list
@@ -112,7 +110,9 @@ function getCachedData(url: string) {
   if (apiCache.has(url)) {
     return apiCache.get(url);
   }
-  // ... fetch data ...
+  const data = fetch(url); // Assume this function fetches data
+  apiCache.set(url, data);
+  return data;
 }
 ```
 
@@ -124,6 +124,8 @@ function getCachedData(url: string) {
   other primitive value. 
 - Use objects when there is logic that operates on individual elements.
 </Aside>
+
+## (Less Common / More specific) JS Built-in Data Structures
 
 ### WeakMaps
 
@@ -193,6 +195,7 @@ Both the key equality of Map objects and the value equality of Set objects are b
 
 ## Resources
 
+- [Wikipedia](https://en.wikipedia.org/wiki/Data_structure) article on Data Structures
 - Data Structures in JavaScript by
   [freeCodeCamp](https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/) 
 - MDN Documentation on [Keyed

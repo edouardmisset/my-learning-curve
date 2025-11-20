@@ -1,9 +1,9 @@
 ---
-date: 2025-11-19
+date: 2025-11-20
 title: Algorithm Strategies
 excerpt: A deep dive into common algorithm strategies like Divide and Conquer, Sliding Window, and Two Pointers, tailored for the modern TypeScript developer.
 tags: ['Algorithms', 'TypeScript', 'Strategies', 'Optimization', 'Problem Solving']
-lastUpdated: 2025-11-19
+lastUpdated: 2025-11-20
 ---
 
 import Disclaimer from '~/components/Disclaimer.astro'
@@ -11,10 +11,10 @@ import { Aside } from '@astrojs/starlight/components'
 
 ## Definition
 
-> An algorithm strategy is a general approach to solving a class of problems. It
-> is a recipe for designing algorithms, not a specific algorithm itself. 
+> An algorithm is a finite sequence of instructions, typically used to solve a
+> class of specific problems or to perform a computation. 
 >
-> ~ Introduction to Algorithms
+> ~ Wikipedia
 
 {/* <!-- truncate --> */}
 
@@ -26,7 +26,7 @@ underlying strategies can help us write more efficient code, debug performance
 bottlenecks, and solve complex problems.
 
 Choosing the right strategy can turn a sluggish O(n^2) operation into a snappy
-O(n \log n) or even O(n) solution. 🚀 
+O(n) or even O(log n) solution. 🚀 
 
 Here are *7* strategies that every developer should have in their toolkit. 
 
@@ -199,7 +199,7 @@ function maxMeetings(meetings: Meeting[]): number {
   let lastEndTime = -1;
 
   for (const meeting of meetings) {
-    if (meeting.start >= lastEndTime) {
+    if (lastEndTime <= meeting.start) {
       count++;
       lastEndTime = meeting.end;
     }
@@ -213,7 +213,8 @@ function maxMeetings(meetings: Meeting[]): number {
 
 **The Gist:** Explore all potential solutions incrementally and abandon
 ("backtrack") a candidate as soon as it determines that the candidate cannot
-possibly be completed to a valid solution. 
+possibly be completed to a valid solution. One way to think about it is like
+trying to solve a maze.
 
 This is used for generating permutations, combinations, solving puzzles
 (Sudoku), or pathfinding. 
@@ -224,12 +225,13 @@ Generate all possible combinations of feature flags to test different states of
 your application. 
 
 ```typescript
+// Power Set: Generate all subsets of a set of features using backtracking
 function getAllSubsets(features: string[]): string[][] {
   const result: string[][] = [];
   const subset: string[] = [];
 
   function dfs(i: number) {
-    if (i >= features.length) {
+    if (features.length <= i) {
       result.push([...subset]);
       return;
     }
@@ -264,27 +266,33 @@ can either climb 1 or 2 steps. In how many distinct ways can you climb to the
 top? 
 
 ```typescript
-function climbStairs(n: number): number {
-  if (n <= 2) return n;
+function climbStairs(stairs: number): number {
+  if (stairs <= 2) return stairs
 
   // Tabulation approach (Bottom-Up)
-  const dp: number[] = new Array(n + 1);
-  dp[1] = 1;
-  dp[2] = 2;
+  const array: number[] = new Array(stairs + 1)
+  array[1] = 1
+  array[2] = 2
 
-  for (let i = 3; i <= n; i++) {
-    dp[i] = dp[i - 1] + dp[i - 2];
+  for (let i = 3; i <= stairs; i++) {
+    array[i] = array[i - 1] + array[i - 2]
   }
 
-  return dp[n];
+  return array[stairs]
 }
 ```
 
 ## Resources
 
+- [Introduction to
+  Algorithms](https://mitpress.ublish.com/ebook/introduction-to-algorithms-4-preview/12675/5)
+  by Cormen, Leiserson, Rivest, and Stein
+- [GeeksForGeeks](https://www.geeksforgeeks.org/dsa/algorithms-design-techniques/)
+  on Algorithm Design
 - Algorithms and Data Structures in TypeScript by [Oleksii
   Trekhleb](https://github.com/trekhleb/javascript-algorithms) 
-- Grokking Algorithms (Book)
-- LeetCode Patterns - [Sliding Window](https://leetcode.com/tag/sliding-window/)
+- [GeeksForGeeks](https://www.geeksforgeeks.org/dsa/greedy-algorithms/) on Greedy Algorithms
+- [GeeksForGeeks](https://www.geeksforgeeks.org/dsa/backtracking-algorithms/) on Backtracking Algorithms
+- [GeeksForGeeks](https://www.geeksforgeeks.org/competitive-programming/dynamic-programming/) on Dynamic Programming
 
 <Disclaimer />

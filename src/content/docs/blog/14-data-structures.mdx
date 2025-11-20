@@ -5,11 +5,14 @@ excerpt: "Data structures are specialized formats for organizing, processing, re
 tags: [ 'TypeScript', 'Data Structures', 'Arrays', 'Objects', 'Maps', 'Sets' ]
 lastUpdated: 2025-11-19
 ---
-import Disclaimer from '~/components/Disclaimer.astro';
+import Disclaimer from '~/components/Disclaimer.astro'
+import { Aside } from '@astrojs/starlight/components'
+
 
 ## Definition
 
-> In computer science, a data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.
+> In computer science, a data structure is a data organization, management, and
+> storage format that is usually chosen for efficient access to data. 
 >
 > ~ Wikipedia
 
@@ -17,20 +20,25 @@ import Disclaimer from '~/components/Disclaimer.astro';
 
 ## The concept
 
-As full-stack developers, we manipulate data constantly. Whether it's state management in a React component, processing API responses on the server, or optimizing database queries, the way we structure our data matters.
+As full-stack developers, we manipulate data constantly. Whether it's state
+management in a React component, processing API responses on the server, or
+optimizing database queries, the way we structure our data matters. 
 
-Choosing the appropriate data structure isn't just about academic correctness; it's about writing code that is:
+Choosing the appropriate data structure isn't just about academic correctness;
+it's about writing code that is: 
 1.  **Readable**: Intent is clear.
-2.  **Performant**: Operations like search, insertion, and deletion are optimized.
+2.  **Performant**: Operations like search, insertion, and deletion are
+    optimized. 
 3.  **Maintainable**: Easier to debug and extend.
 
-In the TypeScript/JavaScript ecosystem, we have several built-in structures at our disposal.
+In the TypeScript/JavaScript ecosystem, we have several built-in structures at
+our disposal. 
 
 ## Common Structures
 
 ### Arrays (Lists)
 
-The bread and butter of web development. Ordered collections of items.
+**Ordered** collections of items.
 
 **Use case**: Rendering a list of components, managing a queue of notifications.
 
@@ -55,7 +63,8 @@ todos.forEach(todo => console.log(todo.text));
 
 Key-value pairs. Perfect for looking up values by a known key.
 
-**Use case**: Storing user profiles, configuration settings, or indexing data by ID for O(1) access.
+**Use case**: Storing user profiles, configuration settings, or indexing data by
+ID for O(1) access. 
 
 ```typescript
 // Indexing users by ID for instant lookup
@@ -72,7 +81,8 @@ const alice = usersById['u-123'];
 
 Collections of *unique* values.
 
-**Use case**: Managing selected filters, tracking visited URLs, ensuring no duplicate tags.
+**Use case**: Managing selected filters, tracking visited URLs, ensuring no
+duplicate tags. 
 
 ```typescript
 // Managing selected tags in a filter component
@@ -88,9 +98,11 @@ console.log(selectedTags.size); // 2
 
 ### Maps
 
-Similar to Objects, but with some key differences: keys can be of any type (not just strings/symbols), maintains insertion order, and has a `size` property.
+Similar to Objects, but with some key differences: keys can be of any type (not
+just strings/symbols), maintains insertion order, and has a `size` property. 
 
-**Use case**: Caching API responses where keys might be complex objects or when frequent additions/removals occur.
+**Use case**: Caching API responses where keys might be complex objects or when
+frequent additions/removals occur. 
 
 ```typescript
 // Simple in-memory cache
@@ -104,56 +116,80 @@ function getCachedData(url: string) {
 }
 ```
 
-### Stacks & Queues
+<Aside type="tip" title="When to use Maps vs Objects">
+- Use maps over objects when keys are unknown until run time, and when all keys
+  are the same type and all values are the same type. 
+- Use maps if there is a need to store primitive values as keys because object
+  treats each key as a string whether it's a number value, boolean value or any
+  other primitive value. 
+- Use objects when there is logic that operates on individual elements.
+</Aside>
 
-While not native classes in JS (usually implemented with Arrays), the *pattern* is vital.
+### WeakMaps
 
--   **Stack (LIFO)**: Last In, First Out. Think "Undo" functionality.
--   **Queue (FIFO)**: First In, First Out. Think "Toast notifications" or background job processing.
+A `WeakMap` is like a `Map`, but with key differences: keys *must* be objects
+(not primitives), and the references are "weak" — meaning if there are no other
+references to the key object, it can be garbage collected.
 
-#### Usage with Arrays
-
-```typescript
-// Stack: Undo history
-const history: string[] = [];
-history.push('Type A');
-history.push('Type B');
-const lastAction = history.pop(); // 'Type B'
-
-// Queue: Task processing
-const taskQueue: string[] = [];
-taskQueue.push('Email User');
-taskQueue.push('Generate Report');
-const nextTask = taskQueue.shift(); // 'Email User'
-```
-
-#### Simple Class Implementation
+**Use case**: Storing private data for objects, caching computed values without
+preventing garbage collection, or associating metadata with DOM nodes.
 
 ```typescript
-class Stack<T> {
-  private items: T[] = [];
+// Storing private data without memory leaks
+const privateData = new WeakMap<object, { secret: string }>();
 
-  push(item: T): void {
-    this.items.push(item);
-  }
+// Factory function to create users
+const createUser = (name: string, secret: string) => {
+  const user = { name };
+  privateData.set(user, { secret });
+  return user;
+};
 
-  pop(): T | undefined {
-    return this.items.pop();
-  }
-}
+// Pure function to retrieve secret
+const getSecret = (user: object) => privateData.get(user)?.secret;
 
-class Queue<T> {
-  private items: T[] = [];
+// Usage
+const alice = createUser('Alice', 'my-secret');
+console.log(getSecret(alice)); // 'my-secret'
 
-  enqueue(item: T): void {
-    this.items.push(item);
-  }
-
-  dequeue(): T | undefined {
-    return this.items.shift();
-  }
-}
+// When alice is no longer referenced, 
+// its entry in privateData is automatically cleaned up
 ```
+
+### WeakSets
+
+A `WeakSet` is similar to a `Set`, but only holds *objects* (not primitives) and
+the references are "weak" — objects can be garbage collected if there are no
+other references to them. Unlike `Set`, you can't iterate over a `WeakSet` or
+get its size.
+
+**Use case**: Tracking objects without preventing garbage collection, marking
+objects as processed, or managing object-based flags.
+
+```typescript
+// Tracking which DOM nodes have been initialized
+const initializedNodes = new WeakSet<HTMLElement>();
+
+function initializeElement(element: HTMLElement) {
+  if (initializedNodes.has(element)) {
+    return; // Already initialized
+  }
+  
+  // ... perform initialization ...
+  initializedNodes.add(element);
+}
+
+// When the element is removed from DOM and no longer referenced,
+// it's automatically removed from the WeakSet
+```
+
+<Aside type="caution" title="Key and value equality of Map and Set">
+Both the key equality of Map objects and the value equality of Set objects are based on the **SameValueZero** algorithm:
+
+- Equality works like the identity comparison operator ===.
+- -0 and +0 are considered equal.
+- `NaN` is considered equal to itself (contrary to ===).
+</Aside>
 
 ## Resources
 

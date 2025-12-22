@@ -30,7 +30,7 @@ Ember includes all of these out of the box:
 
 Modern React is heavily functional (Hooks, Functional Components). Ember has embraced modern JavaScript classes and decorators. If you are familiar with **Object-Oriented Programming**, you will feel right at home.
 
-> See the article on [Object-Oriented Programming](./15-oop.mdx) for a refresher on classes and inheritance, which are fundamental to Ember's architecture.
+> See the article on [Object-Oriented Programming](/my-learning-curve/blog/15-oop) for a refresher on classes and inheritance, which are fundamental to Ember's architecture.
 
 ### 3. Reactivity: Virtual DOM vs. Tracked Properties
 
@@ -38,7 +38,7 @@ React uses the Virtual DOM and re-renders components when state changes (`useSta
 
 Ember uses **Tracked Properties** (Glimmer VM). You annotate a class property with `@tracked`, and when it changes, only the parts of the DOM that depend on it update. It's more akin to "fine-grained reactivity" (like Signals) than VDOM diffing.
 
-> See [Memoization](./04-memoization.mdx) for how React handles derived state.
+> See [Memoization](/my-learning-curve/blog/04-memoization) for how React handles derived state.
 > In Ember, you simply use a standard JavaScript `get` accessor, and it
 > auto-tracks dependencies! 
 

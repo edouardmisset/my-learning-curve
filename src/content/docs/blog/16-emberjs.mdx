@@ -1,0 +1,195 @@
+---
+date: 2025-12-22
+title: Ember.js for React Developers
+excerpt: A guide to switching mental models from React to Ember.js, highlighting differences and gotchas.
+tags: ['Ember.js', 'React', 'TypeScript', 'Frameworks', 'Comparison']
+lastUpdated: 2025-12-22
+---
+
+import Disclaimer from '../../../components/Disclaimer.astro';
+
+## Introduction
+
+As a React developer, you're used to thinking in terms of functions, hooks, and a "view-library" approach where you pick your own tools for routing and state management. **Ember.js**, on the other hand, is a full-featured framework that follows the "Convention over Configuration" philosophy.
+
+While React gives you a box of Lego bricks to build your castle, Ember gives you the castle blueprint and the pre-assembled walls, asking you to decorate the rooms.
+
+## The Mental Model Shift
+
+### 1. Library vs. Framework
+
+React focuses primarily on the View layer. You likely use libraries like `react-router` for routing, `tanstack-query` for data fetching, and `redux` or `zustand` for global state.
+
+Ember includes all of these out of the box:
+- **Router**: First-class citizen, determines the state of your application.
+- **Ember Data**: A robust data layer (similar to an ORM on the client).
+- **Services**: Singletons for global state (Dependency Injection).
+- **CLI**: A powerful command-line interface for generating code.
+
+### 2. Functional vs. Object-Oriented
+
+Modern React is heavily functional (Hooks, Functional Components). Ember has embraced modern JavaScript classes and decorators. If you are familiar with **Object-Oriented Programming**, you will feel right at home.
+
+> See the article on [Object-Oriented Programming](./15-oop.mdx) for a refresher on classes and inheritance, which are fundamental to Ember's architecture.
+
+### 3. Reactivity: Virtual DOM vs. Tracked Properties
+
+React uses the Virtual DOM and re-renders components when state changes (`useState`). You often need to worry about dependency arrays in `useEffect` or `useMemo`.
+
+Ember uses **Tracked Properties** (Glimmer VM). You annotate a class property with `@tracked`, and when it changes, only the parts of the DOM that depend on it update. It's more akin to "fine-grained reactivity" (like Signals) than VDOM diffing.
+
+> See [Memoization](./04-memoization.mdx) for how React handles derived state.
+> In Ember, you simply use a standard JavaScript `get` accessor, and it
+> auto-tracks dependencies! 
+
+### 4. Syntax: JavaScript vs. Templates
+
+React relies on **JSX**, which is effectively "Just JavaScript". You use standard JS methods like `.map()` for loops and ternary operators for conditionals.
+
+Ember uses **Handlebars**, a dedicated templating language. It provides specific keywords for control flow (`{{#each}}`, `{{#if}}`).
+
+*   **HBS (Handlebars)**: The classic approach. Templates are in separate files from logic. It enforces a strict separation of concerns but requires context switching between files.
+*   **GTS/GJS (Glimmer)**: The modern evolution. It brings "Strict Mode" templates, meaning you must import everything you use (components, helpers). It allows for **Single File Components**, giving you lexical scope (using JS variables directly in templates) and better TypeScript support.
+
+**Why do both exist?**
+Ember is a mature framework. `.hbs` is the established standard that powers most existing apps. `.gts` is the future (part of the "Polaris" edition), designed to provide a developer experience closer to React/Vue while keeping Ember's powerful conventions.
+
+## Key Differences & Examples
+
+### Components
+
+**React (JSX + Hooks):**
+
+```tsx
+import { useState } from 'react';
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      traditionally separates logic (`.ts`) from templates (`.hbs`), but **GTS** (`.gts`) allows for Single File Components.
+
+*Classic approach (Separate files):*
+
+*component.ts*
+```ts
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
+
+export default class Counter extends Component {
+  @tracked count = 0;
+
+  @action
+  increment() {
+    this.count++;
+  }
+}
+```
+
+*template.hbs*
+```hbs
+<button type="button" {{on "click" this.increment}}>
+  Count is {{this.count}}
+</button>
+```
+
+*Modern approach (.gts):*
+
+```ts
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { on } from '@ember/modifier';
+
+export default class Counter extends Component {
+  @tracked count = 0;
+
+  increment = () => this.count++;
+
+  <template>
+    <button type="button" {{on "click" this.increment}}>
+      Count is {{this.count}}
+    </button>
+  </template>
+}
+}
+```
+
+*template.hbs*
+```hbs
+<button type="button" {{on "click" this.increment}}>
+  Count is {{this.count}}
+</button>
+```
+
+### Conditionals and Loops
+
+**React:**
+```tsx
+{isLoggedIn ? <UserMenu /> : <LoginButton />}
+
+<ul>
+  {items.map(item => <li key={item.id}>{item.name}</li>)}
+</ul>
+```
+
+**Ember:**
+```hbs
+{{#if this.isLoggedIn}}
+  <UserMenu />
+{{else}}
+  <LoginButton />
+{{/if}}
+
+<ul>
+  {{#each this.items as |item|}}
+    <li>{{item.name}}</li>
+  {{/each}}
+</ul>
+```
+
+### State Management (Services vs Context)
+
+In React, you might use `Context` to share state. In Ember, you use **Services**.
+
+```ts
+// app/services/shopping-cart.ts
+import Service from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+
+export default class ShoppingCartService extends Service {
+  @tracked items = [];
+
+  add(item) {
+    this.items = [...this.items, item];
+  }
+}
+```
+
+Injecting it into a component:
+
+```ts
+import Component from '@glimmer/component';
+import { service } from '@ember/service';
+
+export default class Product extends Component {
+  @service declare shoppingCart: ShoppingCartService;
+  
+  // Usage: this.shoppingCart.add(item)
+}
+```
+
+## Gotchas for React Devs
+
+1.  **Mutating State**: In React, you *never* mutate state directly (`count++` is forbidden). In Ember with `@tracked`, **mutation is the standard way** to trigger updates (`this.count++` works perfectly).
+2.  **"Actions"**: In React, you pass functions as props. In Ember, you use the `{{on "event" this.method}}` modifier. You often need the `@action` decorator to bind `this` correctly.
+3.  **Two-Way Binding**: React is strictly one-way data flow. Ember allows two-way binding (especially in forms) using the `{{mut}}` helper or modern patterns, though "Data Down, Actions Up" is still the preferred architecture.
+4.  **The Run Loop**: Ember has an internal "Run Loop" to batch DOM updates. You rarely need to touch it in modern Ember, but you might see errors related to it in older codebases or async tests.
+
+## Further Reading
+
+*   [Ember.js Official Guides](https://guides.emberjs.com/release/) - The best place to start.
+*   [Ember for React devs](https://www.notion.so/emberatlas/Ember-For-React-Developers-556a5d343cfb4f8dab1f4d631c05c95b)
+
+<Disclaimer />

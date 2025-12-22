@@ -21,14 +21,14 @@ While React gives you a box of Lego bricks to build your castle, Ember gives you
 React focuses primarily on the View layer. You likely use libraries like `react-router` for routing, `tanstack-query` for data fetching, and `redux` or `zustand` for global state.
 
 Ember includes all of these out of the box:
-- **Router**: First-class citizen, determines the state of your application.
+- **Router**: First-class citizen, determines the state of your application. The `application.hbs` template acts as the root layout, and `{{outlet}}` works exactly like React Router's `<Outlet />` to render nested routes.
 - **Ember Data**: A robust data layer (similar to an ORM on the client).
 - **Services**: Singletons for global state (Dependency Injection).
 - **CLI**: A powerful command-line interface for generating code.
 
 ### 2. Functional vs. Object-Oriented
 
-Modern React is heavily functional (Hooks, Functional Components). Ember has embraced modern JavaScript classes and decorators. If you are familiar with **Object-Oriented Programming**, you will feel right at home.
+Modern React is heavily functional (Hooks, Functional Components). Ember has embraced modern JavaScript classes and **[Decorators](/my-learning-curve/blog/15-oop#decorators)**. Decorators (like `@tracked`, `@action`, `@service`) are just functions that wrap classes or properties to add behavior—similar to how Higher-Order Components worked in older React, but cleaner.
 
 > See the article on [Object-Oriented Programming](/my-learning-curve/blog/15-oop) for a refresher on classes and inheritance, which are fundamental to Ember's architecture.
 
@@ -122,6 +122,16 @@ export default class Counter extends Component {
   </template>
 }
 ```
+
+### Component Patterns
+
+| Concept | React | Ember |
+| :--- | :--- | :--- |
+| **Children** | `props.children` | `{{yield}}` |
+| **Attribute Spreading** | `<div {...props} />` | `<div ...attributes>` (HTML attributes only) |
+| **Namespacing** | `import RentalImage ...` | `<Rental::Image />` (File: `rental/image.hbs`) |
+
+> **Note on Namespacing**: If you create a component at `app/components/rental/image.hbs`, you invoke it as `<Rental::Image>`. This helps organize components by feature folders. 
 
 ### Conditionals and Loops
 

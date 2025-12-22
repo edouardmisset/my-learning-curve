@@ -1,0 +1,405 @@
+---
+date: 2025-12-22
+title: Object-Oriented Programming (OOP)
+excerpt: A deep dive into Object-Oriented Programming concepts in TypeScript.
+tags: [ 'TypeScript', 'OOP', 'Classes', 'Inheritance', 'Composition', 'Polymorphism', 'Abstraction', 'Prototype', 'Structural Typing' ]
+lastUpdated: 2025-12-22
+---
+
+import Disclaimer from '../../../components/Disclaimer.astro';
+
+## Introduction
+
+In **Functional Programming (FP)**, data and behavior are typically treated as separate entities, with a focus on pure functions that transform data without side effects.
+
+**Object-Oriented Programming (OOP)** takes a different approach. It bundles data (state) and behavior (methods) together into **objects**. In the world of TypeScript and full-stack development, classes act as blueprints for these objects.
+
+OOP is built on four main pillars:
+1. **Encapsulation**: Bundling data and methods that operate on that data within a single unit (class) and restricting access to some of the object's components.
+2. **Abstraction**: Hiding complex implementation details and showing only the necessary features of an object.
+3. **Inheritance**: A mechanism where a new class derives properties and behavior from an existing class.
+4. **Polymorphism**: The ability of different classes to be treated as instances of the same general class or interface.
+
+{/* <!-- truncate --> */}
+
+## JS/TS OOP vs Traditional OOP (Java/C++)
+
+While TypeScript's syntax for classes looks very similar to Java or C#, there are fundamental differences in how OOP is implemented and behaves.
+
+### Prototype-based vs Class-based
+
+JavaScript (and thus TypeScript) is **prototype-based**. The `class` keyword introduced in ES6 is primarily syntactic sugar over existing prototype-based inheritance. In Java or C++, classes are static blueprints created at compile time. In JavaScript, classes are functions, and inheritance is achieved via prototype chains.
+
+### Structural vs Nominal Typing
+
+TypeScript uses **structural typing** (duck typing), whereas Java and C++ use **nominal typing**.
+- **Nominal**: Two classes are compatible only if they share the same name/declaration (e.g., `Dog` is not a `Cat` even if they have the same properties).
+- **Structural**: Two classes are compatible if they have the same shape (structure). If a `Dog` and a `Cat` both have a `name` property, TypeScript might treat them as interchangeable in certain contexts.
+
+### Type Erasure
+
+In TypeScript, types (interfaces, generics, access modifiers like `private`) exist only at **compile time**. They are erased during compilation to JavaScript. Class-related keywords such as `private`, `protected`, `public`, `readonly`, and `abstract` are not part of JavaScript and are removed during compilation. In Java/C++, types are enforced at runtime (to varying degrees). This means `private` in TypeScript is a compile-time check, whereas `private` in Java is enforced by the JVM.
+
+## Classes in TypeScript
+
+### Classes vs Instances
+
+It's important to distinguish between the two:
+- **Class**: The blueprint or template. It defines the structure and behavior. (e.g., `Developer` blueprint)
+- **Instance**: The actual object created from the class. It holds specific data. (e.g., `dev` object with name "Edouard")
+
+### Anatomy of a Class
+
+A class typically consists of three main parts:
+1. **Properties (Fields)**: Variables that hold the state of the object.
+2. **Constructor**: A special method called when creating an instance. It initializes the properties.
+3. **Methods**: Functions that define the behavior of the object.
+
+### The basics
+
+Here is a simple class demonstrating these parts:
+
+```typescript
+class Dog {
+  // 1. Properties
+  name: string;
+  breed: string;
+
+  // 2. Constructor
+  constructor(name: string, breed: string) {
+    this.name = name;
+    this.breed = breed;
+  }
+
+  // 3. Methods
+  bark() {
+    console.log(`${this.name} says: Woof!`);
+  }
+}
+
+const myDog = new Dog('Rex', 'German Shepherd');
+myDog.bark(); // Rex says: Woof!
+```
+
+### Constructor Shorthand (Parameter Properties)
+
+TypeScript offers a concise syntax to declare and initialize class members in one place. This is very common in modern TypeScript codebases (like Angular or NestJS).
+
+```typescript
+class Dog {
+  // The 'public' keyword here automatically creates a property and assigns the value
+  constructor(
+    public name: string,
+    public breed: string
+  ) {}
+}
+```
+
+### Access Modifiers
+
+TypeScript provides access modifiers to control the visibility of class members. This is crucial for **encapsulation**.
+
+- **`public`** (default): Accessible from anywhere.
+- **`private`**: Accessible only within the class.
+- **`protected`**: Accessible within the class and its subclasses.
+
+```typescript
+class ZooKeeper {
+  constructor(
+    public name: string,
+    private _masterKey: string
+  ) {}
+
+  public feedAnimals() {
+    this.unlockEnclosure();
+    console.log(`${this.name} is feeding the animals.`);
+  }
+
+  private unlockEnclosure() {
+    console.log(`Unlocking enclosure with key: ${this._masterKey}`);
+  }
+}
+
+const keeper = new ZooKeeper('Alice', '12345');
+keeper.feedAnimals();
+// keeper.unlockEnclosure(); // Error: Property 'unlockEnclosure' is private
+// console.log(keeper._masterKey); // Error: Property '_masterKey' is private
+```
+
+### Readonly modifier
+
+The `readonly` keyword prevents class properties from being changed after initialization.
+
+```typescript
+class Microchip {
+  constructor(readonly id: string) {}
+}
+
+const chip = new Microchip('981020001234567');
+// chip.id = '000000000000000'; // Error: Cannot assign to 'id' because it is a read-only property.
+```
+
+### Getters and Setters
+
+Getters and setters allow you to control access to a member. They are useful for validation or computed properties.
+
+```typescript
+class Cat {
+  private _lives: number = 9;
+
+  get lives(): number {
+    return this._lives;
+  }
+
+  set lives(value: number) {
+    if (value < 0) {
+      throw new Error('Lives cannot be negative');
+    }
+    this._lives = value;
+  }
+}
+
+const kitty = new Cat();
+console.log(kitty.lives); // 9
+// kitty.lives = -1; // Throws Error
+```
+
+### Static Members
+
+Static properties and methods belong to the class itself rather than to instances of the class. They are often used for utility functions.
+
+```typescript
+class AnimalHelper {
+  static DOG_YEARS_MULTIPLIER = 7;
+
+  static toDogYears(humanYears: number): number {
+    return humanYears * this.DOG_YEARS_MULTIPLIER;
+  }
+}
+
+console.log(AnimalHelper.DOG_YEARS_MULTIPLIER); // 7
+console.log(AnimalHelper.toDogYears(5)); // 35
+```
+
+## Abstraction
+
+Abstraction allows you to define a contract for classes without implementing the details immediately.
+
+### Abstract Classes
+
+An abstract class cannot be instantiated directly. It serves as a base class for other classes. It can contain implementation details and abstract methods (signatures without implementation).
+
+```typescript
+abstract class Animal {
+  constructor(protected name: string) {}
+
+  // Must be implemented by derived classes
+  abstract makeSound(): void;
+
+  // Common implementation shared by all subclasses
+  sleep(): void {
+    console.log(`${this.name} is sleeping... zzz`);
+  }
+}
+
+class Dog extends Animal {
+  makeSound() {
+    console.log(`${this.name} barks!`);
+  }
+}
+
+// const animal = new Animal('Generic'); // Error: Cannot create an instance of an abstract class
+const dog = new Dog('Buddy');
+dog.makeSound(); // Buddy barks!
+dog.sleep(); // Buddy is sleeping... zzz
+```
+
+> **Abstract Class vs Interface**: Use an **Abstract Class** when you want to
+> share implementation details (code) between classes. Use an **Interface** when
+> you only want to define a contract (shape) without any implementation. 
+
+### Interfaces
+
+In TypeScript, interfaces are purely for type-checking and define the shape of an object. Classes can implement interfaces to ensure they adhere to a specific contract.
+
+```typescript
+interface Pet {
+  play(): void;
+  feed(): void;
+}
+
+class Goldfish implements Pet {
+  play() { console.log('Swimming around happily!'); }
+  feed() { console.log('Eating flakes...'); }
+}
+```
+
+## Polymorphism
+
+Polymorphism allows objects of different classes to be treated as objects of a common superclass or interface. This enables flexible and interchangeable code.
+
+```typescript
+interface Animal {
+  makeSound(): void;
+}
+
+class Dog implements Animal {
+  makeSound() { console.log('Woof!'); }
+}
+
+class Cat implements Animal {
+  makeSound() { console.log('Meow!'); }
+}
+
+function letAnimalSpeak(animal: Animal) {
+  animal.makeSound();
+}
+
+letAnimalSpeak(new Dog()); // Woof!
+letAnimalSpeak(new Cat()); // Meow!
+
+```
+> **Runtime Checks**: Since interfaces are erased at runtime, you cannot use
+> `instanceof` with them. However, you can use `instanceof` with classes to
+> check an object's type at runtime: `if (myPet instanceof Dog) { ... }`. 
+
+## Advanced Concepts
+
+### Generics in Classes
+
+Just like functions, classes can be generic to work with different data types while maintaining type safety.
+See the [Generics](./02-generics) article for more details.
+
+```typescript
+class Cage<T> {
+  constructor(private occupant: T) {}
+
+  getOccupant(): T {
+    return this.occupant;
+  }
+}
+
+const dogCage = new Cage<Dog>(new Dog());
+const catCage = new Cage<Cat>(new Cat());
+```
+
+### Decorators
+
+Decorators are a special kind of declaration that can be attached to a class declaration, method, accessor, property, or parameter. They are functions that modify the behavior of the class or its members.
+
+```typescript
+function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+
+  descriptor.value = function (...args: any[]) {
+    console.log(`Calling ${propertyKey} with arguments: ${args}`);
+    return originalMethod.apply(this, args);
+  };
+}
+
+class AnimalTrainer {
+  @Log
+  teachTrick(trickName: string) {
+    console.log(`Teaching trick: ${trickName}`);
+  }
+}
+
+const trainer = new AnimalTrainer();
+trainer.teachTrick('Sit'); 
+// Logs: 
+// Calling teachTrick with arguments: Sit
+// Teaching trick: Sit
+```
+
+## Inheritance vs Composition
+
+### Inheritance
+
+Inheritance allows a class to derive properties and methods from another class using the `extends` keyword. It represents an **"is-a"** relationship.
+
+```typescript
+class Animal {
+  move() { console.log('Moving along!'); }
+}
+
+class Bird extends Animal {
+  fly() { console.log('Flying high!'); }
+}
+
+const bird = new Bird();
+bird.move(); // Inherited method
+bird.fly(); // Own method
+```
+
+#### The `super` keyword
+
+The `super` keyword is used to access and call functions on an object's parent.
+
+- **In the constructor**: `super()` calls the parent constructor. It **must** be called before using `this` if the class extends another.
+- **In methods**: `super.methodName()` calls the method from the parent class.
+
+```typescript
+class Lion extends Animal {
+  constructor(public name: string) {
+    super(); // Calls Animal's constructor
+  }
+
+  move() {
+    super.move(); // Calls Animal's move()
+    console.log(`${this.name} roars and runs!`);
+  }
+}
+
+const lion = new Lion('Simba');
+lion.move();
+// Moving along!
+// Simba roars and runs!
+```
+
+### Composition
+
+Composition involves building complex objects by combining simpler ones. It represents a **"has-a"** relationship.
+
+> **Prefer Composition over Inheritance.**
+
+Inheritance can lead to rigid hierarchies and the "fragile base class" problem. Composition offers more flexibility. Instead of inheriting from a `Veterinarian` class, a `Zoo` class should *have* a `Veterinarian`.
+
+```typescript
+class Veterinarian {
+  checkHealth(animal: string) { console.log(`Checking health of ${animal}`); }
+}
+
+class Zoo {
+  constructor(private vet: Veterinarian) {} // Composition via dependency injection
+
+  dailyCheckup() {
+    this.vet.checkHealth('Lion');
+  }
+}
+```
+
+## Common OOP Patterns
+
+Design patterns are typical solutions to common problems in software design. Here are a few essential ones:
+
+- **[Singleton](https://refactoring.guru/design-patterns/singleton)**: Ensures a class has only one instance and provides a global point of access to it.
+- **[Factory Method](https://refactoring.guru/design-patterns/factory-method)**: Provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+- **[Observer](https://refactoring.guru/design-patterns/observer)**: Lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they're observing.
+- **[Strategy](https://refactoring.guru/design-patterns/strategy)**: Lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
+- **[Adapter](https://refactoring.guru/design-patterns/adapter)**: Allows objects with incompatible interfaces to collaborate.
+
+## Related Principles
+
+To write effective OOP code, you should follow established design principles:
+
+- **[SOLID Principles](./11-solid-principles)**: A set of five design principles intended to make software designs more understandable, flexible, and maintainable.
+- **[DRY (Don't Repeat Yourself)](./10-dry-principle)**: Reduces repetition of software patterns, replacing it with abstractions or using data normalization.
+
+## Resources
+
+- [TypeScript Documentation - Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+- [MDN Web Docs - Object-oriented programming](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming)
+- [Refactoring Guru - Replace Inheritance with Delegation](https://refactoring.guru/replace-inheritance-with-delegation)
+- [Refactoring Guru - Composite](https://refactoring.guru/design-patterns/composite)
+
+<Disclaimer />

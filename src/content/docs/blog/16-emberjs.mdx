@@ -68,7 +68,15 @@ export function Counter() {
 
   return (
     <button onClick={() => setCount(count + 1)}>
-      traditionally separates logic (`.ts`) from templates (`.hbs`), but **GTS** (`.gts`) allows for Single File Components.
+      Count is {count}
+    </button>
+  );
+}
+```
+
+**Ember:**
+
+Ember traditionally separates logic (`.ts`) from templates (`.hbs`), but **GTS** (`.gts`) allows for Single File Components.
 
 *Classic approach (Separate files):*
 
@@ -113,14 +121,6 @@ export default class Counter extends Component {
     </button>
   </template>
 }
-}
-```
-
-*template.hbs*
-```hbs
-<button type="button" {{on "click" this.increment}}>
-  Count is {{this.count}}
-</button>
 ```
 
 ### Conditionals and Loops

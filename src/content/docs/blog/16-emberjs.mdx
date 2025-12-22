@@ -40,7 +40,12 @@ Ember uses **Tracked Properties** (Glimmer VM). You annotate a class property wi
 
 > See [Memoization](/my-learning-curve/blog/04-memoization) for how React handles derived state.
 > In Ember, you simply use a standard JavaScript `get` accessor, and it
-> auto-tracks dependencies! 
+> auto-tracks dependencies!
+
+**Auto-tracking Simplified:**
+Think of it like a spreadsheet formula. If you have a cell that calculates `A1 + B1`, it automatically updates whenever `A1` or `B1` changes. You don't have to tell Excel "watch A1 and B1".
+
+Ember works the same way. If you have a getter that uses a `@tracked` property, Ember notices. When that property changes, Ember automatically updates anything using that getter. No dependency arrays required!
 
 ### 4. Syntax: JavaScript vs. Templates
 
@@ -128,10 +133,20 @@ export default class Counter extends Component {
 | Concept | React | Ember |
 | :--- | :--- | :--- |
 | **Children** | `props.children` | `{{yield}}` |
+| **Props (Data)** | `props.name` | `{{@name}}` (Arguments) |
+| **Props (HTML Attr)** | `className="foo"` | `class="foo"` (passed via `...attributes`) |
 | **Attribute Spreading** | `<div {...props} />` | `<div ...attributes>` (HTML attributes only) |
 | **Namespacing** | `import RentalImage ...` | `<Rental::Image />` (File: `rental/image.hbs`) |
 
-> **Note on Namespacing**: If you create a component at `app/components/rental/image.hbs`, you invoke it as `<Rental::Image>`. This helps organize components by feature folders. 
+> **Note on Namespacing**: If you create a component at `app/components/rental/image.hbs`, you invoke it as `<Rental::Image>`. This helps organize components by feature folders.
+
+> **Typing Arguments**: In TypeScript, you can type component arguments by defining an interface and passing it to the Component generic:
+> ```ts
+> interface CounterArgs {
+>   start: number;
+> }
+> export default class Counter extends Component<CounterArgs> { ... }
+> ```
 
 ### Conditionals and Loops
 
@@ -188,6 +203,69 @@ export default class Product extends Component {
   
   // Usage: this.shoppingCart.add(item)
 }
+```
+
+### Data Loading & Routing
+
+In React, you fetch data inside components (using `useEffect` or libraries like TanStack Query). In Ember, **Routes** are responsible for fetching data.
+
+**React:**
+```tsx
+// Post.tsx
+const { data } = useQuery({ queryKey: ['post', id], queryFn: fetchPost });
+```
+
+**Ember:**
+```ts
+// app/routes/post.ts
+import Route from '@ember/routing/route';
+import { service } from '@ember/service';
+
+export default class PostRoute extends Route {
+  @service declare store: Store;
+
+  model(params) {
+    // The model hook waits for the promise to resolve before rendering.
+    // It is responsible for fetching and preparing any data needed for the route.
+    return this.store.findRecord('post', params.post_id);
+  }
+}
+```
+The data returned from `model()` is available in the template as `{{@model}}`.
+
+**Navigation:**
+Instead of `<Link to="...">`, Ember uses the `<LinkTo>` component.
+
+```hbs
+<LinkTo @route="post" @model={{this.post.id}}>
+  Read more
+</LinkTo>
+```
+
+### Testing
+
+Ember has testing built-in. When you generate a component (`ember g component my-comp`), it automatically creates a test file.
+
+*   **QUnit**: The default test runner (similar to Jest/Mocha).
+*   **Test Helpers**: `@ember/test-helpers` provides utilities like `click`, `fillIn`, `render`.
+> **Note**: Running tests feels slower than React because Ember tests typically run in a real browser environment (building and rendering the app), providing high-fidelity results but at the cost of speed.
+```ts
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'my-app/tests/helpers';
+import { render, click } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
+
+module('Integration | Component | counter', function (hooks) {
+  setupRenderingTest(hooks);
+
+  test('it increments', async function (assert) {
+    await render(hbs`<Counter />`);
+    
+    assert.dom('button').hasText('Count is 0');
+    await click('button');
+    assert.dom('button').hasText('Count is 1');
+  });
+});
 ```
 
 ## Gotchas for React Devs

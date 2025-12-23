@@ -7,57 +7,58 @@ lastUpdated: 2025-12-22
 ---
 
 import Disclaimer from '../../../components/Disclaimer.astro';
+import { Aside } from '@astrojs/starlight/components';
 
 ## Introduction
 
-As a React developer, you're used to thinking in terms of functions, hooks, and a "view-library" approach where you pick your own tools for routing and state management. **Ember.js**, on the other hand, is a full-featured framework that follows the "Convention over Configuration" philosophy.
+As a **React** developer, we're used to thinking in terms of functions, hooks, and a "view-library" approach where we pick our own tools for routing, state management, etc. **Ember**, on the other hand, is a full-featured framework that follows the "Convention over Configuration" philosophy.
 
-While React gives you a box of Lego bricks to build your castle, Ember gives you the castle blueprint and the pre-assembled walls, asking you to decorate the rooms.
+While React gives us a box of Lego bricks to build our castle, Ember gives us the castle blueprint and the pre-assembled walls, asking us to decorate the rooms.
 
 ## The Mental Model Shift
 
 ### 1. Library vs. Framework
 
-React focuses primarily on the View layer. You likely use libraries like `react-router` for routing, `tanstack-query` for data fetching, and `redux` or `zustand` for global state.
+React focuses primarily on the View layer. We use libraries like `react-router` for routing, `tanstack-query` for data fetching, and `redux` or `zustand` for state management.
 
 Ember includes all of these out of the box:
-- **Router**: First-class citizen, determines the state of your application. The `application.hbs` template acts as the root layout, and `{{outlet}}` works exactly like React Router's `<Outlet />` to render nested routes.
+- **Router**: First-class citizen, determines the state of our application. The `application.hbs` template acts as the root layout, and `{{outlet}}` works exactly like React Router's `<Outlet />` to render nested routes.
 - **Ember Data**: A robust data layer (similar to an ORM on the client).
 - **Services**: Singletons for global state (Dependency Injection).
 - **CLI**: A powerful command-line interface for generating code.
 
 ### 2. Functional vs. Object-Oriented
 
-Modern React is heavily functional (Hooks, Functional Components). Ember has embraced modern JavaScript classes and **[Decorators](/my-learning-curve/blog/15-oop#decorators)**. Decorators (like `@tracked`, `@action`, `@service`) are just functions that wrap classes or properties to add behavior—similar to how Higher-Order Components worked in older React, but cleaner.
+Modern React is heavily functional (Hooks, Functional Components). On the other hand, Ember has embraced modern JavaScript **classes** and **[Decorators](/my-learning-curve/blog/15-oop#decorators)**. Decorators (like `@tracked`, `@action`, `@service`) are just functions that wrap classes or properties to add behavior. This is somewhat similar to Higher-Order Components in older React.
 
 > See the article on [Object-Oriented Programming](/my-learning-curve/blog/15-oop) for a refresher on classes and inheritance, which are fundamental to Ember's architecture.
 
 ### 3. Reactivity: Virtual DOM vs. Tracked Properties
 
-React uses the Virtual DOM and re-renders components when state changes (`useState`). You often need to worry about dependency arrays in `useEffect` or `useMemo`.
+React uses the Virtual DOM and re-renders components when state changes (`useState`). We often need to worry about dependency arrays in `useEffect` or `useMemo`.
 
-Ember uses **Tracked Properties** (Glimmer VM). You annotate a class property with `@tracked`, and when it changes, only the parts of the DOM that depend on it update. It's more akin to "fine-grained reactivity" (like Signals) than VDOM diffing.
+Ember uses **Tracked Properties** (Glimmer VM). We annotate a class property with `@tracked`, and when it changes, only the parts of the DOM that depend on it update. It's more akin to "fine-grained reactivity" (like Signals) than VDOM diffing.
 
 > See [Memoization](/my-learning-curve/blog/04-memoization) for how React handles derived state.
-> In Ember, you simply use a standard JavaScript `get` accessor, and it
+> In Ember, we simply use a standard JavaScript `get` accessor, and it
 > auto-tracks dependencies!
 
 **Auto-tracking Simplified:**
-Think of it like a spreadsheet formula. If you have a cell that calculates `A1 + B1`, it automatically updates whenever `A1` or `B1` changes. You don't have to tell Excel "watch A1 and B1".
+Think of it like a spreadsheet formula. If we have a cell that calculates `A1 + B1`, it automatically updates whenever `A1` or `B1` changes. We don't have to tell Excel "watch A1 and B1".
 
-Ember works the same way. If you have a getter that uses a `@tracked` property, Ember notices. When that property changes, Ember automatically updates anything using that getter. No dependency arrays required!
+Ember works the same way. If we have a getter that uses a `@tracked` property, Ember notices. When that property changes, Ember automatically updates anything using that getter. **No dependency arrays required**!
 
 ### 4. Syntax: JavaScript vs. Templates
 
-React relies on **JSX**, which is effectively "Just JavaScript". You use standard JS methods like `.map()` for loops and ternary operators for conditionals.
+React relies on **JSX**, which is effectively "Just JavaScript". We use standard JS methods like `.map()` for loops and ternary operators for conditionals.
 
 Ember uses **Handlebars**, a dedicated templating language. It provides specific keywords for control flow (`{{#each}}`, `{{#if}}`).
 
-*   **HBS (Handlebars)**: The classic approach. Templates are in separate files from logic. It enforces a strict separation of concerns but requires context switching between files.
-*   **GTS/GJS (Glimmer)**: The modern evolution. It brings "Strict Mode" templates, meaning you must import everything you use (components, helpers). It allows for **Single File Components**, giving you lexical scope (using JS variables directly in templates) and better TypeScript support.
+- **HBS (Handlebars)**: The classic approach. Templates are in separate files from logic. It enforces a strict separation of concerns but requires context switching between files.
+- **GTS/GJS (Glimmer)**: The modern evolution. It brings "Strict Mode" templates, meaning we must import everything we use (components, helpers). It allows for **Single File Components**, giving us lexical scope (using JS variables directly in templates) and better TypeScript support.
 
 **Why do both exist?**
-Ember is a mature framework. `.hbs` is the established standard that powers most existing apps. `.gts` is the future (part of the "Polaris" edition), designed to provide a developer experience closer to React/Vue while keeping Ember's powerful conventions.
+Ember is a mature framework. `.hbs` is the established standard that powers most existing apps. `.gts` is the future (part of the ["Polaris" edition](https://emberjs.com/editions/polaris/)), designed to provide a developer experience closer to React/Vue while keeping Ember's powerful conventions.
 
 ## Key Differences & Examples
 
@@ -81,11 +82,11 @@ export function Counter() {
 
 **Ember:**
 
-Ember traditionally separates logic (`.ts`) from templates (`.hbs`), but **GTS** (`.gts`) allows for Single File Components.
+Ember traditionally separates logic (`.ts`) from templates (`.hbs`), but glimmer (`.gts`) allows for Single File Components.
 
 *Classic approach (Separate files):*
 
-*component.ts*
+component.ts
 ```ts
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -101,7 +102,7 @@ export default class Counter extends Component {
 }
 ```
 
-*template.hbs*
+template.hbs
 ```hbs
 <button type="button" {{on "click" this.increment}}>
   Count is {{this.count}}
@@ -138,22 +139,31 @@ export default class Counter extends Component {
 | **Attribute Spreading** | `<div {...props} />` | `<div ...attributes>` (HTML attributes only) |
 | **Namespacing** | `import RentalImage ...` | `<Rental::Image />` (File: `rental/image.hbs`) |
 
-> **Note on Namespacing**: If you create a component at `app/components/rental/image.hbs`, you invoke it as `<Rental::Image>`. This helps organize components by feature folders.
+<Aside type="note">
 
-> **Typing Arguments**: In TypeScript, you can type component arguments by defining an interface and passing it to the Component generic:
-> ```ts
-> interface CounterArgs {
->   start: number;
-> }
-> export default class Counter extends Component<CounterArgs> { ... }
-> ```
+**Namespacing**: If we create a component at `app/components/rental/image.hbs`, we invoke it as `<Rental::Image>`. This helps organize components by feature folders.
+
+</Aside>
+
+<Aside type="note">
+
+**Typing Arguments**: In TypeScript, we can type component arguments by defining an interface and passing it to the Component generic:
+```ts
+interface CounterArgs {
+  start: number;
+}
+export default class Counter extends Component<CounterArgs> { ... }
+```
+</Aside>
 
 ### Conditionals and Loops
 
 **React:**
 ```tsx
+// Conditional Rendering
 {isLoggedIn ? <UserMenu /> : <LoginButton />}
 
+// Looping
 <ul>
   {items.map(item => <li key={item.id}>{item.name}</li>)}
 </ul>
@@ -176,7 +186,7 @@ export default class Counter extends Component {
 
 ### State Management (Services vs Context)
 
-In React, you might use `Context` to share state. In Ember, you use **Services**.
+In React, we might use `Context` to share state. In Ember, we use **Services**.
 
 ```ts
 // app/services/shopping-cart.ts
@@ -207,7 +217,7 @@ export default class Product extends Component {
 
 ### Data Loading & Routing
 
-In React, you fetch data inside components (using `useEffect` or libraries like TanStack Query). In Ember, **Routes** are responsible for fetching data.
+In React, we fetch data inside components (using `useEffect` or libraries like TanStack Query). In Ember, **Routes** are responsible for fetching data.
 
 **React:**
 ```tsx
@@ -224,14 +234,14 @@ import { service } from '@ember/service';
 export default class PostRoute extends Route {
   @service declare store: Store;
 
-  model(params) {
+  async model(params) {
     // The model hook waits for the promise to resolve before rendering.
     // It is responsible for fetching and preparing any data needed for the route.
     return this.store.findRecord('post', params.post_id);
   }
 }
 ```
-The data returned from `model()` is available in the template as `{{@model}}`.
+The awaited data returned from `model()` is available in the template as `{{@model}}`.
 
 **Navigation:**
 Instead of `<Link to="...">`, Ember uses the `<LinkTo>` component.
@@ -244,11 +254,17 @@ Instead of `<Link to="...">`, Ember uses the `<LinkTo>` component.
 
 ### Testing
 
-Ember has testing built-in. When you generate a component (`ember g component my-comp`), it automatically creates a test file.
+Ember has testing built-in. When we generate a component (`ember generate component my-component`), it automatically creates the corresponding test file.
 
-*   **QUnit**: The default test runner (similar to Jest/Mocha).
-*   **Test Helpers**: `@ember/test-helpers` provides utilities like `click`, `fillIn`, `render`.
-> **Note**: Running tests feels slower than React because Ember tests typically run in a real browser environment (building and rendering the app), providing high-fidelity results but at the cost of speed.
+- **QUnit**: The default test runner (similar to Jest/Mocha).
+- **Test Helpers**: `@ember/test-helpers` provides utilities like `click`, `fillIn`, `render`.
+
+<Aside type="note">
+
+Running tests feels slower than React because Ember tests typically run in a real browser environment. This requires building and rendering the app but provides high-fidelity results at the cost of speed.
+
+</Aside>
+
 ```ts
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'my-app/tests/helpers';
@@ -270,14 +286,14 @@ module('Integration | Component | counter', function (hooks) {
 
 ## Gotchas for React Devs
 
-1.  **Mutating State**: In React, you *never* mutate state directly (`count++` is forbidden). In Ember with `@tracked`, **mutation is the standard way** to trigger updates (`this.count++` works perfectly).
-2.  **"Actions"**: In React, you pass functions as props. In Ember, you use the `{{on "event" this.method}}` modifier. You often need the `@action` decorator to bind `this` correctly.
-3.  **Two-Way Binding**: React is strictly one-way data flow. Ember allows two-way binding (especially in forms) using the `{{mut}}` helper or modern patterns, though "Data Down, Actions Up" is still the preferred architecture.
-4.  **The Run Loop**: Ember has an internal "Run Loop" to batch DOM updates. You rarely need to touch it in modern Ember, but you might see errors related to it in older codebases or async tests.
+1. **Mutating State**: In React, we *never* mutate state directly (`count++` is forbidden). In Ember with `@tracked`, **mutation is the standard way** to trigger updates (`this.count++` works perfectly).
+2. **"Actions"**: In React, we pass functions as props. In Ember, we use the `{{on "event" this.method}}` modifier. We need the `@action` decorator to bind `this` correctly.
+3. **The Run Loop**: Ember has an internal "Run Loop" to batch DOM updates. We rarely need to touch it in modern Ember, but we might see errors related to it in older codebases or async tests.
+4. **Data Down, Actions Up**: Ember ([octane](https://ember-learn.github.io/ember-octane-vs-classic-cheat-sheet/#component-properties__ddau)) components enforce "Data Down, Actions Up." When data is passed down to a component, the only way to change that data is to call an action that was passed in too. In another words, there is no two-way binding for component arguments.
 
 ## Further Reading
 
-*   [Ember.js Official Guides](https://guides.emberjs.com/release/) - The best place to start.
-*   [Ember for React devs](https://www.notion.so/emberatlas/Ember-For-React-Developers-556a5d343cfb4f8dab1f4d631c05c95b)
+- [Ember for React devs](https://www.notion.so/emberatlas/Ember-For-React-Developers-556a5d343cfb4f8dab1f4d631c05c95b)
+- [Comparison of Frontend Frameworks](https://www.educative.io/blog/what-is-the-best-frontend-javascript-framework)
 
 <Disclaimer />

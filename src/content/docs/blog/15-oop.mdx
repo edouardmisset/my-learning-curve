@@ -131,12 +131,12 @@ keeper.feedAnimals();
 The `readonly` keyword prevents class properties from being changed after initialization.
 
 ```typescript
-class Microchip {
-  constructor(readonly id: string) {}
+class Animal {
+  constructor(readonly dna: string) {}
 }
 
-const chip = new Microchip('981020001234567');
-// chip.id = '000000000000000'; // Error: Cannot assign to 'id' because it is a read-only property.
+const samoyed = new Animal('GATACA');
+// samoyed.dna = '000000000000000'; // Error: Cannot assign to 'dna' because it is a read-only property.
 ```
 
 ### Getters and Setters

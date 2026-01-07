@@ -3,7 +3,7 @@ date: 2025-12-22
 title: Object-Oriented Programming (OOP)
 excerpt: A deep dive into Object-Oriented Programming concepts in TypeScript.
 tags: [ 'TypeScript', 'OOP', 'Classes', 'Inheritance', 'Composition', 'Polymorphism', 'Abstraction', 'Prototype', 'Structural Typing' ]
-lastUpdated: 2025-12-22
+lastUpdated: 2026-01-07
 ---
 
 import Disclaimer from '../../../components/Disclaimer.astro';
@@ -179,6 +179,32 @@ class AnimalHelper {
 
 console.log(AnimalHelper.DOG_YEARS_MULTIPLIER); // 7
 console.log(AnimalHelper.toDogYears(5)); // 35
+```
+
+### The `declare` Keyword (Class Fields)
+
+Use `declare` inside a class to tell TypeScript that a field exists at runtime but should not be emitted or initialized in the compiled JavaScript. This is helpful when a property is set externally (frameworks, mixins, dependency injection) or later in the lifecycle, and you want to avoid definite-assignment errors without generating a class field.
+
+- Eliminates the "Property has no initializer and is not definitely assigned" error.
+- No JavaScript output for the field; the value comes from later assignment.
+- Different from `!` (definite assignment assertion), which still emits the field.
+
+```typescript
+class Bird {
+  // Provided later (e.g., hydration from API or framework)
+  declare name: string;
+
+  constructor(public species: string) {}
+
+  describe() {
+    console.log(`${this.name} the ${this.species}`);
+  }
+}
+
+const parrot = new Bird('Parrot');
+// Name arrives later (e.g., from server/state)
+parrot.name = 'Polly';
+parrot.describe(); // Polly the Parrot
 ```
 
 ## Abstraction

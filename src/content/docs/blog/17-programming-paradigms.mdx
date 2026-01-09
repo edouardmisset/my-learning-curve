@@ -32,16 +32,16 @@ The history of programming paradigms mirrors the evolution of computer science i
 Focuses on describing the exact steps the computer must take to reach a goal.
 
 - **Procedural:** Groups instructions into procedures (functions).
-- **Object-Oriented (OOP):** Encapsulates data and methods into objects.
+- **[Object-Oriented (OOP)](/my-learning-curve/blog/15-oop):** Encapsulates data and methods into objects.
 
 ### 2. Declarative Paradigm
 
 **"What to do."**
 Focuses on the desired result rather than the specific steps.
 
-- **Functional (FP):** Builds programs by applying and composing functions.
+- **Functional (FP):** Builds programs by applying and composing functions (often utilizing [Higher-Order Functions](/my-learning-curve/blog/05-higher-order-functions)).
 - **[Logic](https://en.wikipedia.org/wiki/Logic_programming):** Uses facts and rules to infer conclusions (e.g., [Prolog](https://en.wikipedia.org/wiki/Prolog)).
-- **Database/Query:** Asks for data matching criteria (e.g., [SQL](https://en.wikipedia.org/wiki/SQL)).
+- **Database/Query:** Asks for data matching criteria (e.g., [SQL](https://en.wikipedia.org/wiki/SQL)). Reliability is often ensured by [ACID](/my-learning-curve/blog/13-acid) properties.
 
 ## Use Cases, Pros, and Cons
 
@@ -52,12 +52,12 @@ Focuses on the desired result rather than the specific steps.
 - **Use Cases:** Large-scale enterprise systems, GUI applications, game development, complex software modeling.
 - **Pros:**
   - **Modularity:** Objects are self-contained, making code easier to troubleshoot.
-  - **Reusability:** Inheritance and polymorphism allow code to be reused and extended.
+  - **Reusability:** Inheritance and polymorphism allow code to be reused and extended (promoting the [DRY principle](/my-learning-curve/blog/10-dry-principle)).
   - **Real-world Modeling:** easy to map real-world entities (Car, User, Account) to code.
 - **Cons:**
   - **Complexity:** Can lead to overly complex hierarchies ("banana-gorilla-jungle" problem: you wanted a banana but got a gorilla holding the banana and the entire jungle).
   - **Performance:** All that abstraction can introduce overhead.
-- **Critics:** Often criticized for encouraging mutable state (which leads to bugs) and for creating rigid class structures that are hard to refactor.
+- **Critics:** Often criticized for encouraging mutable state (which leads to bugs) and for creating rigid class structures that are hard to refactor. Adhering to [SOLID principles](/my-learning-curve/blog/11-solid-principles) is often recommended.
 
 ### Functional Programming (FP)
 

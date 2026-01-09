@@ -18,11 +18,15 @@ In simpler terms, if a programming language is a tool, the paradigm is the metho
 
 The history of programming paradigms mirrors the evolution of computer science itself, moving from low-level instruction management to high-level abstractions.
 
-1.  **[Imperative Programming](https://en.wikipedia.org/wiki/Imperative_programming) (1950s):** The earliest paradigm, closely tied to the architecture of computers. It focuses on changing the program's state through a sequence of statements. Early languages like [Fortran](https://en.wikipedia.org/wiki/Fortran) and [Assembly](https://en.wikipedia.org/wiki/Assembly_language) exemplify this.
-2.  **[Structured](https://en.wikipedia.org/wiki/Structured_programming)/[Procedural Programming](https://en.wikipedia.org/wiki/Procedural_programming) (1960s-70s):** As programs grew larger, maintaining "spaghetti code" (code with unrestricted jumps/`GOTO`s) became impossible. Structured programming introduced control structures (loops, conditionals) and subroutines (procedures). [C](https://en.wikipedia.org/wiki/C_(programming_language)) and [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)) are classic examples.
-3.  **[Object-Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming) (1970s-80s):** To better model real-world problems and manage complexity, OOP organized code into "objects" containing both data and behavior. [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk), [C++](https://en.wikipedia.org/wiki/C%2B%2B), and later [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) popularized this approach.
-4.  **[Functional Programming (FP)](https://en.wikipedia.org/wiki/Functional_programming) (Origins in 1930s/50s, popular later):** Based on lambda calculus, FP treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) was the pioneer; modern examples include [Haskell](https://en.wikipedia.org/wiki/Haskell) and [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)).
-5.  **[Declarative Programming](https://en.wikipedia.org/wiki/Declarative_programming):** Evolving alongside others, this paradigm focuses on *what* the program should accomplish without describing *how* to do it. [SQL](https://en.wikipedia.org/wiki/SQL) (for databases) and [HTML](https://en.wikipedia.org/wiki/HTML)/[CSS](https://en.wikipedia.org/wiki/CSS) are prime examples.
+1. **[Imperative Programming](https://en.wikipedia.org/wiki/Imperative_programming) (1950s):** The earliest paradigm, closely tied to the architecture of computers. It focuses on changing the program's state through a sequence of statements. Early languages like [Fortran](https://en.wikipedia.org/wiki/Fortran) and [Assembly](https://en.wikipedia.org/wiki/Assembly_language) exemplify this.
+
+2. **[Structured](https://en.wikipedia.org/wiki/Structured_programming)/[Procedural Programming](https://en.wikipedia.org/wiki/Procedural_programming) (1960s-70s):** As programs grew larger, maintaining "spaghetti code" (code with unrestricted jumps/`GOTO`s) became impossible. Structured programming introduced control structures (loops, conditionals) and subroutines (procedures). [C](https://en.wikipedia.org/wiki/C_(programming_language)) and [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)) are classic examples.
+
+3. **[Object-Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming) (1970s-80s):** To better model real-world problems and manage complexity, OOP organized code into "objects" containing both data and behavior. [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk), [C++](https://en.wikipedia.org/wiki/C%2B%2B), and later [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) popularized this approach.
+
+4. **[Functional Programming (FP)](https://en.wikipedia.org/wiki/Functional_programming) (Origins in 1930s/50s, popular later):** Based on lambda calculus, FP treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) was the pioneer; modern examples include [Haskell](https://en.wikipedia.org/wiki/Haskell) and [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)).
+
+5. **[Declarative Programming](https://en.wikipedia.org/wiki/Declarative_programming):** Evolving alongside others, this paradigm focuses on *what* the program should accomplish without describing *how* to do it. [SQL](https://en.wikipedia.org/wiki/SQL) (for databases) and [HTML](https://en.wikipedia.org/wiki/HTML)/[CSS](https://en.wikipedia.org/wiki/CSS) are prime examples.
 
 ## Overview of Major Paradigms
 
@@ -63,15 +67,15 @@ Focuses on the desired result rather than the specific steps.
 
 **Examples:** [Haskell](https://en.wikipedia.org/wiki/Haskell), [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)), [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)), [F#](https://en.wikipedia.org/wiki/F_Sharp_(programming_language)), (increasingly) [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://en.wikipedia.org/wiki/TypeScript).
 
-*   **Use Cases:** Data transformations, concurrent systems, high-reliability systems (telecoms, finance), distributed systems.
-*   **Pros:**
-    *   **Immutability:** Data doesn't change, eliminating a huge class of bugs related to shared state.
-    *   **Predictability:** Pure functions always produce the same output for the same input (referential transparency).
-    *   **Concurrency:** easier to run in parallel since there are no side effects or locks needed for data.
-*   **Cons:**
-    *   **Learning Curve:** Concepts like monads, recursion, and currying can be difficult for developers coming from imperative backgrounds.
-    *   **Memory:** Immutability often requires creating new data structures instead of modifying existing ones, which can be memory-intensive (though optimized by garbage collectors).
-*   **Critics:** Can be seen as too academic or abstract for simple CRUD applications.
+- **Use Cases:** Data transformations, concurrent systems, high-reliability systems (telecoms, finance), distributed systems.
+- **Pros:**
+  - **Immutability:** Data doesn't change, eliminating a huge class of bugs related to shared state.
+  - **Predictability:** Pure functions always produce the same output for the same input (referential transparency).
+  - **Concurrency:** easier to run in parallel since there are no side effects or locks needed for data.
+- **Cons:**
+  - **Learning Curve:** Concepts like monads, recursion, and currying can be difficult for developers coming from imperative backgrounds.
+  - **Memory:** Immutability often requires creating new data structures instead of modifying existing ones, which can be memory-intensive (though optimized by garbage collectors).
+- **Critics:** Can be seen as too academic or abstract for simple CRUD applications.
 
 ### Procedural Programming
 

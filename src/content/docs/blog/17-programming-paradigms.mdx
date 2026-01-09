@@ -16,7 +16,7 @@ In simpler terms, if a programming language is a tool, the paradigm is the metho
 
 ## A Brief History of Programming Paradigms
 
-The history of programming paradigms mirrors the evolution of computer science itself, moving from low-level instruction management to high-level abstractions.
+The [history of programming paradigms](https://read.learnyard.com/low-level-design/the-evolution-of-programming-paradigms/) mirrors the evolution of computer science itself, moving from low-level instruction management to high-level abstractions.
 
 1. **[Imperative Programming](https://en.wikipedia.org/wiki/Imperative_programming) (1950s):** The earliest paradigm, closely tied to the architecture of computers. It focuses on changing the program's state through a sequence of statements. Early languages like [Fortran](https://en.wikipedia.org/wiki/Fortran) and [Assembly](https://en.wikipedia.org/wiki/Assembly_language) exemplify this.
 
@@ -30,22 +30,41 @@ The history of programming paradigms mirrors the evolution of computer science i
 
 ## Overview of Major Paradigms
 
+Paradigms are often categorized hierarchically. Here is a breakdown of the most common ones:
+
+![Programming Paradigms Diagram - By MovGP0 - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=25236323](/my-learning-curve/src/assets/programming-paradigms.png)
+
 ### 1. Imperative Paradigm
 
-**"How to do it."**
-Focuses on describing the exact steps the computer must take to reach a goal.
+**"How to do it."**  
+Code directly controls execution flow and state change using explicit statements.
 
-- **Procedural:** Groups instructions into procedures (functions).
-- **[Object-Oriented (OOP)](/my-learning-curve/blog/15-oop):** Encapsulates data and methods into objects.
+- **Procedural:** Organized as procedures that call each other.
+- **[Object-Oriented (OOP)](/my-learning-curve/blog/15-oop):** Organized as objects containing both data structure and associated behavior.
+  - **Class-based:** Inheritance is achieved by defining classes of objects (e.g., Java, C#).
+  - **Prototype-based:** Inheritance is achieved via cloning of instances (e.g., JavaScript).
+  - **Object-based:** Encapsulates state and behavior without necessarily supporting full inheritance.
 
 ### 2. Declarative Paradigm
 
-**"What to do."**
-Focuses on the desired result rather than the specific steps.
+**"What to do."**  
+Code declares properties of the desired result without specifying detailed state changes.
 
-- **Functional (FP):** Builds programs by applying and composing functions (often utilizing [Higher-Order Functions](/my-learning-curve/blog/05-higher-order-functions)).
-- **[Logic](https://en.wikipedia.org/wiki/Logic_programming):** Uses facts and rules to infer conclusions (e.g., [Prolog](https://en.wikipedia.org/wiki/Prolog)).
+- **Functional (FP):** The desired result is the value of a series of function evaluations. It avoids state and mutable data (often utilizing [Higher-Order Functions](/my-learning-curve/blog/05-higher-order-functions)).
+- **[Logic](https://en.wikipedia.org/wiki/Logic_programming):** The result is the answer to a question about a system of facts and rules (e.g., [Prolog](https://en.wikipedia.org/wiki/Prolog)).
+- **Reactive:** The result is declared with data streams and the propagation of change.
 - **Database/Query:** Asks for data matching criteria (e.g., [SQL](https://en.wikipedia.org/wiki/SQL)). Reliability is often ensured by [ACID](/my-learning-curve/blog/13-acid) properties.
+- **Constraint:** Relations between variables are expressed as constraints directing allowable solutions.
+- **Dataflow:** Forced recalculation of formulas when data values change (e.g., spreadsheets).
+
+### 3. Other Specialized Paradigms
+
+- **[Concurrent](https://en.wikipedia.org/wiki/Concurrent_computing):** Language constructs for concurrency, multi-threading, or distributed computing.
+  - **Actor:** Concurrent computation with "actors" that make local decisions (e.g., Erlang).
+- **[Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming):** Writing programs that write or manipulate other programs (or themselves).
+  - **Reflective:** A program modifies or extends itself.
+- **Generic:** Uses algorithms written in terms of to-be-specified-later types.
+- **Visual:** Manipulating program elements graphically rather than textually.
 
 ## Use Cases, Pros, and Cons
 

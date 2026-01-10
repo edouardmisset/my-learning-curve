@@ -1,0 +1,24 @@
+---
+date: 2026-01-09
+title: "Keeping tabs on New-ish Web Features"
+excerpt: "A look at upcoming and recently landed web platform features like Temporal, Masonry, and more."
+tags: ['css', 'javascript', 'html', 'web platform', 'baseline']
+lastUpdated: 2026-01-09
+---
+
+import Disclaimer from '../../../components/Disclaimer.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+import { WEB_FEATURES } from '../../../constants/webFeatures';
+import { Aside } from '@astrojs/starlight/components'
+
+## Foreword
+
+The web platform is evolving faster than ever. Keeping up with what's actually usable in production can be a challenge. Below are some of the most exciting features that have either already landed or are coming soon, along with their current Baseline status.
+
+<Aside type="note">
+The status widgets below use the live Baseline data. 
+</Aside>
+
+<FeatureList features={WEB_FEATURES} />
+
+<Disclaimer />

@@ -1,0 +1,458 @@
+---
+import { BaselineStatus } from "astro-embed";
+
+interface Props {
+  features: string[];
+}
+
+const { features } = Astro.props;
+
+interface FeatureData {
+  id: string;
+  name: string;
+  description: string;
+  category: "HTML" | "CSS" | "JavaScript" | "Web Platform";
+  status: "limited" | "newly" | "widely" | "unknown";
+  date: string;
+}
+
+const getCategory = (links: { link: string }[]) => {
+  if (!links || links.length === 0) return "Web Platform";
+  for (const l of links) {
+    if (l.link.includes("csswg") || l.link.includes("css")) return "CSS";
+    if (l.link.includes("tc39") || l.link.includes("ecma")) return "JavaScript";
+    if (l.link.includes("html") || l.link.includes("whatwg")) return "HTML";
+  }
+  return "Web Platform";
+};
+
+const featureData: FeatureData[] = await Promise.all(
+  [...new Set(features)].map(async (id) => {
+    try {
+      const [featureRes, metadataRes] = await Promise.all([
+        fetch(`https://api.webstatus.dev/v1/features/${id}`),
+        fetch(`https://api.webstatus.dev/v1/features/${id}/feature-metadata`),
+      ]);
+
+      if (!featureRes.ok) {
+        console.error(
+          `Failed to fetch feature ${id}: ${featureRes.statusText}`
+        );
+        return {
+          id,
+          name: id,
+          description: "Failed to load feature data.",
+          category: "Web Platform",
+          status: "unknown",
+          date: "1970-01-01",
+        };
+      }
+
+      const featureFn = await featureRes.json();
+      const name = featureFn.name || id;
+      const status = featureFn.baseline?.status || "unknown";
+      // Use low_date for availability, fall back to "future" (9999) for limited features to sort them as "newest"
+      const date =
+        featureFn.baseline?.low_date ||
+        (status === "limited" ? "9999-12-31" : "1970-01-01");
+      const category = getCategory(featureFn.spec?.links || []);
+
+      let description = "";
+      if (metadataRes.ok) {
+        const metadata = await metadataRes.json();
+        description = metadata.description || "";
+      }
+
+      return {
+        id,
+        name,
+        description,
+        category,
+        status,
+        date,
+      };
+    } catch (e) {
+      console.error(`Error fetching ${id}`, e);
+      return {
+        id,
+        name: id,
+        description: "Error loading data.",
+        category: "Web Platform",
+        status: "unknown",
+        date: "1970-01-01",
+      };
+    }
+  })
+);
+
+// Get unique categories for the filter
+const categories = Array.from(
+  new Set(featureData.map((f) => f.category))
+).sort();
+const statuses = Array.from(new Set(featureData.map((f) => f.status))).sort();
+
+// Default sort (Newest/Future first)
+const sortedFeatureData = featureData.sort((a, b) =>
+  b.date.localeCompare(a.date)
+);
+---
+
+<div class="feature-dashboard">
+  <div class="controls-container">
+    <div class="control-group search-group">
+      <label for="search-input">Search</label>
+      <input
+        type="text"
+        id="search-input"
+        class="control-input"
+        placeholder="Filter by name..."
+      />
+    </div>
+
+    <div class="control-group">
+      <label for="category-filter">Category</label>
+      <select id="category-filter" class="control-select">
+        <option value="all">All</option>
+        {categories.map((cat) => <option value={cat}>{cat}</option>)}
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="status-filter">Status</label>
+      <select id="status-filter" class="control-select">
+        <option value="all">All</option>
+        {
+          statuses.map((s) => (
+            <option value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>
+          ))
+        }
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="sort-order">Sort By</label>
+      <select id="sort-order" class="control-select">
+        <option value="newest">Newest / Upcoming</option>
+        <option value="oldest">Oldest / Stable</option>
+        <option value="az">A–Z (Name)</option>
+        <option value="za">Z–A (Name)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="features-grid" id="features-grid">
+    {
+      sortedFeatureData.map(
+        ({ id, name, description, category, status, date }) => (
+          <div
+            class="feature-card"
+            data-category={category}
+            data-status={status}
+            data-date={date}
+          >
+            <div class="feature-header">
+              <h3>{name}</h3>
+              <button
+                class="mdn-search-btn"
+                title="Search on MDN"
+                data-query={name}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
+                </svg>
+              </button>
+              <span class="category-badge" data-category={category}>
+                {category}
+              </span>
+            </div>
+            <p class="feature-description">{description}</p>
+            <div class="feature-status">
+              <BaselineStatus id={id} />
+            </div>
+          </div>
+        )
+      )
+    }
+  </div>
+  <div id="no-results" class="no-results hidden">
+    No features match the current filters.
+  </div>
+</div>
+
+<script>
+  const grid = document.getElementById("features-grid");
+  const searchInput = document.getElementById(
+    "search-input"
+  ) as HTMLInputElement;
+  const categoryFilter = document.getElementById(
+    "category-filter"
+  ) as HTMLSelectElement;
+  const statusFilter = document.getElementById(
+    "status-filter"
+  ) as HTMLSelectElement;
+  const sortSelect = document.getElementById("sort-order") as HTMLSelectElement;
+  const noResults = document.getElementById("no-results");
+
+  function updateView() {
+    if (!grid) return;
+
+    // Use HTMLCollection directly or Array.from
+    const items = Array.from(grid.children) as HTMLElement[];
+    const searchValue = searchInput?.value.toLowerCase() || "";
+    const categoryValue = categoryFilter?.value || "all";
+    const statusValue = statusFilter?.value || "all";
+    const sortValue = sortSelect?.value || "newest";
+
+    let visibleCount = 0;
+
+    // Filter
+    // We create a list of items with their metadata to sort later
+    const processedItems = items.map((item) => {
+      const itemCat = item.dataset.category || "";
+      const itemStatus = item.dataset.status || "";
+      // Search in h3 (name) and p (description)
+      const textContent = item.textContent?.toLowerCase() || "";
+      const nameText =
+        item.querySelector("h3")?.textContent?.trim().toLowerCase() || "";
+
+      const matchSearch =
+        searchValue === "" || textContent.includes(searchValue);
+      const matchCategory =
+        categoryValue === "all" || itemCat === categoryValue;
+      const matchStatus = statusValue === "all" || itemStatus === statusValue;
+
+      const isVisible = matchSearch && matchCategory && matchStatus;
+      item.style.display = isVisible ? "" : "none";
+      if (isVisible) visibleCount++;
+
+      return {
+        item,
+        date: item.dataset.date || "",
+        name: nameText,
+        isVisible, // Store visibility to maybe optimize sort? No, sort all is fine.
+      };
+    });
+
+    if (noResults) {
+      noResults.classList.toggle("hidden", visibleCount > 0);
+    }
+
+    // Sort
+    processedItems.sort((a, b) => {
+      // Sort visible items effectively mixed with hidden?
+      // It doesn't matter if hidden items are sorted, but good to keep order consistent.
+      if (sortValue === "newest") {
+        return b.date.localeCompare(a.date);
+      } else if (sortValue === "oldest") {
+        return a.date.localeCompare(b.date);
+      } else if (sortValue === "az") {
+        return a.name.localeCompare(b.name);
+      } else if (sortValue === "za") {
+        return b.name.localeCompare(a.name);
+      } else {
+        return b.date.localeCompare(a.date);
+      }
+    });
+
+    // Re-append to grid in new order.
+    // This moves elements in the DOM.
+    const fragment = document.createDocumentFragment();
+    processedItems.forEach(({ item }) => fragment.appendChild(item));
+    grid.appendChild(fragment);
+  }
+
+  // Event Listeners
+  searchInput?.addEventListener("input", updateView);
+  categoryFilter?.addEventListener("change", updateView);
+  statusFilter?.addEventListener("change", updateView);
+  sortSelect?.addEventListener("change", updateView);
+
+  // MDN Search buttons
+  document.querySelectorAll(".mdn-search-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const query = (btn as HTMLElement).dataset.query || "";
+      const searchUrl = `https://developer.mozilla.org/en-US/search?q=${encodeURIComponent(query)}`;
+      window.open(searchUrl, "_blank");
+    });
+  });
+</script>
+
+<style>
+  .feature-dashboard {
+    margin-top: 2rem;
+  }
+
+  .controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    align-items: flex-end;
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .control-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+
+  .search-group {
+    flex-grow: 1;
+    min-width: 200px;
+  }
+
+  .control-input {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--sl-color-gray-4);
+    background-color: var(--sl-color-black);
+    color: var(--sl-color-white);
+    font-size: 0.95rem;
+  }
+
+  .control-input:focus,
+  .control-select:focus {
+    border-color: var(--sl-color-accent);
+    outline: none;
+  }
+
+  .control-select {
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--sl-color-gray-4);
+    background-color: var(--sl-color-black);
+    color: var(--sl-color-white);
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .control-select:hover {
+    border-color: var(--sl-color-gray-3);
+  }
+
+  .features-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .feature-card {
+    background-color: var(--sl-color-gray-6);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .feature-card:hover {
+    border-color: var(--sl-color-gray-4);
+    transform: translateY(-2px);
+  }
+
+  .feature-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .feature-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+
+  .mdn-search-btn {
+    background: none;
+    border: none;
+    color: var(--sl-color-gray-2);
+    cursor: pointer;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease-in-out;
+    flex-shrink: 0;
+  }
+
+  .mdn-search-btn:hover {
+    color: var(--sl-color-accent);
+  }
+
+  .category-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--sl-color-accent-low);
+    color: var(--sl-color-accent-high);
+    border: 1px solid var(--sl-color-accent);
+    border-radius: 999px;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  /* Brand Colors */
+  .category-badge[data-category="HTML"] {
+    background-color: rgba(227, 79, 38, 0.2);
+    color: #ff8e6e;
+    border-color: #e34f26;
+  }
+
+  .category-badge[data-category="CSS"] {
+    background-color: oklch(from rebeccapurple, 0.2);
+    color: rebeccapurple;
+    border-color: rebeccapurple;
+  }
+
+  .category-badge[data-category="JavaScript"] {
+    background-color: rgba(247, 223, 30, 0.2);
+    color: #f7df1e;
+    border-color: #f7df1e;
+  }
+
+  .feature-description {
+    font-size: 0.95rem;
+    margin-bottom: auto; /* Push status to bottom */
+    padding-bottom: 1.5rem;
+    line-height: 1.5;
+    color: var(--sl-color-gray-2);
+  }
+
+  .feature-status {
+    margin-top: 1rem;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 3rem;
+    color: var(--sl-color-gray-3);
+    border: 1px dashed var(--sl-color-gray-4);
+    border-radius: 0.5rem;
+    font-style: italic;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+</style>

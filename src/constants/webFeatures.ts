@@ -64,6 +64,7 @@ export const WEB_FEATURES = [
   'text-wrap-pretty',
   'top-level-await',
   'transition-behavior',
+  'user-pseudos',
   'view-transitions',
   'where',
-] as const satisfies readonly string[];
+] as const satisfies readonly string[]

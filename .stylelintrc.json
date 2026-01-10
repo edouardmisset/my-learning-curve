@@ -14,7 +14,7 @@
       {
         "accidental-hover": true,
         "background-repeat": true,
-        "custom-property-fallbacks": true,
+        "custom-property-fallbacks": false,
         "scroll-chaining": true
       }
     ]

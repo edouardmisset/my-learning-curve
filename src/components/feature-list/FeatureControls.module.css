@@ -1,0 +1,61 @@
+.controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--sl-color-gray-6, rgb(35 38 47));
+  border: 1px solid var(--sl-color-gray-5, rgb(36 41 46));
+  border-radius: 0.5rem;
+  margin-block-end: 2rem;
+  align-items: flex-end;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.control-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--sl-color-white, white);
+}
+
+.search-group {
+  flex-grow: 1;
+  min-inline-size: 200px;
+}
+
+.control-input {
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--sl-color-gray-4, rgb(92 107 192));
+  background-color: var(--sl-color-black, black);
+  color: var(--sl-color-white, white);
+  font-size: 0.95rem;
+}
+
+.control-select {
+  padding-block: 0.5rem;
+  padding-inline: 1rem 2rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--sl-color-gray-4, rgb(92 107 192));
+  background-color: var(--sl-color-black, black);
+  color: var(--sl-color-white, white);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .control-select:hover {
+    border-color: var(--sl-color-gray-3, rgb(140 158 255));
+  }
+}
+
+.control-input:focus,
+.control-select:focus {
+  border-color: var(--sl-color-accent, rgb(63 81 181));
+  outline: none;
+}

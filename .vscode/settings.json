@@ -24,7 +24,7 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
@@ -81,5 +81,11 @@
     "path": "src/assets",
     "relative": true
   },
-  "frontMatter.git.enabled": true
+  "frontMatter.git.enabled": true,
+  "chat.tools.terminal.autoApprove": {
+    "/^pnpm stylelint '\\./src/components/\\*\\*/\\*\\.css'$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
 }

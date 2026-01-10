@@ -14,12 +14,15 @@
 .container {
   display: flex;
 }
+
 .child {
   --width: 150px;
+
   /* Children will not stretch */
   flex: 0 1 var(--width, 150px);
 
   /* Children will stretch */
+
   /* flex: 1 1 var(--width, 150px); */
 }
 
@@ -27,6 +30,7 @@
 .sidebar {
   --sidebar-min: 25ch;
   --sidebar-max: 25%;
+
   display: grid;
   grid-template-columns: minmax(
       min(var(--sidebar-min), 100%),
@@ -51,6 +55,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 }
+
 .child-full-with {
   grid-column: 1 / -1;
 }

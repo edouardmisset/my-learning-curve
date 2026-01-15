@@ -1,0 +1,67 @@
+---
+title: Template Article
+excerpt: A short, catchy summary for the preview. Max 20 words.
+tags: ['topic1', 'topic2']
+date: 1999-12-31 #YYYY-MM-DD
+lastUpdated: 1999-12-31 #YYYY-MM-DD
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Disclaimer from '~/components/Disclaimer.astro'
+
+
+> [A real quote or definition regarding the topic. This should be sourced and
+> accessible via a link. Keep it concise and relevant.]
+>
+> ~ [Source Name](#source-URL)
+
+## Introduction
+
+[Start with a hook. Why are we talking about this? What problem does it solve?
+Keep it light but relevant.]
+
+{/* <!-- truncate --> */}
+
+## The Core Concept
+
+[Explain the 'What'. Use analogies if possible. This is for the beginner.]
+
+```typescript
+// Simple code example demonstrating the concept
+const hello = "world";
+```
+
+## Deep Dive / Advanced Usage
+
+[This is for the seasoned dev. Trade offs, performance, edge cases.]
+
+### Trade Offs
+
+[Discuss pros and cons of using this concept/technology. When to use it, when to avoid it.]
+
+### Edge Case 1
+
+[Details...]
+
+<Aside type="caution">
+  Watch out for this specific pitfall!
+</Aside>
+
+### Performance Implications
+
+[How does this affect the runtime? Big O notation if relevant.]
+
+## Best Practices
+
+- **Do:** This.
+- **Don't:** That.
+
+## Conclusion
+
+[Summarize the main points. Encourage further exploration of related concepts.]
+
+## References
+
+- [Source Title](URL) - [Brief description]
+
+<Disclaimer />

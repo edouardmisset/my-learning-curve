@@ -17,10 +17,10 @@
     "check": "biome check --write ."
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/starlight": "^0.36.0",
+    "@astrojs/sitemap": "^3.6.1",
+    "@astrojs/starlight": "^0.37.3",
     "@catppuccin/starlight": "^1.0.2",
-    "astro": "^5.6.1",
+    "astro": "^5.16.9",
     "astro-og-canvas": "^0.7.0",
     "canvaskit-wasm": "^0.40.0",
     "sharp": "^0.34.2",

@@ -7,23 +7,23 @@
     "lint": "biome lint .",
     "lint:md": "markdownlint-cli2",
     "lint:md:fix": "markdownlint-cli2 --fix",
-    "style:lint": "pnpm run stylelint './src/**/*.css' './**/snippets/CSS/**/*.css' --cache",
-    "style:lint:fix": "pnpm run style:lint --fix",
+    "style:lint": "stylelint --cache --fix './src/**/*.css' './**/snippets/CSS/**/*.css'",
     "lint:fix": "biome lint . --write",
     "format": "biome format . --write",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "astro check",
     "check": "biome check --write .",
     "spell:check": "cspell lint --no-progress --show-context --relative ."
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.6.1",
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/sitemap": "^3.7.0",
     "@astrojs/starlight": "^0.37.3",
     "@catppuccin/starlight": "^1.0.2",
-    "astro": "^5.16.8",
+    "astro": "^5.16.11",
     "astro-embed": "^0.12.0",
     "astro-og-canvas": "^0.10.0",
     "canvaskit-wasm": "^0.40.0",
@@ -34,16 +34,16 @@
     "starlight-package-managers": "^0.12.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.5",
+    "@biomejs/biome": "^2.3.11",
+    "cspell": "^9.6.0",
     "markdownlint-cli2": "^0.20.0",
     "markdownlint-cli2-formatter-pretty": "^0.0.9",
-    "stylelint": "^16.2.0",
-    "stylelint-config-standard": "^37.0.0",
-    "stylelint-order": "^6.0.4",
+    "stylelint": "^17.0.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-order": "^7.0.1",
     "stylelint-plugin-defensive-css": "^1.0.2",
     "stylelint-use-logical-spec": "^5.0.1",
-    "typescript": "^5.9.3",
-    "cspell": "^8.14.3"
+    "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@10.17.1"
 }

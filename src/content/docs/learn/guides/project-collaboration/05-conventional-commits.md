@@ -7,7 +7,7 @@ prev:
   link: /my-learning-curve/learn/guides/project-collaboration/04-component-structure
   label: Component Structure
 next:
-  link: /my-learning-curve/learn/guides/project-collaboration/06-merge-request-recommandations
+  link: /my-learning-curve/learn/guides/project-collaboration/06-merge-request-recommendations
   label: Merge Request Recommendations
 ---
 

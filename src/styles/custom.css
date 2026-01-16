@@ -3,3 +3,10 @@
     navigation: auto;
   }
 }
+
+:root {
+  --html-color: hsl(12deg 77% 52%);
+  --css-color: rebeccapurple;
+  --js-color: hsl(52deg 84% 63%);
+  --web-platform-color: hsl(217deg 89% 61%);
+}

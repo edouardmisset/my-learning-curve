@@ -1,0 +1,161 @@
+---
+date: 2026-01-09
+title: "The Web Platform Baseline"
+excerpt: "Understanding the new standard for web feature availability and how to use it in your projects."
+tags: ['web platform', 'baseline', 'browser support', 'web development', 'css', 'javascript']
+lastUpdated: 2026-01-09
+---
+
+import Disclaimer from '../../../components/Disclaimer.astro';
+import { BaselineStatus, LinkPreview } from 'astro-embed';
+
+For years, developers have asked the same question: *"Can I use this feature yet?"*
+
+The answer usually involved checking [Can I Use](https://caniuse.com/), deciphering release notes from Chrome, Safari, and Firefox, and consulting your analytics to see which browsers your users are actually on. It was a fragmented process.
+
+Enter **Baseline**.
+
+## What is Baseline?
+
+[Baseline](https://web.dev/baseline) is an initiative by the Web DX Community Group (which includes Apple, Google, Microsoft, and Mozilla) to clarify the status of web features. It aims to provide a common language and definition for "safe to use."
+
+Baseline categorizes features into three main stages:
+
+### 1. Limited Availability
+
+Everything starts here. Features that are experimental, behind flags, or only implemented in some browsers but not the other major browsers.
+
+### 2. Baseline Newly Available
+
+A feature becomes "**Newly Available**" when it is interoperable across the core browser engines:
+- **Chrome** (Google)
+- **Edge** (Microsoft)
+- **Firefox** (Mozilla)
+- **Safari** (Apple)
+
+Once a feature lands in the stable release of *all* these browsers, it is now **Baseline Newly Available**.
+
+### 3. Baseline Widely Available
+
+A feature becomes "**Widely Available**" **30 months** after it becomes **Newly Available**. 
+
+This 30-month window is chosen because it generally covers the update cycle for most users and enterprise environments. If a feature is Widely Available, you can generally use it without worrying about polyfills or fallbacks for the vast majority of users.
+
+
+## Tooling and Ecosystem
+
+The Baseline status is being integrated into the tools we use every day:
+- **[Can I Use](https://caniuse.com/):** Now displays the Baseline badge and status (New/Widely) on feature pages.
+- **[MDN Web Docs](https://developer.mozilla.org/):** Shows the Baseline status at the top of feature pages.
+- **[Browserslist](https://browserslist.dev/):** You can now query based on Baseline status.
+  ```sh
+  # Targets browsers that support widely available features
+  pnpx browserslist "baseline newly available" 
+  ```
+- **[Baseline Dashboard](https://edouardmisset.github.io/baseline/)**: it
+  provides a live dashboard of your selection of Baseline features and their
+  statuses.
+
+<LinkPreview id="https://edouardmisset.github.io/baseline/" />
+
+## For Fullstack TS Developers
+
+Integrating `browserslist` with TypeScript requires some manual synchronization, as TypeScript does not automatically read your `browserslist` configuration.
+
+1.  **Browserslist**: Handles polyfills (via Babel/PostCSS) and CSS prefixes.
+    ```json
+    // package.json
+    "browserslist": [
+      "baseline widely available",
+      "not IE 11"
+    ]
+    ```
+
+2.  **TypeScript (`tsconfig.json`)**: Handles syntax down-leveling.
+    If you use a bundler (Vite, Webpack), it will handle the heavy lifting based on `browserslist`. You can keep your TS target modern.
+    ```json
+    {
+      "compilerOptions": {
+        "target": "ES2022",
+        "lib": ["DOM", "DOM.Iterable", "ES2022"]
+      }
+    }
+    ```
+
+3.  **Bundler Integration (e.g., Vite)**:
+    Vite handles CSS (via PostCSS) based on your `browserslist` automatically. For JavaScript transpilation (via esbuild), you often need to convert your `browserslist` config to a format `esbuild` understands.
+
+    One popular way is using the `browserslist-to-esbuild` package:
+
+    ```ts
+    // vite.config.ts
+    import { defineConfig } from 'vite';
+    import browserslistToEsbuild from 'browserslist-to-esbuild';
+
+    export default defineConfig({
+      build: {
+        // Automatically syncs your JS build target with your browserslist config
+        target: browserslistToEsbuild(), 
+      },
+    });
+    ```
+
+## Using the Baseline Component
+
+You can embed the official Baseline status widget on your own documentation or dashboards. There is a web component available that fetches the data live.
+
+### In Vanilla HTML
+
+You can treat it like any other HTML element after importing the script.
+
+1. **Import the script**:
+
+```html
+<script 
+  src="https://cdn.jsdelivr.net/npm/baseline-status@1/baseline-status.min.js" 
+  type="module"
+></script>
+```
+
+2. **Use the component**:
+   You need the `featureId`, which you can find on [webstatus.dev](https://webstatus.dev).
+
+```html
+<baseline-status featureId="popover"></baseline-status>
+```
+
+### In React
+
+With **React 19**, support for Custom Elements is native, so you can use it just like a standard HTML element.
+
+```jsx
+// React 19+
+import 'baseline-status'; // Make sure the package is installed
+
+function FeatureCard() {
+  return (
+    <div>
+      <h3>Popover API</h3>
+      <baseline-status featureId="popover"></baseline-status>
+    </div>
+  );
+}
+```
+
+### Result
+
+What does it look like in practice?
+Let's look at the HTML Popover status:
+
+<BaselineStatus id="popover" />
+
+## Resources
+
+- [Official Baseline Announcement (web.dev)](https://web.dev/baseline)
+- [Baseline Status Component (GitHub)](https://github.com/web-platform-dx/baseline-status)
+- [Piccalil.li: Perfecting
+  Baseline](https://piccalil.li/blog/perfecting-baseline/)
+- [WebStatus.dev - Browse Baseline Features](https://webstatus.dev/)
+- [Dashboard Demo](https://edouardmisset.github.io/baseline/)
+
+<Disclaimer />

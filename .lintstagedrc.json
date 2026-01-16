@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/lintstagedrc.json",
+  "$schema": "https://www.schemastore.org/lintstagedrc.schema.json",
   "*.{js,jsx,ts,tsx,mjs,cjs,json,jsonc}": [
     "biome check --write --no-errors-on-unmatched"
   ],

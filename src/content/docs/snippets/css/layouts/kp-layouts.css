@@ -19,7 +19,6 @@
     (100% / var(--elements)) -
     (var(--gap) * (var(--elements) + 1))
   );
-
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding: var(--gap);
@@ -47,7 +46,6 @@
   --gap: 1.5rem;
 
   display: grid;
-
   gap: var(--gap);
 
   @media (width >= 40ch) {

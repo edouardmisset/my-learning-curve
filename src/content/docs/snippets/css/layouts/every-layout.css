@@ -24,11 +24,14 @@
    * For more information on cap units see Can I Use:
    * https://caniuse.com/mdn-css_types_length_cap
    */
+
   /* width: 0.75em; */
+
   /* height: 0.75em; */
-  width: 1cap;
-  height: 1cap;
+  inline-size: 1cap;
+  block-size: 1cap;
 }
+
 .with-icon {
   display: inline-flex;
   align-items: baseline;
@@ -58,15 +61,18 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap);
+
   & > * {
     flex-grow: 1;
     flex-basis: calc((var(--threshold) - 100%) * 999);
   }
+
   /* Adjust the ":nth-child() number - 1" to allow the appropriate max number of
   elements on a line */
   & > :nth-last-child(n + 5) {
     flex-basis: 100%;
   }
+
   & > :nth-last-child(n + 5) ~ * {
     flex-basis: 100%;
   }
@@ -77,6 +83,7 @@
   /* We assume the first child to be the sidebar and the content to be the last
   child */
   --gap: 1rem;
+
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap);
@@ -84,9 +91,11 @@
   & > :first-child {
     flex-grow: 1;
   }
+
   & > :last-child {
     flex-basis: 0;
     flex-grow: 999;
+
     /* The content takes up at least half the width */
     min-inline-size: 50%;
   }
@@ -95,30 +104,30 @@
 /* Center */
 .center {
   --max-size: 60ch;
+
   box-sizing: content-box;
   margin-inline: auto;
   max-inline-size: var(--max-size);
-  padding-inline-start: 1rem;
-  padding-inline-end: 1rem;
+  padding-inline: 1rem;
 }
 
 /* Box */
 .box {
-  --color-light: hsl(0, 0%, 93%);
-  --color-dark: hsl(0, 0%, 13%);
+  --color-light: hsl(0deg 0% 93%);
+  --color-dark: hsl(0deg 0% 13%);
   --border-width: 2px;
   --gap: 1rem;
 
   padding: var(--gap);
-
   outline: var(--border-width) solid transparent;
   outline-offset: calc(var(--border-width) * -1);
-
   color: var(--color-dark);
   background-color: var(--color-light);
+
   & * {
     color: inherit;
   }
+
   &.invert {
     color: var(--color-light);
     background-color: var(--color-dark);
@@ -131,7 +140,7 @@
   --min-size: 30ch;
 
   display: grid;
-  grid-gap: var(--gap);
+  gap: var(--gap);
   grid-template-columns: repeat(
       auto-fit,
       minmax(min(var(--min-size), 100%), 1fr)
@@ -142,6 +151,7 @@
 .frame {
   --numerator: 16;
   --denominator: 9;
+
   aspect-ratio: var(--numerator) / var(--denominator);
   overflow: hidden;
   display: flex;
@@ -150,8 +160,8 @@
 
   & > img,
   & > video {
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     object-fit: cover;
   }
 }
@@ -162,17 +172,21 @@
   flex-direction: column;
   min-block-size: 100vh;
   padding: 1rem;
+
   & > * {
     margin-block: 1rem;
   }
+
   /* Adjust the HTML tag (h1) / class selector to whatever is in the element that
   should be towards the vertical center of the space  */
   & > h1 {
     margin-block: auto;
   }
+
   & > :first-child:not(h1) {
     margin-block-start: 0;
   }
+
   & > :last-child:not(h1) {
     margin-block-end: 0;
   }
@@ -180,16 +194,15 @@
 
 /* Reel */
 .reel {
-  --color-light: hsl(0, 0%, 93%);
-  --color-dark: hsl(0, 0%, 13%);
+  --color-light: hsl(0deg 0% 93%);
+  --color-dark: hsl(0deg 0% 13%);
   --item-width: auto;
   --gap: 1rem;
   --height: auto;
 
   display: flex;
   block-size: var(--height, auto);
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
   scrollbar-color: var(--color-light) var(--color-dark);
 
   &::-webkit-scrollbar {
@@ -218,7 +231,7 @@
   & > img {
     block-size: 100%;
     flex-basis: auto;
-    width: auto;
+    inline-size: auto;
   }
 
   & > * + * {
@@ -239,6 +252,7 @@
 
   &.contain {
     --margin: 1rem;
+
     overflow: auto;
     max-inline-size: calc(100% - (var(--margin) * 2));
     max-block-size: calc(100% - (var(--margin) * 2));

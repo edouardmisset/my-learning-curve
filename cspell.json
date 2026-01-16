@@ -266,11 +266,5 @@
     "chilanka",
     "tscu"
   ],
-  "flagWords": [
-    "hte",
-    "teh",
-    "recieve",
-    "alot",
-    "occured"
-  ]
+  "flagWords": ["hte", "teh", "recieve", "alot", "occured"]
 }

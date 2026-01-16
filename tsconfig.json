@@ -1,13 +1,25 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "./src/content/docs/guides/project/tsconfig.json"],
+  "include": [
+    ".astro/types.d.ts",
+    "src/**/*",
+    "*.ts",
+    "*.mjs"
+  ],
+  "exclude": [
+    "dist",
+    "./src/content/docs/guides/project/tsconfig.json",
+    "node_modules"
+  ],
   "compilerOptions": {
     "strictNullChecks": true,
     "allowJs": true,
+    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": [
+        "src/*"
+      ]
     }
   }
 }

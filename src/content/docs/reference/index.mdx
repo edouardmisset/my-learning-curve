@@ -7,19 +7,19 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components'
 import { LINKS } from '~/constants/links'
 
 <CardGrid>
-	<LinkCard 
-		title="Cheatsheets" 
-		href={LINKS.reference('cheatsheets/vs-code-shortcuts')} 
-		description="Quick reference guides and keyboard shortcuts"
-	/>
-	<LinkCard 
-		title="Templates" 
-		href={LINKS.reference('templates/bug-report-template')} 
-		description="Issue and PR templates for consistent documentation"
-	/>
-	<LinkCard 
-		title="Tools" 
-		href={LINKS.reference('tools/vscode-extensions')} 
-		description="Recommended extensions and development setup"
-	/>
+ <LinkCard
+  title="Cheatsheets"
+  href={LINKS.reference('cheatsheets/vs-code-shortcuts')}
+  description="Quick reference guides and keyboard shortcuts"
+ />
+ <LinkCard
+  title="Templates"
+  href={LINKS.reference('templates/bug-report-template')}
+  description="Issue and PR templates for consistent documentation"
+ />
+ <LinkCard
+  title="Tools"
+  href={LINKS.reference('tools/vscode-extensions')}
+  description="Recommended extensions and development setup"
+ />
 </CardGrid>

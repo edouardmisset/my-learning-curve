@@ -209,7 +209,7 @@ To install it using brew: `brew install ghostty`
 [ZSH](https://www.zsh.org)
 
 Check if you have it by running `zsh --version`.  
-If it is not _already_ installed on you system, install it using brew: `brew install zsh`.
+If it is not *already* installed on you system, install it using brew: `brew install zsh`.
 
 ### Framework
 

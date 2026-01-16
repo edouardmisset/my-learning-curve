@@ -15,12 +15,13 @@ In **Functional Programming (FP)**, data and behavior are typically treated as s
 **Object-Oriented Programming (OOP)** takes a different approach. It bundles data (state) and behavior (methods) together into **objects**. In the world of TypeScript and full-stack development, classes act as blueprints for these objects.
 
 OOP is built on four main pillars:
+
 1. **Encapsulation**: Bundling data and methods that operate on that data within a single unit (class) and restricting access to some of the object's components.
 2. **Abstraction**: Hiding complex implementation details and showing only the necessary features of an object.
 3. **Inheritance**: A mechanism where a new class derives properties and behavior from an existing class.
 4. **Polymorphism**: The ability of different classes to be treated as instances of the same general class or interface.
 
-{/* <!-- truncate --> */}
+{/*<!-- truncate -->*/}
 
 ## JS/TS OOP vs Traditional OOP (Java/C++)
 
@@ -33,6 +34,7 @@ JavaScript (and thus TypeScript) is **prototype-based**. The `class` keyword int
 ### Structural vs Nominal Typing
 
 TypeScript uses **structural typing** (duck typing), whereas Java and C++ use **nominal typing**.
+
 - **Nominal**: Two classes are compatible only if they share the same name/declaration (e.g., `Dog` is not a `Cat` even if they have the same properties).
 - **Structural**: Two classes are compatible if they have the same shape (structure). If a `Dog` and a `Cat` both have a `name` property, TypeScript might treat them as interchangeable in certain contexts.
 
@@ -45,12 +47,14 @@ In TypeScript, types (interfaces, generics, access modifiers like `private`) exi
 ### Classes vs Instances
 
 It's important to distinguish between the two:
+
 - **Class**: The blueprint or template. It defines the structure and behavior. (e.g., `Developer` blueprint)
 - **Instance**: The actual object created from the class. It holds specific data. (e.g., `dev` object with name "Edouard")
 
 ### Anatomy of a Class
 
 A class typically consists of three main parts:
+
 1. **Properties (Fields)**: Variables that hold the state of the object.
 2. **Constructor**: A special method called when creating an instance. It initializes the properties.
 3. **Methods**: Functions that define the behavior of the object.
@@ -242,7 +246,7 @@ dog.sleep(); // Buddy is sleeping... zzz
 
 > **Abstract Class vs Interface**: Use an **Abstract Class** when you want to
 > share implementation details (code) between classes. Use an **Interface** when
-> you only want to define a contract (shape) without any implementation. 
+> you only want to define a contract (shape) without any implementation.
 
 ### Interfaces
 
@@ -285,9 +289,10 @@ letAnimalSpeak(new Dog()); // Woof!
 letAnimalSpeak(new Cat()); // Meow!
 
 ```
+
 > **Runtime Checks**: Since interfaces are erased at runtime, you cannot use
 > `instanceof` with them. However, you can use `instanceof` with classes to
-> check an object's type at runtime: `if (myPet instanceof Dog) { ... }`. 
+> check an object's type at runtime: `if (myPet instanceof Dog) { ... }`.
 
 ## Advanced Concepts
 

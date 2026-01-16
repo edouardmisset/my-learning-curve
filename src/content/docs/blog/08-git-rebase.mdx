@@ -37,7 +37,7 @@ git push --force-with-lease
 commits to a new base commit. This creates a cleaner, linear history compared to
 merge commits.
 
-{/* <!-- truncate --> */}
+{/*<!-- truncate -->*/}
 
 ## How it works
 
@@ -218,13 +218,13 @@ git rebase --onto main feature-branch
 
 ## Rebase vs Merge
 
-| Feature | Rebase | Merge |
-|---------|--------|-------|
-| **History** | Linear, clean | Shows true history with merge commits |
-| **Commits** | Rewrites commit hashes | Preserves original commits |
-| **Conflicts** | Resolve per commit | Resolve once |
-| **Use for** | Local cleanup, updating branches | Integrating completed features |
-| **Team use** | ⚠️ Never on public/shared branches | ✅ Safe for shared branches |
+| Feature       | Rebase                               | Merge                                   |
+| ------------- | ------------------------------------ | --------------------------------------- |
+| **History**   | Linear, clean                        | Shows true history with merge commits   |
+| **Commits**   | Rewrites commit hashes               | Preserves original commits              |
+| **Conflicts** | Resolve per commit                   | Resolve once                            |
+| **Use for**   | Local cleanup, updating branches     | Integrating completed features          |
+| **Team use**  | ⚠️ Never on public/shared branches   | ✅ Safe for shared branches             |
 
 ## The Golden Rule
 

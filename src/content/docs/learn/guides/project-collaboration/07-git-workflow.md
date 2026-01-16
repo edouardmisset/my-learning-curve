@@ -79,7 +79,7 @@ In order of complexity, they are:
 5. **Cons:** Can be complex for smaller projects, and feature branches may lead
    to longer development cycles.
 
-[GitFlow cheatsheet & **tool** (_avh_)](https://danielkummer.github.io/git-flow-cheatsheet/)
+[GitFlow cheatsheet & **tool** (*avh*)](https://danielkummer.github.io/git-flow-cheatsheet/)
 
 ![GitFlow Diagram](./assets/git-branching-model.png)
 

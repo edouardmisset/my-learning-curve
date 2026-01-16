@@ -1,0 +1,165 @@
+---
+title: Markdownlint
+description: Markdownlint is a linter for Markdown files that enforces consistent formatting and catches common mistakes in your documentation.
+tags: ['markdownlint', 'markdown', 'linting', 'documentation']
+lastModified: 2026-01-16
+---
+
+## What is Markdownlint?
+
+Markdownlint is a linter that analyzes Markdown files to enforce consistent style and catch common errors. It helps maintain high-quality documentation across your project.
+
+See the [official documentation](https://github.com/DavidAnson/markdownlint).
+
+## Installation
+
+<PackageManagers pkg="markdownlint-cli2 markdownlint-cli2-formatter-pretty" dev />
+
+## Configuration
+
+markdownlint-cli2 supports two types of configuration files:
+
+### `.markdownlint-cli2.jsonc` (CLI configuration)
+
+This file configures the CLI tool itself (globs, ignores, gitignore support, etc.):
+
+```jsonc
+{
+  "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-cli2-config-schema.json",
+  "gitignore": true,
+  "globs": ["**/*.{md,mdx}"],
+  "ignores": ["**/node_modules", "**/.astro", "**/dist"]
+}
+```
+
+### `.markdownlint.jsonc` (Rules configuration)
+
+This file configures the linting rules themselves:
+
+```jsonc
+{
+  "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/main/schema/markdownlint-config-schema.json",
+  "default": true,
+  "MD013": false, // Disable line length limit
+  "MD033": {
+    // Allow specific HTML elements
+    "allowed_elements": ["PackageManagers", "details", "summary"]
+  },
+  "MD041": false // Allow frontmatter before first heading
+}
+```
+
+## Usage
+
+### Scripts
+
+",
+    "lint:md:fix": "markdownlint-cli2 --fix"
+  }
+}
+
+```jsonc
+// The globs are now configured in `.markdownlint-cli2.jsonc`.
+  "scripts": {
+    "lint:md": "markdownlint-cli2 \"**/*.{md,mdx}\"",
+    "lint:md:fix": "markdownlint-cli2 --fix \"**/*.{md,mdx}\""
+  }
+}
+```
+
+### Running Manually
+
+Check all markdown files:
+
+```bash
+pnpm run lint:md
+```
+
+Fix issues automatically:
+
+```bash
+pnpm run lint:md:fix
+```
+
+## Integration with Lint-Staged
+
+Add markdownlint to your `.lintstagedrc.json`:
+
+```json
+{
+  "*.{md,mdx}": ["markdownlint-cli2 --fix"]
+}
+```
+
+This ensures markdown files are linted before each commit.
+
+## Common Rules
+
+### MD001 - Heading levels increment by one
+
+```markdown
+# Heading 1
+## Heading 2 ✓
+#### Heading 4 ✗ (skipped level 3)
+```
+
+### MD012 - Multiple consecutive blank lines
+
+```markdown
+Line 1
+
+Line 2 ✓
+
+
+Line 3 ✗ (too many blank lines above)
+```
+
+### MD040 - Fenced code blocks should have a language
+
+```markdown
+\`\`\`javascript ✓
+const x = 1;
+\`\`\`
+
+\`\`\` ✗ (missing language)
+code here
+\`\`\`
+```
+
+## VS Code Integration
+
+Install the [markdownlint extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) for real-time linting in VS Code.
+
+Add to `.vscode/settings.json`:
+
+```json
+{
+  "markdownlint.config": {
+    "default": true
+  }
+}
+```
+
+## Best Practices
+
+1. **Run before committing**: Use with lint-staged to catch issues early
+2. **Configure for your needs**: Disable rules that don't fit your documentation style
+3. **Use auto-fix**: Many issues can be fixed automatically with `--fix`
+4. **Document exceptions**: Use inline comments for intentional rule violations
+
+## Inline Rule Configuration
+
+Disable rules for specific lines:
+
+```markdown
+<!-- markdownlint-disable MD033 -->
+<custom-element>Allowed HTML</custom-element>
+<!-- markdownlint-enable MD033 -->
+```
+
+## Resources
+
+- [Markdownlint GitHub](https://github.com/DavidAnson/markdownlint)
+- [Markdownlint-cli2 GitHub](https://github.com/DavidAnson/markdownlint-cli2)
+- [Rule
+  Reference](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md)

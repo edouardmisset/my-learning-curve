@@ -7,8 +7,8 @@ prev:
   link: /my-learning-curve/learn/guides/project-collaboration/09-testing
   label: Testing
 next: 
-  link: /my-learning-curve/learn/guides/project-collaboration/xx-package-manager-benchmark
-  label: Package Manager Benchmark
+  link: /my-learning-curve/learn/guides/project-collaboration/11-writing-guidelines
+  label: Writing Guidelines
 ---
 
 Refer to [this diagram for css units](https://whatunit.com/)

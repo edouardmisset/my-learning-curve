@@ -71,7 +71,7 @@ No matter how experienced you are, there is always something to learn from
 others, so don't hate it, embrace it. 😄 Don't be afraid to ask questions, or
 ask for clarification. If you don't understand something, ask!
 
-## Writing review comments using "[_Conventional Comments_](https://conventionalcomments.org/)"
+## Writing review comments using "[*Conventional Comments*](https://conventionalcomments.org/)"
 
 ### Abstract
 

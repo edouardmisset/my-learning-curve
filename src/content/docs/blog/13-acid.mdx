@@ -17,33 +17,34 @@ import { Aside } from '@astrojs/starlight/components';
 >
 > ~ Wikipedia
 
-{/* <!-- truncate --> */}
+{/*<!-- truncate -->*/}
 
 ## The concept
 
 As full-stack developers, we often treat the database as a black box that just
 "stores stuff". But when building critical applications—like e-commerce
 platforms, banking apps, or booking systems—understanding how the database
-ensures data integrity is crucial. 
+ensures data integrity is crucial.
 
 ACID stands for **Atomicity**, **Consistency**, **Isolation**, and
 **Durability**. These principles ensure that your database transactions are
-processed reliably. 
+processed reliably.
 
 ## Examples
 
 ### Atomicity (All or Nothing)
 
 **The Concept:** A transaction is treated as a single unit. Either all of its
-operations are executed, or none of them are. There is no "half-done" state. 
+operations are executed, or none of them are. There is no "half-done" state.
 
 **The Example:**
 Imagine a money transfer feature in your banking app. You need to:
-1.  Subtract $100 from Alice's account.
-2.  Add $100 to Bob's account.
+
+1. Subtract $100 from Alice's account.
+2. Add $100 to Bob's account.
 
 If step 1 succeeds but step 2 fails (e.g., server crash), Alice loses money and
-Bob gets nothing. Atomicity ensures that if step 2 fails, step 1 is rolled back. 
+Bob gets nothing. Atomicity ensures that if step 2 fails, step 1 is rolled back.
 
 ```sql
 BEGIN;
@@ -62,13 +63,13 @@ COMMIT;
 
 **The Concept:** A transaction must bring the database from one valid state to
 another valid state, maintaining all defined rules (constraints, cascades,
-triggers). 
+triggers).
 
 **The Example:**
 Your database has a rule: `inventory_count` cannot be negative.
 If a user tries to buy 5 items but only 3 are in stock, the database should
 reject the transaction because resulting in `-2` would violate the consistency
-rule. 
+rule.
 
 ```sql
 -- Constraint: CHECK (inventory_count >= 0)
@@ -79,33 +80,33 @@ UPDATE products SET inventory_count = inventory_count - 5 WHERE id = 123;
 ### Isolation (Wait Your Turn)
 
 **The Concept:** Transactions occur independently without interference. The
-intermediate state of a transaction is invisible to other transactions. 
+intermediate state of a transaction is invisible to other transactions.
 
 **The Example:**
 Two users, John and Jane, try to book the *last* seat on a flight at the exact
-same millisecond. 
+same millisecond.
 Without isolation, both might read that `seats_available = 1`, both book it, and
-the system oversells. 
+the system oversells.
 With isolation, the database locks the row or serializes the requests so one
-goes first, and the second sees `seats_available = 0`. 
+goes first, and the second sees `seats_available = 0`.
 
 ### Durability (Written in Stone)
 
 **The Concept:** Once a transaction has been committed, it will remain so, even
-in the event of power loss, crashes, or errors. 
+in the event of power loss, crashes, or errors.
 
 **The Example:**
 Your API returns a `200 OK` to the frontend after a user saves their profile.
-One second later, the data center loses power. 
+One second later, the data center loses power.
 Durability guarantees that when the power comes back, that profile change is
 still there. It was written to non-volatile memory (disk) before the success
-message was sent. 
+message was sent.
 
 ## Resources
 
 - [ACID on Wikipedia](https://en.wikipedia.org/wiki/ACID)
 - [Transactions in PostgreSQL](https://www.postgresql.org/docs/current/tutorial-transactions.html)
 - [Designing Data-Intensive Applications](https://dataintensive.net/) by Martin
-  Kleppmann (The Bible of data engineering) 
+  Kleppmann (The Bible of data engineering)
 
 <Disclaimer />

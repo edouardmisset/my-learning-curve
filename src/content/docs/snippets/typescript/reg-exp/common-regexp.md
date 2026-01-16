@@ -124,7 +124,7 @@ export const commonRegExp = [
 const regexp = /\(([^)]+)\)/g
 ```
 
-### Validate GUID/UUID
+## Validate GUID/UUID
 
 - Use the `^` and `$` anchors to match the **start** and **end** of the string, respectively.
 - Validate each segment of the GUID/UUID separately using numeric character ranges and quantifiers.
@@ -134,7 +134,7 @@ const regexp =
   /^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-4[0-9a-fA-F]{3}\-(8|9|a|b)[0-9a-fA-F]{3}\-[0-9a-fA-F]{12}$/
 ```
 
-### Validate date format (DD/MM/YYYY)
+## Validate date format (DD/MM/YYYY)
 
 - Use the `^` and `$` anchors to match the **start** and **end** of the string, respectively.
 - Validate each segment of the date separately using numeric character ranges and quantifiers.
@@ -144,7 +144,7 @@ const regexp =
 const regexp = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/
 ```
 
-### Chunk string into n-size chunks
+## Chunk string into n-size chunks
 
 - Use the `.{1,n}` quantifier to match any character between **1 and n times**.
 - Add the global flag `g` to match **all occurrences** of the pattern in the string.

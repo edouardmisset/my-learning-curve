@@ -1,0 +1,6 @@
+# Ignore patterns for markdownlint-cli2
+# Uses gitignore syntax
+
+node_modules
+dist
+.astro

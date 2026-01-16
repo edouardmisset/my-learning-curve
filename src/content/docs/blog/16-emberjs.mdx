@@ -6,7 +6,7 @@ tags: ['Ember.js', 'React', 'TypeScript', 'Frameworks', 'Comparison']
 lastUpdated: 2025-12-23
 ---
 
-import Disclaimer from '../../../components/Disclaimer.astro';
+import Disclaimer from '~/components/Disclaimer.astro'
 import { Aside } from '@astrojs/starlight/components';
 
 ## Introduction
@@ -22,6 +22,7 @@ While React gives us a box of Lego bricks to build our castle, Ember gives us th
 React focuses primarily on the View layer. We use libraries like `react-router` for routing, `tanstack-query` for data fetching, and `redux` or `zustand` for state management.
 
 Ember includes all of these out of the box:
+
 - **Router**: First-class citizen, determines the state of our application. The `application.hbs` template acts as the root layout, and `{{outlet}}` works exactly like React Router's `<Outlet />` to render nested routes.
 - **Ember Data**: A robust data layer (similar to an ORM on the client).
 - **Services**: Singletons for global state (Dependency Injection).
@@ -87,6 +88,7 @@ Ember traditionally separates logic (`.ts`) from templates (`.hbs`), but glimmer
 *Classic approach (Separate files):*
 
 component.ts
+
 ```ts
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -103,6 +105,7 @@ export default class Counter extends Component {
 ```
 
 template.hbs
+
 ```hbs
 <button type="button" {{on "click" this.increment}}>
   Count is {{this.count}}
@@ -148,17 +151,20 @@ export default class Counter extends Component {
 <Aside type="note">
 
 **Typing Arguments**: In TypeScript, we can type component arguments by defining an interface and passing it to the Component generic:
+
 ```ts
 interface CounterArgs {
   start: number;
 }
 export default class Counter extends Component<CounterArgs> { ... }
 ```
+
 </Aside>
 
 ### Conditionals and Loops
 
 **React:**
+
 ```tsx
 // Conditional Rendering
 {isLoggedIn ? <UserMenu /> : <LoginButton />}
@@ -170,6 +176,7 @@ export default class Counter extends Component<CounterArgs> { ... }
 ```
 
 **Ember:**
+
 ```hbs
 {{#if this.isLoggedIn}}
   <UserMenu />
@@ -220,12 +227,14 @@ export default class Product extends Component {
 In React, we fetch data inside components (using `useEffect` or libraries like TanStack Query). In Ember, **Routes** are responsible for fetching data.
 
 **React:**
+
 ```tsx
 // Post.tsx
 const { data } = useQuery({ queryKey: ['post', id], queryFn: fetchPost });
 ```
 
 **Ember:**
+
 ```ts
 // app/routes/post.ts
 import Route from '@ember/routing/route';
@@ -241,6 +250,7 @@ export default class PostRoute extends Route {
   }
 }
 ```
+
 The awaited data returned from `model()` is available in the template as `{{@model}}`.
 
 **Navigation:**

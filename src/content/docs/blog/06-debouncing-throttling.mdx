@@ -11,7 +11,7 @@ import Disclaimer from '~/components/Disclaimer.astro';
 ## TL;DR
 
 - Debounce: run after the events stop for N ms (great for search inputs, resize).
-- Throttle: run at _most once_ every N ms (great for scroll, drag, rate-limits).
+- Throttle: run at *most once* every N ms (great for scroll, drag, rate-limits).
 
 ### Visual behavior (combined)
 
@@ -147,12 +147,12 @@ The function executes at regular intervals while events are firing.
 
 ## Key differences
 
-| Feature | Debouncing | Throttling |
-|---------|-----------|-----------|
-| **Execution** | After inactivity period | At regular intervals |
-| **Best for** | Actions after user stops | Continuous actions |
-| **Calls** | Once after delay | Multiple times at intervals |
-| **Example** | Search autocomplete | Scroll position tracking |
+| Feature       | Debouncing               | Throttling                  |
+| ------------- | ------------------------ | --------------------------- |
+| **Execution** | After inactivity period  | At regular intervals        |
+| **Best for**  | Actions after user stops | Continuous actions          |
+| **Calls**     | Once after delay         | Multiple times at intervals |
+| **Example**   | Search autocomplete      | Scroll position tracking    |
 
 ## Advanced example with leading and trailing options
 

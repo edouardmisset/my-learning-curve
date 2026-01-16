@@ -1,0 +1,97 @@
+---
+title: Writing Guidelines
+description: Guidelines for writing great computer science articles for this project.
+tags: ['writing', 'guidelines', 'contribution']
+date: 2026-01-15
+lastUpdated: 2026-01-16
+prev:
+  link: /my-learning-curve/learn/guides/project-collaboration/10-style
+  label: Styles (CSS)
+next: 
+  link: /my-learning-curve/learn/guides/project-collaboration/xx-package-manager-benchmark
+  label: Package Manager Benchmark
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Disclaimer from '~/components/Disclaimer.astro'
+
+# Writing Guidelines for Computer Science Articles
+
+Writing a technical article that is both accessible to beginners and valuable to seasoned developers is an art form. This guide outlines the philosophy, structure, and standards we aim for in this project.
+
+## 1. The Core Philosophy
+
+ Our goal is to demystify complex computer science topics, specifically those related to web development. We believe that **clarity is king**, but **context is queen**.
+
+### Target Audience
+
+- **The Newcomer:** Needs clear definitions, simple analogies, and "why should I care?" explanations. They should walk away feeling capable, not overwhelmed.
+- **The Seasoned Dev:** Needs to see the trade offs, the edge cases, the "under the hood" mechanics, and the best practices. They should walk away saying, "Huh, I didn't know that specific detail."
+
+### Tone & Voice
+
+- **Light & Serious:** We take the subject matter seriously, but we don't take ourselves too seriously.
+- **Sparingly Funny:** Humor is a spice, not the main course. A well-placed joke or cheeky comment can relieve tension after a complex explanation, but it shouldn't distract.
+- **Example:** instead of "The CPU processes instructions...", try "The CPU, essentially the brain of the operation (but without the anxiety), processes instructions..."
+
+### Length
+
+- **Ideal Range:** **1,500 to 2,500 words** for standard deep-dive articles.
+- **Why?** This provides enough runway to cover the basics, provide practical examples, and explore advanced nuances without becoming a textbook.
+
+## 2. Generic Article Structure
+
+A great article should feel like a journey. Here is the standard structure to follow:
+
+### I. The Hook (Introduction)
+
+Start with a problem or a relatable scenario. Define existing misconceptions if necessary.
+
+- **What is it?** A 1-2 sentence definition.
+- **Why does it matter?** Real-world application.
+
+### II. The Theory (Concept Breakdown)
+
+Explain the core concept without code first, or with very pseudo-code. Use analogies.
+
+- *Analogy example:* explaining HTTP requests as ordering coffee.
+
+### III. The Practice (Basic Implementation)
+
+Show the code. Start simple.
+
+- Use standard, readable code.
+- Comment on the tricky parts.
+
+### IV. The Deep Dive (Advanced Concepts)
+
+This is where the seasoned devs get their value.
+
+- Edge cases.
+- Performance implications.
+- Comparison with similar concepts.
+
+### V. The Recap (Conclusion)
+
+Summarize the key takeaways.
+
+## 3. Sourcing & Credibility
+
+We are not the source of truth; we are the aggregators of truth.
+
+- **Trustworthy Sources only:**
+  - Official Documentation (MDN, Node.js docs, etc.)
+  - Standards bodies (W3C, TC39)
+  - Seminal books (e.g., "Clean Code", "Design Patterns" by GOF)
+  - Respected engineering blogs (Google, Uber, certain established authors).
+- **Traceability:** Always cite your sources. If you quote a definition, link to it. `~ MDN Web Docs`
+- **Avoid:** Random Medium articles (unless validated), AI hallucinations (verify everything), and "bro-science".
+
+<Aside type="tip">
+  "If you can't find a reputable source for a claim, it might be an opinion. Label it as such."
+</Aside>
+
+## 4. Maintenance
+
+- **Date:** Always include a `date` (creation) and `lastUpdated` field in the frontmatter.
+- **Refactoring:** As technology evolves, so should our articles. If a best practice changes, update the post.

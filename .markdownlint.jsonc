@@ -1,0 +1,50 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/main/schema/markdownlint-config-schema.json",
+  // Default state for all rules
+  "default": true,
+  // MD013/line-length - Disable line length limit for documentation
+  "MD013": false,
+  // MD033/no-inline-html - Allow inline HTML (needed for Astro components)
+  "MD033": {
+    "allowed_elements": [
+      "PackageManagers",
+      "Disclaimer",
+      "details",
+      "summary",
+      "kbd",
+      "br",
+      "sup",
+      "sub",
+      "strong",
+      "img",
+      "Code",
+      "Aside",
+      "LinkCard",
+      "CardGrid"
+    ]
+  },
+  // MD041/first-line-heading - Allow frontmatter before first heading
+  "MD041": false,
+  // MD046/code-block-style - Prefer fenced code blocks
+  "MD046": {
+    "style": "fenced"
+  },
+  // MD024/no-duplicate-heading - Allow duplicate headings in different sections
+  "MD024": {
+    "siblings_only": true
+  },
+  // MD025/single-title - Allow multiple top-level headings
+  "MD025": false,
+  // MD034/no-bare-urls - Allow bare URLs
+  "MD034": false,
+  // MD040/fenced-code-language - Require language in code blocks
+  "MD040": true,
+  // MD049/emphasis-style - Consistent emphasis style
+  "MD049": {
+    "style": "asterisk"
+  },
+  // MD050/strong-style - Consistent strong style
+  "MD050": {
+    "style": "asterisk"
+  }
+}

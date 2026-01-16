@@ -75,15 +75,4 @@
     "titleBar.inactiveForeground": "#15202b99"
   },
   "peacock.color": "#61dafb",
-  "frontMatter.content.pageFolders": [
-    {
-      "title": "shell",
-      "path": "[[workspace]]/snippets/shell"
-    }
-  ],
-  "frontMatter.content.publicFolder": {
-    "path": "src/assets",
-    "relative": true
-  },
-  "frontMatter.git.enabled": true
 }

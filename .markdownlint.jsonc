@@ -20,7 +20,9 @@
       "Code",
       "Aside",
       "LinkCard",
-      "CardGrid"
+      "CardGrid",
+      "LinkPreview",
+      "BaselineStatus"
     ]
   },
   // MD041/first-line-heading - Allow frontmatter before first heading

@@ -6,7 +6,7 @@ tags: ['web platform', 'baseline', 'browser support', 'web development', 'css', 
 lastUpdated: 2026-01-09
 ---
 
-import Disclaimer from '../../../components/Disclaimer.astro';
+import Disclaimer from '../../../components/Disclaimer.astro'
 import { BaselineStatus, LinkPreview } from 'astro-embed';
 
 For years, developers have asked the same question: *"Can I use this feature yet?"*
@@ -28,6 +28,7 @@ Everything starts here. Features that are experimental, behind flags, or only im
 ### 2. Baseline Newly Available
 
 A feature becomes "**Newly Available**" when it is interoperable across the core browser engines:
+
 - **Chrome** (Google)
 - **Edge** (Microsoft)
 - **Firefox** (Mozilla)
@@ -37,21 +38,23 @@ Once a feature lands in the stable release of *all* these browsers, it is now **
 
 ### 3. Baseline Widely Available
 
-A feature becomes "**Widely Available**" **30 months** after it becomes **Newly Available**. 
+A feature becomes "**Widely Available**" **30 months** after it becomes **Newly Available**.
 
 This 30-month window is chosen because it generally covers the update cycle for most users and enterprise environments. If a feature is Widely Available, you can generally use it without worrying about polyfills or fallbacks for the vast majority of users.
-
 
 ## Tooling and Ecosystem
 
 The Baseline status is being integrated into the tools we use every day:
+
 - **[Can I Use](https://caniuse.com/):** Now displays the Baseline badge and status (New/Widely) on feature pages.
 - **[MDN Web Docs](https://developer.mozilla.org/):** Shows the Baseline status at the top of feature pages.
 - **[Browserslist](https://browserslist.dev/):** You can now query based on Baseline status.
+
   ```sh
   # Targets browsers that support widely available features
   pnpx browserslist "baseline newly available" 
   ```
+
 - **[Baseline Dashboard](https://edouardmisset.github.io/baseline/)**: it
   provides a live dashboard of your selection of Baseline features and their
   statuses.
@@ -62,7 +65,8 @@ The Baseline status is being integrated into the tools we use every day:
 
 Integrating `browserslist` with TypeScript requires some manual synchronization, as TypeScript does not automatically read your `browserslist` configuration.
 
-1.  **Browserslist**: Handles polyfills (via Babel/PostCSS) and CSS prefixes.
+1. **Browserslist**: Handles polyfills (via Babel/PostCSS) and CSS prefixes.
+
     ```json
     // package.json
     "browserslist": [
@@ -71,8 +75,9 @@ Integrating `browserslist` with TypeScript requires some manual synchronization,
     ]
     ```
 
-2.  **TypeScript (`tsconfig.json`)**: Handles syntax down-leveling.
+2. **TypeScript (`tsconfig.json`)**: Handles syntax down-leveling.
     If you use a bundler (Vite, Webpack), it will handle the heavy lifting based on `browserslist`. You can keep your TS target modern.
+
     ```json
     {
       "compilerOptions": {
@@ -82,7 +87,7 @@ Integrating `browserslist` with TypeScript requires some manual synchronization,
     }
     ```
 
-3.  **Bundler Integration (e.g., Vite)**:
+3. **Bundler Integration (e.g., Vite)**:
     Vite handles CSS (via PostCSS) based on your `browserslist` automatically. For JavaScript transpilation (via esbuild), you often need to convert your `browserslist` config to a format `esbuild` understands.
 
     One popular way is using the `browserslist-to-esbuild` package:

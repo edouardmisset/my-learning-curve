@@ -1,0 +1,226 @@
+---
+title: EditorConfig
+description: Keep your team’s indentation, line endings, and whitespace consistent across editors and platforms.
+tags: ['editorconfig', 'formatting', 'project-setup', 'consistency']
+date: 2026-01-16
+lastUpdated: 2026-01-16
+---
+
+import { Aside } from '@astrojs/starlight/components'
+import Disclaimer from '~/components/Disclaimer.astro'
+
+> EditorConfig helps maintain consistent coding styles for multiple developers
+> working on the same project across various editors and IDEs.
+>
+> ~ [EditorConfig](https://editorconfig.org/#overview)
+
+## Introduction
+
+Different editors, different defaults: spaces vs tabs, 2 vs 4 spaces, LF vs CRLF. These seemingly small differences create noisy diffs and code review friction. EditorConfig solves this by letting your repository declare formatting fundamentals that editors respect automatically.
+
+{/*<!-- truncate -->*/}
+
+## The Core Concept
+
+EditorConfig is a simple, editor‑agnostic configuration file named `.editorconfig` that lives in your repository. It declares baseline style rules like indentation, line endings, and final newlines. Supported editors (built‑in or via plugins) read those rules and apply them as you type.
+
+Key ideas:
+
+- Rooted configuration: set `root = true` in the top‑level file to stop searching parent directories.
+- Scoped by glob: define rules per file type/path using section headers like `[*.{js,ts}]`.
+- Minimal and portable: focuses on universal formatting primitives; leave language‑specific rules to tools like ESLint, Stylelint, Prettier, or Biome.
+
+### A Practical Example
+
+```properties
+# .editorconfig (repository root)
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Markdown: do not strip trailing spaces (they can mean line breaks)
+[*.md]
+trim_trailing_whitespace = false
+
+# Makefiles require hard tabs
+[Makefile]
+indent_style = tab
+
+# Shell scripts
+[*.{sh,bash,zsh}]
+indent_style = space
+indent_size = 2
+
+# YAML
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# JSON / JSONC
+[*.{json,jsonc}]
+indent_style = space
+indent_size = 2
+```
+
+This baseline reduces churn across platforms and editors.
+
+## The Practice
+
+### Where to put it
+
+- Place `.editorconfig` at the repository root with `root = true`.
+- Add nested files only when absolutely necessary (e.g., sub‑projects with different conventions).
+
+### How editors pick it up
+
+- Most popular editors support EditorConfig either built‑in or via an extension.
+- VS Code: install “EditorConfig for VS Code”.
+
+### Typical property set
+
+- `indent_style`: `space` or `tab`.
+- `indent_size`: number of spaces per indent (or `tab`).
+- `end_of_line`: `lf`, `cr`, or `crlf`.
+- `charset`: usually `utf-8`.
+- `insert_final_newline`: ensure a newline at end of file.
+- `trim_trailing_whitespace`: remove trailing spaces on save.
+
+<Aside type="caution">
+  Line endings are a cross‑tool concern. Coordinate `end_of_line` with `.gitattributes` and Git settings like `core.autocrlf` to avoid flip‑flopping diffs on Windows vs macOS/Linux.
+</Aside>
+
+### Quick checks and automation
+
+- CI can use tools like `editorconfig-checker` to validate adherence.
+- Some formatters (Prettier, Biome) can respect `.editorconfig` settings; see their docs to enable integration.
+
+## EditorConfig vs ESLint vs Prettier vs Biome
+
+- Purpose
+  - EditorConfig: universal whitespace/line‑ending normalization across editors.
+  - ESLint: code quality and style rules for JS/TS (can auto‑fix some issues).
+  - Prettier: opinionated code formatter for many languages.
+  - Biome: fast all‑in‑one for JS/TS/JSON (formatter + linter + more).
+- Scope
+  - EditorConfig: indentation, charset, EOL, final newline, trailing whitespace.
+  - ESLint: patterns, correctness, anti‑patterns, stylistic rules.
+  - Prettier: layout/formatting (line wrapping, spacing, quotes, etc.).
+  - Biome: combines formatter + linter; overlaps with ESLint + Prettier for JS/TS.
+- Where rules apply
+  - EditorConfig: editor/IDE behavior while editing.
+  - ESLint/Prettier/Biome: CLI/CI and editor integrations on save/commit.
+- Output
+  - EditorConfig: prevents inconsistent whitespace from being authored.
+  - Prettier/Biome: rewrites file layout consistently.
+  - ESLint/Biome: reports and optionally fixes code issues.
+- Overlap
+  - `indent_style` / `indent_size` overlap with Prettier/Biome `useTabs`/`tabWidth`.
+  - Prefer a single source of truth; if conflicts exist, formatter's config usually wins.
+
+### Can they be used together?
+
+Yes—and that’s common in modern setups:
+
+- EditorConfig + Prettier: EditorConfig handles universal basics; Prettier formats code structure. Prettier can read `.editorconfig` for `tabWidth`/`useTabs`.
+- EditorConfig + ESLint: EditorConfig normalizes whitespace; ESLint enforces code quality rules.
+- EditorConfig + Biome: EditorConfig covers basics; Biome handles formatting and linting for JS/TS/JSON.
+- ESLint + Prettier: Either integrate via plugins or let each run independently (with `eslint-config-prettier` to disable style rules in ESLint).
+- Biome as alternative: For JS/TS‑heavy repos, Biome can replace both ESLint and Prettier; keep EditorConfig for editor‑level consistency and non‑JS files.
+
+## When to Use Which
+
+- Use EditorConfig when
+  - You want consistent indentation/EOL across editors and OSes.
+  - Your repo spans multiple languages and editors.
+  - You need a lightweight, editor‑agnostic baseline with minimal config.
+- Use EditorConfig + Prettier when
+  - You want consistent formatting across many languages with minimal debate.
+  - You already standardize on Prettier opinions and want editors to align.
+- Use EditorConfig + ESLint when
+  - You care about code quality/correctness and static analysis for JS/TS.
+  - You want auto‑fix for certain lint issues but keep formatting flexible.
+- Use EditorConfig + Biome when
+  - You want a single fast tool for JS/TS formatting + linting.
+  - You prefer Biome’s ecosystem and performance over ESLint/Prettier.
+- Consider Biome instead of ESLint+Prettier when
+  - Project is primarily JS/TS/JSON and you prefer unified tooling and speed.
+- Consider Prettier without ESLint style rules when
+  - You want to avoid style debates; let Prettier decide layout, ESLint focuses on correctness.
+
+## Pros and Cons
+
+- Pros
+  - **Portable baseline:** Works across editors/IDEs and OSes.
+  - **Low friction:** Tiny config, easy to adopt, avoids noisy diffs.
+  - **Polyglot friendly:** Applies to many file types via globs.
+- Cons
+  - **Not a formatter:** No control over quotes, semicolons, wrapping, etc.
+  - **Plugin variance:** Some properties vary by editor/plugin support.
+  - **Overlap confusion:** Needs alignment with formatter/linter configs to avoid conflicts.
+
+## Deep Dive / Advanced Usage
+
+### How precedence works
+
+- Editors locate the closest `.editorconfig` to the file and walk up the directory tree.
+- The first file with `root = true` stops the search upward.
+- Later matches override earlier ones; more specific globs override broader ones.
+
+### Glob patterns and specificity
+
+- Use sections like `[*.md]`, `[**/*.test.ts]`, `[src/**/*.{js,ts}]`.
+- Place specific sections after general ones to ensure intended overrides in all editors.
+
+### Line endings and Git
+
+- `.editorconfig` can request `end_of_line = lf`, but Git controls checkout/storage.
+- Normalize with `.gitattributes`:
+
+```gitattributes
+* text=auto eol=lf
+```
+
+- Combine with EditorConfig for a consistent authoring experience across platforms.
+
+### Monorepos and nested configs
+
+- Put a single root at the repository top.
+- Add nested `.editorconfig` only where teams or technical constraints truly differ.
+- Document intentional deviations to avoid surprise.
+
+## Best Practices
+
+- **Declare a root:** Put `root = true` in the top file.
+- **Keep it minimal:** Only include widely supported properties.
+- **Respect file conventions:** Tabs for `Makefile`, preserve meaningful Markdown trailing spaces.
+- **Unify with Git:** Normalize line endings in `.gitattributes` alongside EditorConfig.
+- **Align tools:** Mirror `indent_size`/`indent_style` with Prettier/Biome where applicable.
+- **Document choices:** Explain non‑obvious deviations in README or comments.
+
+## Troubleshooting
+
+- If settings don’t apply, verify your editor’s EditorConfig support and that the file path matches your glob.
+- Check for multiple `.editorconfig` files; ensure the intended one is the nearest and `root = true` at repo root.
+- Resolve conflicts with formatter/IDE settings by picking a single source of truth for indent size/style.
+
+## Conclusion
+
+EditorConfig is the low‑friction way to eliminate whitespace and line‑ending noise across your team. Add a small, well‑scoped `.editorconfig`, align it with your formatter and Git settings, and enjoy cleaner diffs and happier code reviews.
+
+## References
+
+- EditorConfig — Overview: https://editorconfig.org/#overview
+- EditorConfig — Example file: https://editorconfig.org/#example-file
+- EditorConfig — Properties: https://editorconfig-specification.readthedocs.io/en/latest/
+- EditorConfig — Plugins: https://editorconfig.org/#download
+- Prettier and EditorConfig: https://prettier.io/docs/en/configuration.html#editorconfig
+- Biome: https://biomejs.dev/
+- Git Attributes (EOL): https://git-scm.com/docs/gitattributes
+
+<Disclaimer />

@@ -41,7 +41,7 @@ Make sure you understand what your analysis is telling you. This could involve s
 // Load your data
 const data = readFileSync('path_to_your_data.json', 'utf8')
 const dataset = JSON.parse(data)
-const column = 'name_of_the_column_to_analyse'
+const column = 'name_of_the_column_to_analyze'
 
 const cleanedData = dataset.filter(item => item[column] !== null)
 

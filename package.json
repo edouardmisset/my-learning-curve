@@ -16,7 +16,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "tsc",
-    "check": "biome check --write ."
+    "check": "biome check --write .",
+    "spell:check": "cspell lint --no-progress --show-context --relative ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.1",
@@ -40,7 +41,8 @@
     "stylelint-order": "^6.0.4",
     "stylelint-plugin-defensive-css": "^1.0.2",
     "stylelint-use-logical-spec": "^5.0.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "cspell": "^8.14.3"
   },
   "packageManager": "pnpm@10.17.1"
 }

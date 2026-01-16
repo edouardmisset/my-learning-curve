@@ -4,18 +4,16 @@
   "version": "0.2.0",
   "scripts": {
     "dev": "astro dev",
-    "lint": "biome lint .",
-    "lint:md": "markdownlint-cli2",
-    "lint:md:fix": "markdownlint-cli2 --fix",
+    "lint": "biome lint --write .",
+    "lint:md": "markdownlint-cli2 --fix",
     "style:lint": "stylelint --cache --fix './src/**/*.css' './**/snippets/CSS/**/*.css'",
-    "lint:fix": "biome lint . --write",
     "format": "biome format . --write",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
-    "check": "biome check --write .",
+    "check": "pnpm lint:md && biome check --write . && pnpm typecheck && pnpm style:lint",
     "spell:check": "cspell lint --no-progress --show-context --relative ."
   },
   "dependencies": {

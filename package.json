@@ -18,11 +18,6 @@
     "prepare": "husky",
     "update:edit:date": "node --experimental-strip-types scripts/update-frontmatter.ts"
   },
-  "lint-staged": {
-    "src/content/**/*.{md,mdx}": [
-      "pnpm update:edit:date --"
-    ]
-  },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/sitemap": "^3.7.0",

@@ -20,7 +20,7 @@
   },
   "lint-staged": {
     "src/content/**/*.{md,mdx}": [
-      "pnpm update:edit:date"
+      "pnpm update:edit:date --"
     ]
   },
   "dependencies": {

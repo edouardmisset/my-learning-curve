@@ -1,0 +1,138 @@
+---
+title: Web Rendering Patterns
+excerpt: From MPAs to Resumability—a conceptual guide to the 14 major ways to build and render web applications today.
+tags: ['rendering', 'architecture', 'ssr', 'ssg', 'spa']
+date: 2026-02-12
+lastUpdated: 2026-02-12
+---
+
+import { Aside } from '@astrojs/starlight/components'
+import Disclaimer from '~/components/Disclaimer.astro'
+
+> "The web is a flexible platform, and 'best' is almost always a function of your specific constraints."
+>
+> ~ Web Architecture Principles
+
+## TL;DR
+
+Modern web development offers a spectrum of rendering strategies. There is no silver bullet. **Static (SSG)** is fastest but rigid. **Server (SSR)** is dynamic but costly. **Client (SPA)** is interactive but heavy. Newer patterns like **Islands** and **Resumability** attempt to merge the best of these worlds by reducing the JavaScript payload sent to the client.
+
+## Introduction
+
+If you have been in web development for more than a week, you have likely drowned in acronyms. SPA, SSR, SSG, ISR... passing through these feels less like engineering and more like alphabet soup.
+
+But these aren't just buzzwords. They represent different answers to two fundamental questions: **Where** do we build the HTML? And **When** do we ship it to the user?
+
+This guide breaks down 14 distinct rendering patterns, categorized by the problems they try to solve.
+
+## 1. The Foundations
+
+These are the "Big Four" approaches that define the corners of the rendering landscape.
+
+### Multi-Page Application (MPA)
+
+**The Old Guard.** Every time a user clicks a link, the browser requests a brand new HTML file from the server. The page refreshes completely.
+
+- **Pros:** Extremely simple, excellent SEO by default.
+- **Cons:** Slow transitions, feels "clunky" compared to native apps.
+
+### Single Page Application (SPA)
+
+**The App Experience.** You load one empty HTML shell and a massive bundle of JavaScript. The JS constructs the page in the browser and handles navigation without refreshing.
+
+- **Pros:** Fluid, native-like feel.
+- **Cons:** Poor initial load performance (waiting for JS to download), SEO requires extra work (crawlers typically need HTML).
+
+### Server-Side Rendering (SSR)
+
+**Dynamic on Demand.** Like an MPA, HTML is built on the server. However, modern frameworks often "hydrate" this HTML into an SPA on the client side to take over navigation interaction.
+
+- **Pros:** Fast "First Contentful Paint" (FCP), fresh data every request.
+- **Cons:** Higher server costs, slower "Time to First Byte" (TTFB) since the server must work before sending anything.
+
+### Static Site Generation (SSG)
+
+**The Pre-baked Approach.** All HTML is generated once during build time. The server just serves static files via a CDN.
+
+- **Pros:** Unbeatable performance, cheap hosting, great security.
+- **Cons:** Long build times. Content can get stale; requires a rebuild to update a typo.
+
+## 2. Refining the Server & Static Models
+
+Developers realized that "Build everything once" (SSG) and "Build everything every time" (SSR) were too extreme. We needed a middle ground.
+
+### Incremental Static Generation (ISR)
+
+Imagine you have 10,000 pages. Building them all takes hours. With Incremental Static Generation (often called ISR), you build the critical ones first. The others are built (or updated) lazily in the background when users request them, then cached.
+
+- **Best for:** E-commerce sites, large blogs, news outlets.
+
+### Streaming SSR
+
+Instead of the server waiting for the *entire* page to be ready before sending it, it streams HTML in chunks. You might get the "Header" instantly while the "Product List" database query is still running.
+
+- **Benefit:** The user sees something immediately, reducing the perception of slowness.
+
+### Edge Rendering
+
+This is SSR, but running on a CDN (Content Delivery Network). The server logic runs physically closer to the user (the "Edge") via Serverless functions.
+
+- **Benefit:** Reduced latency. Your server logic executes in Tokyo if your user is in Tokyo, not Virginia.
+
+### Partial Prerendering
+
+A hybrid approach (popularized recently by frameworks like Next.js). You pre-generate a static "shell" (like a navbar and footer) during the build, but leave "holes" for dynamic content that streams in from the server on request.
+
+## 3. Solving the Hydration Cost (The "New Wave")
+
+Standard SSR has a hidden cost: **Hydration**. The server sends HTML (fast!), but the browser has to re-run all the JavaScript to attach event listeners and make it interactive (slow!). These patterns try to fix that.
+
+### Partial Hydration
+
+Why hydrate the never-changing static footer? Partial hydration allows frameworks to strictly hydrate only the interactive bits of the page, leaving static HTML alone.
+
+### Progressive Hydration
+
+Instead of freezing the main thread by hydrating everything at once, the browser hydrates components based on priority—like waiting until they scroll into view or when the main thread is idle.
+
+### Islands Architecture
+
+Popularized by **Astro**. The page is HTML-first by default. Distinct "Islands" of interactivity (React, Vue, Svelte widgets) are isolated.
+
+- **Key Difference:** The empty space between islands is pure HTML. No JavaScript is loaded for it.
+- **Metaphor:** A sea of static content with islands of interactivity.
+
+### Resumability
+
+Popularized by **Qwik**. Instead of *replaying* the setup logic (hydration) in the browser to attach events, the framework serializes the exact mental state of the application into the HTML. The client "resumes" exactly where the server left off.
+
+- **Result:** Near-zero JavaScript execution on startup. instant interactivity.
+
+## 4. Architectural Philosophies
+
+These aren't strictly "rendering" modes, but architectural patterns that dictate how rendering and application structure is orchestrated.
+
+### Progressive Enhancement
+
+**Content First.** Build a functional experience with just HTML (and maybe CSS). Then, sprinkle JavaScript on top to enhance it. If the JS fails or hasn't loaded, the site still works (e.g., a form submits via standard HTTP POST).
+
+<Aside type="tip">
+  This is a philosophy, not just a tech stack. It ensures your app works on a potato connection.
+</Aside>
+
+### Micro Frontends
+
+**Divide and Conquer.** Instead of one giant monolithic app, you split the UI into independent pieces (e.g., "Checkout Team" owns the cart widget, "Search Team" owns the search bar). These pieces can be deployed independently, potentially using different rendering strategies.
+
+- **Trade-off:** Massive complexity overhead. Only recommended for very large organizational scaling issues.
+
+## Conclusion
+
+Choosing a pattern isn't about picking the "most modern" one; it's about matching the architecture to your content.
+
+- Building a personal blog? **SSG** is king.
+- Building a private dashboard? **SPA** is fine.
+- Building a global e-commerce giant? Look into **ISR** or **Edge Rendering**.
+- Need extreme performance with rich interactivity? **Islands** or **Resumability**.
+
+<Disclaimer />

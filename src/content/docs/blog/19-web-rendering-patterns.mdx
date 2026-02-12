@@ -9,10 +9,6 @@ lastUpdated: 2026-02-12
 import { Aside } from '@astrojs/starlight/components'
 import Disclaimer from '~/components/Disclaimer.astro'
 
-> "The web is a flexible platform, and 'best' is almost always a function of your specific constraints."
->
-> ~ Web Architecture Principles
-
 ## TL;DR
 
 Modern web development offers a spectrum of rendering strategies. There is no silver bullet. **Static (SSG)** is fastest but rigid. **Server (SSR)** is dynamic but costly. **Client (SPA)** is interactive but heavy. Newer patterns like **Islands** and **Resumability** attempt to merge the best of these worlds by reducing the JavaScript payload sent to the client.
@@ -77,9 +73,9 @@ Instead of the server waiting for the *entire* page to be ready before sending i
 
 This is SSR, but running on a CDN (Content Delivery Network). The server logic runs physically closer to the user (the "Edge") via Serverless functions.
 
-- **Benefit:** Reduced latency. Your server logic executes in Tokyo if your user is in Tokyo, not Virginia.
+- **Benefit:** Reduced latency. When your user is in Tokyo, your server logic executes in Tokyo, not Virginia.
 
-### Partial Prerendering
+### Partial Prerendering (PPR)
 
 A hybrid approach (popularized recently by frameworks like Next.js). You pre-generate a static "shell" (like a navbar and footer) during the build, but leave "holes" for dynamic content that streams in from the server on request.
 
@@ -100,13 +96,16 @@ Instead of freezing the main thread by hydrating everything at once, the browser
 Popularized by **Astro**. The page is HTML-first by default. Distinct "Islands" of interactivity (React, Vue, Svelte widgets) are isolated.
 
 - **Key Difference:** The empty space between islands is pure HTML. No JavaScript is loaded for it.
-- **Metaphor:** A sea of static content with islands of interactivity.
 
 ### Resumability
 
-Popularized by **Qwik**. Instead of *replaying* the setup logic (hydration) in the browser to attach events, the framework serializes the exact mental state of the application into the HTML. The client "resumes" exactly where the server left off.
+Popularized by **Qwik**. To understand this, you need to understand the flaw of Hydration.
 
-- **Result:** Near-zero JavaScript execution on startup. instant interactivity.
+With Hydration, your browser downloads the HTML, displays it, and then **re-runs** all the framework logic from scratch just to figure out where the event listeners belong. It's like waking up with amnesia and reading your entire diary just to remember into start your day.
+
+Resumability skips this re-run. The server serializes the entire state (event listeners, internal data, promises) into the HTML. The browser doesn't execute any code on load. When you click a button, a tiny piece of JS loads instantly and handles that specific interaction. It "resumes" exactly where the server left off.
+
+- **Result:** Near-zero JavaScript execution on startup, enabling instant interactivity regardless of app size.
 
 ## 4. Architectural Philosophies
 
@@ -117,7 +116,7 @@ These aren't strictly "rendering" modes, but architectural patterns that dictate
 **Content First.** Build a functional experience with just HTML (and maybe CSS). Then, sprinkle JavaScript on top to enhance it. If the JS fails or hasn't loaded, the site still works (e.g., a form submits via standard HTTP POST).
 
 <Aside type="tip">
-  This is a philosophy, not just a tech stack. It ensures your app works on a potato connection.
+  This is a philosophy, not just a tech stack. It ensures your app works on a 3G connection.
 </Aside>
 
 ### Micro Frontends
@@ -128,7 +127,7 @@ These aren't strictly "rendering" modes, but architectural patterns that dictate
 
 ## Conclusion
 
-Choosing a pattern isn't about picking the "most modern" one; it's about matching the architecture to your content.
+Choosing a pattern isn't about picking the "best" one; it's about matching the architecture to your content/need.
 
 - Building a personal blog? **SSG** is king.
 - Building a private dashboard? **SPA** is fine.

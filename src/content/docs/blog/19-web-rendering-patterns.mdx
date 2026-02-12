@@ -57,9 +57,9 @@ These are the "Big Four" approaches that define the corners of the rendering lan
 
 Developers realized that "Build everything once" (SSG) and "Build everything every time" (SSR) were too extreme. We needed a middle ground.
 
-### Incremental Static Generation (ISR)
+### Incremental Static Regeneration (ISR)
 
-Imagine you have 10,000 pages. Building them all takes hours. With Incremental Static Generation (often called ISR), you build the critical ones first. The others are built (or updated) lazily in the background when users request them, then cached.
+Imagine you have 10,000 pages. Building them all takes hours. With Incremental Static Regeneration, you build the critical ones first. The others are built (or updated) lazily in the background when users request them, then cached.
 
 - **Best for:** E-commerce sites, large blogs, news outlets.
 
@@ -101,7 +101,7 @@ Popularized by **Astro**. The page is HTML-first by default. Distinct "Islands" 
 
 Popularized by **Qwik**. To understand this, you need to understand the flaw of Hydration.
 
-With Hydration, your browser downloads the HTML, displays it, and then **re-runs** all the framework logic from scratch just to figure out where the event listeners belong. It's like waking up with amnesia and reading your entire diary just to remember into start your day.
+With Hydration, your browser downloads the HTML, displays it, and then **re-runs** all the framework logic from scratch just to figure out where the event listeners belong. It's like waking up with amnesia and reading your entire diary just to remember how to start your day.
 
 Resumability skips this re-run. The server serializes the entire state (event listeners, internal data, promises) into the HTML. The browser doesn't execute any code on load. When you click a button, a tiny piece of JS loads instantly and handles that specific interaction. It "resumes" exactly where the server left off.
 

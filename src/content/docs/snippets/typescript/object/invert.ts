@@ -26,11 +26,14 @@ export const invert = <
   Obj extends Record<string, unknown>,
   Key extends keyof Obj,
   Value extends Obj[Key] & (string | number),
-  Return extends { [K in Value]: Key },
 >(
   object: Obj,
-): Return =>
-  Object.entries(object).reduce((acc, current) => {
-    acc[current[1] as string] = current[0]
-    return acc
-  }, {} as Return)
+): Record<Value, Key> =>
+  Object.entries(object).reduce(
+    (acc, current) => {
+      const valueKey = current[1] as Value
+      acc[valueKey] = current[0] as Key
+      return acc
+    },
+    {} as Record<Value, Key>,
+  )

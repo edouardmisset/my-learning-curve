@@ -69,11 +69,11 @@
 
   /* Adjust the ":nth-child() number - 1" to allow the appropriate max number of
   elements on a line */
-  & > :nth-last-child(n + 5) {
+  :where(&) > :nth-last-child(n + 5) {
     flex-basis: 100%;
   }
 
-  & > :nth-last-child(n + 5) ~ * {
+  :where(&) > :nth-last-child(n + 5) ~ * {
     flex-basis: 100%;
   }
 }

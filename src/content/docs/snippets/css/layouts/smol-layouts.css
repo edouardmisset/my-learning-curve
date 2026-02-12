@@ -62,7 +62,7 @@
   margin-inline: auto;
 }
 
-.breakout-grid > *:not(.breakout) {
+:where(.breakout-grid) > *:not(.breakout) {
   grid-column: content;
 }
 
@@ -100,7 +100,7 @@
   }
 }
 
-.aspect-ratio-gallery img {
+:where(.aspect-ratio-gallery) img {
   display: block;
   object-fit: cover;
   inline-size: 100%;
@@ -143,7 +143,7 @@
 }
 
 /** Background Picture */
-.background-picture img {
+:where(.background-picture) img {
   --background-img-brightness: 0.45;
   --background-img-saturate: 1.25;
 
@@ -188,17 +188,17 @@
   box-shadow: 0 0 0.5rem hsl(0deg 0% 0% / 35%);
 }
 
-.card-component > img {
+:where(.card-component) > img {
   aspect-ratio: var(--img-ratio);
   object-fit: cover;
   inline-size: 100%;
 }
 
-.card-component > img:first-child {
+:where(.card-component > img:first-child) {
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
-.card-component > img:last-child {
+:where(.card-component) > img:last-child {
   border-radius: 0 0 0.5rem 0.5rem;
   margin-block-start: auto;
 }
@@ -224,7 +224,7 @@ but as a fallback you can chain `:not()` instead */
   font-size: 0.9rem;
 }
 
-.card-component > a {
+:where(.card-component) > a {
   align-self: start;
 }
 
@@ -266,27 +266,17 @@ but as a fallback you can chain `:not()` instead */
   block-size: var(--avatar-size, 3rem);
 }
 
-@media (hover: hover) {
-  .avatar-list li:hover ~ li a {
-    transform: translateX(33%);
-  }
-}
-
-.avatar-list li:focus-within ~ li a {
-  transform: translateX(33%);
-}
-
-.avatar-list img,
-.avatar-list a {
+:where(.avatar-list img),
+:where(.avatar-list a) {
   display: block;
   border-radius: 50%;
 }
 
-.avatar-list a {
+:where(.avatar-list a) {
   transition: transform 180ms ease-in-out;
 }
 
-.avatar-list img {
+:where(.avatar-list img) {
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
@@ -296,13 +286,23 @@ but as a fallback you can chain `:not()` instead */
     0 0 0 0.08em rgb(0 0 0 / 15%);
 }
 
-.avatar-list a:focus {
+:where(.avatar-list a:focus) {
   outline: 2px solid transparent;
 
   /* Double-layer trick to work for dark and light backgrounds */
   box-shadow:
     0 0 0 0.08em hsl(221deg 29% 23%),
     0 0 0 0.12em white;
+}
+
+@media (hover: hover) {
+  :where(.avatar-list li:hover ~ li a) {
+    transform: translateX(33%);
+  }
+}
+
+:where(.avatar-list li:focus-within ~ li a) {
+  transform: translateX(33%);
 }
 
 /** Scroll Snap */
@@ -365,7 +365,7 @@ these custom properties */
 }
 
 /* Demonstration of customizing */
-.focus-styles li:nth-of-type(2) a {
+:where(.focus-styles li:nth-of-type(2) a) {
   --outline-style: dashed;
 }
 
@@ -397,7 +397,7 @@ ul.visited-styles {
   inline-size: fit-content;
 }
 
-.visited-styles a {
+:where(.visited-styles a) {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
@@ -545,7 +545,7 @@ main {
   inset-inline-start: 0;
 }
 
-.article-anchor a {
+:where(.article-anchor a) {
   grid-row-start: 1;
   align-self: start;
   font-size: 1rem;
@@ -568,7 +568,7 @@ main {
   }
 }
 
-.article-anchor a:focus {
+:where(.article-anchor a:focus) {
   outline: 2px solid currentcolor;
   outline-offset: 0.15em;
 }

@@ -20,6 +20,7 @@
     (var(--gap) * (var(--elements) + 1))
   );
   overflow-x: auto;
+  overscroll-behavior: contain;
   scroll-snap-type: x mandatory;
   scroll-padding: var(--gap);
 

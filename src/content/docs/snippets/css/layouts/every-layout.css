@@ -203,6 +203,7 @@
   display: flex;
   block-size: var(--height, auto);
   overflow: auto hidden;
+  overscroll-behavior: contain;
   scrollbar-color: var(--color-light) var(--color-dark);
 
   &::-webkit-scrollbar {
@@ -254,6 +255,7 @@
     --margin: 1rem;
 
     overflow: auto;
+    overscroll-behavior: contain;
     max-inline-size: calc(100% - (var(--margin) * 2));
     max-block-size: calc(100% - (var(--margin) * 2));
   }

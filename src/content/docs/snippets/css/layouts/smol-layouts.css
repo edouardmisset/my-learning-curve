@@ -118,7 +118,7 @@
   font-size: 1.15rem;
 
   /* Help prevent overflow of long words/names/URLs */
-  word-break: break-word;
+  overflow-wrap: break-word;
 
   /* Optional, not supported for all languages */
   hyphens: auto;
@@ -266,7 +266,12 @@ but as a fallback you can chain `:not()` instead */
   block-size: var(--avatar-size, 3rem);
 }
 
-.avatar-list li:hover ~ li a,
+@media (hover: hover) {
+  .avatar-list li:hover ~ li a {
+    transform: translateX(33%);
+  }
+}
+
 .avatar-list li:focus-within ~ li a {
   transform: translateX(33%);
 }
@@ -309,6 +314,7 @@ but as a fallback you can chain `:not()` instead */
 
   /* Enable overflow along our scroll axis */
   overflow-x: auto;
+  overscroll-behavior: contain;
 
   /* Define axis and scroll type, where
   `mandatory` means any scroll attempt will
@@ -485,16 +491,18 @@ main {
   transition: var(--transition-property) var(--transition-duration) ease-in-out;
 }
 
-.rise:hover > * {
-  transform: translateY(-25%);
-}
+@media (hover: hover) {
+  .rise:hover > * {
+    transform: translateY(-25%);
+  }
 
-.rotate:hover > * {
-  transform: rotate(15deg);
-}
+  .rotate:hover > * {
+    transform: rotate(15deg);
+  }
 
-.zoom:hover > * {
-  transform: scale(1.1);
+  .zoom:hover > * {
+    transform: scale(1.1);
+  }
 }
 
 .fade > * {
@@ -502,8 +510,10 @@ main {
   --transition-duration: 500ms;
 }
 
-.fade:hover > * {
-  opacity: 0;
+@media (hover: hover) {
+  .fade:hover > * {
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -550,10 +560,12 @@ main {
   opacity: 0.75;
 }
 
-.article-anchor a:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
-  opacity: 1;
+@media (hover: hover) {
+  .article-anchor a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    opacity: 1;
+  }
 }
 
 .article-anchor a:focus {

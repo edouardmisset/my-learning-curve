@@ -153,8 +153,10 @@
     text-decoration-thickness: max(0.08em, 1px);
     text-underline-offset: 0.15em;
 
-    &:hover {
-      color: color-mix(in oklab, var(--a-color), white 10%);
+    @media (hover: hover) {
+      &:hover {
+        color: color-mix(in oklab, var(--a-color), white 10%);
+      }
     }
 
     &:visited {
@@ -255,7 +257,7 @@ not to see them */
   }
 
   /* Create a root stacking context */
-  :where(#root, #__next, #app) {
+  :where(#root, #app) {
     isolation: isolate;
   }
 }

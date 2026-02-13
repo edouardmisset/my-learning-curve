@@ -1,11 +1,12 @@
 ---
 title: Markdownlint
+date: 2026-01-16
 description: Markdownlint is a linter for Markdown files that enforces consistent formatting and catches common mistakes in your documentation.
 tags: ['markdownlint', 'markdown', 'linting', 'documentation']
 lastModified: 2026-01-16
 ---
 
-import PackageManagers from '~/components/PackageManagers.astro';
+import PackageManagers from '~/components/PackageManagers.astro'
 
 ## What is Markdownlint?
 
@@ -15,7 +16,10 @@ See the [official documentation](https://github.com/DavidAnson/markdownlint).
 
 ## Installation
 
-<PackageManagers pkg="markdownlint-cli2 markdownlint-cli2-formatter-pretty" dev />
+<PackageManagers
+  pkg="markdownlint-cli2 markdownlint-cli2-formatter-pretty"
+  dev
+/>
 
 ## Configuration
 
@@ -30,7 +34,7 @@ This file configures the CLI tool itself (globs, ignores, gitignore support, etc
   "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-cli2-config-schema.json",
   "gitignore": true,
   "globs": ["**/*.{md,mdx}"],
-  "ignores": ["**/node_modules", "**/.astro", "**/dist"]
+  "ignores": ["**/node_modules", "**/.astro", "**/dist"],
 }
 ```
 
@@ -45,9 +49,9 @@ This file configures the linting rules themselves:
   "MD013": false, // Disable line length limit
   "MD033": {
     // Allow specific HTML elements
-    "allowed_elements": ["PackageManagers", "details", "summary"]
+    "allowed_elements": ["PackageManagers", "details", "summary"],
   },
-  "MD041": false // Allow frontmatter before first heading
+  "MD041": false, // Allow frontmatter before first heading
 }
 ```
 
@@ -55,16 +59,11 @@ This file configures the linting rules themselves:
 
 ### Scripts
 
-",
-    "lint:md:fix": "markdownlint-cli2 --fix"
-  }
-}
-
 ```jsonc
-// The globs are now configured in `.markdownlint-cli2.jsonc`.
+// The globs are configured in `.markdownlint-cli2.jsonc`.
   "scripts": {
-    "lint:md": "markdownlint-cli2 \"**/*.{md,mdx}\"",
-    "lint:md:fix": "markdownlint-cli2 --fix \"**/*.{md,mdx}\""
+    "lint:md": "markdownlint-cli2",
+    "lint:md:fix": "markdownlint-cli2 --fix"
   }
 }
 ```
@@ -101,7 +100,9 @@ This ensures markdown files are linted before each commit.
 
 ```markdown
 # Heading 1
+
 ## Heading 2 ✓
+
 #### Heading 4 ✗ (skipped level 3)
 ```
 
@@ -111,7 +112,6 @@ This ensures markdown files are linted before each commit.
 Line 1
 
 Line 2 ✓
-
 
 Line 3 ✗ (too many blank lines above)
 ```
@@ -155,7 +155,9 @@ Disable rules for specific lines:
 
 ```markdown
 <!-- markdownlint-disable MD033 -->
+
 <custom-element>Allowed HTML</custom-element>
+
 <!-- markdownlint-enable MD033 -->
 ```
 

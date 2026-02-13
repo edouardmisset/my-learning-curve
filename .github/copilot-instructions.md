@@ -35,7 +35,7 @@ You are an expert developer working on "My Learning Curve", a personal knowledge
     - `title`: Article heading.
     - `date`: Publication date (YYYY-MM-DD).
     - `excerpt`: Short summary for previews (max ~20 words).
-    - `tags`: Array of lowercased topic strings.
+    - `tags`: Array of Title Case topic strings.
   - **Optional Fields**:
     - `lastUpdated`: Date of last significant change (YYYY-MM-DD).
   - See `src/content.config.ts` for full schema definitions.

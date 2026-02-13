@@ -51,13 +51,16 @@
   "conventionalCommits.promptFooter": false,
   "cSpell.language": "en,fr",
   "cSpell.words": [
+    "Creational",
     "Frontends",
     "frontmatter",
     "Powerlevel",
     "Qwik",
     "Resumability",
     "timeit",
-    "TTFB"
+    "TTFB",
+    "undoable",
+    "wrappee"
   ],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#93e6fc",

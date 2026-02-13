@@ -16,7 +16,8 @@
     "check": "pnpm lint:md && biome check --write . && pnpm typecheck && pnpm style:lint",
     "spell:check": "cspell lint --no-progress --show-context --relative .",
     "prepare": "husky",
-    "update:edit:date": "node --experimental-strip-types scripts/update-frontmatter.ts"
+    "update:edit:date": "node --experimental-strip-types scripts/update-frontmatter.ts",
+    "reset": "rm -rf node_modules pnpm-lock.yaml && pnpm install"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",

@@ -14,7 +14,7 @@ Design patterns are reusable solutions to common design problems, not rules you 
 
 ## Introduction
 
-When code grows, the hardest part is not writing new features, it is keeping changes predictable. Design patterns are a shared language for proven structures so teams can communicate and evolve systems with less friction. They are tools, not trophies, and misusing them can make code harder to maintain.
+When code grows, the hardest part is not writing new features; it is keeping changes predictable. Design patterns are a shared language for proven structures so teams can communicate and evolve systems with less friction. They are tools, not trophies, and misusing them can make code harder to maintain.
 
 These patterns work well with [SOLID principles](/my-learning-curve/blog/11-solid-principles) and help you apply the [DRY principle](/my-learning-curve/blog/10-dry-principle) across different [programming paradigms](/my-learning-curve/blog/17-programming-paradigms).
 
@@ -369,20 +369,20 @@ notifier.send('Build completed');
 
 #### Language-Level Decorators (TypeScript)
 
-These are aspect-oriented programming style and require decorators to be enabled in `tsconfig.json`. They are conceptually similar to the Decorator pattern, but implemented at the language level.
+This follows the **aspect-oriented programming** style. Since TypeScript 5.0, standardized decorators are supported without requiring `experimentalDecorators`.
 
 ```typescript
-function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-  const originalMethod = descriptor.value;
+function Log(originalMethod: any, context: ClassMethodDecoratorContext) {
+  const methodName = String(context.name);
 
-  descriptor.value = function (...args: any[]) {
-    console.log(`Calling ${propertyKey} with args: ${JSON.stringify(args)}`);
-    const result = originalMethod.apply(this, args);
+  function replacementMethod(this: any, ...args: any[]) {
+    console.log(`Calling ${methodName} with args: ${JSON.stringify(args)}`);
+    const result = originalMethod.call(this, ...args);
     console.log(`Result: ${result}`);
     return result;
-  };
+  }
 
-  return descriptor;
+  return replacementMethod;
 }
 
 class UserService {
@@ -639,28 +639,28 @@ These patterns are concerned with algorithms and the assignment of responsibilit
 | Enables loose coupling between publishers and subscribers | |
 
 ```typescript
-interface Observer {
-  update(data: any): void;
+interface Observer<T> {
+  update(data: T): void;
 }
 
-class Newsletter {
-  private subscribers: Observer[] = [];
+class Newsletter<T> {
+  private subscribers: Observer<T>[] = [];
 
-  subscribe(observer: Observer) {
+  subscribe(observer: Observer<T>) {
     this.subscribers.push(observer);
   }
 
-  notify(data: any) {
+  notify(data: T) {
     this.subscribers.forEach(sub => sub.update(data));
   }
 }
 
 // Usage
-class EmailSubscriber implements Observer {
-  update(data: any) { console.log(`Email subscriber received: ${data}`); }
+class EmailSubscriber implements Observer<string> {
+  update(data: string) { console.log(`Email subscriber received: ${data}`); }
 }
 
-const newsletter = new Newsletter();
+const newsletter = new Newsletter<string>();
 newsletter.subscribe(new EmailSubscriber());
 newsletter.notify('New article published!');
 ```
@@ -668,17 +668,17 @@ newsletter.notify('New article published!');
 #### Functional Alternative: Callbacks / Event Emitters
 
 ```typescript
-type Listener = (data: any) => void;
-const createNewsletter = () => {
-  const listeners: Listener[] = [];
+type Listener<T> = (data: T) => void;
+const createNewsletter = <T>() => {
+  const listeners: Listener<T>[] = [];
   return {
-    subscribe: (fn: Listener) => listeners.push(fn),
-    notify: (data: any) => listeners.forEach(fn => fn(data))
+    subscribe: (fn: Listener<T>) => listeners.push(fn),
+    notify: (data: T) => listeners.forEach(fn => fn(data))
   };
 };
 
 // Usage
-const newsletter = createNewsletter();
+const newsletter = createNewsletter<string>();
 newsletter.subscribe((data) => console.log(`Received: ${data}`));
 newsletter.notify('New article!');
 ```
@@ -1330,6 +1330,8 @@ These are not classic GoF patterns, but they are commonly used in modern TypeScr
 - **Module Pattern:** Leverages ES modules as natural singletons for configuration, constants, and shared utilities.
 - **Result/Maybe Types:** Encodes errors and absence as data (e.g., `Result<T, E>` or `Option<T>`) instead of throwing exceptions.
 - **Higher-Order Components/Functions:** Wraps components or functions to add cross-cutting concerns (logging, auth, caching).
+- **Compound Components:** (Concept: UI state sharing) Extremely common in modern Frontend (React/Vue/Svelte) libraries like Radix UI or Headless UI.
+- **Provider Pattern:** (Concept: Dependency Injection via Context) Common in React/Vue ecosystems.
 
 ## Conclusion
 

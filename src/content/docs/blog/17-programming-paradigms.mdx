@@ -72,6 +72,41 @@ Code declares properties of the desired result without specifying detailed state
 
 **Examples:** [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)), [C++](https://en.wikipedia.org/wiki/C%2B%2B), [Python](https://en.wikipedia.org/wiki/Python_(programming_language)), [Ruby](https://en.wikipedia.org/wiki/Ruby_(programming_language)).
 
+**TypeScript Example:**
+
+```typescript
+// Objects encapsulate data and behavior
+class BankAccount {
+  private balance: number
+
+  constructor(initialBalance: number) {
+    this.balance = initialBalance
+  }
+
+  deposit(amount: number): void {
+    this.balance += amount
+  }
+
+  withdraw(amount: number): boolean {
+    if (this.balance >= amount) {
+      this.balance -= amount
+      return true
+    }
+    return false
+  }
+
+  getBalance(): number {
+    return this.balance
+  }
+}
+
+// Using the object
+const account = new BankAccount(1000)
+account.deposit(500)
+account.withdraw(200)
+console.log(account.getBalance()) // 1300
+```
+
 - **Use Cases:** Large-scale enterprise systems, GUI applications, game development, complex software modeling.
 - **Pros:**
   - **Modularity:** Objects are self-contained, making code easier to troubleshoot.
@@ -86,6 +121,30 @@ Code declares properties of the desired result without specifying detailed state
 
 **Examples:** [Haskell](https://en.wikipedia.org/wiki/Haskell), [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)), [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)), [F#](https://en.wikipedia.org/wiki/F_Sharp_(programming_language)), (increasingly) [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://en.wikipedia.org/wiki/TypeScript).
 
+**TypeScript Example:**
+
+```typescript
+// Pure functions with immutable data
+type Transaction = { amount: number; type: 'deposit' | 'withdraw' }
+
+const processTransactions = (
+  initialBalance: number,
+  transactions: Transaction[]
+): number => transactions.reduce((balance, { amount, type }) => type === 'deposit'
+      ? balance + amount
+      : balance - amount
+  , initialBalance)
+
+// Data is immutable, no side effects
+const transactions: Transaction[] = [
+  { amount: 500, type: 'deposit' },
+  { amount: 200, type: 'withdraw' }
+]
+
+const finalBalance = processTransactions(1000, transactions)
+console.log(finalBalance) // 1300
+```
+
 - **Use Cases:** Data transformations, concurrent systems, high-reliability systems (telecoms, finance), distributed systems.
 - **Pros:**
   - **Immutability:** Data doesn't change, eliminating a huge class of bugs related to shared state.
@@ -99,6 +158,34 @@ Code declares properties of the desired result without specifying detailed state
 ### Procedural Programming
 
 **Examples:** [C](https://en.wikipedia.org/wiki/C_(programming_language)), [Go](https://en.wikipedia.org/wiki/Go_(programming_language)), [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)), [Basic](https://en.wikipedia.org/wiki/BASIC).
+
+**TypeScript Example:**
+
+```typescript
+// Step-by-step instructions with shared state
+let balance = 1000
+
+function deposit(amount: number): void {
+  balance = balance + amount
+}
+
+function withdraw(amount: number): boolean {
+  if (balance >= amount) {
+    balance = balance - amount
+    return true
+  }
+  return false
+}
+
+function getBalance(): number {
+  return balance
+}
+
+// Executing procedures in sequence
+deposit(500)
+withdraw(200)
+console.log(getBalance()) // 1300
+```
 
 - **Use Cases:** System-level programming (OS kernels, drivers), embedded systems, simple scripts.
 - **Pros:**

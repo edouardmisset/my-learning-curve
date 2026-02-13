@@ -1,5 +1,5 @@
 ---
-date: 2025-11-19
+date: 2026-02-13
 title: Design Patterns in TypeScript
 excerpt: "A practical guide to the most useful design patterns for full-stack TypeScript developers, with real-world examples."
 tags: ['TypeScript', 'Design Patterns', 'Architecture', 'Best Practices', 'OOP', 'Software Design']
@@ -84,6 +84,10 @@ In TypeScript/ES6, modules are singletons by default.
 
 ```typescript
 // database.ts
+class DatabaseConnection {
+  query(sql: string) { console.log(`Executing: ${sql}`); }
+}
+
 export const db = new DatabaseConnection();
 
 // Usage
@@ -429,14 +433,12 @@ getUserWithLog(1); // Logs: Calling with 1
 | Makes the subsystem easier to use and test | |
 
 ```typescript
+// Simplified facade that hides complex subsystem classes
 class VideoConverterFacade {
   convert(filename: string, format: string): void {
-    const file = new VideoFile(filename);
-    const sourceCodec = CodecFactory.extract(file);
-    const destinationCodec = CodecFactory.get(format);
-    const buffer = BitrateReader.read(filename, sourceCodec);
-    const result = BitrateReader.convert(buffer, destinationCodec);
-    new AudioMixer().fix(result);
+    console.log(`Converting ${filename} to ${format}`);
+    // In reality, this would coordinate multiple subsystem classes:
+    // - VideoFile, CodecFactory, BitrateReader, AudioMixer, etc.
     console.log('Conversion completed');
   }
 }
@@ -1175,6 +1177,8 @@ console.log(exportToXML(square)); // Square(s=5)
 
 ### Null Object
 
+**Note:** This is not one of the original 23 GoF patterns, but a widely-adopted modern pattern.
+
 **The Concept:** Provide an object as a surrogate for the lack of an object of a given type. The Null Object provides intelligent "do nothing" behavior.
 
 **Real-world use case:** Avoiding `if (user !== null)` checks everywhere.
@@ -1221,6 +1225,8 @@ const name = user?.getName() ?? 'Guest';
 ```
 
 ### Semaphore
+
+**Note:** This is a **Concurrency Pattern**, not one of the original GoF Behavioral patterns, but included here for its relevance in modern asynchronous TypeScript applications.
 
 **The Concept:** A semaphore is a synchronization primitive that limits the number of concurrent operations that can access a shared resource. It acts as a gatekeeper, allowing only a specific number of "permits" at any given time.
 

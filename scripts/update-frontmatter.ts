@@ -9,7 +9,7 @@ function updateFileFrontmatter(files = process.argv.slice(2)) {
       const frontmatterRegex = /^---\n([\s\S]*?)\n---/
       const match = content.match(frontmatterRegex)
 
-      if (!match) continue
+      if (!match || content.includes('Template Article')) continue
 
       let frontmatter = match[1]
       const lastUpdatedRegex = /^lastUpdated:.*$/m

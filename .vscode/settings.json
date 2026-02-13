@@ -42,7 +42,7 @@
     "editor.wordWrapColumn": 80
   },
   "[mdx]": {
-    "editor.defaultFormatter": "biomejs.biome",
+    "editor.defaultFormatter": "unifiedjs.vscode-mdx",
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 80
   },
@@ -58,6 +58,7 @@
     "Qwik",
     "Resumability",
     "timeit",
+    "TTFB",
     "TTFB",
     "undoable",
     "wrappee"

@@ -9,10 +9,9 @@
  *
  * @template Obj - An object with string or number keys.
  * @template Key - The keys of the object T.
- * @template Return - The inverted object.
  *
  * @param {Obj} object - The original object to invert.
- * @returns {Return} The new object with inverted keys and values.
+ * @returns {Record<Value, Key>} The new object with inverted keys and values.
  *
  * @example
  * invert({ a: '1', b: '2' });

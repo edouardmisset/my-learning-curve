@@ -194,7 +194,7 @@
   inline-size: 100%;
 }
 
-:where(.card-component > img:first-child) {
+:where(.card-component) > img:first-child {
   border-radius: 0.5rem 0.5rem 0 0;
 }
 

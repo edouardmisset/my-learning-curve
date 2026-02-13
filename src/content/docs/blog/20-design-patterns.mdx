@@ -10,7 +10,7 @@ import Disclaimer from '~/components/Disclaimer.astro';
 
 ## TL;DR
 
-Design patterns are reusable solutions to common design problems, not rules you must follow. Use them when they clarify intent, reduce duplication, or help you scale change. This guide covers core GoF patterns plus modern TypeScript-adjacent patterns, with practical examples and trade-offs.
+Design patterns are reusable solutions to common design problems, not rules you must follow. Use them when they clarify intent, reduce duplication, or help you scale change. This guide covers many GoF patterns plus modern TypeScript-adjacent patterns, with practical examples and trade-offs.
 
 ## Introduction
 
@@ -329,7 +329,7 @@ logger.log('User logged in');
 
 **The Concept:** Lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
 
-**Real-world use case:** Adding logging, caching, or validation to API handlers (common in NestJS or with TS decorators).
+**Real-world use case:** Adding logging, caching, or validation to API handlers (common in NestJS or with TS [decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#handbook-content)).
 
 **When to use:** When you need to add responsibilities to objects dynamically without affecting other objects.
 
@@ -373,7 +373,9 @@ notifier.send('Build completed');
 
 #### Language-Level Decorators (TypeScript)
 
-This follows the **aspect-oriented programming** style. Since TypeScript 5.0, standardized decorators are supported without requiring `experimentalDecorators`.
+This follows the **aspect-oriented programming** style. The [TypeScript decorators handbook](https://www.typescriptlang.org/docs/handbook/decorators.html) covers the legacy (stage 2) decorator implementation, which requires enabling [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators). Standard (stage 3) decorators are supported since TypeScript 5.0 and use different signatures and semantics.
+
+The example below uses the standard (stage 3) decorator shape described in the [TypeScript 5.0 release notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators).
 
 ```typescript
 function Log(originalMethod: any, context: ClassMethodDecoratorContext) {
@@ -497,7 +499,7 @@ api.getData(); // Returns cached data
 
 **The Concept:** Lets you split a large class or a set of closely related classes into two separate hierarchies—abstraction and implementation—which can be developed independently of each other.
 
-**Real-world use case:** separating a UI (View) from the underlying data source (API vs LocalStorage), or a remote control (Abstraction) working with different devices (Implementation).
+**Real-world use case:** Separating a UI (View) from the underlying data source (API vs LocalStorage), or a remote control (Abstraction) working with different devices (Implementation).
 
 **When to use:** When you want to divide and organize a class with multiple variants into separate hierarchies.
 
@@ -636,7 +638,7 @@ These patterns are concerned with algorithms and the assignment of responsibilit
 
 | Benefits | Drawbacks |
 | --- | --- |
-| Establishes dynamic relationships between objects at runtime | Subscribers are notified in random order |
+| Establishes dynamic relationships between objects at runtime | Subscriber notification order is not guaranteed |
 | Follows [Open/Closed Principle](/my-learning-curve/blog/11-solid-principles#o---openclosed-principle-ocp) (add new subscribers without modifying publisher) | Can lead to memory leaks if subscribers aren't properly unsubscribed |
 | Enables loose coupling between publishers and subscribers | |
 
@@ -802,7 +804,7 @@ auth.handle('guest'); // Stops at auth
 
 ### Command
 
-**The Concept:** Turns a request into a stand-alone object that contains all information about the request. This transformation lets you pass requests as a method arguments, delay or queue a request's execution, and support undoable operations.
+**The Concept:** Turns a request into a stand-alone object that contains all information about the request. This transformation lets you pass requests as arguments to a method, delay or queue a request's execution, and support undoable operations.
 
 **Real-world use case:** Redux actions, implementing "Undo/Redo" functionality in editors, or job queues.
 

@@ -1,9 +1,9 @@
 ---
 date: 2025-11-20
 title: Data Structures
-excerpt: "Data structures are specialized formats for organizing, processing, retrieving and storing data. Choosing the right one can significantly impact your application's performance and code readability."
+excerpt: "Data structures organize, process, retrieve, and store data efficiently. Choosing the right one significantly impacts application performance and code readability."
 tags: [ 'TypeScript', 'Data Structures', 'Arrays', 'Objects', 'Maps', 'Sets' ]
-lastUpdated: 2025-11-20
+lastUpdated: 2026-02-14
 ---
 import Disclaimer from '~/components/Disclaimer.astro'
 import { Aside } from '@astrojs/starlight/components'
@@ -13,19 +13,27 @@ import { Aside } from '@astrojs/starlight/components'
 > Data structure is a data organization and storage format that is usually
 > chosen for efficient access to data.
 >
-> ~ Wikipedia
+> ~ [Wikipedia](https://en.wikipedia.org/wiki/Data_structure)
 
 {/* <!-- truncate --> */}
 
-## The concept
+## TL;DR
+
+Data structures are the shapes your data takes so your code stays readable,
+performant, and maintainable. In JavaScript, Arrays, Objects, Maps, and Sets
+cover most day-to-day needs, while WeakMaps and WeakSets handle object-linked
+metadata without memory leaks. Picking the right tool clarifies intent and
+reduces accidental complexity.
+
+## Introduction
 
 As developers, we manipulate data constantly. Whether it's state
 management in a component, processing API responses on the server, or
 optimizing database queries, the way we structure our data matters.
 
-Choosing the appropriate data structure is about writing code that is: 
+Choosing the appropriate data structure is about writing code that is:
 1. *Readable*: Intent is clear.
-2. *Performant*: Operations like search, insertion and deletion are optimized
+2. *Performant*: Operations like search, insertion, and deletion are optimized.
 3. *Maintainable*: Easy to debug and extend.
 
 In the TypeScript/JavaScript ecosystem, we have several built-in structures at
@@ -56,9 +64,10 @@ const todos: Todo[] = [
 todos.forEach(todo => console.log(todo.text));
 ```
 
-### Objects (Hash Tables)
+### Objects (Dictionaries)
 
-Key-value pairs. Perfect for looking up values by a known key.
+Key-value pairs with string or symbol keys. Great for simple records and
+fast lookups, but keep key coercion and prototype properties in mind.
 
 **Use case**: Storing user profiles, configuration settings, or indexing data by
 ID for O(1) access. 
@@ -96,18 +105,19 @@ console.log(selectedTags.size); // 2
 ### Maps
 
 Similar to Objects, but with some key differences: keys can be of any type (not
-just strings/symbols), maintains insertion order, and has a `size` property. 
+just strings/symbols), **maintains insertion order** (guaranteed since ES2015), and has a `size` property. 
 
 **Use case**: Caching API responses where keys might be complex objects or when
 frequent additions/removals occur. 
 
 ```typescript
 // Simple in-memory cache
-const apiCache = new Map<string, any>();
+const apiCache = new Map<string, Promise<Response>>();
 
-function getCachedData(url: string) {
-  if (apiCache.has(url)) {
-    return apiCache.get(url);
+function getCachedData(url: string): Promise<Response> {
+  const cached = apiCache.get(url);
+  if (cached) {
+    return cached;
   }
   const data = fetch(url); // Assume this function fetches data
   apiCache.set(url, data);
@@ -116,15 +126,13 @@ function getCachedData(url: string) {
 ```
 
 <Aside type="tip" title="When to use Maps vs Objects">
-- Use maps over objects when keys are unknown until run time, and when all keys
-  are the same type and all values are the same type. 
-- Use maps if there is a need to store primitive values as keys because object
-  treats each key as a string whether it's a number value, boolean value or any
-  other primitive value. 
-- Use objects when there is logic that operates on individual elements.
+- Use Maps when keys are unknown until runtime, when you add/remove entries
+  frequently, or when you need guaranteed insertion order.
+- Use Maps if you need non-string keys (e.g., objects, functions, or any primitive).
+- Use Objects for fixed-shape records, JSON-like data, and when you need property access syntax.
 </Aside>
 
-## (Less Common / More specific) JS Built-in Data Structures
+## (Less Common / More Specific) JS Built-in Data Structures
 
 ### WeakMaps
 
@@ -192,12 +200,26 @@ Both the key equality of Map objects and the value equality of Set objects are b
 - `NaN` is considered equal to itself (contrary to ===).
 </Aside>
 
+## Conclusion
+
+Data structures are trade-offs. Arrays and Objects are the everyday tools,
+Maps and Sets add stronger semantics, and WeakMaps/WeakSets help you attach
+data without blocking garbage collection. The best choice is the one that
+makes intent obvious and operations efficient for your use case.
+
 ## Resources
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Data_structure) article on Data Structures
+- MDN reference for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+- MDN reference for [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+- MDN reference for [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
+- MDN reference for [WeakSet](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet)
 - Data Structures in JavaScript by
   [freeCodeCamp](https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/) 
 - MDN Documentation on [Keyed
-  Collections](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections) 
+  Collections](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections)
+
+**Next**: Dive deeper into [Advanced Data Structures](/my-learning-curve/blog/15-advanced-data-structures/)
+like Linked Lists, Trees, Graphs, and Tries.
 
 <Disclaimer />

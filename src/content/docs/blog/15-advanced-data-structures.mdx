@@ -86,7 +86,7 @@ like an Array would.
 ```typescript
 class ListNode<T> {
   value: T;
-  next: ListNode<T> | null = null;
+  next: ListNode<T> | undefined = undefined;
 
   constructor(value: T) {
     this.value = value;
@@ -94,7 +94,7 @@ class ListNode<T> {
 }
 
 class LinkedList<T> {
-  head: ListNode<T> | null = null;
+  head: ListNode<T> | undefined = undefined;
 
   /** O(1) insertion at the start */
   prepend(value: T): void {
@@ -108,7 +108,7 @@ const list = new LinkedList<string>();
 list.prepend('Third');
 list.prepend('Second');
 list.prepend('First');
-// Structure: First -> Second -> Third -> null
+// Structure: First -> Second -> Third -> undefined
 ```
 
 ### Doubly Linked List
@@ -120,8 +120,8 @@ Each node has pointers to both the **next** and **previous** nodes.
 ```typescript
 class DoublyNode<T> {
   value: T;
-  next: DoublyNode<T> | null = null;
-  prev: DoublyNode<T> | null = null;
+  next: DoublyNode<T> | undefined = undefined;
+  prev: DoublyNode<T> | undefined = undefined;
 
   constructor(value: T) {
     this.value = value;
@@ -129,8 +129,8 @@ class DoublyNode<T> {
 }
 
 class DoublyLinkedList<T> {
-  head: DoublyNode<T> | null = null;
-  tail: DoublyNode<T> | null = null;
+  head: DoublyNode<T> | undefined = undefined;
+  tail: DoublyNode<T> | undefined = undefined;
 
   /** O(1) insertion at the end */
   append(value: T): void {
@@ -157,27 +157,27 @@ class DoublyLinkedList<T> {
   }
 
   /** O(1) deletion from the end */
-  removeLast(): T | null {
-    if (!this.tail) return null;
+  removeLast(): T | undefined {
+    if (!this.tail) return undefined;
     const value = this.tail.value;
     if (this.head === this.tail) {
-      this.head = this.tail = null;
+      this.head = this.tail = undefined;
     } else {
       this.tail = this.tail.prev;
-      this.tail!.next = null;
+      this.tail!.next = undefined;
     }
     return value;
   }
 
   /** O(1) deletion from the start */
-  removeFirst(): T | null {
-    if (!this.head) return null;
+  removeFirst(): T | undefined {
+    if (!this.head) return undefined;
     const value = this.head.value;
     if (this.head === this.tail) {
-      this.head = this.tail = null;
+      this.head = this.tail = undefined;
     } else {
       this.head = this.head.next;
-      this.head!.prev = null;
+      this.head!.prev = undefined;
     }
     return value;
   }
@@ -241,8 +241,8 @@ is *larger*.
 ```typescript
 class BinaryNode<T> {
   value: T;
-  left: BinaryNode<T> | null = null;
-  right: BinaryNode<T> | null = null;
+  left: BinaryNode<T> | undefined = undefined;
+  right: BinaryNode<T> | undefined = undefined;
 
   constructor(value: T) {
     this.value = value;
@@ -250,7 +250,7 @@ class BinaryNode<T> {
 }
 
 class BinarySearchTree<T> {
-  root: BinaryNode<T> | null = null;
+  root: BinaryNode<T> | undefined = undefined;
 
   insert(value: T): void {
     const newNode = new BinaryNode(value);
@@ -274,7 +274,7 @@ class BinarySearchTree<T> {
   }
 }
 
-const bst = new BinarySearchTree();
+const bst = new BinarySearchTree<number>();
 bst.insert(10);
 bst.insert(5);
 bst.insert(15);

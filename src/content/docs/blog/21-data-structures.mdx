@@ -1,0 +1,225 @@
+---
+date: 2026-02-14
+title: Data Structures
+excerpt: "Data structures organize, process, retrieve, and store data efficiently. Choosing the right one significantly impacts application performance and code readability."
+tags: [ 'TypeScript', 'Data Structures', 'Arrays', 'Objects', 'Maps', 'Sets' ]
+lastUpdated: 2026-02-14
+---
+import Disclaimer from '~/components/Disclaimer.astro'
+import { Aside } from '@astrojs/starlight/components'
+
+## Definition
+
+> Data structure is a data organization and storage format that is usually
+> chosen for efficient access to data.
+>
+> ~ [Wikipedia](https://en.wikipedia.org/wiki/Data_structure)
+
+{/* <!-- truncate --> */}
+
+## TL;DR
+
+Data structures are the shapes your data takes so your code stays readable,
+performant, and maintainable. In JavaScript, Arrays, Objects, Maps, and Sets
+cover most day-to-day needs, while WeakMaps and WeakSets handle object-linked
+metadata without memory leaks. Picking the right tool clarifies intent and
+reduces accidental complexity.
+
+## Introduction
+
+As developers, we manipulate data constantly. Whether it's state
+management in a component, processing API responses on the server, or
+optimizing database queries, the way we structure our data matters.
+
+Choosing the appropriate data structure is about writing code that is:
+1. *Readable*: Intent is clear.
+2. *Performant*: Operations like search, insertion, and deletion are optimized.
+3. *Maintainable*: Easy to debug and extend.
+
+In the TypeScript/JavaScript ecosystem, we have several built-in structures at
+our disposal. 
+
+## JS Built-in Data Structures
+
+### Arrays (Lists)
+
+**Ordered** collections of items. 
+
+**Use case**: Rendering a list of components.
+
+```typescript
+// A simple todo list
+interface Todo {
+  id: number;
+  text: string;
+  done: boolean;
+}
+
+const todos: Todo[] = [
+  { id: 1, text: 'Learn TypeScript', done: true },
+  { id: 2, text: 'Master Data Structures', done: false },
+];
+
+// Iterating is cheap and easy
+todos.forEach(todo => console.log(todo.text));
+```
+
+### Objects (Dictionaries)
+
+Key-value pairs with string or symbol keys. Great for simple records and
+fast lookups, but keep key coercion and prototype properties in mind.
+
+**Use case**: Storing user profiles, configuration settings, or indexing data by
+ID for O(1) access. 
+
+```typescript
+// Indexing users by ID for instant lookup
+const usersById: Record<string, { name: string; role: string }> = {
+  'u-123': { name: 'Alice', role: 'admin' },
+  'u-456': { name: 'Bob', role: 'editor' },
+};
+
+// Instant access without looping
+const alice = usersById['u-123'];
+```
+
+### Sets
+
+Collections of *unique* values.
+
+**Use case**: Managing selected filters, tracking visited URLs, ensuring no
+duplicate tags. 
+
+```typescript
+// Managing selected tags in a filter component
+const selectedTags = new Set<string>();
+
+selectedTags.add('react');
+selectedTags.add('typescript');
+selectedTags.add('react'); // Duplicate is ignored!
+
+console.log(selectedTags.has('typescript')); // true
+console.log(selectedTags.size); // 2
+```
+
+### Maps
+
+Similar to Objects, but with some key differences: keys can be of any type (not
+just strings/symbols), **maintains insertion order** (guaranteed since ES2015), and has a `size` property. 
+
+**Use case**: Caching API responses where keys might be complex objects or when
+frequent additions/removals occur. 
+
+```typescript
+// Simple in-memory cache
+const apiCache = new Map<string, Promise<Response>>();
+
+function getCachedData(url: string): Promise<Response> {
+  const cached = apiCache.get(url);
+  if (cached) {
+    return cached;
+  }
+  const data = fetch(url); // Assume this function fetches data
+  apiCache.set(url, data);
+  return data;
+}
+```
+
+<Aside type="tip" title="When to use Maps vs Objects">
+- Use Maps when keys are unknown until runtime, when you add/remove entries
+  frequently, or when you need guaranteed insertion order.
+- Use Maps if you need non-string keys (e.g., objects, functions, or any primitive).
+- Use Objects for fixed-shape records, JSON-like data, and when you need property access syntax.
+</Aside>
+
+## (Less Common / More Specific) JS Built-in Data Structures
+
+### WeakMaps
+
+A `WeakMap` is like a `Map`, but with key differences: keys *must* be objects
+(not primitives), and the references are "weak" — meaning if there are no other
+references to the key object, it can be garbage collected.
+
+**Use case**: Storing private data for objects, caching computed values without
+preventing garbage collection, or associating metadata with DOM nodes.
+
+```typescript
+// Storing private data without memory leaks
+const privateData = new WeakMap<object, { secret: string }>();
+
+// Factory function to create users
+const createUser = (name: string, secret: string) => {
+  const user = { name };
+  privateData.set(user, { secret });
+  return user;
+};
+
+// Pure function to retrieve secret
+const getSecret = (user: object) => privateData.get(user)?.secret;
+
+// Usage
+const alice = createUser('Alice', 'my-secret');
+console.log(getSecret(alice)); // 'my-secret'
+
+// When alice is no longer referenced, 
+// its entry in privateData is automatically cleaned up
+```
+
+### WeakSets
+
+A `WeakSet` is similar to a `Set`, but only holds *objects* (not primitives) and
+the references are "weak" — objects can be garbage collected if there are no
+other references to them. Unlike `Set`, you can't iterate over a `WeakSet` or
+get its size.
+
+**Use case**: Tracking objects without preventing garbage collection, marking
+objects as processed, or managing object-based flags.
+
+```typescript
+// Tracking which DOM nodes have been initialized
+const initializedNodes = new WeakSet<HTMLElement>();
+
+function initializeElement(element: HTMLElement) {
+  if (initializedNodes.has(element)) {
+    return; // Already initialized
+  }
+  
+  // ... perform initialization ...
+  initializedNodes.add(element);
+}
+
+// When the element is removed from DOM and no longer referenced,
+// it's automatically removed from the WeakSet
+```
+
+<Aside type="caution" title="Key and value equality of Map and Set">
+Both the key equality of Map objects and the value equality of Set objects are based on the **SameValueZero** algorithm:
+
+- Equality works like the identity comparison operator ===.
+- -0 and +0 are considered equal.
+- `NaN` is considered equal to itself (contrary to ===).
+</Aside>
+
+## Conclusion
+
+Data structures are trade-offs. Arrays and Objects are the everyday tools,
+Maps and Sets add stronger semantics, and WeakMaps/WeakSets help you attach
+data without blocking garbage collection. The best choice is the one that
+makes intent obvious and operations efficient for your use case.
+
+## Resources
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Data_structure) article on Data Structures
+- MDN reference for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+- MDN reference for [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+- MDN reference for [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
+- MDN reference for [WeakSet](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet)
+- Data Structures in JavaScript by
+  [freeCodeCamp](https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/) 
+- MDN Documentation on [Keyed
+  Collections](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections)
+
+**Next**: Dive deeper into [Advanced Data Structures](/my-learning-curve/blog/15-advanced-data-structures/)
+like Linked Lists, Trees, Graphs, and Tries.
+
+<Disclaimer />

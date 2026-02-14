@@ -1,0 +1,432 @@
+---
+date: 2026-02-14
+title: Advanced Data Structures
+excerpt: "Moving beyond arrays and objects: exploring Stacks, Queues, Linked Lists, Trees, Graphs, and Tries."
+tags: [ 'TypeScript', 'Data Structures', 'Linked Lists', 'Trees', 'Binary Search Trees', 'Graphs', 'Tries' ]
+lastUpdated: 2026-02-14
+---
+import Disclaimer from '~/components/Disclaimer.astro'
+
+## TL;DR
+
+Stacks and queues model LIFO/FIFO workflows, linked lists avoid costly shifts,
+trees represent hierarchies, graphs model networks, and tries power fast
+prefix lookups. You rarely need these for every app, but knowing them helps you
+reach for the right structure when performance or modeling starts to matter.
+
+{/* <!-- truncate --> */}
+
+## Introduction
+
+While [Arrays and Objects](/my-learning-curve/blog/14-data-structures/) cover most day-to-day needs,
+understanding advanced structures unlocks the ability to solve more complex
+problems.
+
+## Stacks & Queues
+
+While not native classes in JS (usually implemented with Arrays), these *patterns*
+are extremely useful. 
+
+- **Stack (LIFO)**: Last In, First Out. Think "Undo" functionality.
+- **Queue (FIFO)**: First In, First Out. Think background job processing. 
+
+### Usage with Arrays
+
+```typescript
+// Stack: Undo history
+const history: string[] = [];
+history.push('Type A');
+history.push('Type B');
+const lastAction = history.pop(); // 'Type B'
+
+// Queue: Task processing
+const taskQueue: string[] = [];
+taskQueue.push('Email User');
+taskQueue.push('Generate Report');
+const nextTask = taskQueue.shift(); // 'Email User'
+```
+
+### Simple Class Implementation
+
+```typescript
+class Stack<T> {
+  private items: T[] = [];
+
+  /** Add item on top of the stack */
+  push(item: T): void {
+    this.items.push(item);
+  }
+
+  /** Remove and return the top item from the stack */
+  pop(): T | undefined {
+    if (this.items.length === 0) return;
+    return this.items.pop();
+  }
+
+  /** View the top item without removing it */
+  peek(): T | undefined {
+    return this.items[this.items.length - 1];
+  }
+}
+
+class Queue<T> {
+  private items: T[] = [];
+
+  /** Add item to the end of the queue */
+  enqueue(item: T): void {
+    this.items.push(item);
+  }
+
+  /** 
+   * Remove and return the item at the front of the queue 
+   * Note: shift() is O(n). For true O(1) operations, use a Linked List.
+   */
+  dequeue(): T | undefined {
+    if (this.items.length === 0) return;
+    return this.items.shift();
+  }
+
+  /** View the front item without removing it */
+  peek(): T | undefined {
+    return this.items[0];
+  }
+}
+```
+
+## Linked Lists
+
+A linear collection of data elements where each element points to the next.
+
+### Singly Linked List
+
+Each node contains data and a reference (pointer) to the next node.
+
+**Use case**: An implementation of a Stack or Queue where you need constant-time
+O(1) insertion and deletion at the beginning, without shifting all elements
+like an Array would. 
+
+```typescript
+class ListNode<T> {
+  value: T;
+  next: ListNode<T> | undefined = undefined;
+
+  constructor(value: T) {
+    this.value = value;
+  }
+}
+
+class LinkedList<T> {
+  head: ListNode<T> | undefined = undefined;
+
+  /** O(1) insertion at the start */
+  prepend(value: T): void {
+    const newNode = new ListNode(value);
+    newNode.next = this.head;
+    this.head = newNode;
+  }
+}
+
+const list = new LinkedList<string>();
+list.prepend('Third');
+list.prepend('Second');
+list.prepend('First');
+// Structure: First -> Second -> Third -> undefined
+```
+
+### Doubly Linked List
+
+Each node has pointers to both the **next** and **previous** nodes.
+
+**Use case**: Browser history (Back/Forward buttons), or a music playlist.
+
+```typescript
+class DoublyNode<T> {
+  value: T;
+  next: DoublyNode<T> | undefined = undefined;
+  prev: DoublyNode<T> | undefined = undefined;
+
+  constructor(value: T) {
+    this.value = value;
+  }
+}
+
+class DoublyLinkedList<T> {
+  head: DoublyNode<T> | undefined = undefined;
+  tail: DoublyNode<T> | undefined = undefined;
+
+  /** O(1) insertion at the end */
+  append(value: T): void {
+    const newNode = new DoublyNode(value);
+    if (!this.tail) {
+      this.head = this.tail = newNode;
+    } else {
+      newNode.prev = this.tail;
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+  }
+
+  /** O(1) insertion at the start */
+  prepend(value: T): void {
+    const newNode = new DoublyNode(value);
+    if (!this.head) {
+      this.head = this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head.prev = newNode;
+      this.head = newNode;
+    }
+  }
+
+  /** O(1) deletion from the end */
+  removeLast(): T | undefined {
+    if (!this.tail) return undefined;
+    const value = this.tail.value;
+    if (this.head === this.tail) {
+      this.head = this.tail = undefined;
+    } else {
+      this.tail = this.tail.prev;
+      this.tail!.next = undefined;
+    }
+    return value;
+  }
+
+  /** O(1) deletion from the start */
+  removeFirst(): T | undefined {
+    if (!this.head) return undefined;
+    const value = this.head.value;
+    if (this.head === this.tail) {
+      this.head = this.tail = undefined;
+    } else {
+      this.head = this.head.next;
+      this.head!.prev = undefined;
+    }
+    return value;
+  }
+}
+
+// Usage example: Music player playlist
+const playlist = new DoublyLinkedList<string>();
+playlist.append('Bohemian Rhapsody');
+playlist.append('Stairway to Heaven');
+playlist.append('Hotel California');
+
+// Navigate through the playlist
+let currentTrack = playlist.head;
+console.log(currentTrack?.value); // 'Bohemian Rhapsody'
+
+currentTrack = currentTrack?.next; // Move forward
+console.log(currentTrack?.value); // 'Stairway to Heaven'
+
+currentTrack = currentTrack?.prev; // Move backward
+console.log(currentTrack?.value); // 'Bohemian Rhapsody'
+```
+
+## Trees
+
+A hierarchical structure consisting of nodes, with a single root node and
+children nodes. 
+
+**Use case**: The **DOM** (Document Object Model), file systems, and client-side
+route trees are all examples of tree structures.
+
+```typescript
+class TreeNode<T> {
+  value: T;
+  children: TreeNode<T>[] = [];
+
+  constructor(value: T) {
+    this.value = value;
+  }
+
+  addChild(node: TreeNode<T>): void {
+    this.children.push(node);
+  }
+}
+
+// Modeling a simple HTML structure
+const html = new TreeNode('html');
+const body = new TreeNode('body');
+const div = new TreeNode('div');
+const p = new TreeNode('p');
+
+html.addChild(body);
+body.addChild(div);
+div.addChild(p);
+```
+
+### Binary Search Trees (BST)
+
+A specific type of tree where each node has *at most* two children (left and
+right). For any node, the left child is *smaller* and the right child
+is *larger* (or equal, depending on how duplicates are handled).
+
+**Use case**: Efficient searching and sorting — O(log n) for *balanced* trees.
+Note: An unbalanced BST (e.g., inserting sorted values) degrades to O(n).
+
+```typescript
+class BinaryNode<T extends number | string> {
+  value: T;
+  left: BinaryNode<T> | undefined = undefined;
+  right: BinaryNode<T> | undefined = undefined;
+
+  constructor(value: T) {
+    this.value = value;
+  }
+}
+
+class BinarySearchTree<T extends number | string> {
+  root: BinaryNode<T> | undefined = undefined;
+
+  insert(value: T): void {
+    const newNode = new BinaryNode(value);
+    if (!this.root) {
+      this.root = newNode;
+      return;
+    }
+    this.insertNode(this.root, newNode);
+  }
+
+  private insertNode(node: BinaryNode<T>, newNode: BinaryNode<T>): void {
+    if (newNode.value < node.value) {
+      // Go Left
+      if (!node.left) node.left = newNode;
+      else this.insertNode(node.left, newNode);
+    } else {
+      // Go Right
+      if (!node.right) node.right = newNode;
+      else this.insertNode(node.right, newNode);
+    }
+  }
+
+  search(value: T): boolean {
+    return this.searchNode(this.root, value);
+  }
+
+  private searchNode(node: BinaryNode<T> | undefined, value: T): boolean {
+    if (!node) return false;
+    if (value === node.value) return true;
+    return value < node.value
+      ? this.searchNode(node.left, value)
+      : this.searchNode(node.right, value);
+  }
+}
+
+const bst = new BinarySearchTree<number>();
+bst.insert(10);
+bst.insert(5);
+bst.insert(15);
+//       10
+//      /  \
+//     5    15
+
+bst.search(5);  // true
+bst.search(20); // false
+```
+
+## Graphs
+
+A collection of nodes (vertices) and edges that connect pairs of nodes. Graphs
+can be directed (Twitter followers) or undirected (Facebook friends). 
+
+**Use case**: Social networks, recommendation engines ("People who bought X also
+bought Y"), and routing algorithms (Google Maps). 
+
+```typescript
+class Graph<T> {
+  // Adjacency List: Map<Node, Array<Neighbors>>
+  adjacencyList: Map<T, T[]> = new Map();
+
+  addVertex(vertex: T): void {
+    if (this.adjacencyList.has(vertex)) return;
+
+    this.adjacencyList.set(vertex, []);
+  }
+
+  addEdge(vertex1: T, vertex2: T): void {
+    // Ensure vertices exist before adding edge
+    this.addVertex(vertex1);
+    this.addVertex(vertex2);
+    this.adjacencyList.get(vertex1)!.push(vertex2);
+    this.adjacencyList.get(vertex2)!.push(vertex1); // Undirected
+  }
+}
+
+const socialNetwork = new Graph<string>();
+socialNetwork.addVertex('Alice');
+socialNetwork.addVertex('Bob');
+socialNetwork.addVertex('Charlie');
+
+socialNetwork.addEdge('Alice', 'Bob');
+socialNetwork.addEdge('Alice', 'Charlie');
+// Alice is friends with Bob and Charlie
+```
+
+## Tries (Prefix Trees)
+
+A specialized tree used to store associative data structures. A node's position
+in the tree defines the key with which it is associated. 
+
+**Use case**: Autocomplete / Typeahead systems. If you type "Re", a Trie can
+efficiently find "React", "Redux", "Remix" without scanning a whole database. 
+
+```typescript
+class TrieNode {
+  children: Map<string, TrieNode> = new Map();
+  isEndOfWord: boolean = false;
+}
+
+class Trie {
+  root: TrieNode = new TrieNode();
+
+  insert(word: string): void {
+    let current = this.root;
+    for (const char of word) {
+      if (!current.children.has(char)) {
+        current.children.set(char, new TrieNode());
+      }
+      current = current.children.get(char)!;
+    }
+    current.isEndOfWord = true;
+  }
+
+  search(word: string): boolean {
+    let current = this.root;
+    for (const char of word) {
+      const child = current.children.get(char);
+      if (!child) return false;
+      current = child;
+    }
+    return current.isEndOfWord;
+  }
+}
+
+const autocomplete = new Trie();
+autocomplete.insert('react');
+autocomplete.insert('redux');
+// Efficiently stores 'r', 'e', then branches for 'a' and 'd'
+```
+
+## Conclusion
+
+Advanced data structures help you model problems more naturally and push
+performance when arrays and objects start to strain. You do not need them for
+every project, but keeping them in your toolbox makes the next hard problem
+feel a lot smaller.
+
+## Resources
+
+- Visualizing Data Structures with [VisuAlgo](https://visualgo.net/en)
+- Singly Linked List by [Nicholas C.
+  Zakas](https://humanwhocodes.com/blog/2009/04/13/computer-science-in-javascript-linked-list/) 
+- Doubly Linked List by [Nicholas C.
+  Zakas](https://humanwhocodes.com/blog/2009/04/21/computer-science-in-javascript-doubly-linked-lists/) 
+- Binary Search Tree by [Nicholas C.
+  Zakas](https://humanwhocodes.com/blog/2009/06/09/computer-science-in-javascript-binary-search-tree-part-1/)
+- Other data structures by Fireship.io on
+  [YouTube](https://www.youtube.com/watch?v=6fnmXX8RK0s)
+
+**Previous**: Revisit [Data Structures](/my-learning-curve/blog/14-data-structures/) for the JS
+basics.
+
+<Disclaimer />

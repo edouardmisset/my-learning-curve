@@ -42,8 +42,8 @@
   }
 
   :where(html) {
-    --text-1: light-dark(hsl(0deg 0% 14%), hsl(0, 0%, 94%));
-    --surface-1: light-dark(hsl(0, 0%, 94%), hsl(0deg 0% 14%));
+    --text-1: light-dark(hsl(0deg 0% 14%), hsl(0deg 0% 94%));
+    --surface-1: light-dark(hsl(0deg 0% 94%), hsl(0deg 0% 14%));
 
     font-weight: 400;
     font-family: system-ui, sans-serif;
@@ -52,10 +52,9 @@
     background-color: var(--surface-1);
     color: var(--text-1);
     font-synthesis: none;
-    text-rendering: optimizeLegibility;
+    text-rendering: optimizelegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     hanging-punctuation: first last;
     animation-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
@@ -115,7 +114,6 @@
   :where(img, svg, picture, video) {
     max-inline-size: 100%;
     block-size: auto;
-
     display: block;
     vertical-align: middle;
     font-style: italic;
@@ -124,13 +122,15 @@
   /* Remove stroke and set fill color to the inherited font color */
   :where(svg) {
     stroke: none;
-    fill: currentColor;
+    fill: currentcolor;
   }
+
   /* SVG's without a fill attribute */
   :where(svg):where(:not([fill])) {
     /* Remove fill and set stroke color to the inherited font color */
-    stroke: currentColor;
+    stroke: currentcolor;
     fill: none;
+
     /* Rounded stroke */
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -141,20 +141,22 @@
     inline-size: 5rem;
   }
 
-  /* !!!!!!! THIS NEEDS TESTING !!!!!*/
+  /* !!!!!!! THIS NEEDS TESTING !!!!! */
   :where(a) {
     --a-color: hsl(235deg 100% 70%);
 
     color: var(--a-color);
     font-weight: 500;
-
     text-decoration-skip-ink: auto;
+
     /* Relatively sized thickness and offset */
     text-decoration-thickness: max(0.08em, 1px);
     text-underline-offset: 0.15em;
 
-    &:hover {
-      color: color-mix(in oklab, var(--a-color), white 10%);
+    @media (hover: hover) {
+      &:hover {
+        color: color-mix(in oklab, var(--a-color), white 10%);
+      }
     }
 
     &:visited {
@@ -164,16 +166,12 @@
 
   :where(input:user-valid) {
     outline-offset: 2px;
-    outline-color: greenyellow;
-    outline-style: solid;
-    outline-width: 2px;
+    outline: greenyellow solid 2px;
   }
 
   :where(input:user-invalid) {
     outline-offset: 2px;
-    outline-color: tomato;
-    outline-style: solid;
-    outline-width: 2px;
+    outline: tomato solid 2px;
   }
 
   :where(input:is(:-webkit-autofill, :autofill)) {
@@ -190,7 +188,7 @@
   :where(input, button, textarea, select) {
     letter-spacing: inherit;
     word-spacing: inherit;
-    color: currentColor;
+    color: currentcolor;
   }
 
   :where(button, label, select, summary, [role="button"], [role="option"]) {
@@ -209,10 +207,12 @@
   :where(textarea:not([rows])) {
     min-block-size: 10em;
   }
+
   /* Change textarea resize to vertical only and block only if the browser supports that */
   :where(textarea) {
     resize: vertical;
   }
+
   @supports (resize: block) {
     :where(textarea) {
       resize: block;
@@ -240,7 +240,7 @@ not to see them */
   :focus-visible {
     --outline-size: max(2px, 0.15em);
 
-    outline: var(--outline-size) solid currentColor;
+    outline: var(--outline-size) solid currentcolor;
     outline-offset: var(--outline-size);
   }
 
@@ -257,7 +257,7 @@ not to see them */
   }
 
   /* Create a root stacking context */
-  :where(#root, #__next, #app) {
+  :where(#root, #app) {
     isolation: isolate;
   }
 }
@@ -266,6 +266,7 @@ not to see them */
   /* forces light color-scheme */
   color-scheme: light;
 }
+
 .dark {
   /* forces dark color-scheme */
   color-scheme: dark;

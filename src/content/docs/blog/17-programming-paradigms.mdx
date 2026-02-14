@@ -1,0 +1,215 @@
+---
+date: 2026-01-09
+title: "Programming Paradigms"
+excerpt: "A comprehensive guide to understanding different programming paradigms, their history, use cases, and trade-offs."
+tags: ['Programming', 'Paradigms', 'Software Development', 'Coding Styles', 'Computer Science', 'Programming Languages', 'OOP', 'Functional Programming', 'Declarative Programming', 'Imperative Programming']
+lastUpdated: 2026-02-13
+---
+
+import Disclaimer from '~/components/Disclaimer.astro'
+
+## What is a Programming Paradigm?
+
+A programming paradigm is a fundamental style or approach to computer programming. It provides a framework for how developers think about and structure their code to solve problems. Just as a "paradigm" in science represents a distinct set of concepts or thought patterns, a programming paradigm dictates the way computations are conceptualized and organized.
+
+In simpler terms, if a programming language is a tool, the paradigm is the methodology for using that tool. Some languages are designed specifically for one paradigm (like [Haskell](https://en.wikipedia.org/wiki/Haskell) for functional programming), while others are multi-paradigm (like [JavaScript](https://en.wikipedia.org/wiki/JavaScript), [Python](https://en.wikipedia.org/wiki/Python_(programming_language)), and [C++](https://en.wikipedia.org/wiki/C%2B%2B)), allowing developers to mix and match styles.
+
+## A Brief History of Programming Paradigms
+
+The [history of programming paradigms](https://read.learnyard.com/low-level-design/the-evolution-of-programming-paradigms/) mirrors the evolution of computer science itself, moving from low-level instruction management to high-level abstractions.
+
+1. **[Imperative Programming](https://en.wikipedia.org/wiki/Imperative_programming) (1950s):** The earliest paradigm, closely tied to the architecture of computers. It focuses on changing the program's state through a sequence of statements. Early languages like [Fortran](https://en.wikipedia.org/wiki/Fortran) and [Assembly](https://en.wikipedia.org/wiki/Assembly_language) exemplify this.
+
+2. **[Structured](https://en.wikipedia.org/wiki/Structured_programming)/[Procedural Programming](https://en.wikipedia.org/wiki/Procedural_programming) (1960s-70s):** As programs grew larger, maintaining "spaghetti code" (code with unrestricted jumps/`GOTO`s) became impossible. Structured programming introduced control structures (loops, conditionals) and subroutines (procedures). [C](https://en.wikipedia.org/wiki/C_(programming_language)) and [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)) are classic examples.
+
+3. **[Object-Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming) (1970s-80s):** To better model real-world problems and manage complexity, OOP organized code into "objects" containing both data and behavior. [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk), [C++](https://en.wikipedia.org/wiki/C%2B%2B), and later [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) popularized this approach.
+
+4. **[Functional Programming (FP)](https://en.wikipedia.org/wiki/Functional_programming) (Origins in 1930s/50s, popular later):** Based on lambda calculus, FP treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) was the pioneer; modern examples include [Haskell](https://en.wikipedia.org/wiki/Haskell) and [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)).
+
+5. **[Declarative Programming](https://en.wikipedia.org/wiki/Declarative_programming):** Evolving alongside others, this paradigm focuses on *what* the program should accomplish without describing *how* to do it. [SQL](https://en.wikipedia.org/wiki/SQL) (for databases) and [HTML](https://en.wikipedia.org/wiki/HTML)/[CSS](https://en.wikipedia.org/wiki/CSS) are prime examples.
+
+## Overview of Major Paradigms
+
+Paradigms are often categorized hierarchically. Here is a breakdown of the most common ones:
+
+![Programming Paradigms Diagram - By MovGP0 - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=25236323](/my-learning-curve/src/assets/programming-paradigms.png)
+
+### 1. Imperative Paradigm
+
+**"How to do it."**  
+Code directly controls execution flow and state change using explicit statements.
+
+- **Procedural:** Organized as procedures that call each other.
+- **[Object-Oriented (OOP)](/my-learning-curve/blog/15-oop):** Organized as objects containing both data structure and associated behavior.
+  - **Class-based:** Inheritance is achieved by defining classes of objects (e.g., Java, C#).
+  - **Prototype-based:** Inheritance is achieved via cloning of instances (e.g., JavaScript).
+  - **Object-based:** Encapsulates state and behavior without necessarily supporting full inheritance.
+
+### 2. Declarative Paradigm
+
+**"What to do."**  
+Code declares properties of the desired result without specifying detailed state changes.
+
+- **Functional (FP):** The desired result is the value of a series of function evaluations. It avoids state and mutable data (often utilizing [Higher-Order Functions](/my-learning-curve/blog/05-higher-order-functions)).
+- **[Logic](https://en.wikipedia.org/wiki/Logic_programming):** The result is the answer to a question about a system of facts and rules (e.g., [Prolog](https://en.wikipedia.org/wiki/Prolog)).
+- **Reactive:** The result is declared with data streams and the propagation of change.
+- **Database/Query:** Asks for data matching criteria (e.g., [SQL](https://en.wikipedia.org/wiki/SQL)). Reliability is often ensured by [ACID](/my-learning-curve/blog/13-acid) properties.
+- **Constraint:** Relations between variables are expressed as constraints directing allowable solutions.
+- **Dataflow:** Forced recalculation of formulas when data values change (e.g., spreadsheets).
+
+### 3. Other Specialized Paradigms
+
+- **[Concurrent](https://en.wikipedia.org/wiki/Concurrent_computing):** Language constructs for concurrency, multi-threading, or distributed computing.
+  - **Actor:** Concurrent computation with "actors" that make local decisions (e.g., Erlang).
+- **[Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming):** Writing programs that write or manipulate other programs (or themselves).
+  - **Reflective:** A program modifies or extends itself.
+- **Generic:** Uses algorithms written in terms of to-be-specified-later types.
+- **Visual:** Manipulating program elements graphically rather than textually.
+
+## Use Cases, Pros, and Cons
+
+### Object-Oriented Programming (OOP)
+
+**Examples:** [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)), [C++](https://en.wikipedia.org/wiki/C%2B%2B), [Python](https://en.wikipedia.org/wiki/Python_(programming_language)), [Ruby](https://en.wikipedia.org/wiki/Ruby_(programming_language)).
+
+**TypeScript Example:**
+
+```typescript
+// Objects encapsulate data and behavior
+class BankAccount {
+  private balance: number
+
+  constructor(initialBalance: number) {
+    this.balance = initialBalance
+  }
+
+  deposit(amount: number): void {
+    this.balance += amount
+  }
+
+  withdraw(amount: number): boolean {
+    if (this.balance >= amount) {
+      this.balance -= amount
+      return true
+    }
+    return false
+  }
+
+  getBalance(): number {
+    return this.balance
+  }
+}
+
+// Using the object
+const account = new BankAccount(1000)
+account.deposit(500)
+account.withdraw(200)
+console.log(account.getBalance()) // 1300
+```
+
+- **Use Cases:** Large-scale enterprise systems, GUI applications, game development, complex software modeling.
+- **Pros:**
+  - **Modularity:** Objects are self-contained, making code easier to troubleshoot.
+  - **Reusability:** Inheritance and polymorphism allow code to be reused and extended (promoting the [DRY principle](/my-learning-curve/blog/10-dry-principle)).
+  - **Real-world Modeling:** easy to map real-world entities (Car, User, Account) to code.
+- **Cons:**
+  - **Complexity:** Can lead to overly complex hierarchies ("banana-gorilla-jungle" problem: you wanted a banana but got a gorilla holding the banana and the entire jungle).
+  - **Performance:** All that abstraction can introduce overhead.
+- **Critics:** Often criticized for encouraging mutable state (which leads to bugs) and for creating rigid class structures that are hard to refactor. Adhering to [SOLID principles](/my-learning-curve/blog/11-solid-principles) and using appropriate [design patterns](/my-learning-curve/blog/20-design-patterns) is often cited.
+
+### Functional Programming (FP)
+
+**Examples:** [Haskell](https://en.wikipedia.org/wiki/Haskell), [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)), [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)), [F#](https://en.wikipedia.org/wiki/F_Sharp_(programming_language)), (increasingly) [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://en.wikipedia.org/wiki/TypeScript).
+
+**TypeScript Example:**
+
+```typescript
+// Pure functions with immutable data
+type Transaction = { amount: number; type: 'deposit' | 'withdraw' }
+
+const processTransactions = (
+  initialBalance: number,
+  transactions: Transaction[]
+): number => transactions.reduce((balance, { amount, type }) => type === 'deposit'
+      ? balance + amount
+      : balance - amount
+  , initialBalance)
+
+// Data is immutable, no side effects
+const transactions: Transaction[] = [
+  { amount: 500, type: 'deposit' },
+  { amount: 200, type: 'withdraw' }
+]
+
+const finalBalance = processTransactions(1000, transactions)
+console.log(finalBalance) // 1300
+```
+
+- **Use Cases:** Data transformations, concurrent systems, high-reliability systems (telecoms, finance), distributed systems.
+- **Pros:**
+  - **Immutability:** Data doesn't change, eliminating a huge class of bugs related to shared state.
+  - **Predictability:** Pure functions always produce the same output for the same input (referential transparency).
+  - **Concurrency:** easier to run in parallel since there are no side effects or locks needed for data.
+- **Cons:**
+  - **Learning Curve:** Concepts like monads, recursion, and currying can be difficult for developers coming from imperative backgrounds.
+  - **Memory:** Immutability often requires creating new data structures instead of modifying existing ones, which can be memory-intensive (though optimized by garbage collectors).
+- **Critics:** Can be seen as too academic or abstract for simple CRUD applications.
+
+### Procedural Programming
+
+**Examples:** [C](https://en.wikipedia.org/wiki/C_(programming_language)), [Go](https://en.wikipedia.org/wiki/Go_(programming_language)), [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)), [Basic](https://en.wikipedia.org/wiki/BASIC).
+
+**TypeScript Example:**
+
+```typescript
+// Step-by-step instructions with shared state
+let balance = 1000
+
+function deposit(amount: number): void {
+  balance = balance + amount
+}
+
+function withdraw(amount: number): boolean {
+  if (balance >= amount) {
+    balance = balance - amount
+    return true
+  }
+  return false
+}
+
+function getBalance(): number {
+  return balance
+}
+
+// Executing procedures in sequence
+deposit(500)
+withdraw(200)
+console.log(getBalance()) // 1300
+```
+
+- **Use Cases:** System-level programming (OS kernels, drivers), embedded systems, simple scripts.
+- **Pros:**
+  - **Efficiency:** Close to the hardware, often resulting in high-performance code.
+  - **Simplicity:** Easy to understand the flow of execution for small programs.
+- **Cons:**
+  - **Scalability:** Difficult to manage as the codebase grows; global data can become a maintenance nightmare.
+  - **Security:** Manual memory management (in C) frequently leads to vulnerabilities.
+- **Critics:** Lacks the abstractions needed for modern software development, leading to "spaghetti code" in larger applications.
+
+## Conclusion
+
+There is no "best" paradigm. Modern software development often embraces **multi-paradigm** approaches. For example, [React](https://en.wikipedia.org/wiki/React_(software)) (a UI library) pushes a highly functional style (immutable state, pure components) within [JavaScript](https://en.wikipedia.org/wiki/JavaScript), which is traditionally imperative. [Rust](https://en.wikipedia.org/wiki/Rust_(programming_language)) combines system-level imperative control with functional features and strong type safety.
+
+Understanding these paradigms gives you a richer toolkit. You learn to choose the right approach for the specific problem at hand, rather than trying to force every problem into a single shape.
+
+## Resources
+
+- [Object Oriented vs Functional Programming with TypeScript](https://youtu.be/fsVL_xrYO0w) by Fireship
+- [Imperative vs Declarative Programming](https://youtu.be/E7Fbf7R3x6I) by Fireship
+- [Programming Paradigms (Stanford CS107)](https://www.youtube.com/playlist?list=PL9D558D49CA734A02) by Jerry Cain
+- [Functional Programming & Haskell](https://youtu.be/LnX3B9oaKzw) by Computerphile
+- [Programming Paradigms for Dummies: What Every Programmer Should Know](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf) by Peter Van Roy
+- [The Paradigms of Programming](https://dl.acm.org/doi/pdf/10.1145/358198.358210) by Robert W. Floyd
+- [Object-oriented programming](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming) by MDN Web Docs
+
+<Disclaimer />

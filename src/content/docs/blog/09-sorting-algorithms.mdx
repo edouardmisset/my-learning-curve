@@ -2,19 +2,18 @@
 date: 2025-11-19
 title: Understanding Sorting Algorithms
 excerpt: An introduction to sorting algorithms, their time and space complexity.
-tags: ['algorithms', 'sorting', 'complexity', 'computer-science', 'javascript', 'typescript']
-lastUpdated: 2025-11-19
+tags: ['Algorithms', 'Sorting', 'Complexity', 'Computer Science', 'JavaScript', 'TypeScript']
+lastUpdated: 2026-02-13
 ---
 
 import Disclaimer from '~/components/Disclaimer.astro'
 import { Aside } from '@astrojs/starlight/components'
 
-
 ## Definition
 
 > A sorting algorithm is an algorithm that puts elements of a list into an
 > order. The most frequently used orders are numerical order and lexicographical
-> order. 
+> order.
 >
 > ~ Wikipedia
 
@@ -22,25 +21,26 @@ import { Aside } from '@astrojs/starlight/components'
 
 Sorting algorithms are the bread and butter of computer science. They are
 fundamental tools that allow us to organize data, each with specific trade-offs
-between space and time complexity. 
+between space and time complexity.
 
 We usually look at:
+
 - **Time Complexity**: How fast it runs (Big O).
 - **Space Complexity**: How much memory it needs.
 - **Stability**: Does it keep the original order of equal items?
 
-{/* <!-- truncate --> */}
+{/*<!-- truncate -->*/}
 
 ## Quick Reference
 
-| Algorithm | Best | Average | Worst | Space | Stable |
-|-----------|------|---------|-------|-------|--------|
-| Bubble | O(n) | O(n²) | O(n²) | O(1) | ✓ |
-| Selection | O(n²) | O(n²) | O(n²) | O(1) | ✗ |
-| Insertion | O(n) | O(n²) | O(n²) | O(1) | ✓ |
-| Merge | O(n log n) | O(n log n) | O(n log n) | O(n) | ✓ |
-| Quick | O(n log n) | O(n log n) | O(n²) | O(log n) | ✗ |
-| Heap | O(n log n) | O(n log n) | O(n log n) | O(1) | ✗ |
+| Algorithm | Best       | Average    | Worst      | Space    | Stable |
+| --------- | ---------- | ---------- | ---------- | -------- | ------ |
+| Bubble    | O(n)       | O(n²)      | O(n²)      | O(1)     | ✓      |
+| Selection | O(n²)      | O(n²)      | O(n²)      | O(1)     | ✗      |
+| Insertion | O(n)       | O(n²)      | O(n²)      | O(1)     | ✓      |
+| Merge     | O(n log n) | O(n log n) | O(n log n) | O(n)     | ✓      |
+| Quick     | O(n log n) | O(n log n) | O(n²)      | O(log n) | ✗      |
+| Heap      | O(n log n) | O(n log n) | O(n log n) | O(1)     | ✗      |
 
 ## Key Concepts
 
@@ -71,7 +71,8 @@ We usually look at:
 ### Stability
 
 A stable sort preserves the relative order of equal elements. Important for
-multi-level sorting. 
+multi-level sorting.
+
 - **Stable**: Bubble, Insertion, Merge
 - **Unstable**: Selection, Quick, Heap
 
@@ -140,7 +141,7 @@ function insertionSort<T>(arr: T[]): T[] {
 ### Merge Sort
 
 Divides array into halves, recursively sorts them, then merges. Guaranteed `O(n
-log n)`. 
+log n)`.
 
 ```typescript
 function mergeSort<T>(arr: T[]): T[] {
@@ -175,7 +176,7 @@ function merge<T>(left: T[], right: T[]): T[] {
 ### Quick Sort
 
 Picks a pivot, partitions array around it, recursively sorts partitions. Fast in
-practice. 
+practice.
 
 ```typescript
 function quickSort<T>(arr: T[]): T[] {
@@ -262,25 +263,25 @@ function heapify<T>(arr: T[], n: number, i: number): void {
 
 ### Why Quick Sort isn't always O(n log n)
 
-Quick Sort's performance depends heavily on the **pivot selection**. 
+Quick Sort's performance depends heavily on the **pivot selection**.
 
 - **Best Case**: Pivot divides array into two equal halves.
 - **Worst Case**: Pivot is the smallest or largest element (e.g., sorting an
   already sorted array with last element as pivot). This creates unbalanced
-  partitions, degrading to **O(n²)**. 
+  partitions, degrading to **O(n²)**.
 
 NB: To mitigate this, robust implementations often use **Randomized Pivot** or
 **Median-of-Three** (picking the median of first, middle, and last elements) to
-ensure balanced partitions. 
+ensure balanced partitions.
 
 ### Space Complexity: Merge vs. Quick
 
 - **Merge Sort** is "out-of-place". It requires **O(n)** auxiliary space to
   store the sub-arrays during the merge phase. This can be costly for very large
-  datasets in memory-constrained environments. 
+  datasets in memory-constrained environments.
 - **Quick Sort** is "in-place". It doesn't create new arrays but uses the call
   stack for recursion. The space complexity is **O(log n)** for the stack
-  frames, which is generally much lighter than Merge Sort's requirements. 
+  frames, which is generally much lighter than Merge Sort's requirements.
 
 ## Bonus
 
@@ -300,6 +301,7 @@ numbers.sort((a, b) => a - b); // [1, 5, 10, 25, 40, 1000] ✓
 <Aside type="note">
 
 **Timsort** is particularly clever:
+
 - Identifies existing sorted subsequences ("runs")
 - Uses Insertion Sort for small arrays (< 64 elements)
 - Adapts to real-world data patterns

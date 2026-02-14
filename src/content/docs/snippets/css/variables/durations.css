@@ -16,10 +16,8 @@
   --decade: calc(10 * var(--year));
   --generation: calc(3 * var(--decade));
   --lifetime: calc(8 * var(--decade));
-
   --work-day: calc(8 * var(--hour));
   --work-week: calc(5 * var(--day));
-
   --blink: 0.1s;
   --sneeze: 0.5s;
   --brief-moment: 15s;
@@ -45,7 +43,7 @@
      * 10 Little-Known Units of Time
      * https://www.mentalfloss.com/article/60080/10-little-known-units-time
      */
-  --atom: 0.15957s;
+  --atom: 0.1596s;
   --ghurry: calc(24 * var(--minute));
   --lustre: calc(5 * var(--year));
   --mileway: calc(20 * var(--minute));

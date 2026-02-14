@@ -76,31 +76,31 @@ Use `react-error-boundary` as a wrapper functional component
 
 ## Form
 
-- **`react-hook-form`** [link](https://react-hook-form.com/)
+- [**`react-hook-form`**](https://react-hook-form.com/)
 
 ## Graphs
 
-- **`Kendo`** [link](https://www.telerik.com/kendo-react-ui/components/charts/)
+- [**`Kendo`** Charts](https://www.telerik.com/kendo-react-ui/components/charts/)
 
 ## Table
 
-- **`Kendo`** [link](https://www.telerik.com/kendo-react-ui/components/grid/)
+- [**`Kendo`** Grid](https://www.telerik.com/kendo-react-ui/components/grid/)
 
 ## Notifications
 
-- **`react-toastify`** [link](https://fkhadra.github.io/react-toastify/introduction/)
+- [**`react-toastify`**](https://fkhadra.github.io/react-toastify/introduction/)
 
 ## Translation / Localization
 
-- **`i18n`** [link](https://www.i18next.com/)
+- [**`i18n`**](https://www.i18next.com/)
 
 ## Real-time Bidirectional Communication
 
-- **`SignalR`** [link](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/introduction-to-signalr)
+- [**`SignalR`**](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/introduction-to-signalr)
 
 ## HTTP Request
 
-- **`RTK Query`** [link](https://redux-toolkit.js.org/rtk-query/overview)
+- [**`RTK Query`**](https://redux-toolkit.js.org/rtk-query/overview)
 
 ## API Interface (development tool)
 

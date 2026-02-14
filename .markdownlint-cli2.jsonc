@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-cli2-config-schema.json",
+  // Use gitignore to automatically ignore files
+  "gitignore": true,
+  // Globs to lint (can be overridden by command line)
+  "globs": ["**/*.{md,mdx}"],
+  // Additional ignores beyond gitignore
+  "ignores": ["**/node_modules", "**/.astro", "**/dist"]
+}

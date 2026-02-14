@@ -23,14 +23,14 @@
 .backdrop {
   position: absolute;
   inset: 0;
-  height: 200%;
+  block-size: 200%;
   background: var(--transparent-background);
   pointer-events: none;
   backdrop-filter: blur(var(--size-3));
   mask-image: linear-gradient(to bottom, black 0, black 50%, transparent 50%);
 }
 
-.backdropEdge {
+.backdrop-edge {
   /* Set this to whatever you want for the edge thickness: */
   --thickness: var(--size-1);
 
@@ -41,7 +41,7 @@
       Only a few pixels will be visible, but we’ll
       set the height by 100% to include nearby elements.
     */
-  height: 100%;
+  block-size: 100%;
 
   /*
       Shift down by 100% of its own height, so that the

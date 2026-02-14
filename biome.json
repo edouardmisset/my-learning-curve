@@ -14,7 +14,8 @@
         "recommended": true
       },
       "complexity": {
-        "recommended": true
+        "recommended": true,
+        "noImportantStyles": "off"
       },
       "performance": {
         "recommended": true
@@ -26,7 +27,8 @@
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "lineWidth": 80
   },
   "vcs": {
     "enabled": true,
@@ -51,6 +53,12 @@
     "formatter": {
       "enabled": true,
       "indentStyle": "space"
+    }
+  },
+  "html": {
+    "experimentalFullSupportEnabled": true,
+    "formatter": {
+      "indentScriptAndStyle": true
     }
   },
   "assist": {

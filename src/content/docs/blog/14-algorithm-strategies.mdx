@@ -12,11 +12,11 @@ import { Aside } from '@astrojs/starlight/components'
 ## Definition
 
 > An algorithm is a finite sequence of instructions, typically used to solve a
-> class of specific problems or to perform a computation. 
+> class of specific problems or to perform a computation.
 >
 > ~ Wikipedia
 
-{/* <!-- truncate --> */}
+{/*<!-- truncate -->*/}
 
 ## The concept
 
@@ -26,9 +26,9 @@ underlying strategies can help us write more efficient code, debug performance
 bottlenecks, and solve complex problems.
 
 Choosing the right strategy can turn a sluggish O(n^2) operation into a snappy
-O(n) or even O(log n) solution. 🚀 
+O(n) or even O(log n) solution. 🚀
 
-Here are *7* strategies that every developer should have in their toolkit. 
+Here are *7* strategies that every developer should have in their toolkit.
 
 ## Strategies
 
@@ -36,10 +36,10 @@ Here are *7* strategies that every developer should have in their toolkit.
 
 **The Gist:** Use an object or set to collect frequencies of values. This
 often allows you to avoid nested loops (O(n^2)) in favor of linear time
-(O(n)). 
+(O(n)).
 
 This is perfect for comparing data sets, finding duplicates, checking if two
-strings are anagrams, counting, averaging, finding min or max values. 
+strings are anagrams, counting, averaging, finding min or max values.
 
 #### Example: Anagram Checker
 
@@ -69,15 +69,15 @@ function areAnagrams(str1: string, str2: string): boolean {
 ### 2. Two Pointers
 
 **The Gist:** Use two distinct indices to traverse the data structure, often
-moving towards each other or in the same direction at different speeds. 
+moving towards each other or in the same direction at different speeds.
 
 Great for searching pairs in sorted arrays or detecting cycles (like in a linked
-list). 
+list).
 
 #### Example: E-commerce Budget Matcher
 
 Find two products in a sorted list that sum up exactly to a customer's gift card
-balance. 
+balance.
 
 ```typescript
 function findProductPair(prices: number[], budget: number): [number, number] | null {
@@ -105,10 +105,10 @@ function findProductPair(prices: number[], budget: number): [number, number] | n
 ### 3. Sliding Window
 
 **The Gist:** Maintain a subset of data (a window) that slides over the input
-to calculate a continuous result. 
+to calculate a continuous result.
 
 This is very useful for data analysis, rate limiting, or string
-manipulation problems where you need to look at a contiguous sub-array. 
+manipulation problems where you need to look at a contiguous sub-array.
 
 #### Example: Maximum Sum Subarray (Kadane's Algorithm)
 
@@ -131,16 +131,16 @@ function maxSubArray(nums: number[]): number {
 ### 4. Divide and Conquer
 
 **The Gist:** Divide the problem into smaller sub-problems, solve them
-recursively, and combine the results. 
+recursively, and combine the results.
 
 <Aside type="note">
-This is the backbone of efficient sorting (Merge Sort, Quick Sort) and searching. 
+This is the backbone of efficient sorting (Merge Sort, Quick Sort) and searching.
 </Aside>
 
 #### Example: Binary Search
 
 Imagine you have a sorted array of user logs by timestamp, and you need to find
-a specific entry. A linear scan is O(n), but binary search is O(log n). 
+a specific entry. A linear scan is O(n), but binary search is O(log n).
 
 ```typescript
 interface Log {
@@ -174,15 +174,15 @@ function findLogByTimestamp(logs: Log[], target: number): Log | undefined {
 ### 5. Greedy Algorithm
 
 **The Gist:** Make the locally optimal choice at each stage with the hope of
-finding a global optimum. 
+finding a global optimum.
 
 Greedy algorithms are fast and often used in optimization problems like
-scheduling, routing, or resource allocation. 
+scheduling, routing, or resource allocation.
 
 #### Example: Meeting Scheduler
 
 Given a list of meetings with start and end times, find the maximum number of
-meetings you can attend (assuming you can't be in two places at once). 
+meetings you can attend (assuming you can't be in two places at once).
 
 ```typescript
 interface Meeting {
@@ -217,12 +217,12 @@ possibly be completed to a valid solution. One way to think about it is like
 trying to solve a maze.
 
 This is used for generating permutations, combinations, solving puzzles
-(Sudoku), or pathfinding. 
+(Sudoku), or pathfinding.
 
 #### Example: Feature Toggles Combinations (Subsets)
 
 Generate all possible combinations of feature flags to test different states of
-your application. 
+your application.
 
 ```typescript
 // Power Set: Generate all subsets of a set of features using backtracking
@@ -255,7 +255,7 @@ function getAllSubsets(features: string[]): string[][] {
 ### 7. Dynamic Programming
 
 **The Gist:** Break complex problems into simpler subproblems and store their
-results (memoization or tabulation) to avoid redundant computations. 
+results (memoization or tabulation) to avoid redundant computations.
 
 It's essentially "recursion with caching".
 
@@ -263,7 +263,7 @@ It's essentially "recursion with caching".
 
 You are climbing a staircase. It takes `n` steps to reach the top. Each time you
 can either climb 1 or 2 steps. In how many distinct ways can you climb to the
-top? 
+top?
 
 ```typescript
 function climbStairs(stairs: number): number {
@@ -290,7 +290,7 @@ function climbStairs(stairs: number): number {
 - [GeeksForGeeks](https://www.geeksforgeeks.org/dsa/algorithms-design-techniques/)
   on Algorithm Design
 - Algorithms and Data Structures in TypeScript by [Oleksii
-  Trekhleb](https://github.com/trekhleb/javascript-algorithms) 
+  Trekhleb](https://github.com/trekhleb/javascript-algorithms)
 - [GeeksForGeeks](https://www.geeksforgeeks.org/dsa/greedy-algorithms/) on Greedy Algorithms
 - [GeeksForGeeks](https://www.geeksforgeeks.org/dsa/backtracking-algorithms/) on Backtracking Algorithms
 - [GeeksForGeeks](https://www.geeksforgeeks.org/competitive-programming/dynamic-programming/) on Dynamic Programming

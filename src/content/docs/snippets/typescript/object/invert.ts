@@ -9,10 +9,9 @@
  *
  * @template Obj - An object with string or number keys.
  * @template Key - The keys of the object T.
- * @template Return - The inverted object.
  *
  * @param {Obj} object - The original object to invert.
- * @returns {Return} The new object with inverted keys and values.
+ * @returns {Record<Value, Key>} The new object with inverted keys and values.
  *
  * @example
  * invert({ a: '1', b: '2' });
@@ -26,11 +25,14 @@ export const invert = <
   Obj extends Record<string, unknown>,
   Key extends keyof Obj,
   Value extends Obj[Key] & (string | number),
-  Return extends { [K in Value]: Key },
 >(
   object: Obj,
-): Return =>
-  Object.entries(object).reduce((acc, current) => {
-    acc[current[1] as string] = current[0]
-    return acc
-  }, {} as Return)
+): Record<Value, Key> =>
+  Object.entries(object).reduce(
+    (acc, current) => {
+      const valueKey = current[1] as Value
+      acc[valueKey] = current[0] as Key
+      return acc
+    },
+    {} as Record<Value, Key>,
+  )

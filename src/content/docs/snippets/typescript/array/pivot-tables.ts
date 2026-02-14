@@ -20,7 +20,7 @@ export const createPivotTable = <
   Returned = number,
 >(
   params: CreatePivotTableParams<Obj, RowKey, ColumnKey, Returned>,
-): { [k in keyof Obj]: { [j in keyof Obj]: Returned } } => {
+): Record<string, Record<string, Returned>> => {
   const { data, rowKey, columnKey, operation = curVal => curVal } = params
   return data.reduce(
     (acc, row) => {
@@ -36,11 +36,7 @@ export const createPivotTable = <
         }),
       })
     },
-    {} as {
-      [key in keyof Obj]: {
-        [k in keyof Obj]: Returned
-      }
-    },
+    {} as Record<string, Record<string, Returned>>,
   )
 }
 

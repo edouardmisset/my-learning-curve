@@ -1,0 +1,8 @@
+{
+  "$schema": "https://www.schemastore.org/lintstagedrc.schema.json",
+  "*.{js,jsx,ts,tsx,mjs,cjs,json,jsonc}": [
+    "biome check --write --no-errors-on-unmatched"
+  ],
+  "*.css": ["stylelint --fix"],
+  "*.{md,mdx}": ["pnpm update:edit:date", "markdownlint-cli2 --fix"]
+}

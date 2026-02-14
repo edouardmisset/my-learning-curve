@@ -4,7 +4,7 @@ title: "Git Workflow"
 description: "Overview of branching strategies and workflows for Git."
 tags: [git, workflow, branching]
 prev:
-  link: /my-learning-curve/learn/guides/project-collaboration/06-merge-request-recommandations
+  link: /my-learning-curve/learn/guides/project-collaboration/06-merge-request-recommendations
   label: Merge Request Recommendations
 next: 
   link: /my-learning-curve/learn/guides/project-collaboration/08-tech-stack
@@ -79,7 +79,7 @@ In order of complexity, they are:
 5. **Cons:** Can be complex for smaller projects, and feature branches may lead
    to longer development cycles.
 
-[GitFlow cheatsheet & **tool** (_avh_)](https://danielkummer.github.io/git-flow-cheatsheet/)
+[GitFlow cheatsheet & **tool** (*avh*)](https://danielkummer.github.io/git-flow-cheatsheet/)
 
 ![GitFlow Diagram](./assets/git-branching-model.png)
 

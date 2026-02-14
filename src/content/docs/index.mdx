@@ -10,7 +10,7 @@ hero:
     file: ../../assets/coder.png
   actions:
     - text: Blog
-      link: /my-learning-curve/blog
+      link: https://edouardmisset.github.io/my-learning-curve/blog/
       icon: right-arrow
     - text: Look at my other projects
       link: https://github.com/edouardmisset
@@ -24,12 +24,12 @@ import { LINKS } from '~/constants/links'
 ## Content
 
 <CardGrid >
-	<LinkCard title="Read my blog" href={LINKS.blog()} description='Insights and experiences from my coding journey.' />
-	<LinkCard title="Browse snippets"
-	href={LINKS.snippets("css/layouts/every-layout")} description='A collection of
-	useful code snippets (CSS, TypeScript, SQL, Shell).' />
-	<LinkCard title="My setup" href={LINKS.reference("tools/setup")} description='Details about my development setup.' />
-	<LinkCard title="Learn" href={LINKS.learn()}
-	description='Tutorials and guides on development topics (data analysis, project
-	setup, collaboration...).' />
+ <LinkCard title="Read my blog" href={LINKS.blog()} description='Insights and experiences from my coding journey.' />
+ <LinkCard title="Browse snippets"
+ href={LINKS.snippets("css/layouts/every-layout")} description='A collection of
+ useful code snippets (CSS, TypeScript, SQL, Shell).' />
+ <LinkCard title="My setup" href={LINKS.reference("tools/setup")} description='Details about my development setup.' />
+ <LinkCard title="Learn" href={LINKS.learn()}
+ description='Tutorials and guides on development topics (data analysis, project
+ setup, collaboration...).' />
 </CardGrid>

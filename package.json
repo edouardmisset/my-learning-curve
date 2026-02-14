@@ -22,10 +22,10 @@
   "dependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/sitemap": "^3.7.0",
-    "@astrojs/starlight": "^0.37.3",
+    "@astrojs/starlight": "^0.37.6",
     "@catppuccin/starlight": "^1.0.2",
     "@types/node": "^25.0.9",
-    "astro": "^5.16.11",
+    "astro": "^5.17.2",
     "astro-embed": "^0.12.0",
     "astro-og-canvas": "^0.10.0",
     "canvaskit-wasm": "^0.40.0",

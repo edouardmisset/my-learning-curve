@@ -3,7 +3,7 @@ date: 2026-02-14
 title: Data Structures
 excerpt: "Data structures organize, process, retrieve, and store data efficiently. Choosing the right one significantly impacts application performance and code readability."
 tags: [ 'TypeScript', 'Data Structures', 'Arrays', 'Objects', 'Maps', 'Sets' ]
-lastUpdated: 2026-02-14
+lastUpdated: 2026-02-16
 ---
 import Disclaimer from '~/components/Disclaimer.astro'
 import { Aside } from '@astrojs/starlight/components'
@@ -15,7 +15,7 @@ import { Aside } from '@astrojs/starlight/components'
 >
 > ~ [Wikipedia](https://en.wikipedia.org/wiki/Data_structure)
 
-{/* <!-- truncate --> */}
+{/*<!-- truncate -->*/}
 
 ## TL;DR
 
@@ -32,18 +32,19 @@ management in a component, processing API responses on the server, or
 optimizing database queries, the way we structure our data matters.
 
 Choosing the appropriate data structure is about writing code that is:
+
 1. *Readable*: Intent is clear.
 2. *Performant*: Operations like search, insertion, and deletion are optimized.
 3. *Maintainable*: Easy to debug and extend.
 
 In the TypeScript/JavaScript ecosystem, we have several built-in structures at
-our disposal. 
+our disposal.
 
 ## JS Built-in Data Structures
 
 ### Arrays (Lists)
 
-**Ordered** collections of items. 
+**Ordered** collections of items.
 
 **Use case**: Rendering a list of components.
 
@@ -70,7 +71,7 @@ Key-value pairs with string or symbol keys. Great for simple records and
 fast lookups, but keep key coercion and prototype properties in mind.
 
 **Use case**: Storing user profiles, configuration settings, or indexing data by
-ID for O(1) access. 
+ID for O(1) access.
 
 ```typescript
 // Indexing users by ID for instant lookup
@@ -88,7 +89,7 @@ const alice = usersById['u-123'];
 Collections of *unique* values.
 
 **Use case**: Managing selected filters, tracking visited URLs, ensuring no
-duplicate tags. 
+duplicate tags.
 
 ```typescript
 // Managing selected tags in a filter component
@@ -105,10 +106,10 @@ console.log(selectedTags.size); // 2
 ### Maps
 
 Similar to Objects, but with some key differences: keys can be of any type (not
-just strings/symbols), **maintains insertion order** (guaranteed since ES2015), and has a `size` property. 
+just strings/symbols), **maintains insertion order** (guaranteed since ES2015), and has a `size` property.
 
 **Use case**: Caching API responses where keys might be complex objects or when
-frequent additions/removals occur. 
+frequent additions/removals occur.
 
 ```typescript
 // Simple in-memory cache
@@ -198,6 +199,7 @@ Both the key equality of Map objects and the value equality of Set objects are b
 - Equality works like the identity comparison operator ===.
 - -0 and +0 are considered equal.
 - `NaN` is considered equal to itself (contrary to ===).
+
 </Aside>
 
 ## Conclusion
@@ -215,11 +217,11 @@ makes intent obvious and operations efficient for your use case.
 - MDN reference for [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
 - MDN reference for [WeakSet](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet)
 - Data Structures in JavaScript by
-  [freeCodeCamp](https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/) 
+  [freeCodeCamp](https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/)
 - MDN Documentation on [Keyed
   Collections](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections)
 
-**Next**: Dive deeper into [Advanced Data Structures](/my-learning-curve/blog/15-advanced-data-structures/)
+**Next**: Dive deeper into [Advanced Data Structures](/my-learning-curve/blog/22-advanced-data-structures)
 like Linked Lists, Trees, Graphs, and Tries.
 
 <Disclaimer />

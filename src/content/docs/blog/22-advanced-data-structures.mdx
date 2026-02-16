@@ -3,7 +3,7 @@ date: 2026-02-14
 title: Advanced Data Structures
 excerpt: "Moving beyond arrays and objects: exploring Stacks, Queues, Linked Lists, Trees, Graphs, and Tries."
 tags: [ 'TypeScript', 'Data Structures', 'Linked Lists', 'Trees', 'Binary Search Trees', 'Graphs', 'Tries' ]
-lastUpdated: 2026-02-14
+lastUpdated: 2026-02-16
 ---
 import Disclaimer from '~/components/Disclaimer.astro'
 
@@ -14,21 +14,21 @@ trees represent hierarchies, graphs model networks, and tries power fast
 prefix lookups. You rarely need these for every app, but knowing them helps you
 reach for the right structure when performance or modeling starts to matter.
 
-{/* <!-- truncate --> */}
+{/*<!-- truncate -->*/}
 
 ## Introduction
 
-While [Arrays and Objects](/my-learning-curve/blog/14-data-structures/) cover most day-to-day needs,
+While [Arrays and Objects](/my-learning-curve/blog/21-data-structures) cover most day-to-day needs,
 understanding advanced structures unlocks the ability to solve more complex
 problems.
 
 ## Stacks & Queues
 
 While not native classes in JS (usually implemented with Arrays), these *patterns*
-are extremely useful. 
+are extremely useful.
 
 - **Stack (LIFO)**: Last In, First Out. Think "Undo" functionality.
-- **Queue (FIFO)**: First In, First Out. Think background job processing. 
+- **Queue (FIFO)**: First In, First Out. Think background job processing.
 
 ### Usage with Arrays
 
@@ -103,7 +103,7 @@ Each node contains data and a reference (pointer) to the next node.
 
 **Use case**: An implementation of a Stack or Queue where you need constant-time
 O(1) insertion and deletion at the beginning, without shifting all elements
-like an Array would. 
+like an Array would.
 
 ```typescript
 class ListNode<T> {
@@ -225,7 +225,7 @@ console.log(currentTrack?.value); // 'Bohemian Rhapsody'
 ## Trees
 
 A hierarchical structure consisting of nodes, with a single root node and
-children nodes. 
+children nodes.
 
 **Use case**: The **DOM** (Document Object Model), file systems, and client-side
 route trees are all examples of tree structures.
@@ -327,10 +327,10 @@ bst.search(20); // false
 ## Graphs
 
 A collection of nodes (vertices) and edges that connect pairs of nodes. Graphs
-can be directed (Twitter followers) or undirected (Facebook friends). 
+can be directed (Twitter followers) or undirected (Facebook friends).
 
 **Use case**: Social networks, recommendation engines ("People who bought X also
-bought Y"), and routing algorithms (Google Maps). 
+bought Y"), and routing algorithms (Google Maps).
 
 ```typescript
 class Graph<T> {
@@ -365,10 +365,10 @@ socialNetwork.addEdge('Alice', 'Charlie');
 ## Tries (Prefix Trees)
 
 A specialized tree used to store associative data structures. A node's position
-in the tree defines the key with which it is associated. 
+in the tree defines the key with which it is associated.
 
 **Use case**: Autocomplete / Typeahead systems. If you type "Re", a Trie can
-efficiently find "React", "Redux", "Remix" without scanning a whole database. 
+efficiently find "React", "Redux", "Remix" without scanning a whole database.
 
 ```typescript
 class TrieNode {
@@ -418,15 +418,15 @@ feel a lot smaller.
 
 - Visualizing Data Structures with [VisuAlgo](https://visualgo.net/en)
 - Singly Linked List by [Nicholas C.
-  Zakas](https://humanwhocodes.com/blog/2009/04/13/computer-science-in-javascript-linked-list/) 
+  Zakas](https://humanwhocodes.com/blog/2009/04/13/computer-science-in-javascript-linked-list/)
 - Doubly Linked List by [Nicholas C.
-  Zakas](https://humanwhocodes.com/blog/2009/04/21/computer-science-in-javascript-doubly-linked-lists/) 
+  Zakas](https://humanwhocodes.com/blog/2009/04/21/computer-science-in-javascript-doubly-linked-lists/)
 - Binary Search Tree by [Nicholas C.
   Zakas](https://humanwhocodes.com/blog/2009/06/09/computer-science-in-javascript-binary-search-tree-part-1/)
 - Other data structures by Fireship.io on
   [YouTube](https://www.youtube.com/watch?v=6fnmXX8RK0s)
 
-**Previous**: Revisit [Data Structures](/my-learning-curve/blog/14-data-structures/) for the JS
+**Previous**: Revisit [Data Structures](/my-learning-curve/blog/21-data-structures) for the JS
 basics.
 
 <Disclaimer />

@@ -81,7 +81,7 @@ export function Counter() {
 
 Ember traditionally separates logic (`.ts`) from templates (`.hbs`), but glimmer (`.gts`) allows for Single File Components.
 
-*Classic approach (Separate files):*
+_Classic approach (Separate files):_
 
 component.ts
 
@@ -109,7 +109,7 @@ template.hbs
 </button>
 ```
 
-*Modern approach (.gts):*
+_Modern approach (.gts):_
 
 ```ts
 import Component from '@glimmer/component';
@@ -297,7 +297,7 @@ module('Integration | Component | counter', function (hooks) {
 
 ## Gotchas for React Devs
 
-1. **Mutating State**: In React, we *never* mutate state directly (`count++` is forbidden). In Ember with `@tracked`, **mutation is the standard way** to trigger updates (`this.count++` works perfectly).
+1. **Mutating State**: In React, we _never_ mutate state directly (`count++` is forbidden). In Ember with `@tracked`, **mutation is the standard way** to trigger updates (`this.count++` works perfectly).
 2. **"Actions"**: In React, we pass functions as props. In Ember, we use the `{{on "event" this.method}}` modifier. We need the `@action` decorator to bind `this` correctly.
 3. **The Run Loop**: Ember has an internal "Run Loop" to batch DOM updates. We rarely need to touch it in modern Ember, but we might see errors related to it in older codebases or async tests.
 4. **Data Down, Actions Up**: Ember ([octane](https://ember-learn.github.io/ember-octane-vs-classic-cheat-sheet/#component-properties__ddau)) components enforce "Data Down, Actions Up." When data is passed down to a component, the only way to change that data is to call an action that was passed in too. In another words, there is no two-way binding for component arguments.

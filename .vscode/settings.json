@@ -28,6 +28,9 @@
   "[json]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode",
     "editor.codeActionsOnSave": {}

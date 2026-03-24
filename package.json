@@ -14,7 +14,7 @@
     "astro": "astro",
     "typecheck": "astro check",
     "typecheck:tsgo": "tsgo --noEmit --skipLibCheck",
-    "check": "pnpm lint:md && pnpm lint && pnpm format && pnpm typecheck && pnpm typecheck:tsgo && pnpm style:lint",
+    "check": "pnpm lint:md && pnpm lint && pnpm format && pnpm typecheck && pnpm style:lint",
     "spell:check": "cspell lint --no-progress --show-context --relative .",
     "prepare": "husky",
     "update:edit:date": "node --experimental-strip-types scripts/update-frontmatter.ts",

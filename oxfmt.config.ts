@@ -8,4 +8,12 @@ export default defineConfig({
   singleQuote: true,
   arrowParens: 'avoid',
   trailingComma: 'all',
+  overrides: [
+    {
+      files: ['*.jsonc', '**/*.jsonc'],
+      options: {
+        trailingComma: 'none',
+      },
+    },
+  ],
 })

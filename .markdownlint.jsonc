@@ -22,18 +22,18 @@
       "LinkCard",
       "CardGrid",
       "LinkPreview",
-      "BaselineStatus",
-    ],
+      "BaselineStatus"
+    ]
   },
   // MD041/first-line-heading - Allow frontmatter before first heading
   "MD041": false,
   // MD046/code-block-style - Prefer fenced code blocks
   "MD046": {
-    "style": "fenced",
+    "style": "fenced"
   },
   // MD024/no-duplicate-heading - Allow duplicate headings in different sections
   "MD024": {
-    "siblings_only": true,
+    "siblings_only": true
   },
   // MD025/single-title - Allow multiple top-level headings
   "MD025": false,
@@ -43,10 +43,10 @@
   "MD040": true,
   // MD049/emphasis-style - Consistent emphasis style
   "MD049": {
-    "style": "asterisk",
+    "style": "underscore"
   },
   // MD050/strong-style - Consistent strong style
   "MD050": {
-    "style": "asterisk",
-  },
+    "style": "asterisk"
+  }
 }

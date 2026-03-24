@@ -1,12 +1,12 @@
 ---
 date: 2025-10-02
-title: "Tech Stack"
-description: "Overview of the technologies and tools used in the project."
+title: 'Tech Stack'
+description: 'Overview of the technologies and tools used in the project.'
 tags: [tech-stack, tools, technologies]
 prev:
   link: /my-learning-curve/learn/guides/project-collaboration/07-git-workflow
   label: Git Workflow
-next: 
+next:
   link: /my-learning-curve/learn/guides/project-collaboration/09-testing
   label: Testing
 ---

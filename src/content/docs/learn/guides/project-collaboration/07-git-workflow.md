@@ -1,12 +1,12 @@
 ---
 date: 2025-10-02
-title: "Git Workflow"
-description: "Overview of branching strategies and workflows for Git."
+title: 'Git Workflow'
+description: 'Overview of branching strategies and workflows for Git.'
 tags: [git, workflow, branching]
 prev:
   link: /my-learning-curve/learn/guides/project-collaboration/06-merge-request-recommendations
   label: Merge Request Recommendations
-next: 
+next:
   link: /my-learning-curve/learn/guides/project-collaboration/08-tech-stack
   label: Tech Stack
 ---

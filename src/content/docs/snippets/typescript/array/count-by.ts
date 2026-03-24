@@ -1,12 +1,12 @@
 /**
  * Counts the number of elements in an array that satisfy a condition.
  *
- * @param {T[]} arr - The array to process.
- * @param {(arg: T) => boolean} checkFunction - The function to test each element of the array.
+ * @param arr - The array to process.
+ * @param checkFunction - The function to test each element of the array.
  * This function should accept a single argument of type T (the type of elements in the array)
  * and return a boolean.
  *
- * @returns {number} The number of elements that satisfy the condition.
+ * @returns The number of elements that satisfy the condition.
  *
  * @template T The type of elements in the array.
  *
@@ -21,8 +21,8 @@ export const countBy = <T>(arr: T[], checkFunction: (arg: T) => boolean) =>
 /**
  * Calculates the frequency of each unique element in an array.
  * @template T - The type of elements in the array, which extends string or number.
- * @param {T[]} arr - An array of elements of type T.
- * @returns {Record<T, number>} - An object where the keys are the unique elements from the input array and the values are their corresponding frequencies.
+ * @param arr - An array of elements of type T.
+ * @returns - An object where the keys are the unique elements from the input array and the values are their corresponding frequencies.
  *
  * @example
  * frequency(['apple', 'banana', 'apple', 'cherry'])

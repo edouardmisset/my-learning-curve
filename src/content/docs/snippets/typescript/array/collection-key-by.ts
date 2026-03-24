@@ -4,9 +4,9 @@
  *
  * @template Obj - The type of the objects in the array. Must extend Record<string, unknown>.
  * @template Key - The type of the key to use. Must be a key of T.
- * @param {Obj[]} array - The array of objects to transform.
- * @param {Key} key - The key to use for the new object.
- * @returns {undefined | Record<string, Obj>} - The transformed object, or undefined if the array is empty.
+ * @param array - The array of objects to transform.
+ * @param key - The key to use for the new object.
+ * @returns - The transformed object, or undefined if the array is empty.
  *
  * @example
  * const array = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }];
@@ -39,9 +39,9 @@ export const keyBy = <
  *
  * @template Obj - The type of the objects in the collection. Must extend Record<string, unknown>.
  * @template Key - The type of the key to use. Must be a key of T.
- * @param {Obj[] | Record<string, Obj>} collection - The collection of objects to transform.
- * @param {Key} key - The key to use for the new object.
- * @returns {undefined | Record<string, Obj>} - The transformed object, or undefined if the collection is empty.
+ * @param collection - The collection of objects to transform.
+ * @param key - The key to use for the new object.
+ * @returns - The transformed object, or undefined if the collection is empty.
  *
  * @example
  * const array = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }];
@@ -67,7 +67,7 @@ export const collectionKeyBy = <
 >(
   collection: Obj[] | Record<string, Obj>,
   key: Key,
-) =>
+): undefined | Record<string, Obj> =>
   Array.isArray(collection)
     ? keyBy(collection, key)
     : keyBy(Object.values(collection), key)

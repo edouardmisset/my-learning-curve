@@ -3,8 +3,8 @@
  *
  * **Note**: Spaces or blanc strings (" ") are considered empty.
  *
- * @param {undefined | null | string} s - The string to be checked.
- * @returns {boolean} - A boolean value indicating whether the string is empty, `null`, or `undefined`.
+ * @param s - The string to be checked.
+ * @returns - A boolean value indicating whether the string is empty, `null`, or `undefined`.
  */
 export const isEmptyStringOrNullish = (s: undefined | null | string): boolean =>
   s == null || s.trim() === ''

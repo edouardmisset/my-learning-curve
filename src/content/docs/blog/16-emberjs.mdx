@@ -3,11 +3,11 @@ date: 2025-12-22
 title: Ember.js for React Developers
 excerpt: A guide to switching mental models from React to Ember.js, highlighting differences and gotchas.
 tags: ['Ember.js', 'React', 'TypeScript', 'Frameworks', 'Comparison']
-lastUpdated: 2025-12-23
+lastUpdated: 2026-03-24
 ---
 
 import Disclaimer from '~/components/Disclaimer.astro'
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components'
 
 ## Introduction
 
@@ -68,16 +68,12 @@ Ember is a mature framework. `.hbs` is the established standard that powers most
 **React (JSX + Hooks):**
 
 ```tsx
-import { useState } from 'react';
+import { useState } from 'react'
 
 export function Counter() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      Count is {count}
-    </button>
-  );
+  return <button onClick={() => setCount(count + 1)}>Count is {count}</button>
 }
 ```
 
@@ -90,16 +86,16 @@ Ember traditionally separates logic (`.ts`) from templates (`.hbs`), but glimmer
 component.ts
 
 ```ts
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
+import Component from '@glimmer/component'
+import { tracked } from '@glimmer/tracking'
+import { action } from '@ember/object'
 
 export default class Counter extends Component {
-  @tracked count = 0;
+  @tracked count = 0
 
   @action
   increment() {
-    this.count++;
+    this.count++
   }
 }
 ```
@@ -107,8 +103,9 @@ export default class Counter extends Component {
 template.hbs
 
 ```hbs
-<button type="button" {{on "click" this.increment}}>
-  Count is {{this.count}}
+<button type='button' {{on 'click' this.increment}}>
+  Count is
+  {{this.count}}
 </button>
 ```
 
@@ -134,13 +131,13 @@ export default class Counter extends Component {
 
 ### Component Patterns
 
-| Concept | React | Ember |
-| :--- | :--- | :--- |
-| **Children** | `props.children` | `{{yield}}` |
-| **Props (Data)** | `props.name` | `{{@name}}` (Arguments) |
-| **Props (HTML Attr)** | `className="foo"` | `class="foo"` (passed via `...attributes`) |
-| **Attribute Spreading** | `<div {...props} />` | `<div ...attributes>` (HTML attributes only) |
-| **Namespacing** | `import RentalImage ...` | `<Rental::Image />` (File: `rental/image.hbs`) |
+| Concept                 | React                    | Ember                                          |
+| :---------------------- | :----------------------- | :--------------------------------------------- |
+| **Children**            | `props.children`         | `{{yield}}`                                    |
+| **Props (Data)**        | `props.name`             | `{{@name}}` (Arguments)                        |
+| **Props (HTML Attr)**   | `className="foo"`        | `class="foo"` (passed via `...attributes`)     |
+| **Attribute Spreading** | `<div {...props} />`     | `<div ...attributes>` (HTML attributes only)   |
+| **Namespacing**         | `import RentalImage ...` | `<Rental::Image />` (File: `rental/image.hbs`) |
 
 <Aside type="note">
 
@@ -167,11 +164,15 @@ export default class Counter extends Component<CounterArgs> { ... }
 
 ```tsx
 // Conditional Rendering
-{isLoggedIn ? <UserMenu /> : <LoginButton />}
+{
+  isLoggedIn ? <UserMenu /> : <LoginButton />
+}
 
 // Looping
-<ul>
-  {items.map(item => <li key={item.id}>{item.name}</li>)}
+;<ul>
+  {items.map(item => (
+    <li key={item.id}>{item.name}</li>
+  ))}
 </ul>
 ```
 
@@ -197,14 +198,14 @@ In React, we might use `Context` to share state. In Ember, we use **Services**.
 
 ```ts
 // app/services/shopping-cart.ts
-import Service from '@ember/service';
-import { tracked } from '@glimmer/tracking';
+import Service from '@ember/service'
+import { tracked } from '@glimmer/tracking'
 
 export default class ShoppingCartService extends Service {
-  @tracked items = [];
+  @tracked items = []
 
   add(item) {
-    this.items = [...this.items, item];
+    this.items = [...this.items, item]
   }
 }
 ```
@@ -212,12 +213,12 @@ export default class ShoppingCartService extends Service {
 Injecting it into a component:
 
 ```ts
-import Component from '@glimmer/component';
-import { service } from '@ember/service';
+import Component from '@glimmer/component'
+import { service } from '@ember/service'
 
 export default class Product extends Component {
-  @service declare shoppingCart: ShoppingCartService;
-  
+  @service declare shoppingCart: ShoppingCartService
+
   // Usage: this.shoppingCart.add(item)
 }
 ```
@@ -230,23 +231,23 @@ In React, we fetch data inside components (using `useEffect` or libraries like T
 
 ```tsx
 // Post.tsx
-const { data } = useQuery({ queryKey: ['post', id], queryFn: fetchPost });
+const { data } = useQuery({ queryKey: ['post', id], queryFn: fetchPost })
 ```
 
 **Ember:**
 
 ```ts
 // app/routes/post.ts
-import Route from '@ember/routing/route';
-import { service } from '@ember/service';
+import Route from '@ember/routing/route'
+import { service } from '@ember/service'
 
 export default class PostRoute extends Route {
-  @service declare store: Store;
+  @service declare store: Store
 
   async model(params) {
     // The model hook waits for the promise to resolve before rendering.
     // It is responsible for fetching and preparing any data needed for the route.
-    return this.store.findRecord('post', params.post_id);
+    return this.store.findRecord('post', params.post_id)
   }
 }
 ```
@@ -257,7 +258,7 @@ The awaited data returned from `model()` is available in the template as `{{@mod
 Instead of `<Link to="...">`, Ember uses the `<LinkTo>` component.
 
 ```hbs
-<LinkTo @route="post" @model={{this.post.id}}>
+<LinkTo @route='post' @model={{this.post.id}}>
   Read more
 </LinkTo>
 ```
@@ -276,22 +277,22 @@ Running tests feels slower than React because Ember tests typically run in a rea
 </Aside>
 
 ```ts
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'my-app/tests/helpers';
-import { render, click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
+import { module, test } from 'qunit'
+import { setupRenderingTest } from 'my-app/tests/helpers'
+import { render, click } from '@ember/test-helpers'
+import { hbs } from 'ember-cli-htmlbars'
 
 module('Integration | Component | counter', function (hooks) {
-  setupRenderingTest(hooks);
+  setupRenderingTest(hooks)
 
   test('it increments', async function (assert) {
-    await render(hbs`<Counter />`);
-    
-    assert.dom('button').hasText('Count is 0');
-    await click('button');
-    assert.dom('button').hasText('Count is 1');
-  });
-});
+    await render(hbs`<Counter />`)
+
+    assert.dom('button').hasText('Count is 0')
+    await click('button')
+    assert.dom('button').hasText('Count is 1')
+  })
+})
 ```
 
 ## Gotchas for React Devs

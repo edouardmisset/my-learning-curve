@@ -1,10 +1,11 @@
 ---
 date: 2026-02-14
 title: Data Structures
-excerpt: "Data structures organize, process, retrieve, and store data efficiently. Choosing the right one significantly impacts application performance and code readability."
-tags: [ 'TypeScript', 'Data Structures', 'Arrays', 'Objects', 'Maps', 'Sets' ]
-lastUpdated: 2026-02-16
+excerpt: 'Data structures organize, process, retrieve, and store data efficiently. Choosing the right one significantly impacts application performance and code readability.'
+tags: ['TypeScript', 'Data Structures', 'Arrays', 'Objects', 'Maps', 'Sets']
+lastUpdated: 2026-03-24
 ---
+
 import Disclaimer from '~/components/Disclaimer.astro'
 import { Aside } from '@astrojs/starlight/components'
 
@@ -51,18 +52,18 @@ our disposal.
 ```typescript
 // A simple todo list
 interface Todo {
-  id: number;
-  text: string;
-  done: boolean;
+  id: number
+  text: string
+  done: boolean
 }
 
 const todos: Todo[] = [
   { id: 1, text: 'Learn TypeScript', done: true },
   { id: 2, text: 'Master Data Structures', done: false },
-];
+]
 
 // Iterating is cheap and easy
-todos.forEach(todo => console.log(todo.text));
+todos.forEach(todo => console.log(todo.text))
 ```
 
 ### Objects (Dictionaries)
@@ -78,10 +79,10 @@ ID for O(1) access.
 const usersById: Record<string, { name: string; role: string }> = {
   'u-123': { name: 'Alice', role: 'admin' },
   'u-456': { name: 'Bob', role: 'editor' },
-};
+}
 
 // Instant access without looping
-const alice = usersById['u-123'];
+const alice = usersById['u-123']
 ```
 
 ### Sets
@@ -93,14 +94,14 @@ duplicate tags.
 
 ```typescript
 // Managing selected tags in a filter component
-const selectedTags = new Set<string>();
+const selectedTags = new Set<string>()
 
-selectedTags.add('react');
-selectedTags.add('typescript');
-selectedTags.add('react'); // Duplicate is ignored!
+selectedTags.add('react')
+selectedTags.add('typescript')
+selectedTags.add('react') // Duplicate is ignored!
 
-console.log(selectedTags.has('typescript')); // true
-console.log(selectedTags.size); // 2
+console.log(selectedTags.has('typescript')) // true
+console.log(selectedTags.size) // 2
 ```
 
 ### Maps
@@ -113,24 +114,25 @@ frequent additions/removals occur.
 
 ```typescript
 // Simple in-memory cache
-const apiCache = new Map<string, Promise<Response>>();
+const apiCache = new Map<string, Promise<Response>>()
 
 function getCachedData(url: string): Promise<Response> {
-  const cached = apiCache.get(url);
+  const cached = apiCache.get(url)
   if (cached) {
-    return cached;
+    return cached
   }
-  const data = fetch(url); // Assume this function fetches data
-  apiCache.set(url, data);
-  return data;
+  const data = fetch(url) // Assume this function fetches data
+  apiCache.set(url, data)
+  return data
 }
 ```
 
 <Aside type="tip" title="When to use Maps vs Objects">
-- Use Maps when keys are unknown until runtime, when you add/remove entries
-  frequently, or when you need guaranteed insertion order.
-- Use Maps if you need non-string keys (e.g., objects, functions, or any primitive).
-- Use Objects for fixed-shape records, JSON-like data, and when you need property access syntax.
+  - Use Maps when keys are unknown until runtime, when you add/remove entries
+  frequently, or when you need guaranteed insertion order. - Use Maps if you
+  need non-string keys (e.g., objects, functions, or any primitive). - Use
+  Objects for fixed-shape records, JSON-like data, and when you need property
+  access syntax.
 </Aside>
 
 ## (Less Common / More Specific) JS Built-in Data Structures
@@ -146,23 +148,23 @@ preventing garbage collection, or associating metadata with DOM nodes.
 
 ```typescript
 // Storing private data without memory leaks
-const privateData = new WeakMap<object, { secret: string }>();
+const privateData = new WeakMap<object, { secret: string }>()
 
 // Factory function to create users
 const createUser = (name: string, secret: string) => {
-  const user = { name };
-  privateData.set(user, { secret });
-  return user;
-};
+  const user = { name }
+  privateData.set(user, { secret })
+  return user
+}
 
 // Pure function to retrieve secret
-const getSecret = (user: object) => privateData.get(user)?.secret;
+const getSecret = (user: object) => privateData.get(user)?.secret
 
 // Usage
-const alice = createUser('Alice', 'my-secret');
-console.log(getSecret(alice)); // 'my-secret'
+const alice = createUser('Alice', 'my-secret')
+console.log(getSecret(alice)) // 'my-secret'
 
-// When alice is no longer referenced, 
+// When alice is no longer referenced,
 // its entry in privateData is automatically cleaned up
 ```
 
@@ -178,15 +180,15 @@ objects as processed, or managing object-based flags.
 
 ```typescript
 // Tracking which DOM nodes have been initialized
-const initializedNodes = new WeakSet<HTMLElement>();
+const initializedNodes = new WeakSet<HTMLElement>()
 
 function initializeElement(element: HTMLElement) {
   if (initializedNodes.has(element)) {
-    return; // Already initialized
+    return // Already initialized
   }
-  
+
   // ... perform initialization ...
-  initializedNodes.add(element);
+  initializedNodes.add(element)
 }
 
 // When the element is removed from DOM and no longer referenced,

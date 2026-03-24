@@ -3,10 +3,10 @@ date: 2025-11-16
 title: Git Rebase
 excerpt: Git rebase is a powerful tool for rewriting commit history, allowing you to maintain a clean and linear project timeline.
 tags: ['Git', 'Rebase', 'Version Control', 'Git History']
-lastUpdated: 2025-11-16
+lastUpdated: 2026-03-24
 ---
 
-import Disclaimer from '~/components/Disclaimer.astro';
+import Disclaimer from '~/components/Disclaimer.astro'
 
 ## TL;DR
 
@@ -218,13 +218,13 @@ git rebase --onto main feature-branch
 
 ## Rebase vs Merge
 
-| Feature       | Rebase                               | Merge                                   |
-| ------------- | ------------------------------------ | --------------------------------------- |
-| **History**   | Linear, clean                        | Shows true history with merge commits   |
-| **Commits**   | Rewrites commit hashes               | Preserves original commits              |
-| **Conflicts** | Resolve per commit                   | Resolve once                            |
-| **Use for**   | Local cleanup, updating branches     | Integrating completed features          |
-| **Team use**  | ⚠️ Never on public/shared branches   | ✅ Safe for shared branches             |
+| Feature       | Rebase                             | Merge                                 |
+| ------------- | ---------------------------------- | ------------------------------------- |
+| **History**   | Linear, clean                      | Shows true history with merge commits |
+| **Commits**   | Rewrites commit hashes             | Preserves original commits            |
+| **Conflicts** | Resolve per commit                 | Resolve once                          |
+| **Use for**   | Local cleanup, updating branches   | Integrating completed features        |
+| **Team use**  | ⚠️ Never on public/shared branches | ✅ Safe for shared branches           |
 
 ## The Golden Rule
 
@@ -254,7 +254,7 @@ you'll cause serious problems.
 - **Rebase often**: Keep your feature branch up-to-date with main
 - **Communicate**: Tell your team when you rebase shared branches
 - **Keep backups**: Create a backup branch before complex rebases: `git branch
-  backup-branch`
+backup-branch`
 - **Start simple**: Practice on local branches before rebasing pushed work
 
 ## Resources

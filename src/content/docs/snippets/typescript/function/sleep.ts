@@ -1,8 +1,8 @@
 /**
  * Pauses the execution of an asynchronous function for a specified time.
  *
- * @param {number} time - The amount of time to sleep in milliseconds.
- * @returns {Promise<void>} - A Promise that resolves after the specified time.
+ * @param time - The amount of time to sleep in milliseconds.
+ * @returns - A Promise that resolves after the specified time.
  * @throws {Error} - Throws an error if the time is a negative number.
  *
  * @example

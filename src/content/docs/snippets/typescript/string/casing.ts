@@ -1,7 +1,7 @@
 /**
  * Capitalizes the first letter of a word (string).
- * @param {string} word - The word to capitalize.
- * @returns {string} - The word with the first letter capitalized.
+ * @param word - The word to capitalize.
+ * @returns - The word with the first letter capitalized.
  */
 export const capitalize = (word: string): string =>
   word

@@ -2,11 +2,18 @@
 date: 2025-11-19
 title: The DRY Principle
 excerpt: Don't Repeat Yourself (DRY) - "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system"
-tags: ['Software Engineering', 'Best Practices', 'DRY', 'Refactoring', 'Web Development']
-lastUpdated: 2026-02-13
+tags:
+  [
+    'Software Engineering',
+    'Best Practices',
+    'DRY',
+    'Refactoring',
+    'Web Development',
+  ]
+lastUpdated: 2026-03-24
 ---
 
-import Disclaimer from '~/components/Disclaimer.astro';
+import Disclaimer from '~/components/Disclaimer.astro'
 
 ## Definition
 
@@ -37,6 +44,7 @@ or We Enjoy Typing).
 ### The Rule of Three
 
 A common rule of thumb is the **Rule of Three**:
+
 > "Two instances of similar code is just a coincidence, but three is a pattern."
 
 It is often better to tolerate a little duplication than to create the wrong
@@ -60,24 +68,24 @@ Refactoring repetitive logic into reusable functions.
 #### Bad
 
 ```javascript
-const user1 = { firstName: 'John', lastName: 'Doe' };
-console.log(`Hello, ${user1.firstName} ${user1.lastName}!`);
+const user1 = { firstName: 'John', lastName: 'Doe' }
+console.log(`Hello, ${user1.firstName} ${user1.lastName}!`)
 
-const user2 = { firstName: 'Jane', lastName: 'Smith' };
-console.log(`Hello, ${user2.firstName} ${user2.lastName}!`);
+const user2 = { firstName: 'Jane', lastName: 'Smith' }
+console.log(`Hello, ${user2.firstName} ${user2.lastName}!`)
 ```
 
 #### Good
 
 ```javascript
-const getFullName = (user) => `${user.firstName} ${user.lastName}`;
-const greetUser = (user) => console.log(`Hello, ${getFullName(user)}!`);
+const getFullName = user => `${user.firstName} ${user.lastName}`
+const greetUser = user => console.log(`Hello, ${getFullName(user)}!`)
 
-const user1 = { firstName: 'John', lastName: 'Doe' };
-const user2 = { firstName: 'Jane', lastName: 'Smith' };
+const user1 = { firstName: 'John', lastName: 'Doe' }
+const user2 = { firstName: 'Jane', lastName: 'Smith' }
 
-greetUser(user1);
-greetUser(user2);
+greetUser(user1)
+greetUser(user2)
 ```
 
 ### In CSS

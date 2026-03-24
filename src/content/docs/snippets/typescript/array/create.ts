@@ -2,9 +2,9 @@
  * Creates an array of a specified length and populates it with the results of calling a provided function on every index in the array.
  *
  * @template T - The type of elements in the resulting array.
- * @param {number} length - The length of the array to create.
- * @param {(_: unknown, index: number) => T} [transform=(_, index) => index] - The function to call on every index in the array. By default, it returns the index itself.
- * @returns {T[]} An array of length `length` with its elements being the result of the `transform` function.
+ * @param length - The length of the array to create.
+ * @param [transform=(_, index) => index] - The function to call on every index in the array. By default, it returns the index itself.
+ * @returns An array of length `length` with its elements being the result of the `transform` function.
  *
  * @example
  * // Create an array of numbers
@@ -33,10 +33,10 @@ export const createArray = <T = number>(
  *
  * @default step = 1
  *
- * @param {number} start - The start of the range.
- * @param {number} [end] - The end of the range.
- * @param {number} [step=1] - The value to increment or decrement by.
- * @returns {number[]} Returns the range of numbers.
+ * @param start - The start of the range.
+ * @param [end] - The end of the range.
+ * @param [step=1] - The value to increment or decrement by.
+ * @returns Returns the range of numbers.
  *
  * @example
  * range(4);

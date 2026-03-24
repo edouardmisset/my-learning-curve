@@ -1,7 +1,7 @@
 ---
 date: 2024-01-23
-title: "Package Manager Benchmark"
-description: "Comparison of package managers to optimize CI performance."
+title: 'Package Manager Benchmark'
+description: 'Comparison of package managers to optimize CI performance.'
 tags: [package-managers, benchmark, CI-performance]
 prev:
   link: /my-learning-curve/learn/guides/project-collaboration/11-writing-guidelines

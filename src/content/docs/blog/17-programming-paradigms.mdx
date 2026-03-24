@@ -1,9 +1,21 @@
 ---
 date: 2026-01-09
-title: "Programming Paradigms"
-excerpt: "A comprehensive guide to understanding different programming paradigms, their history, use cases, and trade-offs."
-tags: ['Programming', 'Paradigms', 'Software Development', 'Coding Styles', 'Computer Science', 'Programming Languages', 'OOP', 'Functional Programming', 'Declarative Programming', 'Imperative Programming']
-lastUpdated: 2026-02-13
+title: 'Programming Paradigms'
+excerpt: 'A comprehensive guide to understanding different programming paradigms, their history, use cases, and trade-offs.'
+tags:
+  [
+    'Programming',
+    'Paradigms',
+    'Software Development',
+    'Coding Styles',
+    'Computer Science',
+    'Programming Languages',
+    'OOP',
+    'Functional Programming',
+    'Declarative Programming',
+    'Imperative Programming',
+  ]
+lastUpdated: 2026-03-24
 ---
 
 import Disclaimer from '~/components/Disclaimer.astro'
@@ -12,7 +24,7 @@ import Disclaimer from '~/components/Disclaimer.astro'
 
 A programming paradigm is a fundamental style or approach to computer programming. It provides a framework for how developers think about and structure their code to solve problems. Just as a "paradigm" in science represents a distinct set of concepts or thought patterns, a programming paradigm dictates the way computations are conceptualized and organized.
 
-In simpler terms, if a programming language is a tool, the paradigm is the methodology for using that tool. Some languages are designed specifically for one paradigm (like [Haskell](https://en.wikipedia.org/wiki/Haskell) for functional programming), while others are multi-paradigm (like [JavaScript](https://en.wikipedia.org/wiki/JavaScript), [Python](https://en.wikipedia.org/wiki/Python_(programming_language)), and [C++](https://en.wikipedia.org/wiki/C%2B%2B)), allowing developers to mix and match styles.
+In simpler terms, if a programming language is a tool, the paradigm is the methodology for using that tool. Some languages are designed specifically for one paradigm (like [Haskell](https://en.wikipedia.org/wiki/Haskell) for functional programming), while others are multi-paradigm (like [JavaScript](https://en.wikipedia.org/wiki/JavaScript), [Python](<https://en.wikipedia.org/wiki/Python_(programming_language)>), and [C++](https://en.wikipedia.org/wiki/C%2B%2B)), allowing developers to mix and match styles.
 
 ## A Brief History of Programming Paradigms
 
@@ -20,11 +32,11 @@ The [history of programming paradigms](https://read.learnyard.com/low-level-desi
 
 1. **[Imperative Programming](https://en.wikipedia.org/wiki/Imperative_programming) (1950s):** The earliest paradigm, closely tied to the architecture of computers. It focuses on changing the program's state through a sequence of statements. Early languages like [Fortran](https://en.wikipedia.org/wiki/Fortran) and [Assembly](https://en.wikipedia.org/wiki/Assembly_language) exemplify this.
 
-2. **[Structured](https://en.wikipedia.org/wiki/Structured_programming)/[Procedural Programming](https://en.wikipedia.org/wiki/Procedural_programming) (1960s-70s):** As programs grew larger, maintaining "spaghetti code" (code with unrestricted jumps/`GOTO`s) became impossible. Structured programming introduced control structures (loops, conditionals) and subroutines (procedures). [C](https://en.wikipedia.org/wiki/C_(programming_language)) and [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)) are classic examples.
+2. **[Structured](https://en.wikipedia.org/wiki/Structured_programming)/[Procedural Programming](https://en.wikipedia.org/wiki/Procedural_programming) (1960s-70s):** As programs grew larger, maintaining "spaghetti code" (code with unrestricted jumps/`GOTO`s) became impossible. Structured programming introduced control structures (loops, conditionals) and subroutines (procedures). [C](<https://en.wikipedia.org/wiki/C_(programming_language)>) and [Pascal](<https://en.wikipedia.org/wiki/Pascal_(programming_language)>) are classic examples.
 
-3. **[Object-Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming) (1970s-80s):** To better model real-world problems and manage complexity, OOP organized code into "objects" containing both data and behavior. [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk), [C++](https://en.wikipedia.org/wiki/C%2B%2B), and later [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) popularized this approach.
+3. **[Object-Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming) (1970s-80s):** To better model real-world problems and manage complexity, OOP organized code into "objects" containing both data and behavior. [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk), [C++](https://en.wikipedia.org/wiki/C%2B%2B), and later [Java](<https://en.wikipedia.org/wiki/Java_(programming_language)>) popularized this approach.
 
-4. **[Functional Programming (FP)](https://en.wikipedia.org/wiki/Functional_programming) (Origins in 1930s/50s, popular later):** Based on lambda calculus, FP treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) was the pioneer; modern examples include [Haskell](https://en.wikipedia.org/wiki/Haskell) and [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)).
+4. **[Functional Programming (FP)](https://en.wikipedia.org/wiki/Functional_programming) (Origins in 1930s/50s, popular later):** Based on lambda calculus, FP treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. [Lisp](<https://en.wikipedia.org/wiki/Lisp_(programming_language)>) was the pioneer; modern examples include [Haskell](https://en.wikipedia.org/wiki/Haskell) and [Elixir](<https://en.wikipedia.org/wiki/Elixir_(programming_language)>).
 
 5. **[Declarative Programming](https://en.wikipedia.org/wiki/Declarative_programming):** Evolving alongside others, this paradigm focuses on *what* the program should accomplish without describing *how* to do it. [SQL](https://en.wikipedia.org/wiki/SQL) (for databases) and [HTML](https://en.wikipedia.org/wiki/HTML)/[CSS](https://en.wikipedia.org/wiki/CSS) are prime examples.
 
@@ -70,7 +82,7 @@ Code declares properties of the desired result without specifying detailed state
 
 ### Object-Oriented Programming (OOP)
 
-**Examples:** [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)), [C++](https://en.wikipedia.org/wiki/C%2B%2B), [Python](https://en.wikipedia.org/wiki/Python_(programming_language)), [Ruby](https://en.wikipedia.org/wiki/Ruby_(programming_language)).
+**Examples:** [Java](<https://en.wikipedia.org/wiki/Java_(programming_language)>), [C#](<https://en.wikipedia.org/wiki/C_Sharp_(programming_language)>), [C++](https://en.wikipedia.org/wiki/C%2B%2B), [Python](<https://en.wikipedia.org/wiki/Python_(programming_language)>), [Ruby](<https://en.wikipedia.org/wiki/Ruby_(programming_language)>).
 
 **TypeScript Example:**
 
@@ -119,7 +131,7 @@ console.log(account.getBalance()) // 1300
 
 ### Functional Programming (FP)
 
-**Examples:** [Haskell](https://en.wikipedia.org/wiki/Haskell), [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)), [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)), [F#](https://en.wikipedia.org/wiki/F_Sharp_(programming_language)), (increasingly) [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://en.wikipedia.org/wiki/TypeScript).
+**Examples:** [Haskell](https://en.wikipedia.org/wiki/Haskell), [Elixir](<https://en.wikipedia.org/wiki/Elixir_(programming_language)>), [Scala](<https://en.wikipedia.org/wiki/Scala_(programming_language)>), [F#](<https://en.wikipedia.org/wiki/F_Sharp_(programming_language)>), (increasingly) [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://en.wikipedia.org/wiki/TypeScript).
 
 **TypeScript Example:**
 
@@ -129,16 +141,18 @@ type Transaction = { amount: number; type: 'deposit' | 'withdraw' }
 
 const processTransactions = (
   initialBalance: number,
-  transactions: Transaction[]
-): number => transactions.reduce((balance, { amount, type }) => type === 'deposit'
-      ? balance + amount
-      : balance - amount
-  , initialBalance)
+  transactions: Transaction[],
+): number =>
+  transactions.reduce(
+    (balance, { amount, type }) =>
+      type === 'deposit' ? balance + amount : balance - amount,
+    initialBalance,
+  )
 
 // Data is immutable, no side effects
 const transactions: Transaction[] = [
   { amount: 500, type: 'deposit' },
-  { amount: 200, type: 'withdraw' }
+  { amount: 200, type: 'withdraw' },
 ]
 
 const finalBalance = processTransactions(1000, transactions)
@@ -157,7 +171,7 @@ console.log(finalBalance) // 1300
 
 ### Procedural Programming
 
-**Examples:** [C](https://en.wikipedia.org/wiki/C_(programming_language)), [Go](https://en.wikipedia.org/wiki/Go_(programming_language)), [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)), [Basic](https://en.wikipedia.org/wiki/BASIC).
+**Examples:** [C](<https://en.wikipedia.org/wiki/C_(programming_language)>), [Go](<https://en.wikipedia.org/wiki/Go_(programming_language)>), [Pascal](<https://en.wikipedia.org/wiki/Pascal_(programming_language)>), [Basic](https://en.wikipedia.org/wiki/BASIC).
 
 **TypeScript Example:**
 
@@ -198,7 +212,7 @@ console.log(getBalance()) // 1300
 
 ## Conclusion
 
-There is no "best" paradigm. Modern software development often embraces **multi-paradigm** approaches. For example, [React](https://en.wikipedia.org/wiki/React_(software)) (a UI library) pushes a highly functional style (immutable state, pure components) within [JavaScript](https://en.wikipedia.org/wiki/JavaScript), which is traditionally imperative. [Rust](https://en.wikipedia.org/wiki/Rust_(programming_language)) combines system-level imperative control with functional features and strong type safety.
+There is no "best" paradigm. Modern software development often embraces **multi-paradigm** approaches. For example, [React](<https://en.wikipedia.org/wiki/React_(software)>) (a UI library) pushes a highly functional style (immutable state, pure components) within [JavaScript](https://en.wikipedia.org/wiki/JavaScript), which is traditionally imperative. [Rust](<https://en.wikipedia.org/wiki/Rust_(programming_language)>) combines system-level imperative control with functional features and strong type safety.
 
 Understanding these paradigms gives you a richer toolkit. You learn to choose the right approach for the specific problem at hand, rather than trying to force every problem into a single shape.
 

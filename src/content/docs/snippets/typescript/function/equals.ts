@@ -16,9 +16,9 @@
  *   is not deeply equal, it returns `false`.
  *
  * @template T - The type of the values to compare.
- * @param {T} left - The first value to compare.
- * @param {T} right - The second value to compare.
- * @returns {boolean} - Returns `true` if the values are equivalent, else `false`.
+ * @param left - The first value to compare.
+ * @param right - The second value to compare.
+ * @returns - Returns `true` if the values are equivalent, else `false`.
  *
  * @example
  * deepEquals({ a: 1, b: 2 }, { a: 1, b: 2 }) // returns true

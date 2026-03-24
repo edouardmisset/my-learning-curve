@@ -1,11 +1,11 @@
 ---
 date: 2025-10-02
-title: "Interpretation"
-description: "Guidelines for interpreting statistical analysis results."
-tags: ["data-analysis", "interpretation", "guide"]
-prev: 
-   link: /my-learning-curve/learn/tutorials/data-analysis/05-analyze-data
-   label: Data Analysis
+title: 'Interpretation'
+description: 'Guidelines for interpreting statistical analysis results.'
+tags: ['data-analysis', 'interpretation', 'guide']
+prev:
+  link: /my-learning-curve/learn/tutorials/data-analysis/05-analyze-data
+  label: Data Analysis
 ---
 
 Interpreting your results is about understanding what the statistical analysis

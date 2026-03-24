@@ -3,10 +3,11 @@ date: 2025-11-19
 title: ACID
 excerpt: ACID is a set of properties of database transactions intended to guarantee data validity despite errors, power failures, and other mishaps.
 tags: ['Database', 'SQL', 'Architecture', 'Backend', 'Transactions']
-lastUpdated: 2025-11-19
+lastUpdated: 2026-03-24
 ---
+
 import Disclaimer from '~/components/Disclaimer.astro'
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components'
 
 ## Definition
 
@@ -55,8 +56,8 @@ COMMIT;
 ```
 
 <Aside type="note">
-`BEGIN` starts a transaction block.  
-`COMMIT` ends it, applying all changes if successful.
+  `BEGIN` starts a transaction block. `COMMIT` ends it, applying all changes if
+  successful.
 </Aside>
 
 ### Consistency (Follow the Rules)

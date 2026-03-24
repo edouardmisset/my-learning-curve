@@ -1,10 +1,20 @@
 ---
 date: 2026-02-14
 title: Advanced Data Structures
-excerpt: "Moving beyond arrays and objects: exploring Stacks, Queues, Linked Lists, Trees, Graphs, and Tries."
-tags: [ 'TypeScript', 'Data Structures', 'Linked Lists', 'Trees', 'Binary Search Trees', 'Graphs', 'Tries' ]
-lastUpdated: 2026-02-16
+excerpt: 'Moving beyond arrays and objects: exploring Stacks, Queues, Linked Lists, Trees, Graphs, and Tries.'
+tags:
+  [
+    'TypeScript',
+    'Data Structures',
+    'Linked Lists',
+    'Trees',
+    'Binary Search Trees',
+    'Graphs',
+    'Tries',
+  ]
+lastUpdated: 2026-03-24
 ---
+
 import Disclaimer from '~/components/Disclaimer.astro'
 
 ## TL;DR
@@ -34,61 +44,61 @@ are extremely useful.
 
 ```typescript
 // Stack: Undo history
-const history: string[] = [];
-history.push('Type A');
-history.push('Type B');
-const lastAction = history.pop(); // 'Type B'
+const history: string[] = []
+history.push('Type A')
+history.push('Type B')
+const lastAction = history.pop() // 'Type B'
 
 // Queue: Task processing
-const taskQueue: string[] = [];
-taskQueue.push('Email User');
-taskQueue.push('Generate Report');
-const nextTask = taskQueue.shift(); // 'Email User'
+const taskQueue: string[] = []
+taskQueue.push('Email User')
+taskQueue.push('Generate Report')
+const nextTask = taskQueue.shift() // 'Email User'
 ```
 
 ### Simple Class Implementation
 
 ```typescript
 class Stack<T> {
-  private items: T[] = [];
+  private items: T[] = []
 
   /** Add item on top of the stack */
   push(item: T): void {
-    this.items.push(item);
+    this.items.push(item)
   }
 
   /** Remove and return the top item from the stack */
   pop(): T | undefined {
-    if (this.items.length === 0) return;
-    return this.items.pop();
+    if (this.items.length === 0) return
+    return this.items.pop()
   }
 
   /** View the top item without removing it */
   peek(): T | undefined {
-    return this.items[this.items.length - 1];
+    return this.items[this.items.length - 1]
   }
 }
 
 class Queue<T> {
-  private items: T[] = [];
+  private items: T[] = []
 
   /** Add item to the end of the queue */
   enqueue(item: T): void {
-    this.items.push(item);
+    this.items.push(item)
   }
 
-  /** 
-   * Remove and return the item at the front of the queue 
+  /**
+   * Remove and return the item at the front of the queue
    * Note: shift() is O(n). For true O(1) operations, use a Linked List.
    */
   dequeue(): T | undefined {
-    if (this.items.length === 0) return;
-    return this.items.shift();
+    if (this.items.length === 0) return
+    return this.items.shift()
   }
 
   /** View the front item without removing it */
   peek(): T | undefined {
-    return this.items[0];
+    return this.items[0]
   }
 }
 ```
@@ -107,29 +117,29 @@ like an Array would.
 
 ```typescript
 class ListNode<T> {
-  value: T;
-  next: ListNode<T> | undefined = undefined;
+  value: T
+  next: ListNode<T> | undefined = undefined
 
   constructor(value: T) {
-    this.value = value;
+    this.value = value
   }
 }
 
 class LinkedList<T> {
-  head: ListNode<T> | undefined = undefined;
+  head: ListNode<T> | undefined = undefined
 
   /** O(1) insertion at the start */
   prepend(value: T): void {
-    const newNode = new ListNode(value);
-    newNode.next = this.head;
-    this.head = newNode;
+    const newNode = new ListNode(value)
+    newNode.next = this.head
+    this.head = newNode
   }
 }
 
-const list = new LinkedList<string>();
-list.prepend('Third');
-list.prepend('Second');
-list.prepend('First');
+const list = new LinkedList<string>()
+list.prepend('Third')
+list.prepend('Second')
+list.prepend('First')
 // Structure: First -> Second -> Third -> undefined
 ```
 
@@ -141,85 +151,85 @@ Each node has pointers to both the **next** and **previous** nodes.
 
 ```typescript
 class DoublyNode<T> {
-  value: T;
-  next: DoublyNode<T> | undefined = undefined;
-  prev: DoublyNode<T> | undefined = undefined;
+  value: T
+  next: DoublyNode<T> | undefined = undefined
+  prev: DoublyNode<T> | undefined = undefined
 
   constructor(value: T) {
-    this.value = value;
+    this.value = value
   }
 }
 
 class DoublyLinkedList<T> {
-  head: DoublyNode<T> | undefined = undefined;
-  tail: DoublyNode<T> | undefined = undefined;
+  head: DoublyNode<T> | undefined = undefined
+  tail: DoublyNode<T> | undefined = undefined
 
   /** O(1) insertion at the end */
   append(value: T): void {
-    const newNode = new DoublyNode(value);
+    const newNode = new DoublyNode(value)
     if (!this.tail) {
-      this.head = this.tail = newNode;
+      this.head = this.tail = newNode
     } else {
-      newNode.prev = this.tail;
-      this.tail.next = newNode;
-      this.tail = newNode;
+      newNode.prev = this.tail
+      this.tail.next = newNode
+      this.tail = newNode
     }
   }
 
   /** O(1) insertion at the start */
   prepend(value: T): void {
-    const newNode = new DoublyNode(value);
+    const newNode = new DoublyNode(value)
     if (!this.head) {
-      this.head = this.tail = newNode;
+      this.head = this.tail = newNode
     } else {
-      newNode.next = this.head;
-      this.head.prev = newNode;
-      this.head = newNode;
+      newNode.next = this.head
+      this.head.prev = newNode
+      this.head = newNode
     }
   }
 
   /** O(1) deletion from the end */
   removeLast(): T | undefined {
-    if (!this.tail) return undefined;
-    const value = this.tail.value;
+    if (!this.tail) return undefined
+    const value = this.tail.value
     if (this.head === this.tail) {
-      this.head = this.tail = undefined;
+      this.head = this.tail = undefined
     } else {
-      this.tail = this.tail.prev;
-      this.tail!.next = undefined;
+      this.tail = this.tail.prev
+      this.tail!.next = undefined
     }
-    return value;
+    return value
   }
 
   /** O(1) deletion from the start */
   removeFirst(): T | undefined {
-    if (!this.head) return undefined;
-    const value = this.head.value;
+    if (!this.head) return undefined
+    const value = this.head.value
     if (this.head === this.tail) {
-      this.head = this.tail = undefined;
+      this.head = this.tail = undefined
     } else {
-      this.head = this.head.next;
-      this.head!.prev = undefined;
+      this.head = this.head.next
+      this.head!.prev = undefined
     }
-    return value;
+    return value
   }
 }
 
 // Usage example: Music player playlist
-const playlist = new DoublyLinkedList<string>();
-playlist.append('Bohemian Rhapsody');
-playlist.append('Stairway to Heaven');
-playlist.append('Hotel California');
+const playlist = new DoublyLinkedList<string>()
+playlist.append('Bohemian Rhapsody')
+playlist.append('Stairway to Heaven')
+playlist.append('Hotel California')
 
 // Navigate through the playlist
-let currentTrack = playlist.head;
-console.log(currentTrack?.value); // 'Bohemian Rhapsody'
+let currentTrack = playlist.head
+console.log(currentTrack?.value) // 'Bohemian Rhapsody'
 
-currentTrack = currentTrack?.next; // Move forward
-console.log(currentTrack?.value); // 'Stairway to Heaven'
+currentTrack = currentTrack?.next // Move forward
+console.log(currentTrack?.value) // 'Stairway to Heaven'
 
-currentTrack = currentTrack?.prev; // Move backward
-console.log(currentTrack?.value); // 'Bohemian Rhapsody'
+currentTrack = currentTrack?.prev // Move backward
+console.log(currentTrack?.value) // 'Bohemian Rhapsody'
 ```
 
 ## Trees
@@ -232,27 +242,27 @@ route trees are all examples of tree structures.
 
 ```typescript
 class TreeNode<T> {
-  value: T;
-  children: TreeNode<T>[] = [];
+  value: T
+  children: TreeNode<T>[] = []
 
   constructor(value: T) {
-    this.value = value;
+    this.value = value
   }
 
   addChild(node: TreeNode<T>): void {
-    this.children.push(node);
+    this.children.push(node)
   }
 }
 
 // Modeling a simple HTML structure
-const html = new TreeNode('html');
-const body = new TreeNode('body');
-const div = new TreeNode('div');
-const p = new TreeNode('p');
+const html = new TreeNode('html')
+const body = new TreeNode('body')
+const div = new TreeNode('div')
+const p = new TreeNode('p')
 
-html.addChild(body);
-body.addChild(div);
-div.addChild(p);
+html.addChild(body)
+body.addChild(div)
+div.addChild(p)
 ```
 
 ### Binary Search Trees (BST)
@@ -266,62 +276,62 @@ Note: An unbalanced BST (e.g., inserting sorted values) degrades to O(n).
 
 ```typescript
 class BinaryNode<T extends number | string> {
-  value: T;
-  left: BinaryNode<T> | undefined = undefined;
-  right: BinaryNode<T> | undefined = undefined;
+  value: T
+  left: BinaryNode<T> | undefined = undefined
+  right: BinaryNode<T> | undefined = undefined
 
   constructor(value: T) {
-    this.value = value;
+    this.value = value
   }
 }
 
 class BinarySearchTree<T extends number | string> {
-  root: BinaryNode<T> | undefined = undefined;
+  root: BinaryNode<T> | undefined = undefined
 
   insert(value: T): void {
-    const newNode = new BinaryNode(value);
+    const newNode = new BinaryNode(value)
     if (!this.root) {
-      this.root = newNode;
-      return;
+      this.root = newNode
+      return
     }
-    this.insertNode(this.root, newNode);
+    this.insertNode(this.root, newNode)
   }
 
   private insertNode(node: BinaryNode<T>, newNode: BinaryNode<T>): void {
     if (newNode.value < node.value) {
       // Go Left
-      if (!node.left) node.left = newNode;
-      else this.insertNode(node.left, newNode);
+      if (!node.left) node.left = newNode
+      else this.insertNode(node.left, newNode)
     } else {
       // Go Right
-      if (!node.right) node.right = newNode;
-      else this.insertNode(node.right, newNode);
+      if (!node.right) node.right = newNode
+      else this.insertNode(node.right, newNode)
     }
   }
 
   search(value: T): boolean {
-    return this.searchNode(this.root, value);
+    return this.searchNode(this.root, value)
   }
 
   private searchNode(node: BinaryNode<T> | undefined, value: T): boolean {
-    if (!node) return false;
-    if (value === node.value) return true;
+    if (!node) return false
+    if (value === node.value) return true
     return value < node.value
       ? this.searchNode(node.left, value)
-      : this.searchNode(node.right, value);
+      : this.searchNode(node.right, value)
   }
 }
 
-const bst = new BinarySearchTree<number>();
-bst.insert(10);
-bst.insert(5);
-bst.insert(15);
+const bst = new BinarySearchTree<number>()
+bst.insert(10)
+bst.insert(5)
+bst.insert(15)
 //       10
 //      /  \
 //     5    15
 
-bst.search(5);  // true
-bst.search(20); // false
+bst.search(5) // true
+bst.search(20) // false
 ```
 
 ## Graphs
@@ -335,30 +345,30 @@ bought Y"), and routing algorithms (Google Maps).
 ```typescript
 class Graph<T> {
   // Adjacency List: Map<Node, Array<Neighbors>>
-  adjacencyList: Map<T, T[]> = new Map();
+  adjacencyList: Map<T, T[]> = new Map()
 
   addVertex(vertex: T): void {
-    if (this.adjacencyList.has(vertex)) return;
+    if (this.adjacencyList.has(vertex)) return
 
-    this.adjacencyList.set(vertex, []);
+    this.adjacencyList.set(vertex, [])
   }
 
   addEdge(vertex1: T, vertex2: T): void {
     // Ensure vertices exist before adding edge
-    this.addVertex(vertex1);
-    this.addVertex(vertex2);
-    this.adjacencyList.get(vertex1)!.push(vertex2);
-    this.adjacencyList.get(vertex2)!.push(vertex1); // Undirected
+    this.addVertex(vertex1)
+    this.addVertex(vertex2)
+    this.adjacencyList.get(vertex1)!.push(vertex2)
+    this.adjacencyList.get(vertex2)!.push(vertex1) // Undirected
   }
 }
 
-const socialNetwork = new Graph<string>();
-socialNetwork.addVertex('Alice');
-socialNetwork.addVertex('Bob');
-socialNetwork.addVertex('Charlie');
+const socialNetwork = new Graph<string>()
+socialNetwork.addVertex('Alice')
+socialNetwork.addVertex('Bob')
+socialNetwork.addVertex('Charlie')
 
-socialNetwork.addEdge('Alice', 'Bob');
-socialNetwork.addEdge('Alice', 'Charlie');
+socialNetwork.addEdge('Alice', 'Bob')
+socialNetwork.addEdge('Alice', 'Charlie')
 // Alice is friends with Bob and Charlie
 ```
 
@@ -372,38 +382,38 @@ efficiently find "React", "Redux", "Remix" without scanning a whole database.
 
 ```typescript
 class TrieNode {
-  children: Map<string, TrieNode> = new Map();
-  isEndOfWord: boolean = false;
+  children: Map<string, TrieNode> = new Map()
+  isEndOfWord: boolean = false
 }
 
 class Trie {
-  root: TrieNode = new TrieNode();
+  root: TrieNode = new TrieNode()
 
   insert(word: string): void {
-    let current = this.root;
+    let current = this.root
     for (const char of word) {
       if (!current.children.has(char)) {
-        current.children.set(char, new TrieNode());
+        current.children.set(char, new TrieNode())
       }
-      current = current.children.get(char)!;
+      current = current.children.get(char)!
     }
-    current.isEndOfWord = true;
+    current.isEndOfWord = true
   }
 
   search(word: string): boolean {
-    let current = this.root;
+    let current = this.root
     for (const char of word) {
-      const child = current.children.get(char);
-      if (!child) return false;
-      current = child;
+      const child = current.children.get(char)
+      if (!child) return false
+      current = child
     }
-    return current.isEndOfWord;
+    return current.isEndOfWord
   }
 }
 
-const autocomplete = new Trie();
-autocomplete.insert('react');
-autocomplete.insert('redux');
+const autocomplete = new Trie()
+autocomplete.insert('react')
+autocomplete.insert('redux')
 // Efficiently stores 'r', 'e', then branches for 'a' and 'd'
 ```
 

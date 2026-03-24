@@ -2,8 +2,16 @@
 date: 2025-11-19
 title: Understanding Sorting Algorithms
 excerpt: An introduction to sorting algorithms, their time and space complexity.
-tags: ['Algorithms', 'Sorting', 'Complexity', 'Computer Science', 'JavaScript', 'TypeScript']
-lastUpdated: 2026-02-13
+tags:
+  [
+    'Algorithms',
+    'Sorting',
+    'Complexity',
+    'Computer Science',
+    'JavaScript',
+    'TypeScript',
+  ]
+lastUpdated: 2026-03-24
 ---
 
 import Disclaimer from '~/components/Disclaimer.astro'
@@ -85,15 +93,15 @@ in wrong order. Simple but inefficient.
 
 ```typescript
 function bubbleSort<T>(arr: T[]): T[] {
-  const result = [...arr];
+  const result = [...arr]
   for (let i = 0; i < result.length; i++) {
     for (let j = 0; j < result.length - i - 1; j++) {
       if (result[j] > result[j + 1]) {
-        [result[j], result[j + 1]] = [result[j + 1], result[j]];
+        ;[result[j], result[j + 1]] = [result[j + 1], result[j]]
       }
     }
   }
-  return result;
+  return result
 }
 ```
 
@@ -103,17 +111,17 @@ Finds the minimum element and places it at the beginning. Minimizes swaps.
 
 ```typescript
 function selectionSort<T>(arr: T[]): T[] {
-  const result = [...arr];
+  const result = [...arr]
   for (let i = 0; i < result.length; i++) {
-    let minIndex = i;
+    let minIndex = i
     for (let j = i + 1; j < result.length; j++) {
-      if (result[j] < result[minIndex]) minIndex = j;
+      if (result[j] < result[minIndex]) minIndex = j
     }
     if (minIndex !== i) {
-      [result[i], result[minIndex]] = [result[minIndex], result[i]];
+      ;[result[i], result[minIndex]] = [result[minIndex], result[i]]
     }
   }
-  return result;
+  return result
 }
 ```
 
@@ -124,17 +132,17 @@ data.
 
 ```typescript
 function insertionSort<T>(arr: T[]): T[] {
-  const result = [...arr];
+  const result = [...arr]
   for (let i = 1; i < result.length; i++) {
-    const key = result[i];
-    let j = i - 1;
+    const key = result[i]
+    let j = i - 1
     while (j >= 0 && result[j] > key) {
-      result[j + 1] = result[j];
-      j--;
+      result[j + 1] = result[j]
+      j--
     }
-    result[j + 1] = key;
+    result[j + 1] = key
   }
-  return result;
+  return result
 }
 ```
 
@@ -145,31 +153,31 @@ log n)`.
 
 ```typescript
 function mergeSort<T>(arr: T[]): T[] {
-  if (arr.length <= 1) return arr;
-  
-  const mid = Math.floor(arr.length / 2);
-  const left = mergeSort(arr.slice(0, mid));
-  const right = mergeSort(arr.slice(mid));
-  
-  return merge(left, right);
+  if (arr.length <= 1) return arr
+
+  const mid = Math.floor(arr.length / 2)
+  const left = mergeSort(arr.slice(0, mid))
+  const right = mergeSort(arr.slice(mid))
+
+  return merge(left, right)
 }
 
 function merge<T>(left: T[], right: T[]): T[] {
-  const result: T[] = [];
-  let i = 0;
-  let j = 0;
-  
+  const result: T[] = []
+  let i = 0
+  let j = 0
+
   while (i < left.length && j < right.length) {
     if (left[i] <= right[j]) {
-      result.push(left[i]);
-      i++;
+      result.push(left[i])
+      i++
     } else {
-      result.push(right[j]);
-      j++;
+      result.push(right[j])
+      j++
     }
   }
-  
-  return result.concat(left.slice(i)).concat(right.slice(j));
+
+  return result.concat(left.slice(i)).concat(right.slice(j))
 }
 ```
 
@@ -180,37 +188,37 @@ practice.
 
 ```typescript
 function quickSort<T>(arr: T[]): T[] {
-  const result = [...arr];
-  
+  const result = [...arr]
+
   // Partition places the pivot in its correct position
   // All smaller elements to left, larger to right
   function partition(low: number, high: number): number {
-    const pivot = result[high]; // Choosing last element as pivot
-    let i = low - 1; // Index of smaller element
-    
+    const pivot = result[high] // Choosing last element as pivot
+    let i = low - 1 // Index of smaller element
+
     for (let j = low; j < high; j++) {
       // If current element is smaller than the pivot
       if (result[j] < pivot) {
-        i++;
-        [result[i], result[j]] = [result[j], result[i]];
+        i++
+        ;[result[i], result[j]] = [result[j], result[i]]
       }
     }
     // Place pivot after the last smaller element
-    [result[i + 1], result[high]] = [result[high], result[i + 1]];
-    return i + 1;
+    ;[result[i + 1], result[high]] = [result[high], result[i + 1]]
+    return i + 1
   }
 
   function sort(low: number, high: number) {
     if (low < high) {
-      const pi = partition(low, high);
+      const pi = partition(low, high)
       // Recursively sort elements before and after partition
-      sort(low, pi - 1);
-      sort(pi + 1, high);
+      sort(low, pi - 1)
+      sort(pi + 1, high)
     }
   }
 
-  sort(0, result.length - 1);
-  return result;
+  sort(0, result.length - 1)
+  return result
 }
 ```
 
@@ -220,41 +228,41 @@ Uses binary heap data structure. Guaranteed `O(n log n)` with `O(1)` space.
 
 ```typescript
 function heapSort<T>(arr: T[]): T[] {
-  const result = [...arr];
-  const n = result.length;
-  
+  const result = [...arr]
+  const n = result.length
+
   // Build max heap: rearrange array so parent > children
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
-    heapify(result, n, i);
+    heapify(result, n, i)
   }
-  
+
   // Extract elements from heap one by one
   for (let i = n - 1; i > 0; i--) {
     // Move current root (largest) to end
-    [result[0], result[i]] = [result[i], result[0]];
+    ;[result[0], result[i]] = [result[i], result[0]]
     // Call max heapify on the reduced heap
-    heapify(result, i, 0);
+    heapify(result, i, 0)
   }
-  
-  return result;
+
+  return result
 }
 
 // Maintains the heap property for a subtree rooted at index i
 function heapify<T>(arr: T[], n: number, i: number): void {
-  let largest = i;
-  const left = 2 * i + 1;
-  const right = 2 * i + 2;
-  
+  let largest = i
+  const left = 2 * i + 1
+  const right = 2 * i + 2
+
   // If left child is larger than root
-  if (left < n && arr[left] > arr[largest]) largest = left;
+  if (left < n && arr[left] > arr[largest]) largest = left
   // If right child is larger than largest so far
-  if (right < n && arr[right] > arr[largest]) largest = right;
-  
+  if (right < n && arr[right] > arr[largest]) largest = right
+
   // If largest is not root
   if (largest !== i) {
-    [arr[i], arr[largest]] = [arr[largest], arr[i]];
+    ;[arr[i], arr[largest]] = [arr[largest], arr[i]]
     // Recursively heapify the affected sub-tree
-    heapify(arr, n, largest);
+    heapify(arr, n, largest)
   }
 }
 ```
@@ -291,11 +299,11 @@ JavaScript engines use sophisticated algorithms (usually Timsort):
 
 ```javascript
 // Without comparator - lexicographic string sorting
-const numbers = [10, 5, 40, 25, 1000, 1];
-numbers.sort(); // [1, 10, 1000, 25, 40, 5] ⚠️
+const numbers = [10, 5, 40, 25, 1000, 1]
+numbers.sort() // [1, 10, 1000, 25, 40, 5] ⚠️
 
 // With comparator - numeric sorting
-numbers.sort((a, b) => a - b); // [1, 5, 10, 25, 40, 1000] ✓
+numbers.sort((a, b) => a - b) // [1, 5, 10, 25, 40, 1000] ✓
 ```
 
 <Aside type="note">

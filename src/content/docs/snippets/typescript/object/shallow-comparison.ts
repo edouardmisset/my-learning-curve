@@ -6,9 +6,9 @@ import { objectKeys } from './object-keys'
  * It checks if both objects have the same keys and if the values for these keys are the same in both objects.
  *
  * @template Obj The type of the objects to compare.
- * @param {Obj} leftObject The first object to compare.
- * @param {Obj} rightObject The second object to compare.
- * @returns {boolean} True if the objects have the same keys and the same values for each key, false otherwise.
+ * @param leftObject The first object to compare.
+ * @param rightObject The second object to compare.
+ * @returns True if the objects have the same keys and the same values for each key, false otherwise.
  *
  * @example
  * const obj1 = { a: 1, b: 2 };

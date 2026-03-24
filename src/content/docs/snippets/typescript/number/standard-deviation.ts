@@ -13,10 +13,10 @@
  * - Sample: When the data set only includes part of the data you are interested
  *   in.
  *
- * @param {number[]} arr - The array of numbers.
- * @param {boolean} [usePopulation=false] - Whether to calculate the standard
+ * @param arr - The array of numbers.
+ * @param [usePopulation=false] - Whether to calculate the standard
  * deviation for a population or a sample.
- * @returns {number} The standard deviation of the numbers.
+ * @returns The standard deviation of the numbers.
  *
  * @example
  * standardDeviation([1, 2, 3, 4])

@@ -5,16 +5,16 @@ import { isValidURL } from './is-valid-url'
  *
  * Note: By default this function does not modify the original URL object.
  *
- * @param {URL | string} url - The original URL object.
- * @param {string} newHash - The new hash fragment to set.
- * @param {boolean} [replace=false] - Whether to replace the original URL object
+ * @param url - The original URL object.
+ * @param newHash - The new hash fragment to set.
+ * @param [replace=false] - Whether to replace the original URL object
  * or create a new one.
- * @returns {URL} An URL object with the updated hash fragment.
+ * @returns An URL object with the updated hash fragment.
  */
 export function editHash(
   url: URL | string,
   newHash: string,
-  replace = false,
+  replace: boolean = false,
 ): URL {
   if (newHash === '') {
     return typeof url === 'string'

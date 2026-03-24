@@ -1,0 +1,133 @@
+---
+date: 2026-03-24
+title: TypeScript Go (tsgo)
+description: TypeScript 7 is a native Go port of the TypeScript compiler offering up to 10x faster type-checking. This article covers setup and the TypeScript 5→6 migration changes.
+tags: ['TypeScript', 'Tsgo', 'Frontend', 'Development']
+---
+
+import { Aside } from '@astrojs/starlight/components'
+import PackageManagers from '~/components/PackageManagers.astro'
+
+TypeScript 7 is a native Go port of the TypeScript compiler (codenamed
+**tsgo**). It targets the same language semantics as TypeScript 5/6 but is
+significantly faster — benchmarks show 10× or more improvement on large
+codebases.
+
+## TL;DR
+
+Install `@typescript/native-preview` to get the `tsgo` binary (TypeScript 7
+dev preview). Separately, apply the TypeScript 6.0 migration checklist to your
+`tsconfig.json` to avoid deprecation errors when fully upgrading.
+
+## Installation
+
+<PackageManagers pkg="@typescript/native-preview" flags="-D" />
+
+This installs the `tsgo` binary. You can expose it as an optional script for
+native checks:
+
+```json title="package.json"
+{
+  "scripts": {
+    "typecheck:tsgo": "tsgo --noEmit"
+  }
+}
+```
+
+<Aside type="caution">
+  `@typescript/native-preview` is a **dev preview** and updates daily. It does
+  not yet replace the `typescript` package for all tooling. In particular,
+  `@astrojs/check` currently requires `typescript@^5.0.0` as a peer dependency.
+</Aside>
+
+## TypeScript 5.x → 6.0 migration
+
+TypeScript 6.0 is the version that bridges the legacy TypeScript 5 compiler and
+the forthcoming TypeScript 7 (tsgo). Most changes are **new defaults** and
+**deprecations** preparing for 7.0.
+
+### Changed default values
+
+| Option                         | TS 5 default               | TS 6 default                    |
+| ------------------------------ | -------------------------- | ------------------------------- |
+| `strict`                       | `false`                    | `true`                          |
+| `target`                       | `ES3`                      | `es2025`                        |
+| `module`                       | `CommonJS`                 | `es2022` (resolved from target) |
+| `moduleResolution`             | `node10`                   | `bundler`                       |
+| `rootDir`                      | inferred from source files | `.` (tsconfig directory)        |
+| `types`                        | all `@types` auto-included | `[]` (none)                     |
+| `noUncheckedSideEffectImports` | `false`                    | `true`                          |
+| `libReplacement`               | `true`                     | `false`                         |
+| `esModuleInterop`              | `false`                    | `true`                          |
+
+### Deprecated options
+
+All deprecations in TS 6 become **hard removals** in TS 7:
+
+| Deprecated option/value                           | Migration                              |
+| ------------------------------------------------- | -------------------------------------- |
+| `target: "es3"` / `"es5"`                         | `target: "es2015"` or higher           |
+| `downlevelIteration`                              | Remove entirely                        |
+| `moduleResolution: "node"` / `"node10"`           | `"nodenext"` or `"bundler"`            |
+| `moduleResolution: "classic"`                     | `"nodenext"` or `"bundler"`            |
+| `module: "amd"` / `"umd"` / `"system"` / `"none"` | `"esnext"`, `"commonjs"`, `"nodenext"` |
+| `baseUrl`                                         | Inline value into `paths` entries      |
+| `esModuleInterop: false`                          | Remove (always `true`)                 |
+| `allowSyntheticDefaultImports: false`             | Remove (always `true`)                 |
+| `alwaysStrict: false`                             | Remove (always strict)                 |
+| `outFile`                                         | Use a bundler                          |
+| `module Foo {}` namespace syntax                  | `namespace Foo {}`                     |
+| `import ... assert {}` import assertions          | `import ... with {}`                   |
+
+### Priority migration checklist
+
+**Priority 1 — likely breaking for most projects:**
+
+1. Set `"types": ["node"]` (or all `@types` packages you need) — types are no longer auto-discovered.
+2. Set `"rootDir": "./src"` if you were relying on inference (source files in a subdirectory).
+3. Review the new `strict: true` default — set `"strict": false` if not ready.
+
+**Priority 2 — common adjustments:**
+
+1. Set explicit `target` if you need something other than `es2025`.
+2. Set explicit `module` if you need CommonJS output.
+3. Remove `baseUrl` and inline its value into `paths` entries.
+4. Replace `import ... assert {}` with `import ... with {}`.
+5. Replace `module Foo {}` with `namespace Foo {}`.
+6. If you have side-effect imports that do not resolve, set `"noUncheckedSideEffectImports": false`.
+
+**Priority 3 — deprecated options to remove:**
+
+Remove `downlevelIteration`, `outFile`, `alwaysStrict: false`, `esModuleInterop: false`, `allowSyntheticDefaultImports: false`, and update legacy `moduleResolution` / `module` values.
+
+### Temporary escape hatch
+
+Add `"ignoreDeprecations": "6.0"` to `tsconfig.json` to silence deprecation
+warnings while you migrate. This will **not** work in TypeScript 7.
+
+```json
+{
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0"
+  }
+}
+```
+
+### Automated migration tool
+
+The [`ts5to6`](https://github.com/andrewbranch/ts5to6) tool (by a TypeScript
+team member) automates the two most disruptive changes — `baseUrl` removal and
+`rootDir` inference:
+
+```sh
+npx @andrewbranch/ts5to6 --fixBaseUrl .
+npx @andrewbranch/ts5to6 --fixRootDir .
+```
+
+## Documentation
+
+- [`@typescript/native-preview` on npm](https://www.npmjs.com/package/@typescript/native-preview)
+- [typescript-go repository](https://github.com/microsoft/typescript-go)
+- [TypeScript 6.0 Beta announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-6-0-beta/)
+- [TypeScript 5.x → 6.0 migration guide](https://gist.github.com/privatenumber/3d2e80da28f84ee30b77d53e1693378f)
+- [Automated migration tool `ts5to6`](https://github.com/andrewbranch/ts5to6)

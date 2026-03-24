@@ -3,10 +3,10 @@ date: 2021-05-08
 title: TypeScript Types
 excerpt: A short introduction to TypeScript types.
 tags: ['TypeScript', 'Types', 'Introduction']
-lastUpdated: 2026-02-13
+lastUpdated: 2026-03-24
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components'
 
 ## Introduction
 
@@ -24,17 +24,19 @@ The trifecta of primitives.
 
 ```typescript
 // boolean - simple true/false flags
-let isCool: boolean = false;
+let isCool: boolean = false
 
 // number - for all your floating point needs
-let age: number = 56;
+let age: number = 56
 
 // string - text
-let favoriteQuote: string = `I'm not old, I'm dirt`;
+let favoriteQuote: string = `I'm not old, I'm dirt`
 ```
 
 <Aside type="note">
-  TypeScript also infers types. If you write `let x = 10`, TypeScript knows `x` is a number. You don't *always* need to type it explicitly, but it helps when learning.
+  TypeScript also infers types. If you write `let x = 10`, TypeScript knows `x`
+  is a number. You don't *always* need to type it explicitly, but it helps when
+  learning.
 </Aside>
 
 ### Null and Undefined
@@ -42,8 +44,8 @@ let favoriteQuote: string = `I'm not old, I'm dirt`;
 These two are often the source of many runtime errors. TypeScript helps you handle them safely.
 
 ```typescript
-let meh: undefined = undefined;
-let noo: null = null;
+let meh: undefined = undefined
+let noo: null = null
 ```
 
 ## Complex Types
@@ -56,10 +58,10 @@ There are two ways to define arrays. Both are valid, pick your style.
 
 ```typescript
 // Syntax 1: Type[]
-let pets: string[] = ['cat', 'mouse', 'dragon'];
+let pets: string[] = ['cat', 'mouse', 'dragon']
 
 // Syntax 2: Array<Type> (Generics syntax)
-let pets2: Array<string> = ['pig', 'lion', 'cheetah'];
+let pets2: Array<string> = ['pig', 'lion', 'cheetah']
 ```
 
 ### Tuples
@@ -68,9 +70,9 @@ Arrays with a fixed number of elements and known types. Great for simple coordin
 
 ```typescript
 // Represents a [name, quantity] pair
-let basket: [string, number];
+let basket: [string, number]
 
-basket = ['basketball', 10]; // OK
+basket = ['basketball', 10] // OK
 // basket = [10, 'basketball']; // Error: Type 'number' is not assignable to type 'string'.
 ```
 
@@ -85,12 +87,13 @@ enum Size {
   Large = 3,
 }
 
-let sizeName: string = Size[2];
-console.log(sizeName); // Displays 'Medium'
+let sizeName: string = Size[2]
+console.log(sizeName) // Displays 'Medium'
 ```
 
 <Aside type="note">
-  These are largely replaced by union types in modern TypeScript, but still useful in some scenarios.
+  These are largely replaced by union types in modern TypeScript, but still
+  useful in some scenarios.
 </Aside>
 
 ## Advanced & Special Types
@@ -100,8 +103,8 @@ console.log(sizeName); // Displays 'Medium'
 The "Escape Hatch". `any` disables type checking. Use it sparingly, or better yet, don't use it at all if you can avoid it.
 
 ```typescript
-let whatever: any = 'aaaaghhhhhh noooooo!';
-whatever = 42; // legitimate in some rare cases, but dangerous
+let whatever: any = 'aaaaghhhhhh noooooo!'
+whatever = 42 // legitimate in some rare cases, but dangerous
 ```
 
 ### Void
@@ -109,7 +112,7 @@ whatever = 42; // legitimate in some rare cases, but dangerous
 Used for functions that do not return a value.
 
 ```typescript
-const sing = (): void => console.log('Lalalala');
+const sing = (): void => console.log('Lalalala')
 ```
 
 ### Never
@@ -118,8 +121,8 @@ Represents the type of values that never occur. Commonly used for functions that
 
 ```typescript
 let error = (): never => {
-  throw Error('blah!');
-};
+  throw Error('blah!')
+}
 ```
 
 ## Interfaces vs Types
@@ -132,15 +135,15 @@ Interfaces are primarily used to define the structure of objects. They can be ex
 
 ```typescript
 interface RobotArmy {
-  count: number;
-  type: string;
-  magic?: string; // Optional property
+  count: number
+  type: string
+  magic?: string // Optional property
 }
 
 // Function using the interface
 const fightRobotArmy = (robots: RobotArmy): void => {
-  console.log(`FIGHT! ${robots.count} ${robots.type} robots attacking.`);
-};
+  console.log(`FIGHT! ${robots.count} ${robots.type} robots attacking.`)
+}
 ```
 
 ### Type Aliases
@@ -149,22 +152,20 @@ Types are more flexible. They can define unions, primitives, tuples, and more.
 
 ```typescript
 // Union Type
-type AnimalType = 'cat' | 'mouse' | 'dragon';
+type AnimalType = 'cat' | 'mouse' | 'dragon'
 
 // Object Type
 type CatArmy = {
-  count: number;
-  type: string;
+  count: number
+  type: string
 }
 
 // Type Assertion (Casting)
-const dog = {} as CatArmy;
-dog.count = 5;
+const dog = {} as CatArmy
+dog.count = 5
 ```
 
-<Aside type="tip">
-   **Opinion:** Use `type`.
-</Aside>
+<Aside type="tip">**Opinion:** Use `type`.</Aside>
 
 ## Classes
 
@@ -176,13 +177,13 @@ class Animal {
   constructor(private sound: string) {}
 
   greet(): string {
-    return `Hello, ${this.sound}`;
+    return `Hello, ${this.sound}`
   }
 }
 
-const lion = new Animal('Roar');
+const lion = new Animal('Roar')
 // lion.sound; // Error: Property 'sound' is private and only accessible within class 'Animal'.
-console.log(lion.greet()); // 'Hello, Roar'
+console.log(lion.greet()) // 'Hello, Roar'
 ```
 
 ## Conclusion

@@ -1,10 +1,10 @@
 ---
 date: 2025-10-02
-title: "Data Analysis Workflow"
-description: "A guide to the workflow for data analysis."
-tags: ["data-analysis", "workflow", "guide"]
+title: 'Data Analysis Workflow'
+description: 'A guide to the workflow for data analysis.'
+tags: ['data-analysis', 'workflow', 'guide']
 prev: false
-next: 
+next:
   link: /my-learning-curve/learn/tutorials/data-analysis/01-definition
   label: Define Your Question
 ---

@@ -47,7 +47,7 @@
       larger than content area  */
   --breakout-grid-width: calc(
     var(--max-content-width) +
-    (var(--max-content-width) * var(--breakout-difference))
+      (var(--max-content-width) * var(--breakout-difference))
   );
 
   display: grid;
@@ -239,9 +239,9 @@ but as a fallback you can chain `:not()` instead */
   enable easier access on touch devices, ensuring
   the WCAG touch target size is met or exceeded */
   grid-template-columns: repeat(
-      var(--avatar-count),
-      max(44px, calc(var(--avatar-size) / 1.15))
-    );
+    var(--avatar-count),
+    max(44px, calc(var(--avatar-size) / 1.15))
+  );
 
   /* `padding` matches added visual dimensions of
   the `box-shadow` to help create a more accurate
@@ -255,9 +255,9 @@ but as a fallback you can chain `:not()` instead */
     /* We create 1 extra cell to enable the computed 
     width to match the final visual width */
     grid-template-columns: repeat(
-        calc(var(--avatar-count) + 1),
-        calc(var(--avatar-size) / 1.75)
-      );
+      calc(var(--avatar-count) + 1),
+      calc(var(--avatar-size) / 1.75)
+    );
   }
 }
 
@@ -418,7 +418,7 @@ ul.visited-styles {
 
 .visited-styles a span::after {
   color: var(--color-background);
-  content: "✔";
+  content: '✔';
 }
 
 .visited-styles a:visited span::after {

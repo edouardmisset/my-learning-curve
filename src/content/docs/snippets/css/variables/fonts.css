@@ -14,12 +14,16 @@
     inter, roboto, helvetica neue, arial nova, nimbus sans, arial, sans-serif;
   --font-monospace-slab-serif: nimbus mono ps, courier new, monospace;
   --font-monospace-code:
-    dank mono, operator mono, inconsolata, fira mono, ui-monospace, sf mono, monaco, droid sans mono, source code pro, cascadia code, menlo, consolas, dejavu sans mono, monospace;
+    dank mono, operator mono, inconsolata, fira mono, ui-monospace, sf mono,
+    monaco, droid sans mono, source code pro, cascadia code, menlo, consolas,
+    dejavu sans mono, monospace;
   --font-industrial:
     bahnschrift, din alternate, franklin gothic medium, nimbus sans narrow,
     sans-serif-condensed, sans-serif;
   --font-rounded-sans:
-    ui-rounded, hiragino maru gothic pron, quicksand, comfortaa, manjari, arial rounded mt, arial rounded mt bold, calibri, source-sans-pro, sans-serif;
+    ui-rounded, hiragino maru gothic pron, quicksand, comfortaa, manjari,
+    arial rounded mt, arial rounded mt bold, calibri, source-sans-pro,
+    sans-serif;
   --font-slab-serif:
     rockwell, rockwell nova, roboto slab, dejavu serif, sitka small, serif;
   --font-antique:

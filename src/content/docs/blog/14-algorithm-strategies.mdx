@@ -2,8 +2,9 @@
 date: 2025-11-20
 title: Algorithm Strategies
 excerpt: A deep dive into common algorithm strategies like Divide and Conquer, Sliding Window, and Two Pointers, tailored for the modern TypeScript developer.
-tags: ['Algorithms', 'TypeScript', 'Strategies', 'Optimization', 'Problem Solving']
-lastUpdated: 2025-11-20
+tags:
+  ['Algorithms', 'TypeScript', 'Strategies', 'Optimization', 'Problem Solving']
+lastUpdated: 2026-03-24
 ---
 
 import Disclaimer from '~/components/Disclaimer.astro'
@@ -47,22 +48,22 @@ Check if two strings contain the exact same characters with the same frequency.
 
 ```typescript
 function areAnagrams(str1: string, str2: string): boolean {
-  if (str1.length !== str2.length) return false;
+  if (str1.length !== str2.length) return false
 
-  const lookup: Record<string, number> = {};
+  const lookup: Record<string, number> = {}
 
   for (const char of str1) {
-    lookup[char] = (lookup[char] || 0) + 1;
+    lookup[char] = (lookup[char] || 0) + 1
   }
 
   for (const char of str2) {
     if (!lookup[char]) {
-      return false;
+      return false
     }
-    lookup[char] -= 1;
+    lookup[char] -= 1
   }
 
-  return true;
+  return true
 }
 ```
 
@@ -80,25 +81,28 @@ Find two products in a sorted list that sum up exactly to a customer's gift card
 balance.
 
 ```typescript
-function findProductPair(prices: number[], budget: number): [number, number] | null {
-  let left = 0;
-  let right = prices.length - 1;
+function findProductPair(
+  prices: number[],
+  budget: number,
+): [number, number] | null {
+  let left = 0
+  let right = prices.length - 1
 
   while (left < right) {
-    const sum = prices[left] + prices[right];
+    const sum = prices[left] + prices[right]
 
     if (sum === budget) {
-      return [prices[left], prices[right]];
+      return [prices[left], prices[right]]
     } else if (sum < budget) {
       // Need a larger sum, move left pointer up
-      left++;
+      left++
     } else {
       // Need a smaller sum, move right pointer down
-      right--;
+      right--
     }
   }
 
-  return null;
+  return null
 }
 ```
 
@@ -116,15 +120,15 @@ Find the maximum sum of any contiguous subarray in an array of numbers.
 
 ```typescript
 function maxSubArray(nums: number[]): number {
-  let maxSum = nums[0];
-  let currentSum = nums[0];
+  let maxSum = nums[0]
+  let currentSum = nums[0]
 
   for (let i = 1; i < nums.length; i++) {
-    currentSum = Math.max(nums[i], currentSum + nums[i]);
-    maxSum = Math.max(maxSum, currentSum);
+    currentSum = Math.max(nums[i], currentSum + nums[i])
+    maxSum = Math.max(maxSum, currentSum)
   }
 
-  return maxSum;
+  return maxSum
 }
 ```
 
@@ -134,7 +138,8 @@ function maxSubArray(nums: number[]): number {
 recursively, and combine the results.
 
 <Aside type="note">
-This is the backbone of efficient sorting (Merge Sort, Quick Sort) and searching.
+  This is the backbone of efficient sorting (Merge Sort, Quick Sort) and
+  searching.
 </Aside>
 
 #### Example: Binary Search
@@ -144,30 +149,30 @@ a specific entry. A linear scan is O(n), but binary search is O(log n).
 
 ```typescript
 interface Log {
-  id: string;
-  timestamp: number;
-  message: string;
+  id: string
+  timestamp: number
+  message: string
 }
 
 // NB: Assumes logs are sorted by timestamp
 function findLogByTimestamp(logs: Log[], target: number): Log | undefined {
-  let left = 0;
-  let right = logs.length - 1;
+  let left = 0
+  let right = logs.length - 1
 
   while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-    const current = logs[mid];
+    const mid = Math.floor((left + right) / 2)
+    const current = logs[mid]
 
     if (current.timestamp === target) {
-      return current;
+      return current
     } else if (current.timestamp < target) {
-      left = mid + 1;
+      left = mid + 1
     } else {
-      right = mid - 1;
+      right = mid - 1
     }
   }
 
-  return undefined;
+  return undefined
 }
 ```
 
@@ -186,26 +191,26 @@ meetings you can attend (assuming you can't be in two places at once).
 
 ```typescript
 interface Meeting {
-  start: number;
-  end: number;
+  start: number
+  end: number
 }
 
 function maxMeetings(meetings: Meeting[]): number {
   // Sort by end time to finish meetings as early as possible
   // This leaves more room for subsequent meetings
-  meetings.sort((a, b) => a.end - b.end);
+  meetings.sort((a, b) => a.end - b.end)
 
-  let count = 0;
-  let lastEndTime = -1;
+  let count = 0
+  let lastEndTime = -1
 
   for (const meeting of meetings) {
     if (lastEndTime <= meeting.start) {
-      count++;
-      lastEndTime = meeting.end;
+      count++
+      lastEndTime = meeting.end
     }
   }
 
-  return count;
+  return count
 }
 ```
 
@@ -227,26 +232,26 @@ your application.
 ```typescript
 // Power Set: Generate all subsets of a set of features using backtracking
 function getAllSubsets(features: string[]): string[][] {
-  const result: string[][] = [];
-  const subset: string[] = [];
+  const result: string[][] = []
+  const subset: string[] = []
 
   function dfs(i: number) {
     if (features.length <= i) {
-      result.push([...subset]);
-      return;
+      result.push([...subset])
+      return
     }
 
     // Decision 1: Include the feature
-    subset.push(features[i]);
-    dfs(i + 1);
+    subset.push(features[i])
+    dfs(i + 1)
 
     // Decision 2: Exclude the feature (backtrack)
-    subset.pop();
-    dfs(i + 1);
+    subset.pop()
+    dfs(i + 1)
   }
 
-  dfs(0);
-  return result;
+  dfs(0)
+  return result
 }
 
 // Usage: getAllSubsets(['darkMode', 'betaUI', 'newFeed'])

@@ -5,9 +5,9 @@ import type { Prettify } from '../type/type-helpers'
  *
  * @template Obj - The type of the object.
  * @template Key - The type of the keys to pick.
- * @param {Obj} obj - The object to pick keys from.
- * @param {Key[]} keys - The array of keys to pick.
- * @returns {Prettify<Pick<Obj, Key>>} A new object with the picked keys.
+ * @param obj - The object to pick keys from.
+ * @param keys - The array of keys to pick.
+ * @returns A new object with the picked keys.
  *
  * @example
  * const obj = { name: 'John', age: 30, city: 'New York' };

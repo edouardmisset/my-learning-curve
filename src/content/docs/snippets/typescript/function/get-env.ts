@@ -10,13 +10,13 @@ type EnvType = keyof typeof ENVIRONNEMENT_PREFIX
 /**
  * Retrieves the value of an environment variable.
  *
- * @param {string} variable - The name of the environment variable to retrieve.
- * @param {('node'|'CRA'|'vite')} [env='node'] - The environment from which to retrieve the variable.
+ * @param variable - The name of the environment variable to retrieve.
+ * @param [env='node'] - The environment from which to retrieve the variable.
  * 'node' and 'CRA' will use process.env, 'vite' will use import.meta.env.
  *
  * @throws {TypeError} Will throw an error if the environment variable is not set.
  *
- * @returns {string} The value of the environment variable.
+ * @returns The value of the environment variable.
  */
 export async function getEnv(
   variable: string,

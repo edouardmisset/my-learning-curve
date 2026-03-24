@@ -3,9 +3,9 @@
  *
  * @template Obj - The type of the objects in the array.
  * @template Key - The type of the key to select from the objects.
- * @param {Obj[]} arr - The array of objects.
- * @param {Key} key - The key to select from each object.
- * @returns {Array<Obj[Key]>} - An array of the selected properties.
+ * @param arr - The array of objects.
+ * @param key - The key to select from each object.
+ * @returns - An array of the selected properties.
  *
  * @example
  * selectBy([{ a: 1, b: 2 }, { a: 3, b: 4 }], 'b')
@@ -29,8 +29,8 @@ export const selectBy = <
  *
  * @template Obj - The type of the object.
  * @template Key - The type of the key to select.
- * @param {Key} key - The key to select.
- * @returns {function} A function that takes an object and returns the value of the selected key.
+ * @param key - The key to select.
+ * @returns A function that takes an object and returns the value of the selected key.
  *
  * @example
  * const selectById = createSelectBy<{ id: number, name: string }>('id');
@@ -48,10 +48,10 @@ export const createSelectBy =
  * @template Obj - The type of the objects in the array.
  * @template Key - The type of the key to select from the objects.
  * @template R - The type of the result of the transformation function.
- * @param {Obj[]} arr - The array of objects.
- * @param {Key} key - The key to select from each object.
- * @param {(value: Obj[Key]) => R} transform - The transformation function to apply to each selected key.
- * @returns {Array<R>} - An array of the transformed properties.
+ * @param arr - The array of objects.
+ * @param key - The key to select from each object.
+ * @param transform - The transformation function to apply to each selected key.
+ * @returns - An array of the transformed properties.
  *
  * @example
  * selectAndTransform([{ a: 1, b: 2 }, { a: 3, b: 4 }], 'b', value => value * 2)

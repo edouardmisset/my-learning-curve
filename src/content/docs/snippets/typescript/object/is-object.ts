@@ -3,8 +3,8 @@
  *
  * **Note**: `Date`s, `Array`s and other data structures are also considered objects.
  *
- * @param {unknown} val - The value to check.
- * @returns {val is Record<string, unknown>} - Returns `true` if the value is an object, else `false`.
+ * @param val - The value to check.
+ * @returns - Returns `true` if the value is an object, else `false`.
  *
  * @example
  * isObject({}) // returns true

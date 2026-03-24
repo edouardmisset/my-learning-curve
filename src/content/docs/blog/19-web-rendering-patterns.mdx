@@ -1,9 +1,23 @@
 ---
 title: Web Rendering Patterns
 excerpt: From MPAs to Resumability—a conceptual guide to the 14 major ways to build and render web applications today.
-tags: ['Rendering', 'Architecture', 'SSR', 'SSG', 'SPA', 'MPA', 'PPR', 'ISR', 'Islands', 'Resumability', 'Web Development', 'Performance']
+tags:
+  [
+    'Rendering',
+    'Architecture',
+    'SSR',
+    'SSG',
+    'SPA',
+    'MPA',
+    'PPR',
+    'ISR',
+    'Islands',
+    'Resumability',
+    'Web Development',
+    'Performance',
+  ]
 date: 2026-02-12
-lastUpdated: 2026-02-13
+lastUpdated: 2026-03-24
 ---
 
 import { Aside } from '@astrojs/starlight/components'
@@ -116,7 +130,8 @@ These aren't strictly "rendering" modes, but architectural patterns that dictate
 **Content First.** Build a functional experience with just HTML (and maybe CSS). Then, sprinkle JavaScript on top to enhance it. If the JS fails or hasn't loaded, the site still works (e.g., a form submits via standard HTTP POST).
 
 <Aside type="tip">
-  This is a philosophy, not just a tech stack. It ensures your app works on a 3G connection.
+  This is a philosophy, not just a tech stack. It ensures your app works on a 3G
+  connection.
 </Aside>
 
 ### Micro Frontends

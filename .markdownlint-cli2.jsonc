@@ -5,5 +5,5 @@
   // Globs to lint (can be overridden by command line)
   "globs": ["**/*.{md,mdx}"],
   // Additional ignores beyond gitignore
-  "ignores": ["**/node_modules", "**/.astro", "**/dist"]
+  "ignores": ["**/node_modules", "**/.astro", "**/dist"],
 }

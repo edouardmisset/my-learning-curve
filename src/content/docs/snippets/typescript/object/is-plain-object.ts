@@ -3,8 +3,8 @@
  *
  * A plain object in JavaScript is an object that is created by the `Object` constructor or one that has `null` as its prototype.
  *
- * @param {unknown} val - The value to check.
- * @returns {val is Record<string, unknown>} - Returns `true` if the value is a plain object, else `false`.
+ * @param val - The value to check.
+ * @returns - Returns `true` if the value is a plain object, else `false`.
  *
  * @example
  * isPlainObject({}) // returns true

@@ -8,9 +8,9 @@
  *
  * @template Obj The type of the object. It extends `ObjectType`, which means it can be any object type.
  *
- * @param {Obj} object The object to get the keys from.
+ * @param object The object to get the keys from.
  *
- * @returns {(keyof Obj)[]} An array of the keys of the object.
+ * @returns An array of the keys of the object.
  *
  * @example
  * const person = { name: 'Alice', age: 25 };

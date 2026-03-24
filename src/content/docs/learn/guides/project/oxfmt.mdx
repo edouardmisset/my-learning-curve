@@ -1,0 +1,108 @@
+---
+date: 2026-03-24
+title: Oxfmt
+description: Oxfmt is a high-performance Prettier-compatible formatter built on the Oxc stack, approximately 30x faster than Prettier and 2x faster than Biome.
+tags: ['Oxfmt', 'Formatter', 'TypeScript', 'Frontend']
+---
+
+import { Code } from '@astrojs/starlight/components'
+import { Aside } from '@astrojs/starlight/components'
+import PackageManagers from '~/components/PackageManagers.astro'
+import Source from './oxfmt.config.ts?raw'
+
+Oxfmt is a high-performance formatter for the JavaScript ecosystem. It is
+Prettier-compatible (matching 100% of Prettier's JS/TS conformance tests) and
+supports a wide range of languages out of the box — including TypeScript, JSX,
+JSON, CSS, SCSS, Less, Markdown, MDX, HTML, Vue, and Astro.
+
+## TL;DR
+
+Oxfmt is a drop-in replacement for Prettier (and the formatting part of Biome)
+that is ≈30× faster. Its CLI behaves similarly to Prettier, so adoption
+requires minimal changes to scripts and tooling.
+
+## Installation
+
+<PackageManagers pkg="oxfmt" flags="-D" />
+
+## Configuration
+
+Oxfmt options live in an `oxfmt.config.ts` file (Prettier-style keys):
+
+<Code code={Source} lang="ts" title="oxfmt.config.ts" wrap />
+
+### Key options
+
+| Option          | Type                       | Default    | Notes                                       |
+| --------------- | -------------------------- | ---------- | ------------------------------------------- |
+| `printWidth`    | `integer`                  | `100`      | Max line length before wrapping             |
+| `tabWidth`      | `integer`                  | `2`        | Spaces per indentation level                |
+| `useTabs`       | `boolean`                  | `false`    | Use tabs instead of spaces                  |
+| `semi`          | `boolean`                  | `true`     | Print semicolons at end of statements       |
+| `singleQuote`   | `boolean`                  | `false`    | Use single quotes                           |
+| `arrowParens`   | `"always" \| "avoid"`      | `"always"` | Parens around sole arrow function parameter |
+| `trailingComma` | `"all" \| "es5" \| "none"` | `"all"`    | Trailing commas in multi-line structures    |
+| `endOfLine`     | `"lf" \| "crlf" \| "cr"`   | `"lf"`     | Line ending style                           |
+| `sortImports`   | `object`                   | *disabled* | Sort import statements (built-in)           |
+
+### Built-in import sorting
+
+Unlike Prettier, Oxfmt ships with import sorting baked in — no extra plugin
+needed:
+
+```ts title="oxfmt.config.ts"
+{
+  sortImports: {
+    internalPattern: ['~/', '@/']
+  }
+}
+```
+
+## Scripts
+
+Add to `package.json`:
+
+```json
+{
+  "scripts": {
+    "format": "oxfmt --write",
+    "format:check": "oxfmt --check"
+  }
+}
+```
+
+## VS Code integration
+
+Install the
+[Oxc extension](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)
+and configure it as the default formatter:
+
+```json title=".vscode/settings.json"
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "[javascript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[javascriptreact]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[typescriptreact]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[json]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[css]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    }
+  }
+}
+```
+
+<Aside type="note">
+  CSS formatting in this project is handled by **stylelint**, not Oxfmt. Oxfmt
+  still parses and formats CSS/SCSS/Less — but for production CSS it is
+  advisable to run stylelint after.
+</Aside>
+
+## Documentation
+
+- [Oxfmt overview](https://oxc.rs/docs/guide/usage/formatter)
+- [Config file reference](https://oxc.rs/docs/guide/usage/formatter/config-file-reference)
+- [Migrate from Prettier](https://oxc.rs/docs/guide/usage/formatter/migrate-from-prettier)
+- [Import sorting](https://oxc.rs/docs/guide/usage/formatter/sorting)

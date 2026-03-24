@@ -1,12 +1,12 @@
 ---
 date: 2025-10-02
-title: "Problem Definition"
-description: "Guidelines for defining the question in data analysis."
-tags: ["data-analysis", "problem-definition", "guide"]
-prev: 
-   link: /my-learning-curve/learn/tutorials/data-analysis/00-workflow
-   label: Data Analysis Workflow
-next: 
+title: 'Problem Definition'
+description: 'Guidelines for defining the question in data analysis.'
+tags: ['data-analysis', 'problem-definition', 'guide']
+prev:
+  link: /my-learning-curve/learn/tutorials/data-analysis/00-workflow
+  label: Data Analysis Workflow
+next:
   link: /my-learning-curve/learn/tutorials/data-analysis/02-data-gathering
   label: Data Gathering
 ---

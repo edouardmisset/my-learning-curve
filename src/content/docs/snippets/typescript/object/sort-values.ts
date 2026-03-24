@@ -2,9 +2,9 @@
  * Sorts the values of an object and returns a new object with the sorted values.
  *
  * @template Obj - The type of the object.
- * @param {Obj} obj - The object whose values are to be sorted.
- * @param {boolean} [ascending=true] - Whether to sort the values in ascending order. If false, the values are sorted in descending order.
- * @returns {Obj} A new object with the sorted values.
+ * @param obj - The object whose values are to be sorted.
+ * @param [ascending=true] - Whether to sort the values in ascending order. If false, the values are sorted in descending order.
+ * @returns A new object with the sorted values.
  *
  * @example
  * const objStr = { a: 'z', b: 'y', c: 'x' };
@@ -22,7 +22,7 @@
  */
 export const sortValues = <Obj extends Record<string, number | string>>(
   obj: Obj,
-  ascending = true,
+  ascending: boolean = true,
 ): Obj =>
   Object.fromEntries(
     Object.entries(obj).sort(

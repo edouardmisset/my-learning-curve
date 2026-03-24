@@ -1,11 +1,11 @@
 ---
 date: 2025-10-02
-title: "Data Cleaning"
-description: "Techniques for cleaning and preparing data for analysis."
-tags: ["data-analysis", "data-cleaning", "guide"]
-prev: 
-   link: /my-learning-curve/learn/tutorials/data-analysis/02-data-gathering
-   label: Data Gathering
+title: 'Data Cleaning'
+description: 'Techniques for cleaning and preparing data for analysis.'
+tags: ['data-analysis', 'data-cleaning', 'guide']
+prev:
+  link: /my-learning-curve/learn/tutorials/data-analysis/02-data-gathering
+  label: Data Gathering
 next:
   link: /my-learning-curve/learn/tutorials/data-analysis/04-explore-data
   label: Data Exploration
@@ -47,7 +47,6 @@ Here are some common methods:
 
 - **Imputation**: This involves filling the missing values with substituted
   values. The substituted values can be:
-
   - **Mean/Median/Mode Imputation**: Replace missing values with the mean, median,
     or mode of the column.
   - **Predictive Imputation**: Use statistical models such as regression models to

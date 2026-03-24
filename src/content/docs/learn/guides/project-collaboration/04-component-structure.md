@@ -1,7 +1,7 @@
 ---
 date: 2025-10-02
-title: "Component Structure"
-description: "Best practices for organizing and structuring React components."
+title: 'Component Structure'
+description: 'Best practices for organizing and structuring React components.'
 tags: [components, structure, best-practices]
 prev:
   link: /my-learning-curve/learn/guides/project-collaboration/03-folder-structure

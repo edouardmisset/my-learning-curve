@@ -138,7 +138,6 @@ export type ObjectValues<Obj> = Obj[keyof Obj]
  * Represents a type that can be either a specific string (or union of strings) `T` or any string.
  *
  * @template S - A string literal type.
- * @typedef {S | Omit<string, S>} LooseAutoComplete
  *
  * @example
  * // Define a type that can be either "red" or any string excluding "red"

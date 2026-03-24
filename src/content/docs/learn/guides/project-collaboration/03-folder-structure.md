@@ -1,7 +1,7 @@
 ---
 date: 2025-10-02
-title: "Folder Structure"
-description: "Overview of the recommended folder structure for components and pages."
+title: 'Folder Structure'
+description: 'Overview of the recommended folder structure for components and pages.'
 tags: [folder, structure, organization]
 prev:
   link: /my-learning-curve/learn/guides/project-collaboration/02-naming-conventions
@@ -10,7 +10,6 @@ next:
   link: /my-learning-curve/learn/guides/project-collaboration/04-component-structure
   label: Component Structure
 ---
-
 
 ## Component / Page
 

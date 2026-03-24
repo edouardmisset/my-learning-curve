@@ -3,7 +3,7 @@ date: 2025-11-15
 title: Pull Request / Merge Request Template
 description: A standardized template for creating clear and comprehensive pull requests and merge requests.
 tags: ['pull-request', 'merge-request', 'template', 'git', 'collaboration']
-prev: 
+prev:
   link: /my-learning-curve/reference/templates/feature-request-template
   label: Feature Request Template
 ---

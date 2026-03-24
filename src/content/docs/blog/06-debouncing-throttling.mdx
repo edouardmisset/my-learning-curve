@@ -2,11 +2,19 @@
 date: 2025-11-08
 title: Debouncing and Throttling
 excerpt: Debouncing and throttling are techniques to control how many times we allow a function to be executed over time, improving performance and user experience.
-tags: ['JavaScript', 'Performance', 'Optimization', 'Debouncing', 'Throttling', 'Event Handling']
-lastUpdated: 2025-11-08
+tags:
+  [
+    'JavaScript',
+    'Performance',
+    'Optimization',
+    'Debouncing',
+    'Throttling',
+    'Event Handling',
+  ]
+lastUpdated: 2026-03-24
 ---
 
-import Disclaimer from '~/components/Disclaimer.astro';
+import Disclaimer from '~/components/Disclaimer.astro'
 
 ## TL;DR
 
@@ -59,11 +67,11 @@ timer resets.
 ```javascript
 function debounce(func, delay) {
   let timeoutId
-  
+
   return function (...args) {
     // Clear the previous timeout
     clearTimeout(timeoutId)
-    
+
     // Set a new timeout
     timeoutId = setTimeout(() => {
       func.apply(this, args)
@@ -74,7 +82,7 @@ function debounce(func, delay) {
 // Usage
 const searchInput = document.querySelector('#search')
 
-const handleSearch = (event) => {
+const handleSearch = event => {
   console.log('Searching for:', event.target.value)
   // Make API call here
 }
@@ -112,12 +120,12 @@ period, regardless of how many times it's triggered.
 ```javascript
 function throttle(func, limit) {
   let inThrottle
-  
+
   return function (...args) {
     if (!inThrottle) {
       func.apply(this, args)
       inThrottle = true
-      
+
       setTimeout(() => {
         inThrottle = false
       }, limit)
@@ -159,19 +167,19 @@ The function executes at regular intervals while events are firing.
 ```javascript
 function debounce(func, delay, { leading = false, trailing = true } = {}) {
   let timeoutId
-  
+
   return function (...args) {
     const callNow = leading && !timeoutId
-    
+
     clearTimeout(timeoutId)
-    
+
     timeoutId = setTimeout(() => {
       timeoutId = null
       if (trailing) {
         func.apply(this, args)
       }
     }, delay)
-    
+
     if (callNow) {
       func.apply(this, args)
     }
@@ -182,7 +190,7 @@ function throttle(func, limit, { leading = true, trailing = true } = {}) {
   let inThrottle
   let lastFunc
   let lastRan
-  
+
   return function (...args) {
     if (!inThrottle) {
       if (leading) {
@@ -190,7 +198,7 @@ function throttle(func, limit, { leading = true, trailing = true } = {}) {
       }
       lastRan = Date.now()
       inThrottle = true
-      
+
       setTimeout(() => {
         inThrottle = false
         if (trailing && lastFunc) {
@@ -217,18 +225,24 @@ window.addEventListener('scroll', () => {
 
 // With throttling
 let throttledCounter = 0
-window.addEventListener('scroll', throttle(() => {
-  throttledCounter++
-  console.log('Throttled scroll:', throttledCounter)
-}, 200))
+window.addEventListener(
+  'scroll',
+  throttle(() => {
+    throttledCounter++
+    console.log('Throttled scroll:', throttledCounter)
+  }, 200),
+)
 // Result: ~5 calls per second ✅
 
 // With debouncing
 let debouncedCounter = 0
-window.addEventListener('scroll', debounce(() => {
-  debouncedCounter++
-  console.log('Debounced scroll:', debouncedCounter)
-}, 200))
+window.addEventListener(
+  'scroll',
+  debounce(() => {
+    debouncedCounter++
+    console.log('Debounced scroll:', debouncedCounter)
+  }, 200),
+)
 // Result: 1 call after scrolling stops for 200ms ✅
 ```
 
@@ -237,12 +251,12 @@ window.addEventListener('scroll', debounce(() => {
 ### Search with debouncing
 
 ```javascript
-const searchAPI = async (query) => {
+const searchAPI = async query => {
   const response = await fetch(`/api/search?q=${query}`)
   return response.json()
 }
 
-const debouncedSearch = debounce(async (event) => {
+const debouncedSearch = debounce(async event => {
   const query = event.target.value
   if (query.length >= 2) {
     const results = await searchAPI(query)
@@ -258,7 +272,7 @@ document.querySelector('#search').addEventListener('input', debouncedSearch)
 ```javascript
 const loadMoreContent = () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement
-  
+
   if (scrollTop + clientHeight >= scrollHeight - 100) {
     console.log('Loading more content...')
     // Fetch and append more content
@@ -271,16 +285,16 @@ window.addEventListener('scroll', throttle(loadMoreContent, 250))
 ### Save button with debouncing
 
 ```javascript
-const autoSave = debounce((content) => {
+const autoSave = debounce(content => {
   console.log('Auto-saving...')
   fetch('/api/save', {
     method: 'POST',
     body: JSON.stringify({ content }),
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
   })
 }, 1000)
 
-document.querySelector('#editor').addEventListener('input', (event) => {
+document.querySelector('#editor').addEventListener('input', event => {
   autoSave(event.target.value)
 })
 ```
@@ -297,9 +311,9 @@ Lodash documentation: [debounce](https://lodash.com/docs/#debounce) and
 Debounce and throttle utilities by Sindre Sorhus:
 
 - [debounce GitHub](https://github.com/sindresorhus/debounce) /
-[npm](https://www.npmjs.com/package/debounce)
+  [npm](https://www.npmjs.com/package/debounce)
 - [p-debounce GitHub](https://github.com/sindresorhus/p-debounce) /
-[npm](https://www.npmjs.com/package/p-debounce)
+  [npm](https://www.npmjs.com/package/p-debounce)
 - [throttleit GitHub](https://github.com/sindresorhus/throttleit) / [npm](https://www.npmjs.com/package/throttleit)
 
 <Disclaimer />

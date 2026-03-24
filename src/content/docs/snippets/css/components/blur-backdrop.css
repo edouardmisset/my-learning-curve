@@ -28,6 +28,7 @@
   pointer-events: none;
   backdrop-filter: blur(var(--size-3));
   mask-image: linear-gradient(to bottom, black 0, black 50%, transparent 50%);
+  mask-repeat: no-repeat;
 }
 
 .backdrop-edge {
@@ -62,4 +63,5 @@
     black var(--thickness),
     transparent var(--thickness)
   );
+  mask-repeat: no-repeat;
 }

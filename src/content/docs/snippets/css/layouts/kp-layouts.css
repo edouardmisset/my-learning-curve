@@ -49,7 +49,7 @@
   gap: var(--gap);
 
   @media (width >= 40ch) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: [left-start] 1fr [left-end right-start] 1fr [right-end];
   }
 
   & > .group {

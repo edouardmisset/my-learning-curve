@@ -34,6 +34,7 @@
 
 .with-icon {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: baseline;
 
   & .icon {
@@ -143,7 +144,7 @@
   gap: var(--gap);
   grid-template-columns: repeat(
     auto-fit,
-    minmax(min(var(--min-size), 100%), 1fr)
+    [col-start] minmax(min(var(--min-size), 100%), 1fr) [col-end]
   );
 }
 
@@ -155,6 +156,7 @@
   aspect-ratio: var(--numerator) / var(--denominator);
   overflow: hidden;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
@@ -170,7 +172,7 @@
 .cover {
   display: flex;
   flex-direction: column;
-  min-block-size: 100vh;
+  min-block-size: 100dvh;
   padding: 1rem;
 
   & > * {
@@ -201,9 +203,11 @@
   --height: auto;
 
   display: flex;
+  flex-wrap: wrap;
   block-size: var(--height, auto);
   overflow: auto hidden;
   overscroll-behavior: contain;
+  background-repeat: no-repeat;
   scrollbar-color: var(--color-light) var(--color-dark);
 
   &::-webkit-scrollbar {
@@ -223,6 +227,7 @@
       var(--color-light) 0.75rem,
       var(--color-dark) 0.75rem
     );
+    background-repeat: no-repeat;
   }
 
   & > * {

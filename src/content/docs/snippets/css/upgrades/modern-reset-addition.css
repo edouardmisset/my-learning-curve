@@ -26,6 +26,7 @@ a:not([class]) {
 
 /* Scroll padding allowance below focused elements 
   to ensure they are clearly in view */
+/* stylelint-disable-next-line defensive-css/require-focus-visible */
 :focus {
   scroll-padding-block-end: 8vh;
 }

@@ -13,6 +13,7 @@
 /** Deconstructed Pancake */
 .container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .child {
@@ -33,14 +34,15 @@
 
   display: grid;
   grid-template-columns:
-    minmax(min(var(--sidebar-min), 100%), var(--sidebar-max))
-    1fr;
+    [sidebar-start] minmax(min(var(--sidebar-min), 100%), var(--sidebar-max))
+    [sidebar-end content-start] 1fr
+    [content-end];
 }
 
 /** Pancake Stack */
 .pancake-stack {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: [header-start] auto [header-end main-start] 1fr [main-end footer-start] auto [footer-end];
 }
 
 /** Classic Holy Grail Layout */
@@ -52,7 +54,7 @@
 /** 12-Span Grid */
 .grid-12 {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(12, [col-start] 1fr [col-end]);
 }
 
 .child-full-with {
@@ -66,7 +68,10 @@
 
   display: grid;
   gap: var(--gap);
-  grid-template-columns: repeat(auto-fit, minmax(min(var(--min), 100%), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    [col-start] minmax(min(var(--min), 100%), 1fr) [col-end]
+  );
 }
 
 /** Line Up */

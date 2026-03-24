@@ -92,7 +92,7 @@
   }
 
   :where(ul, ol)[role='list'] {
-    list-style: none;
+    list-style: '';
   }
 
   :where(h1, h2, h3, h4, h5, h6) {
@@ -115,7 +115,6 @@
     max-inline-size: 100%;
     block-size: auto;
     display: block;
-    vertical-align: middle;
     font-style: italic;
   }
 
@@ -230,6 +229,7 @@ not to see them */
     *::before,
     *::after {
       transition-duration: 0.01ms !important;
+      /* stylelint-disable-next-line defensive-css/require-prefers-reduced-motion */
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       scroll-behavior: auto !important;

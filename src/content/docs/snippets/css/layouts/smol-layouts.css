@@ -12,7 +12,10 @@
 
   /* min() with 100% prevents overflow
   in extra narrow spaces */
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    [col-start] minmax(min(100%, var(--min)), 1fr) [col-end]
+  );
 }
 
 /** Responsive Flexbox Grid */
@@ -79,7 +82,10 @@
 /** Responsive Sidebar Layout */
 .sidebar {
   display: grid;
-  grid-template-columns: fit-content(20ch) minmax(min(50%, 30ch), 1fr);
+  grid-template-columns:
+    [sidebar-start] fit-content(20ch)
+    [sidebar-end content-start] minmax(min(50%, 30ch), 1fr)
+    [content-end];
 }
 
 /** Aspect Ratio Gallery */
@@ -240,7 +246,7 @@ but as a fallback you can chain `:not()` instead */
   the WCAG touch target size is met or exceeded */
   grid-template-columns: repeat(
     var(--avatar-count),
-    max(44px, calc(var(--avatar-size) / 1.15))
+    [avatar-start] max(44px, calc(var(--avatar-size) / 1.15)) [avatar-end]
   );
 
   /* `padding` matches added visual dimensions of
@@ -256,7 +262,7 @@ but as a fallback you can chain `:not()` instead */
     width to match the final visual width */
     grid-template-columns: repeat(
       calc(var(--avatar-count) + 1),
-      calc(var(--avatar-size) / 1.75)
+      [avatar-start] calc(var(--avatar-size) / 1.75) [avatar-end]
     );
   }
 }
@@ -273,7 +279,13 @@ but as a fallback you can chain `:not()` instead */
 }
 
 :where(.avatar-list a) {
-  transition: transform 180ms ease-in-out;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :where(.avatar-list a) {
+    transition: transform 180ms ease-in-out;
+  }
 }
 
 :where(.avatar-list img) {
@@ -348,7 +360,7 @@ these custom properties */
 }
 
 /* Base :focus styles for fallback purposes */
-.focus-styles :is(a, button, input, textarea, summary):focus {
+.focus-styles :is(a, button, input, textarea, summary):focus-visible {
   outline: var(--outline-size) var(--outline-style) var(--outline-color);
   outline-offset: var(--outline-offset, var(--outline-size));
 }
@@ -399,7 +411,7 @@ ul.visited-styles {
 
 :where(.visited-styles a) {
   display: flex;
-  flex-direction: row-reverse;
+  flex-flow: row-reverse wrap;
   justify-content: flex-end;
   color: hsl(0deg 0% 13%);
   text-decoration-color: var(--color-accent);
@@ -487,8 +499,13 @@ main {
 .transitions > * {
   --transition-property: transform;
   --transition-duration: 180ms;
+}
 
-  transition: var(--transition-property) var(--transition-duration) ease-in-out;
+@media (prefers-reduced-motion: no-preference) {
+  .transitions > * {
+    transition: var(--transition-property) var(--transition-duration)
+      ease-in-out;
+  }
 }
 
 @media (hover: hover) {
@@ -526,7 +543,7 @@ main {
 .article-anchor {
   position: relative;
   display: grid;
-  grid-template-columns: min-content auto;
+  grid-template-columns: [anchor-start] min-content [anchor-end content-start] auto [content-end];
   margin-block-start: 2em;
 
   /* You could pull this property out and
@@ -568,7 +585,7 @@ main {
   }
 }
 
-:where(.article-anchor a:focus) {
+:where(.article-anchor a:focus-visible) {
   outline: 2px solid currentcolor;
   outline-offset: 0.15em;
 }

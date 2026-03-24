@@ -3,8 +3,8 @@
  * If the input string is empty, it returns an empty string.
  * If the input string does not match the expected format, it throws an error.
  *
- * @param {string} dateString - The date string to be converted. Must be in "dd/mm/yyyy hh:mm" format.
- * @returns {string} - The converted date string in "yyyy-mm-ddThh:mm" format.
+ * @param dateString - The date string to be converted. Must be in "dd/mm/yyyy hh:mm" format.
+ * @returns - The converted date string in "yyyy-mm-ddThh:mm" format.
  * @throws {Error} - Throws an error if the input string does not match the expected format.
  *
  * @example
@@ -34,8 +34,7 @@ export const convertStringDate = (dateString: string): string => {
 
 /**
  * @description Takes a string or a Date object. If it's a string, it assumes UTC string format (YYYY-MM-DDTHH:MM)
- * @param {(string | Date)} date
- * @returns {Date}  {Date}
- */
+ * @param date
+ * @returns */
 export const datification = (date: string | Date): Date =>
   typeof date === 'string' ? new Date(date) : date

@@ -5,9 +5,9 @@ import type { Prettify } from '../type/type-helpers'
  *
  * @template Obj - The type of the object.
  * @template Key - The type of the keys to omit.
- * @param {Obj} obj - The object to omit keys from.
- * @param {Key[]} keys - The array of keys to omit.
- * @returns {Prettify<omit<Obj, Key>>} A new object with the omitted keys.
+ * @param obj - The object to omit keys from.
+ * @param keys - The array of keys to omit.
+ * @returns A new object with the omitted keys.
  *
  * @example
  * const obj = { name: 'John', age: 30, city: 'New York' };

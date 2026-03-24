@@ -1,7 +1,7 @@
 ---
 date: 2025-10-02
-title: "Dev Checklist"
-description: "Checklist to ensure code quality and adherence to project standards before committing."
+title: 'Dev Checklist'
+description: 'Checklist to ensure code quality and adherence to project standards before committing.'
 tags: [checklist, development, quality]
 prev:
   link: /my-learning-curve/learn/guides/project-collaboration/00-getting-started

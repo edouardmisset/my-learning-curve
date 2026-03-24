@@ -6,8 +6,8 @@
  *
  * The regular expression /[\u0300-\u036f]/g matches any character in the Unicode range from 0300 to 036F, which includes many common diacritical marks.
  *
- * @param {string} str - The string from which to remove accents.
- * @returns {string} The string with accents removed.
+ * @param str - The string from which to remove accents.
+ * @returns The string with accents removed.
  *
  * @example
  * removeAccent('résumé');

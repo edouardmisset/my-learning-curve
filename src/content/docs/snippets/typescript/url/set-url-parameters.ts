@@ -5,10 +5,10 @@
  * - This function **does NOT mutate** the original url.
  * - Use `new URL(url)` if the original URL is a string.
  *
- * @param {URL} url - The original URL object.
- * @param {Record<string, string | number | (string | number)[]>} newParams - An
+ * @param url - The original URL object.
+ * @param newParams - An
  * object containing the query parameters to set or update.
- * @returns {URL} A new URL object with the updated query parameters.
+ * @returns A new URL object with the updated query parameters.
  */
 export function setURLParameters(
   url: URL,

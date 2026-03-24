@@ -71,9 +71,7 @@ h4,
     font-size: clamp(
       max(
         1rem,
-        var(--font-size) -
-        var(--font-size) *
-        var(--font-size-diff, 0.3)
+        var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)
       ),
       var(--font-size-fluid, 5cqi),
       var(--font-size)

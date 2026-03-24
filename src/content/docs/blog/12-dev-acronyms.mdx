@@ -3,7 +3,7 @@ date: 2025-11-19
 title: The Developer Acronym Bingo
 excerpt: Grab your bingo cards! Here are the 10 acronyms you're guaranteed to hear in your next stand-up, explained with a healthy dose of reality.
 tags: ['Best Practices', 'Architecture', 'TypeScript', 'Acronyms', 'Humor']
-lastUpdated: 2025-11-20
+lastUpdated: 2026-03-24
 ---
 
 import Disclaimer from '~/components/Disclaimer.astro'
@@ -33,85 +33,85 @@ rewriting the entire codebase for the third time this month.
 **The Reality:** If you copy-paste that function one more time, I'm gonna loose
 it.  
 In TypeScript, this means using Generics instead of writing `UserResponse`,
-`ProductResponse`, and `CatResponse` interfaces that look exactly the same.  
+`ProductResponse`, and `CatResponse` interfaces that look exactly the same.
 
 ### 2. KISS (Keep It Simple, Stupid)
 
 **The Theory:** Systems work best if they are kept simple.  
-**The Reality:** Stop trying to use a Strategy Pattern to add two numbers.  
+**The Reality:** Stop trying to use a Strategy Pattern to add two numbers.
 
 ```typescript
 // Bad (The "Look at me, I'm an Architect" approach)
 class StringPrinterFactory {
   static createPrinter(type: 'console') {
-    return new ConsoleStringPrinter();
+    return new ConsoleStringPrinter()
   }
 }
 // ... 5 files later ...
-printer.print("Hello");
+printer.print('Hello')
 
 // Good (KISS)
-console.log("Hello");
+console.log('Hello')
 ```
 
 ### 3. YAGNI (You Aren't Gonna Need It)
 
 **The Theory:** Implement things only when you actually need them.  
 **The Reality:** No, you do not need to build a generic, plugin-based,
-AI-powered CMS engine for your personal blog. Just write the markdown file.  
+AI-powered CMS engine for your personal blog. Just write the markdown file.
 
 ### 4. SOLID
 
 **The Theory:** Five principles for maintainable software design.  
-**The Reality:** The reason your PR was rejected.  
+**The Reality:** The reason your PR was rejected.
 
 - **S**ingle Responsibility: Your function does one thing (and hopefully does
-    it well).  
-- **O**pen/Closed: Open for extension, closed for modification.  
+  it well).
+- **O**pen/Closed: Open for extension, closed for modification.
 - **L**iskov Substitution: If it looks like a duck and quacks like a duck, it
-    shouldn't explode when you ask it to swim.  
+  shouldn't explode when you ask it to swim.
 - **I**nterface Segregation: Don't force clients to depend on methods they
-    don't use.  
+  don't use.
 - **D**ependency Inversion: Depend on abstractions, not concretions. (aka "Why
-    we have so many interfaces").  
+  we have so many interfaces").
 
 <Aside type="note">
-See the [dedicated post on SOLID](/my-learning-curve/blog/11-solid-principles)
+  See the [dedicated post on SOLID](/my-learning-curve/blog/11-solid-principles)
 </Aside>
 
 ### 5. SOC (Separation of Concerns)
 
 **The Theory:** Separating a program into distinct sections.  
 **The Reality:** Keep your database queries out of your React components! In a
-full-stack world, this is why we don't write SQL inside our `useEffect` hooks.  
+full-stack world, this is why we don't write SQL inside our `useEffect` hooks.
 
 ### 6. DDD (Domain-Driven Design)
 
 **The Theory:** Focusing on the core domain and domain logic.  
 **The Reality:** Spending 3 weeks arguing about what a "User" actually *is*
 before writing a single line of code. In TypeScript, this usually manifests as a
-folder structure so deep you need a map and a compass to find `user.entity.ts`.  
+folder structure so deep you need a map and a compass to find `user.entity.ts`.
 
 ### 7. TDD (Test-Driven Development)
 
 **The Theory:** Write tests before code (Red -> Green -> Refactor).  
 **The Reality:** Writing the code, realizing it works, then writing a test that
-passes, and pretending you did it in the right order.  
+passes, and pretending you did it in the right order.
 
 ### 8. BDD (Behavior-Driven Development)
 
 **The Theory:** Describing software behavior in human-readable terms.  
 **The Reality:** "Given I am a user, When I click the button, Then nothing
-happens because the backend is down. 🤣"  
+happens because the backend is down. 🤣"
 
 ### 9. CRUD (Create, Read, Update, Delete)
 
 **The Theory:** The four basic functions of persistent storage.  
 **The Reality:** 90% of your career. You are a glorified pipe-fitter moving JSON
-from a database to a frontend and back again. Embrace it.  
+from a database to a frontend and back again. Embrace it.
 
 <Aside type="note">
-See the basic [CRUD](/my-learning-curve/snippets/sql/crud) example
+  See the basic [CRUD](/my-learning-curve/snippets/sql/crud) example
 </Aside>
 
 ### 10. ACID (Atomicity, Consistency, Isolation, Durability)
@@ -119,10 +119,10 @@ See the basic [CRUD](/my-learning-curve/snippets/sql/crud) example
 **The Theory:** Properties ensuring reliable database transactions.  
 **The Reality:** The reason you use PostgreSQL instead of storing everything in
 a giant JSON file. It ensures that when you send money, it actually leaves your
-account *and* arrives in the other one, rather than vanishing into the void.  
+account *and* arrives in the other one, rather than vanishing into the void.
 
 <Aside type="note">
-See the [ACID](/my-learning-curve/blog/13-acid) post for a deeper dive
+  See the [ACID](/my-learning-curve/blog/13-acid) post for a deeper dive
 </Aside>
 
 ## Resources

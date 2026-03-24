@@ -21,10 +21,10 @@ type IterableOrNullish =
  * Note that this function does not consider other falsy values (like `false`,
  * `0`, or `NaN`) to be empty.
  *
- * @param {IterableOrNullish} val - The value to check. This can be any iterable
+ * @param val - The value to check. This can be any iterable
  * (like an object or an array), a string, or a nullish value (`null` or
  * `undefined`).
- * @returns {boolean} - Returns `true` if the value is considered empty, else
+ * @returns - Returns `true` if the value is considered empty, else
  * `false`.
  *
  * @example

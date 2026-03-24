@@ -7,11 +7,11 @@ type ValueAndRange = {
 
 /**
  * Clamps the provided value within the specified range.
- * @param {ValueAndRange} options - An object containing the maximum, minimum, and value to be clamped.
- * @param {number} options.maximum - The maximum value of the range.
- * @param {number} options.minimum - The minimum value of the range.
- * @param {number} options.value - The value to be clamped within the range.
- * @returns {number} - The clamped value within the specified range.
+ * @param options - An object containing the maximum, minimum, and value to be clamped.
+ * @param options.maximum - The maximum value of the range.
+ * @param options.minimum - The minimum value of the range.
+ * @param options.value - The value to be clamped within the range.
+ * @returns - The clamped value within the specified range.
  */
 export const clampValueInRange = ({
   maximum,
@@ -22,11 +22,11 @@ export const clampValueInRange = ({
 
 /**
  * Checks if the provided value is strictly outside the specified limits.
- * @param {IsOutsideLimitsOptions} options - An object containing the maximum, minimum, and value to be checked.
- * @param {number} options.maximum - The maximum value of the limit.
- * @param {number} options.minimum - The minimum value of the limit.
- * @param {number} options.value - The value to be checked against the limits.
- * @returns {boolean} - A boolean value indicating whether the provided value is outside the specified limits.
+ * @param options - An object containing the maximum, minimum, and value to be checked.
+ * @param options.maximum - The maximum value of the limit.
+ * @param options.minimum - The minimum value of the limit.
+ * @param options.value - The value to be checked against the limits.
+ * @returns - A boolean value indicating whether the provided value is outside the specified limits.
  */
 export const isOutsideRange = ({
   maximum,
@@ -38,11 +38,11 @@ export const isOutsideRange = ({
 /**
  * Checks if the provided value is within the specified range (including the min
  * and the max).
- * @param {ValueAndRange} options - An object containing the maximum, minimum, and value to be checked.
- * @param {number} options.maximum - The maximum value of the range.
- * @param {number} options.minimum - The minimum value of the range.
- * @param {number} options.value - The value to be checked within the range.
- * @returns {boolean} - A boolean value indicating whether the provided value is within the specified range.
+ * @param options - An object containing the maximum, minimum, and value to be checked.
+ * @param options.maximum - The maximum value of the range.
+ * @param options.minimum - The minimum value of the range.
+ * @param options.value - The value to be checked within the range.
+ * @returns - A boolean value indicating whether the provided value is within the specified range.
  * @see isInRange
  */
 export const isInclusiveInRange = ({
@@ -54,11 +54,11 @@ export const isInclusiveInRange = ({
 /**
  * Checks if the provided value is within the specified range (excluding the min
  * and the max).
- * @param {ValueAndRange} options - An object containing the maximum, minimum, and value to be checked.
- * @param {number} options.maximum - The maximum value of the range.
- * @param {number} options.minimum - The minimum value of the range.
- * @param {number} options.value - The value to be checked against the range.
- * @returns {boolean} - A boolean value indicating whether the provided value is within the specified range.
+ * @param options - An object containing the maximum, minimum, and value to be checked.
+ * @param options.maximum - The maximum value of the range.
+ * @param options.minimum - The minimum value of the range.
+ * @param options.value - The value to be checked against the range.
+ * @returns - A boolean value indicating whether the provided value is within the specified range.
  */
 export const isExclusiveInRange = ({
   maximum,
@@ -69,12 +69,12 @@ export const isExclusiveInRange = ({
 /**
  * Checks if the provided value is within the specified range.
  * @default inclusive - true
- * @param {IsInRangeOptions} options - An object containing the maximum, minimum, and value to be checked.
- * @param {number} options.maximum - The maximum value of the range.
- * @param {number} options.minimum - The minimum value of the range.
- * @param {number} options.value - The value to be checked within the range.
- * @param {boolean} [options.inclusive=true] - A boolean value indicating whether the range is inclusive.
- * @returns {boolean} - A boolean value indicating whether the provided value is within the specified range.
+ * @param options - An object containing the maximum, minimum, and value to be checked.
+ * @param options.maximum - The maximum value of the range.
+ * @param options.minimum - The minimum value of the range.
+ * @param options.value - The value to be checked within the range.
+ * @param [options.inclusive=true] - A boolean value indicating whether the range is inclusive.
+ * @returns - A boolean value indicating whether the provided value is within the specified range.
  */
 export const isInRange = ({
   maximum,

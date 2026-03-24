@@ -1,12 +1,12 @@
 ---
 date: 2025-10-02
-title: "Styles (CSS)"
-description: "Guidelines and tools for managing CSS styles in the project."
+title: 'Styles (CSS)'
+description: 'Guidelines and tools for managing CSS styles in the project.'
 tags: [css, stylelint, guidelines]
 prev:
   link: /my-learning-curve/learn/guides/project-collaboration/09-testing
   label: Testing
-next: 
+next:
   link: /my-learning-curve/learn/guides/project-collaboration/11-writing-guidelines
   label: Writing Guidelines
 ---

@@ -1,8 +1,8 @@
 /**
  * Extracts query parameters from a given URL and returns them as an object.
  *
- * @param {string} url - The URL from which to extract query parameters.
- * @returns {Record<string, string>} An object containing the query parameters.
+ * @param url - The URL from which to extract query parameters.
+ * @returns An object containing the query parameters.
  */
 export function getURLParameters(url: string): Record<string, string> {
   const { searchParams } = new URL(url)

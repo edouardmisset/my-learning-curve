@@ -142,9 +142,9 @@
   display: grid;
   gap: var(--gap);
   grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(var(--min-size), 100%), 1fr)
-    );
+    auto-fit,
+    minmax(min(var(--min-size), 100%), 1fr)
+  );
 }
 
 /* Frame */

@@ -75,7 +75,11 @@
   --gradient-16: radial-gradient(circle at 50% -250%, #374151, #111827, #000);
   --gradient-17: conic-gradient(from -90deg at 50% -25%, blue, blueviolet);
   --gradient-18:
-    linear-gradient(0deg, hsl(0deg 100% 50% / 80%), hsl(0deg 100% 50% / 0%) 75%),
+    linear-gradient(
+      0deg,
+      hsl(0deg 100% 50% / 80%),
+      hsl(0deg 100% 50% / 0%) 75%
+    ),
     linear-gradient(
       60deg,
       hsl(60deg 100% 50% / 80%),

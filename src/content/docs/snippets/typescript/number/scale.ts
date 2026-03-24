@@ -9,13 +9,13 @@ type Scale = (params: {
 /**
  * Scales a value from one range to another.
  *
- * @param {Object} params - The scaling parameters.
- * @param {number} params.inMinimum - The lower bound of the original range.
- * @param {number} params.inMaximum - The upper bound of the original range.
- * @param {number} [params.outMinimum=0] - The lower bound of the target range.
- * @param {number} [params.outMaximum=1] - The upper bound of the target range.
- * @param {number} params.value - The value to scale.
- * @returns {number} The scaled value.
+ * @param params - The scaling parameters.
+ * @param params.inMinimum - The lower bound of the original range.
+ * @param params.inMaximum - The upper bound of the original range.
+ * @param [params.outMinimum=0] - The lower bound of the target range.
+ * @param [params.outMaximum=1] - The upper bound of the target range.
+ * @param params.value - The value to scale.
+ * @returns The scaled value.
  * @throws {Error} Will throw an error if inMinimum equals inMaximum (to prevent division by zero).
  *
  * @example

@@ -24,13 +24,13 @@ type SearchTreeListParameters<NodeType extends BasicNode = BasicNode> = Omit<
  *
  * @template NodeType A type that extends `BasicNode`. This is the type of the nodes in the tree.
  *
- * @param {SearchTreeParameters<NodeType>} params The parameters for the search. This is an object that contains:
+ * @param params The parameters for the search. This is an object that contains:
  * - `node`: The root node of the tree to search.
  * - `searchTerm`: The term to search for.
  * - `subItemsField`: The name of the field that contains the sub-nodes of a node.
  * - `searchItemField`: The name of the field to compare with the search term.
  *
- * @returns {undefined | NodeType} The first node where `node[searchItemField]` equals `searchTerm`, or `undefined` if no such node is found.
+ * @returns The first node where `node[searchItemField]` equals `searchTerm`, or `undefined` if no such node is found.
  *
  * @example
  * const node = { id: 1, name: 'Node 1', children: [{ id: 2, name: 'Node 2' }] };
@@ -73,13 +73,13 @@ export const searchTree = <NodeType extends BasicNode = BasicNode>(
  *
  * @template NodeType A type that extends `BasicNode`. This is the type of the nodes in the list.
  *
- * @param {SearchTreeListParameters<NodeType>} params The parameters for the search. This is an object that contains:
+ * @param params The parameters for the search. This is an object that contains:
  * - `nodeList`: The list of nodes to search.
  * - `searchTerm`: The term to search for.
  * - `subItemsField`: The name of the field that contains the sub-nodes of a node.
  * - `searchItemField`: The name of the field to compare with the search term.
  *
- * @returns {undefined | NodeType} The first node where `node[searchItemField]` equals `searchTerm`, or `undefined` if no such node is found.
+ * @returns The first node where `node[searchItemField]` equals `searchTerm`, or `undefined` if no such node is found.
  *
  * @example
  * const nodes = [{ id: 1, name: 'Node 1', children: [{ id: 2, name: 'Node 2' }] }];

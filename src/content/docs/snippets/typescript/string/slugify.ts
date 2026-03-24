@@ -8,8 +8,8 @@
  * 4. Replaces one or more spaces, underscores, or hyphens with a single hyphen using the regex /[\s_-]+/g.
  * 5. Removes hyphens from the start and end of the string using the regex /^-+|-+$/g.
  *
- * @param {string} str - The string to convert into a slug.
- * @returns {string} The slugified string.
+ * @param str - The string to convert into a slug.
+ * @returns The slugified string.
  *
  * @example
  * slugify('Hello World!');

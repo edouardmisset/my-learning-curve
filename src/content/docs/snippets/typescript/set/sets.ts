@@ -6,10 +6,10 @@
  *
  * @template T The type of the elements in the arrays. It can be any type.
  *
- * @param {T[]} leftArray The first array.
- * @param {T[]} rightArray The second array.
+ * @param leftArray The first array.
+ * @param rightArray The second array.
  *
- * @returns {T[]} An array that contains all elements that are in both arrays.
+ * @returns An array that contains all elements that are in both arrays.
  *
  * @example
  * const array1 = [1, 2, 3];
@@ -32,10 +32,10 @@ export const intersection = commonElements
  *
  * @template T The type of the elements in the arrays. It can be any type.
  *
- * @param {T[]} leftArray The first array.
- * @param {T[]} rightArray The second array.
+ * @param leftArray The first array.
+ * @param rightArray The second array.
  *
- * @returns {T[]} An array that contains all unique elements from both arrays.
+ * @returns An array that contains all unique elements from both arrays.
  *
  * @example
  * const array1 = [1, 2, 3];
@@ -58,10 +58,10 @@ export const union = mergeUnique
  *
  * @template T The type of the elements in the arrays. It can be any type.
  *
- * @param {T[]} firstArray The first array.
- * @param {...T[][]} otherArrays The other arrays.
+ * @param firstArray The first array.
+ * @param otherArrays The other arrays.
  *
- * @returns {T[]} An array that contains all elements that are in the first array but not in any of the other arrays.
+ * @returns An array that contains all elements that are in the first array but not in any of the other arrays.
  *
  * @example
  * const array1 = [1, 2, 3];
@@ -87,9 +87,9 @@ export const setDifference = uniqueInFirst
  *
  * @template T The type of the elements in the arrays. It can be any type.
  *
- * @param {...T[][]} arrays The arrays to find the unique elements of.
+ * @param arrays The arrays to find the unique elements of.
  *
- * @returns {T[]} An array that contains all elements that are in exactly one of the input arrays.
+ * @returns An array that contains all elements that are in exactly one of the input arrays.
  *
  * @example
  * const array1 = [1, 2, 3];

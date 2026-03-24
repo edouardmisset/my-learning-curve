@@ -3,7 +3,7 @@ title: EditorConfig
 description: Keep your team's indentation, line endings, and whitespace consistent across editors and platforms.
 tags: ['editorconfig', 'formatting', 'project-setup', 'consistency']
 date: 2026-01-16
-lastUpdated: 2026-01-16
+lastUpdated: 2026-03-24
 ---
 
 import { Aside } from '@astrojs/starlight/components'
@@ -92,7 +92,9 @@ This baseline reduces churn across platforms and editors.
 - `trim_trailing_whitespace`: remove trailing spaces on save.
 
 <Aside type="caution">
-  Line endings are a cross-tool concern. Coordinate `end_of_line` with `.gitattributes` and Git settings like `core.autocrlf` to avoid flip-flopping diffs on Windows vs macOS/Linux.
+  Line endings are a cross-tool concern. Coordinate `end_of_line` with
+  `.gitattributes` and Git settings like `core.autocrlf` to avoid flip-flopping
+  diffs on Windows vs macOS/Linux.
 </Aside>
 
 ### Quick checks and automation

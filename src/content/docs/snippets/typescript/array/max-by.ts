@@ -3,9 +3,9 @@
  * If the array is empty, returns undefined.
  *
  * @template Obj - The type of the objects in the array. Must extend Record<string, unknown>.
- * @param {Obj[]} array - The array of objects to search.
- * @param {keyof Obj} key - The key to compare.
- * @returns {Obj | undefined} - The object with the maximum value for the specified key, or undefined if the array is empty.
+ * @param array - The array of objects to search.
+ * @param key - The key to compare.
+ * @returns - The object with the maximum value for the specified key, or undefined if the array is empty.
  *
  * @example
  * const array = [{ id: 1, value: 10 }, { id: 2, value: 5 }, { id: 3, value: 20 }];

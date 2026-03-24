@@ -2,10 +2,19 @@
 date: 2025-11-19
 title: SOLID Principles
 excerpt: The SOLID principles are a set of five design principles intended to make software designs more understandable, flexible, and maintainable.
-tags: ['Architecture', 'Clean Code', 'SOLID', 'Design Patterns', 'TypeScript', 'Best Practices']
-lastUpdated: 2026-02-13
+tags:
+  [
+    'Architecture',
+    'Clean Code',
+    'SOLID',
+    'Design Patterns',
+    'TypeScript',
+    'Best Practices',
+  ]
+lastUpdated: 2026-03-24
 ---
-import Disclaimer from '~/components/Disclaimer.astro';
+
+import Disclaimer from '~/components/Disclaimer.astro'
 
 ## The concept
 
@@ -33,32 +42,36 @@ logic, and UI rendering all at once.
 ```tsx
 // ❌ Bad: Doing too much
 function UserProfile() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    fetch('/api/user').then(r => r.json()).then(setUser);
-  }, []);
+    fetch('/api/user')
+      .then(r => r.json())
+      .then(setUser)
+  }, [])
 
-  const handleLogin = () => { /* ... */ };
+  const handleLogin = () => {
+    /* ... */
+  }
 
-  if (!user) return <Spinner />;
+  if (!user) return <Spinner />
 
   return (
     <div className="card">
       <h1>{user.name}</h1>
       <button onClick={handleLogin}>Login</button>
     </div>
-  );
+  )
 }
 
 // ✅ Good: Separation of concerns
 // UserDataContainer handles fetching
 // UserCard handles UI
 function UserProfile() {
-  const { user, loading } = useUser(); // Custom hook for logic
+  const { user, loading } = useUser() // Custom hook for logic
 
-  if (loading) return <Spinner />;
-  return <UserCard user={user} />;
+  if (loading) return <Spinner />
+  return <UserCard user={user} />
 }
 ```
 
@@ -71,10 +84,10 @@ You should be able to add new functionality without changing existing code.
 ```typescript
 // ❌ Bad: Modifying the function for every new role
 function getDashboardRoute(role: string) {
-  if (role === 'admin') return '/admin';
-  if (role === 'manager') return '/manager';
+  if (role === 'admin') return '/admin'
+  if (role === 'manager') return '/manager'
   // Need to edit this file to add 'user'...
-  return '/';
+  return '/'
 }
 
 // ✅ Good: Configuration object (Extension)
@@ -82,10 +95,10 @@ const roleRoutes: Record<string, string> = {
   admin: '/admin',
   manager: '/manager',
   user: '/dashboard',
-};
+}
 
 function getDashboardRoute(role: string) {
-  return roleRoutes[role] || '/';
+  return roleRoutes[role] || '/'
 }
 ```
 
@@ -99,12 +112,12 @@ If you have a generic `Database` class, swapping it for `PostgresDatabase` or
 
 ```typescript
 interface Storage {
-  save(data: string): void;
+  save(data: string): void
 }
 
 class LocalStorage implements Storage {
   save(data: string) {
-    localStorage.setItem('key', data);
+    localStorage.setItem('key', data)
   }
 }
 
@@ -113,7 +126,7 @@ class CloudStorage implements Storage {
     // ❌ Violation if this throws an error the parent doesn't expect
     // or requires different parameters.
     // But if it adheres to the contract, it's LSP compliant.
-    api.post('/save', { data });
+    api.post('/save', { data })
   }
 }
 ```
@@ -162,18 +175,18 @@ In a functional world, this often means passing dependencies as arguments
 ```typescript
 // ❌ Bad: Hard dependency on a specific library (axios)
 const getUsers = () => {
-  return axios.get('/users');
+  return axios.get('/users')
 }
 
 // ✅ Good: Dependency Injection via Higher Order Function
-type HttpClient = (url: string) => Promise<unknown>;
+type HttpClient = (url: string) => Promise<unknown>
 
 const createGetUsers = (httpClient: HttpClient) => () => {
-  return httpClient('/users');
+  return httpClient('/users')
 }
 
 // Usage
-const getUsers = createGetUsers(fetch);
+const getUsers = createGetUsers(fetch)
 ```
 
 ## Resources

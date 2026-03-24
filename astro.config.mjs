@@ -25,7 +25,7 @@ export default defineConfig({
       title: 'My Learning Curve',
       description: 'Bits and pieces I learned during my coding journey!',
       tagline: 'Bits and pieces I learned during my coding journey!',
-      favicon: '/favicon.ico',
+      favicon: `${BASE_URL}/favicon.ico`,
       plugins: [
         catppuccin({
           dark: { flavor: 'macchiato', accent: 'mauve' },

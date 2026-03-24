@@ -14,17 +14,20 @@ You are an expert developer working on "My Learning Curve", a personal knowledge
 
 - **Language**: TypeScript (`strict` mode).
 - **Package Manager**: PNPM.
-- **Linter/Formatter**: **Biome** (replaces ESLint/Prettier).
+- **Linter/Formatter**: **Oxlint + Oxfmt**.
 - **Other Linters**: `stylelint`, `markdownlint`, `cspell`.
 
 ## Development Workflows
 
 ### 1. Code Quality & Formatting
 
-- **Lint & Format**: Always use **Biome**.
+- **Lint & Format**: Always use **Oxlint + Oxfmt**.
   - Run: `pnpm lint` or `pnpm format`.
-  - Config: `biome.json` (Note: `semicolons: "asNeeded"`, `quoteStyle: "single"`).
-- **Full Check**: Run `pnpm check` to execute all validators (Biome, Markdownlint, Typecheck, Stylelint).
+  - Config: `oxlint.config.ts` and `oxfmt.json`.
+- **Type Checking**:
+  - Main: `pnpm typecheck` (Astro check)
+  - Optional native check: `pnpm typecheck:tsgo`
+- **Full Check**: Run `pnpm check` to execute all validators (Oxlint, Oxfmt, Markdownlint, Typecheck, Stylelint).
 - Do not suggest ESLint or Prettier configurations.
 
 ### 2. Creating Content
@@ -72,5 +75,6 @@ You are an expert developer working on "My Learning Curve", a personal knowledge
 
 - `astro.config.mjs`: Starlight & integration config.
 - `src/content.config.ts`: Content collections definition.
-- `biome.json`: Linter/formatter rules.
+- `oxlint.config.ts`: Lint rules.
+- `oxfmt.json`: Formatter rules.
 - `src/constants/links.ts`: Centralized link constants.

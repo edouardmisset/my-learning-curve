@@ -1,13 +1,21 @@
 ---
 date: 2026-01-09
-title: "The Web Platform Baseline"
-excerpt: "Understanding the new standard for web feature availability and how to use it in your projects."
-tags: ['Web Platform', 'Baseline', 'Browser Support', 'Web Development', 'CSS', 'JavaScript']
-lastUpdated: 2026-02-13
+title: 'The Web Platform Baseline'
+excerpt: 'Understanding the new standard for web feature availability and how to use it in your projects.'
+tags:
+  [
+    'Web Platform',
+    'Baseline',
+    'Browser Support',
+    'Web Development',
+    'CSS',
+    'JavaScript',
+  ]
+lastUpdated: 2026-03-24
 ---
 
 import Disclaimer from '../../../components/Disclaimer.astro'
-import { BaselineStatus, LinkPreview } from 'astro-embed';
+import { BaselineStatus, LinkPreview } from 'astro-embed'
 
 For years, developers have asked the same question: *"Can I use this feature yet?"*
 
@@ -52,7 +60,7 @@ The Baseline status is being integrated into the tools we use every day:
 
   ```sh
   # Targets browsers that support widely available features
-  pnpx browserslist "baseline newly available" 
+  pnpx browserslist "baseline newly available"
   ```
 
 - **[Baseline Dashboard](https://edouardmisset.github.io/baseline/)**: it
@@ -67,43 +75,43 @@ Integrating `browserslist` with TypeScript requires some manual synchronization,
 
 1. **Browserslist**: Handles polyfills (via Babel/PostCSS) and CSS prefixes.
 
-    ```json
-    // package.json
-    "browserslist": [
-      "baseline widely available",
-      "not IE 11"
-    ]
-    ```
+   ```json
+   // package.json
+   "browserslist": [
+     "baseline widely available",
+     "not IE 11"
+   ]
+   ```
 
 2. **TypeScript (`tsconfig.json`)**: Handles syntax down-leveling.
-    If you use a bundler (Vite, Webpack), it will handle the heavy lifting based on `browserslist`. You can keep your TS target modern.
+   If you use a bundler (Vite, Webpack), it will handle the heavy lifting based on `browserslist`. You can keep your TS target modern.
 
-    ```json
-    {
-      "compilerOptions": {
-        "target": "ES2022",
-        "lib": ["DOM", "DOM.Iterable", "ES2022"]
-      }
-    }
-    ```
+   ```json
+   {
+     "compilerOptions": {
+       "target": "ES2022",
+       "lib": ["DOM", "DOM.Iterable", "ES2022"]
+     }
+   }
+   ```
 
 3. **Bundler Integration (e.g., Vite)**:
-    Vite handles CSS (via PostCSS) based on your `browserslist` automatically. For JavaScript transpilation (via esbuild), you often need to convert your `browserslist` config to a format `esbuild` understands.
+   Vite handles CSS (via PostCSS) based on your `browserslist` automatically. For JavaScript transpilation (via esbuild), you often need to convert your `browserslist` config to a format `esbuild` understands.
 
-    One popular way is using the `browserslist-to-esbuild` package:
+   One popular way is using the `browserslist-to-esbuild` package:
 
-    ```ts
-    // vite.config.ts
-    import { defineConfig } from 'vite';
-    import browserslistToEsbuild from 'browserslist-to-esbuild';
+   ```ts
+   // vite.config.ts
+   import { defineConfig } from 'vite'
+   import browserslistToEsbuild from 'browserslist-to-esbuild'
 
-    export default defineConfig({
-      build: {
-        // Automatically syncs your JS build target with your browserslist config
-        target: browserslistToEsbuild(), 
-      },
-    });
-    ```
+   export default defineConfig({
+     build: {
+       // Automatically syncs your JS build target with your browserslist config
+       target: browserslistToEsbuild(),
+     },
+   })
+   ```
 
 ## Using the Baseline Component
 
@@ -116,14 +124,14 @@ You can treat it like any other HTML element after importing the script.
 First **Import the script**:
 
 ```html
-<script 
-  src="https://cdn.jsdelivr.net/npm/baseline-status@1/baseline-status.min.js" 
+<script
+  src="https://cdn.jsdelivr.net/npm/baseline-status@1/baseline-status.min.js"
   type="module"
 ></script>
 ```
 
 Then **Use the component**:
-   You need the `featureId`, which you can find on [webstatus.dev](https://webstatus.dev).
+You need the `featureId`, which you can find on [webstatus.dev](https://webstatus.dev).
 
 ```html
 <baseline-status featureId="popover"></baseline-status>
@@ -135,7 +143,7 @@ With **React 19**, support for Custom Elements is native, so you can use it just
 
 ```jsx
 // React 19+
-import 'baseline-status'; // Make sure the package is installed
+import 'baseline-status' // Make sure the package is installed
 
 function FeatureCard() {
   return (
@@ -143,7 +151,7 @@ function FeatureCard() {
       <h3>Popover API</h3>
       <baseline-status featureId="popover"></baseline-status>
     </div>
-  );
+  )
 }
 ```
 

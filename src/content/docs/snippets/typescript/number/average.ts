@@ -1,9 +1,9 @@
 /**
  * Calculates the average of the given numbers.
  *
- * @param {number[] | number} num - The numbers to calculate the average of.
+ * @param num - The numbers to calculate the average of.
  * @throws {Error} When no arguments are provided.
- * @returns {number} The average of the given numbers.
+ * @returns The average of the given numbers.
  */
 export const average = (...num: (number[] | number)[]): number => {
   const numbers = Array.isArray(num[0])

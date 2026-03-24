@@ -1,8 +1,8 @@
 /**
  * Checks if the provided value is a function.
  *
- * @param {unknown} maybeFunction - The value to check.
- * @returns {boolean} Returns `true` if `maybeFunction` is a function, else `false`.
+ * @param maybeFunction - The value to check.
+ * @returns Returns `true` if `maybeFunction` is a function, else `false`.
  *
  * @example
  * isFunction(function() {});

@@ -1,12 +1,20 @@
 ---
 date: 2026-02-13
 title: Design Patterns in TypeScript
-excerpt: "A practical guide to the most useful design patterns for full-stack TypeScript developers, with real-world examples."
-tags: ['TypeScript', 'Design Patterns', 'Architecture', 'Best Practices', 'OOP', 'Software Design']
-lastUpdated: 2026-02-13
+excerpt: 'A practical guide to the most useful design patterns for full-stack TypeScript developers, with real-world examples.'
+tags:
+  [
+    'TypeScript',
+    'Design Patterns',
+    'Architecture',
+    'Best Practices',
+    'OOP',
+    'Software Design',
+  ]
+lastUpdated: 2026-03-24
 ---
 
-import Disclaimer from '~/components/Disclaimer.astro';
+import Disclaimer from '~/components/Disclaimer.astro'
 
 ## TL;DR
 
@@ -44,38 +52,38 @@ These patterns provide object creation mechanisms that increase flexibility and 
 
 **When to use:** When exactly one instance of a class is needed to coordinate actions across the system.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Guarantees a single instance exists globally | Creates global state, making testing harder |
+| Benefits                                        | Drawbacks                                                                                                                                                    |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Guarantees a single instance exists globally    | Creates global state, making testing harder                                                                                                                  |
 | Provides a global access point to that instance | Can hide dependencies and violate the [Single Responsibility Principle](/my-learning-curve/blog/11-solid-principles#s---single-responsibility-principle-srp) |
-| | Difficult to manage in concurrent environments |
+|                                                 | Difficult to manage in concurrent environments                                                                                                               |
 
 ```typescript
 class Database {
-  private static instance: Database;
+  private static instance: Database
 
   private constructor() {
     // Private constructor prevents direct instantiation
-    console.log('Connecting to database...');
+    console.log('Connecting to database...')
   }
 
   public static getInstance(): Database {
     if (!Database.instance) {
-      Database.instance = new Database();
+      Database.instance = new Database()
     }
-    return Database.instance;
+    return Database.instance
   }
 
   public query(sql: string): void {
-    console.log(`Executing: ${sql}`);
+    console.log(`Executing: ${sql}`)
   }
 }
 
 // Usage
-const db1 = Database.getInstance();
-const db2 = Database.getInstance();
+const db1 = Database.getInstance()
+const db2 = Database.getInstance()
 
-console.log(db1 === db2); // true
+console.log(db1 === db2) // true
 ```
 
 #### Functional Alternative: Modules
@@ -85,14 +93,16 @@ In TypeScript/ES6, modules are singletons by default.
 ```typescript
 // database.ts
 class DatabaseConnection {
-  query(sql: string) { console.log(`Executing: ${sql}`); }
+  query(sql: string) {
+    console.log(`Executing: ${sql}`)
+  }
 }
 
-export const db = new DatabaseConnection();
+export const db = new DatabaseConnection()
 
 // Usage
-import { db } from './database';
-db.query('SELECT * FROM users');
+import { db } from './database'
+db.query('SELECT * FROM users')
 ```
 
 ### Factory Method
@@ -103,63 +113,67 @@ db.query('SELECT * FROM users');
 
 **When to use:** When you need to provide a library of related products without specifying their concrete classes.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Decouples object creation from usage | Requires creating new subclasses for each product type |
-| Makes it easy to add new types without modifying existing code | Can introduce unnecessary complexity for simple cases |
-| Follows the [Open/Closed Principle](/my-learning-curve/blog/11-solid-principles#o---openclosed-principle-ocp) | |
+| Benefits                                                                                                      | Drawbacks                                              |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| Decouples object creation from usage                                                                          | Requires creating new subclasses for each product type |
+| Makes it easy to add new types without modifying existing code                                                | Can introduce unnecessary complexity for simple cases  |
+| Follows the [Open/Closed Principle](/my-learning-curve/blog/11-solid-principles#o---openclosed-principle-ocp) |                                                        |
 
 ```typescript
 interface Notification {
-  send(message: string): void;
+  send(message: string): void
 }
 
 class EmailNotification implements Notification {
-  send(message: string) { console.log(`Sending Email: ${message}`); }
+  send(message: string) {
+    console.log(`Sending Email: ${message}`)
+  }
 }
 
 class SMSNotification implements Notification {
-  send(message: string) { console.log(`Sending SMS: ${message}`); }
+  send(message: string) {
+    console.log(`Sending SMS: ${message}`)
+  }
 }
 
 abstract class NotificationCreator {
-  abstract createNotification(): Notification;
+  abstract createNotification(): Notification
 
   send(message: string) {
-    const notifier = this.createNotification();
-    notifier.send(message);
+    const notifier = this.createNotification()
+    notifier.send(message)
   }
 }
 
 class EmailCreator extends NotificationCreator {
   createNotification() {
-    return new EmailNotification();
+    return new EmailNotification()
   }
 }
 
 class SMSCreator extends NotificationCreator {
   createNotification() {
-    return new SMSNotification();
+    return new SMSNotification()
   }
 }
 
 // Usage
-const notifier = new EmailCreator();
-notifier.send('Hello World');
+const notifier = new EmailCreator()
+notifier.send('Hello World')
 ```
 
 #### Functional Alternative: Simple Factory Function
 
 ```typescript
 const createNotifier = (type: 'email' | 'sms') => {
-  if (type === 'email') return (msg: string) => console.log(`Email: ${msg}`);
-  if (type === 'sms') return (msg: string) => console.log(`SMS: ${msg}`);
-  throw new Error('Unknown type');
-};
+  if (type === 'email') return (msg: string) => console.log(`Email: ${msg}`)
+  if (type === 'sms') return (msg: string) => console.log(`SMS: ${msg}`)
+  throw new Error('Unknown type')
+}
 
 // Usage
-const emailNotifier = createNotifier('email');
-emailNotifier('Hello World');
+const emailNotifier = createNotifier('email')
+emailNotifier('Hello World')
 ```
 
 ### Builder
@@ -170,37 +184,40 @@ emailNotifier('Hello World');
 
 **When to use:** When constructing complex objects with many optional parameters or multiple representations.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Creates complex objects step by step with a fluent API | Increases overall code complexity due to multiple new classes |
-| Allows producing different representations using the same construction code | Overkill for simple objects with few parameters |
-| Isolates complex construction code from business logic | |
+| Benefits                                                                    | Drawbacks                                                     |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Creates complex objects step by step with a fluent API                      | Increases overall code complexity due to multiple new classes |
+| Allows producing different representations using the same construction code | Overkill for simple objects with few parameters               |
+| Isolates complex construction code from business logic                      |                                                               |
 
 ```typescript
 class UserBuilder {
-  private user: { name: string; email?: string; role: string };
+  private user: { name: string; email?: string; role: string }
 
   constructor(name: string) {
-    this.user = { name, role: 'user' };
+    this.user = { name, role: 'user' }
   }
 
   withEmail(email: string) {
-    this.user.email = email;
-    return this;
+    this.user.email = email
+    return this
   }
 
   asAdmin() {
-    this.user.role = 'admin';
-    return this;
+    this.user.role = 'admin'
+    return this
   }
 
   build() {
-    return this.user;
+    return this.user
   }
 }
 
 // Usage
-const admin = new UserBuilder('Alice').withEmail('alice@example.com').asAdmin().build();
+const admin = new UserBuilder('Alice')
+  .withEmail('alice@example.com')
+  .asAdmin()
+  .build()
 ```
 
 ### Abstract Factory
@@ -211,41 +228,49 @@ const admin = new UserBuilder('Alice').withEmail('alice@example.com').asAdmin().
 
 **When to use:** When your code needs to work with various families of related products without depending on their concrete classes.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Ensures products from a factory are compatible | Code becomes more complicated with many interfaces and classes |
-| Decouples code from concrete product classes | Can be overkill if product families rarely change |
-| Follows [Single Responsibility](/my-learning-curve/blog/11-solid-principles#s---single-responsibility-principle-srp) and [Open/Closed](/my-learning-curve/blog/11-solid-principles#o---openclosed-principle-ocp) Principles | |
+| Benefits                                                                                                                                                                                                                    | Drawbacks                                                      |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Ensures products from a factory are compatible                                                                                                                                                                              | Code becomes more complicated with many interfaces and classes |
+| Decouples code from concrete product classes                                                                                                                                                                                | Can be overkill if product families rarely change              |
+| Follows [Single Responsibility](/my-learning-curve/blog/11-solid-principles#s---single-responsibility-principle-srp) and [Open/Closed](/my-learning-curve/blog/11-solid-principles#o---openclosed-principle-ocp) Principles |                                                                |
 
 ```typescript
 interface Button {
-  render(): void;
+  render(): void
 }
 
 class WindowsButton implements Button {
-  render() { console.log('Rendering Windows Button'); }
+  render() {
+    console.log('Rendering Windows Button')
+  }
 }
 
 class MacButton implements Button {
-  render() { console.log('Rendering Mac Button'); }
+  render() {
+    console.log('Rendering Mac Button')
+  }
 }
 
 interface GUIFactory {
-  createButton(): Button;
+  createButton(): Button
 }
 
 class WindowsFactory implements GUIFactory {
-  createButton() { return new WindowsButton(); }
+  createButton() {
+    return new WindowsButton()
+  }
 }
 
 class MacFactory implements GUIFactory {
-  createButton() { return new MacButton(); }
+  createButton() {
+    return new MacButton()
+  }
 }
 
 // Usage
 function createUI(factory: GUIFactory) {
-  const button = factory.createButton();
-  button.render();
+  const button = factory.createButton()
+  button.render()
 }
 ```
 
@@ -257,24 +282,28 @@ function createUI(factory: GUIFactory) {
 
 **When to use:** When object creation is expensive and you have similar objects that differ only in some properties.
 
-| Benefits | Drawbacks |
-| --- | --- |
+| Benefits                                                  | Drawbacks                                              |
+| --------------------------------------------------------- | ------------------------------------------------------ |
 | Clones objects without coupling to their concrete classes | Cloning objects with circular references can be tricky |
-| Avoids repeated initialization code for complex objects | Deep cloning requires careful implementation |
-| Useful for creating objects with preset configurations | |
+| Avoids repeated initialization code for complex objects   | Deep cloning requires careful implementation           |
+| Useful for creating objects with preset configurations    |                                                        |
 
 ```typescript
 class Shape {
-  constructor(public x: number, public y: number, public color: string) {}
+  constructor(
+    public x: number,
+    public y: number,
+    public color: string,
+  ) {}
 
   clone(): Shape {
-    return new Shape(this.x, this.y, this.color);
+    return new Shape(this.x, this.y, this.color)
   }
 }
 
 // Usage
-const circle = new Shape(10, 10, 'red');
-const anotherCircle = circle.clone();
+const circle = new Shape(10, 10, 'red')
+const anotherCircle = circle.clone()
 ```
 
 ## Structural Patterns
@@ -291,22 +320,22 @@ These patterns explain how to assemble objects and classes into larger structure
 
 **When to use:** When you want to use an existing class but its interface doesn't match your needs.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Allows incompatible interfaces to work together | Adds an extra layer of indirection |
+| Benefits                                                                                                                                                                                                                    | Drawbacks                                                                  |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Allows incompatible interfaces to work together                                                                                                                                                                             | Adds an extra layer of indirection                                         |
 | Follows [Single Responsibility](/my-learning-curve/blog/11-solid-principles#s---single-responsibility-principle-srp) and [Open/Closed](/my-learning-curve/blog/11-solid-principles#o---openclosed-principle-ocp) Principles | Sometimes it's simpler to change the service class to match your interface |
-| Isolates conversion logic from business logic | |
+| Isolates conversion logic from business logic                                                                                                                                                                               |                                                                            |
 
 ```typescript
 // Your application expects this interface
 interface Logger {
-  log(message: string): void;
+  log(message: string): void
 }
 
 // Third party library has this interface
 class ExternalAnalyticsService {
   sendEvent(eventName: string, data: object) {
-    console.log(`External Analytics: ${eventName}`, data);
+    console.log(`External Analytics: ${eventName}`, data)
   }
 }
 
@@ -315,14 +344,14 @@ class AnalyticsAdapter implements Logger {
   constructor(private service: ExternalAnalyticsService) {}
 
   log(message: string): void {
-    this.service.sendEvent('log_entry', { message });
+    this.service.sendEvent('log_entry', { message })
   }
 }
 
 // Usage
-const analytics = new ExternalAnalyticsService();
-const logger: Logger = new AnalyticsAdapter(analytics);
-logger.log('User logged in');
+const analytics = new ExternalAnalyticsService()
+const logger: Logger = new AnalyticsAdapter(analytics)
+logger.log('User logged in')
 ```
 
 ### Decorator
@@ -333,42 +362,42 @@ logger.log('User logged in');
 
 **When to use:** When you need to add responsibilities to objects dynamically without affecting other objects.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Extends object behavior without modifying the original | Hard to remove a specific wrapper from the stack |
-| Adds responsibilities dynamically at runtime | Can result in many small objects and complex initialization |
-| Follows [Single Responsibility](/my-learning-curve/blog/11-solid-principles#s---single-responsibility-principle-srp) by dividing functionality into separate classes | |
+| Benefits                                                                                                                                                             | Drawbacks                                                   |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Extends object behavior without modifying the original                                                                                                               | Hard to remove a specific wrapper from the stack            |
+| Adds responsibilities dynamically at runtime                                                                                                                         | Can result in many small objects and complex initialization |
+| Follows [Single Responsibility](/my-learning-curve/blog/11-solid-principles#s---single-responsibility-principle-srp) by dividing functionality into separate classes |                                                             |
 
 #### Structural Decorator (Classic Wrapper)
 
 ```typescript
 interface Notifier {
-  send(message: string): void;
+  send(message: string): void
 }
 
 class EmailNotifier implements Notifier {
   send(message: string) {
-    console.log(`Email: ${message}`);
+    console.log(`Email: ${message}`)
   }
 }
 
 class NotifierDecorator implements Notifier {
   constructor(protected wrappee: Notifier) {}
   send(message: string) {
-    this.wrappee.send(message);
+    this.wrappee.send(message)
   }
 }
 
 class SlackDecorator extends NotifierDecorator {
   send(message: string) {
-    super.send(message);
-    console.log(`Slack: ${message}`);
+    super.send(message)
+    console.log(`Slack: ${message}`)
   }
 }
 
 // Usage
-const notifier = new SlackDecorator(new EmailNotifier());
-notifier.send('Build completed');
+const notifier = new SlackDecorator(new EmailNotifier())
+notifier.send('Build completed')
 ```
 
 #### Language-Level Decorators (TypeScript)
@@ -379,28 +408,28 @@ The example below uses the standard (stage 3) decorator shape described in the [
 
 ```typescript
 function Log(originalMethod: any, context: ClassMethodDecoratorContext) {
-  const methodName = String(context.name);
+  const methodName = String(context.name)
 
   function replacementMethod(this: any, ...args: any[]) {
-    console.log(`Calling ${methodName} with args: ${JSON.stringify(args)}`);
-    const result = originalMethod.call(this, ...args);
-    console.log(`Result: ${result}`);
-    return result;
+    console.log(`Calling ${methodName} with args: ${JSON.stringify(args)}`)
+    const result = originalMethod.call(this, ...args)
+    console.log(`Result: ${result}`)
+    return result
   }
 
-  return replacementMethod;
+  return replacementMethod
 }
 
 class UserService {
   @Log
   getUser(id: number) {
-    return { id, name: 'John Doe' };
+    return { id, name: 'John Doe' }
   }
 }
 
 // Usage
-const service = new UserService();
-service.getUser(1); // Logs: Calling getUser with args: [1], then Result: {...}
+const service = new UserService()
+service.getUser(1) // Logs: Calling getUser with args: [1], then Result: {...}
 ```
 
 #### Functional Alternative: Higher-Order Functions
@@ -408,16 +437,18 @@ service.getUser(1); // Logs: Calling getUser with args: [1], then Result: {...}
 See more about [Higher-Order Functions](/my-learning-curve/blog/05-higher-order-functions).
 
 ```typescript
-const withLogging = (fn: Function) => (...args: any[]) => {
-  console.log(`Calling with ${args}`);
-  return fn(...args);
-};
+const withLogging =
+  (fn: Function) =>
+  (...args: any[]) => {
+    console.log(`Calling with ${args}`)
+    return fn(...args)
+  }
 
-const getUser = (id: number) => ({ id, name: 'John Doe' });
-const getUserWithLog = withLogging(getUser);
+const getUser = (id: number) => ({ id, name: 'John Doe' })
+const getUserWithLog = withLogging(getUser)
 
 // Usage
-getUserWithLog(1); // Logs: Calling with 1
+getUserWithLog(1) // Logs: Calling with 1
 ```
 
 ### Facade
@@ -428,26 +459,26 @@ getUserWithLog(1); // Logs: Calling with 1
 
 **When to use:** When you need to provide a simple interface to a complex subsystem.
 
-| Benefits | Drawbacks |
-| --- | --- |
+| Benefits                                             | Drawbacks                                                  |
+| ---------------------------------------------------- | ---------------------------------------------------------- |
 | Simplifies complex subsystems with a clean interface | Can become a "god object" coupled to all subsystem classes |
-| Decouples client code from subsystem internals | Might hide useful advanced features |
-| Makes the subsystem easier to use and test | |
+| Decouples client code from subsystem internals       | Might hide useful advanced features                        |
+| Makes the subsystem easier to use and test           |                                                            |
 
 ```typescript
 // Simplified facade that hides complex subsystem classes
 class VideoConverterFacade {
   convert(filename: string, format: string): void {
-    console.log(`Converting ${filename} to ${format}`);
+    console.log(`Converting ${filename} to ${format}`)
     // In reality, this would coordinate multiple subsystem classes:
     // - VideoFile, CodecFactory, BitrateReader, AudioMixer, etc.
-    console.log('Conversion completed');
+    console.log('Conversion completed')
   }
 }
 
 // Usage
-const converter = new VideoConverterFacade();
-converter.convert('funny-cats-video.ogg', 'mp4');
+const converter = new VideoConverterFacade()
+converter.convert('funny-cats-video.ogg', 'mp4')
 ```
 
 ### Proxy
@@ -458,41 +489,41 @@ converter.convert('funny-cats-video.ogg', 'mp4');
 
 **When to use:** When you need to control access to an object, add lazy initialization, or implement caching and logging.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Controls access to the service object | Adds latency due to extra indirection |
+| Benefits                                                         | Drawbacks                                        |
+| ---------------------------------------------------------------- | ------------------------------------------------ |
+| Controls access to the service object                            | Adds latency due to extra indirection            |
 | Can manage the lifecycle (lazy initialization, caching, logging) | Response might become stale with caching proxies |
-| Works even if the service object isn't ready | |
+| Works even if the service object isn't ready                     |                                                  |
 
 ```typescript
 interface API {
-  getData(): string;
+  getData(): string
 }
 
 class RealAPI implements API {
   getData() {
-    console.log('Fetching data from network...');
-    return 'Data';
+    console.log('Fetching data from network...')
+    return 'Data'
   }
 }
 
 class CachedAPIProxy implements API {
-  private cache: string | null = null;
+  private cache: string | null = null
 
   constructor(private service: RealAPI) {}
 
   getData() {
     if (!this.cache) {
-      this.cache = this.service.getData();
+      this.cache = this.service.getData()
     }
-    return this.cache;
+    return this.cache
   }
 }
 
 // Usage
-const api = new CachedAPIProxy(new RealAPI());
-api.getData(); // Fetches from network
-api.getData(); // Returns cached data
+const api = new CachedAPIProxy(new RealAPI())
+api.getData() // Fetches from network
+api.getData() // Returns cached data
 ```
 
 ### Bridge
@@ -503,17 +534,17 @@ api.getData(); // Returns cached data
 
 **When to use:** When you want to divide and organize a class with multiple variants into separate hierarchies.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Decouples abstraction from implementation | Makes code more complicated by adding extra indirection |
-| Allows independent development of both hierarchies | May be overkill for a simple, cohesive class |
-| Follows Single Responsibility and Open/Closed Principles | |
+| Benefits                                                 | Drawbacks                                               |
+| -------------------------------------------------------- | ------------------------------------------------------- |
+| Decouples abstraction from implementation                | Makes code more complicated by adding extra indirection |
+| Allows independent development of both hierarchies       | May be overkill for a simple, cohesive class            |
+| Follows Single Responsibility and Open/Closed Principles |                                                         |
 
 ```typescript
 interface Device {
-  isEnabled(): boolean;
-  enable(): void;
-  disable(): void;
+  isEnabled(): boolean
+  enable(): void
+  disable(): void
 }
 
 class RemoteControl {
@@ -521,23 +552,29 @@ class RemoteControl {
 
   togglePower() {
     if (this.device.isEnabled()) {
-      this.device.disable();
+      this.device.disable()
     } else {
-      this.device.enable();
+      this.device.enable()
     }
   }
 }
 
 // Usage
 class TV implements Device {
-  private on = false;
-  isEnabled() { return this.on; }
-  enable() { this.on = true; }
-  disable() { this.on = false; }
+  private on = false
+  isEnabled() {
+    return this.on
+  }
+  enable() {
+    this.on = true
+  }
+  disable() {
+    this.on = false
+  }
 }
 
-const remote = new RemoteControl(new TV());
-remote.togglePower(); // Turns TV on
+const remote = new RemoteControl(new TV())
+remote.togglePower() // Turns TV on
 ```
 
 ### Composite
@@ -548,39 +585,41 @@ remote.togglePower(); // Turns TV on
 
 **When to use:** When you need to work with tree-like object structures and treat individual objects uniformly.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Treats individual objects and compositions uniformly | Can make the design overly general |
-| Makes it easy to add new component types | Hard to restrict what components can be added to a composite |
-| Simplifies client code that works with tree structures | |
+| Benefits                                               | Drawbacks                                                    |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
+| Treats individual objects and compositions uniformly   | Can make the design overly general                           |
+| Makes it easy to add new component types               | Hard to restrict what components can be added to a composite |
+| Simplifies client code that works with tree structures |                                                              |
 
 ```typescript
 interface Component {
-  render(): void;
+  render(): void
 }
 
 class Button implements Component {
-  render() { console.log('Rendering Button'); }
+  render() {
+    console.log('Rendering Button')
+  }
 }
 
 class Panel implements Component {
-  private children: Component[] = [];
+  private children: Component[] = []
 
   add(component: Component) {
-    this.children.push(component);
+    this.children.push(component)
   }
 
   render() {
-    console.log('Rendering Panel');
-    this.children.forEach(c => c.render());
+    console.log('Rendering Panel')
+    this.children.forEach(c => c.render())
   }
 }
 
 // Usage
-const panel = new Panel();
-panel.add(new Button());
-panel.add(new Button());
-panel.render(); // Renders panel and all buttons
+const panel = new Panel()
+panel.add(new Button())
+panel.add(new Button())
+panel.render() // Renders panel and all buttons
 ```
 
 ### Flyweight
@@ -591,35 +630,39 @@ panel.render(); // Renders panel and all buttons
 
 **When to use:** When you have a large number of similar objects that are consuming too much memory.
 
-| Benefits | Drawbacks |
-| --- | --- |
+| Benefits                                                       | Drawbacks                                               |
+| -------------------------------------------------------------- | ------------------------------------------------------- |
 | Saves RAM when dealing with massive numbers of similar objects | Trades RAM for CPU cycles (calculating extrinsic state) |
-| Centralizes state shared by many objects | Code becomes more complex |
-| | Only beneficial when you have a large number of objects |
+| Centralizes state shared by many objects                       | Code becomes more complex                               |
+|                                                                | Only beneficial when you have a large number of objects |
 
 ```typescript
 class TreeType {
-  constructor(private name: string, private color: string, private texture: string) {}
+  constructor(
+    private name: string,
+    private color: string,
+    private texture: string,
+  ) {}
   draw(x: number, y: number) {
-    console.log(`Drawing ${this.name} at (${x}, ${y})`);
+    console.log(`Drawing ${this.name} at (${x}, ${y})`)
   }
 }
 
 class TreeFactory {
-  static types: Map<string, TreeType> = new Map();
+  static types: Map<string, TreeType> = new Map()
   static getTreeType(name: string, color: string, texture: string) {
-    const key = `${name}-${color}-${texture}`;
+    const key = `${name}-${color}-${texture}`
     if (!this.types.has(key)) {
-      this.types.set(key, new TreeType(name, color, texture));
+      this.types.set(key, new TreeType(name, color, texture))
     }
-    return this.types.get(key)!;
+    return this.types.get(key)!
   }
 }
 
 // Usage
-const oak = TreeFactory.getTreeType('Oak', 'green', 'rough');
-oak.draw(10, 20);
-oak.draw(50, 60); // Reuses the same TreeType instance
+const oak = TreeFactory.getTreeType('Oak', 'green', 'rough')
+oak.draw(10, 20)
+oak.draw(50, 60) // Reuses the same TreeType instance
 ```
 
 ## Behavioral Patterns
@@ -636,55 +679,57 @@ These patterns are concerned with algorithms and the assignment of responsibilit
 
 **When to use:** When changes to one object require updating others, and you don't know how many objects need to be updated.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Establishes dynamic relationships between objects at runtime | Subscriber notification order is not guaranteed |
+| Benefits                                                                                                                                                    | Drawbacks                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Establishes dynamic relationships between objects at runtime                                                                                                | Subscriber notification order is not guaranteed                      |
 | Follows [Open/Closed Principle](/my-learning-curve/blog/11-solid-principles#o---openclosed-principle-ocp) (add new subscribers without modifying publisher) | Can lead to memory leaks if subscribers aren't properly unsubscribed |
-| Enables loose coupling between publishers and subscribers | |
+| Enables loose coupling between publishers and subscribers                                                                                                   |                                                                      |
 
 ```typescript
 interface Observer<T> {
-  update(data: T): void;
+  update(data: T): void
 }
 
 class Newsletter<T> {
-  private subscribers: Observer<T>[] = [];
+  private subscribers: Observer<T>[] = []
 
   subscribe(observer: Observer<T>) {
-    this.subscribers.push(observer);
+    this.subscribers.push(observer)
   }
 
   notify(data: T) {
-    this.subscribers.forEach(sub => sub.update(data));
+    this.subscribers.forEach(sub => sub.update(data))
   }
 }
 
 // Usage
 class EmailSubscriber implements Observer<string> {
-  update(data: string) { console.log(`Email subscriber received: ${data}`); }
+  update(data: string) {
+    console.log(`Email subscriber received: ${data}`)
+  }
 }
 
-const newsletter = new Newsletter<string>();
-newsletter.subscribe(new EmailSubscriber());
-newsletter.notify('New article published!');
+const newsletter = new Newsletter<string>()
+newsletter.subscribe(new EmailSubscriber())
+newsletter.notify('New article published!')
 ```
 
 #### Functional Alternative: Callbacks / Event Emitters
 
 ```typescript
-type Listener<T> = (data: T) => void;
+type Listener<T> = (data: T) => void
 const createNewsletter = <T>() => {
-  const listeners: Listener<T>[] = [];
+  const listeners: Listener<T>[] = []
   return {
     subscribe: (fn: Listener<T>) => listeners.push(fn),
-    notify: (data: T) => listeners.forEach(fn => fn(data))
-  };
-};
+    notify: (data: T) => listeners.forEach(fn => fn(data)),
+  }
+}
 
 // Usage
-const newsletter = createNewsletter<string>();
-newsletter.subscribe((data) => console.log(`Received: ${data}`));
-newsletter.notify('New article!');
+const newsletter = createNewsletter<string>()
+newsletter.subscribe(data => console.log(`Received: ${data}`))
+newsletter.notify('New article!')
 ```
 
 ### Strategy
@@ -695,54 +740,60 @@ newsletter.notify('New article!');
 
 **When to use:** When you have multiple algorithms for a specific task and want to switch between them at runtime.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Swaps algorithms at runtime | Clients must be aware of different strategies |
+| Benefits                                            | Drawbacks                                                           |
+| --------------------------------------------------- | ------------------------------------------------------------------- |
+| Swaps algorithms at runtime                         | Clients must be aware of different strategies                       |
 | Isolates implementation details from business logic | Overkill if you only have a couple of algorithms that rarely change |
-| Replaces inheritance with composition | |
+| Replaces inheritance with composition               |                                                                     |
 
 ```typescript
 interface PaymentStrategy {
-  pay(amount: number): void;
+  pay(amount: number): void
 }
 
 class CreditCardPayment implements PaymentStrategy {
-  pay(amount: number) { console.log(`Paid ${amount} via Credit Card`); }
+  pay(amount: number) {
+    console.log(`Paid ${amount} via Credit Card`)
+  }
 }
 
 class PayPalPayment implements PaymentStrategy {
-  pay(amount: number) { console.log(`Paid ${amount} via PayPal`); }
+  pay(amount: number) {
+    console.log(`Paid ${amount} via PayPal`)
+  }
 }
 
 class Checkout {
   constructor(private strategy: PaymentStrategy) {}
 
   processOrder(amount: number) {
-    this.strategy.pay(amount);
+    this.strategy.pay(amount)
   }
 }
 
 // Usage
-const checkout = new Checkout(new CreditCardPayment());
-checkout.processOrder(100);
+const checkout = new Checkout(new CreditCardPayment())
+checkout.processOrder(100)
 
 // Can switch strategy
-const paypalCheckout = new Checkout(new PayPalPayment());
-paypalCheckout.processOrder(200);
+const paypalCheckout = new Checkout(new PayPalPayment())
+paypalCheckout.processOrder(200)
 ```
 
 #### Functional Alternative: Passing Functions
 
 ```typescript
-type PaymentStrategy = (amount: number) => void;
-const payWithCard: PaymentStrategy = (amount) => console.log(`Card: ${amount}`);
-const payWithPayPal: PaymentStrategy = (amount) => console.log(`PayPal: ${amount}`);
+type PaymentStrategy = (amount: number) => void
+const payWithCard: PaymentStrategy = amount => console.log(`Card: ${amount}`)
+const payWithPayPal: PaymentStrategy = amount =>
+  console.log(`PayPal: ${amount}`)
 
-const processOrder = (amount: number, strategy: PaymentStrategy) => strategy(amount);
+const processOrder = (amount: number, strategy: PaymentStrategy) =>
+  strategy(amount)
 
 // Usage
-processOrder(100, payWithCard);
-processOrder(200, payWithPayPal);
+processOrder(100, payWithCard)
+processOrder(200, payWithPayPal)
 ```
 
 ### Chain of Responsibility
@@ -753,24 +804,24 @@ processOrder(200, payWithPayPal);
 
 **When to use:** When you want to pass a request through a series of handlers in a specific order.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Decouples senders and receivers | Some requests may end up unhandled |
+| Benefits                                                 | Drawbacks                                         |
+| -------------------------------------------------------- | ------------------------------------------------- |
+| Decouples senders and receivers                          | Some requests may end up unhandled                |
 | Follows Single Responsibility and Open/Closed Principles | Debugging can be difficult due to chain traversal |
-| Controls the order of request handling | |
+| Controls the order of request handling                   |                                                   |
 
 ```typescript
 abstract class Middleware {
-  private next: Middleware | null = null;
+  private next: Middleware | null = null
 
   public setNext(middleware: Middleware): Middleware {
-    this.next = middleware;
-    return middleware;
+    this.next = middleware
+    return middleware
   }
 
   public handle(request: string): void {
     if (this.next) {
-      this.next.handle(request);
+      this.next.handle(request)
     }
   }
 }
@@ -778,10 +829,10 @@ abstract class Middleware {
 class AuthMiddleware extends Middleware {
   public handle(request: string): void {
     if (request === 'authenticated') {
-      console.log('Auth passed');
-      super.handle(request);
+      console.log('Auth passed')
+      super.handle(request)
     } else {
-      console.log('Auth failed');
+      console.log('Auth failed')
     }
   }
 }
@@ -789,17 +840,17 @@ class AuthMiddleware extends Middleware {
 // Usage
 class LoggingMiddleware extends Middleware {
   public handle(request: string): void {
-    console.log(`Logging: ${request}`);
-    super.handle(request);
+    console.log(`Logging: ${request}`)
+    super.handle(request)
   }
 }
 
-const auth = new AuthMiddleware();
-const logging = new LoggingMiddleware();
-auth.setNext(logging);
+const auth = new AuthMiddleware()
+const logging = new LoggingMiddleware()
+auth.setNext(logging)
 
-auth.handle('authenticated'); // Passes through both
-auth.handle('guest'); // Stops at auth
+auth.handle('authenticated') // Passes through both
+auth.handle('guest') // Stops at auth
 ```
 
 ### Command
@@ -810,51 +861,53 @@ auth.handle('guest'); // Stops at auth
 
 **When to use:** When you need to parameterize objects with operations, queue operations, or implement reversible operations.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Decouples sender from receiver | Code becomes more complex with many command classes |
+| Benefits                                         | Drawbacks                                                 |
+| ------------------------------------------------ | --------------------------------------------------------- |
+| Decouples sender from receiver                   | Code becomes more complex with many command classes       |
 | Enables deferred execution, queuing, and logging | Adds a layer of indirection between senders and receivers |
-| Supports undo/redo operations | |
+| Supports undo/redo operations                    |                                                           |
 
 ```typescript
 interface Command {
-  execute(): void;
+  execute(): void
 }
 
 class SaveCommand implements Command {
   constructor(private service: DataService) {}
   execute() {
-    this.service.save();
+    this.service.save()
   }
 }
 
 class Button {
   constructor(private command: Command) {}
   click() {
-    this.command.execute();
+    this.command.execute()
   }
 }
 
 // Usage
 class DataService {
-  save() { console.log('Saving data...'); }
+  save() {
+    console.log('Saving data...')
+  }
 }
 
-const dataService = new DataService();
-const saveButton = new Button(new SaveCommand(dataService));
-saveButton.click(); // Executes save command
+const dataService = new DataService()
+const saveButton = new Button(new SaveCommand(dataService))
+saveButton.click() // Executes save command
 ```
 
 #### Functional Alternative: Closures / Thunks
 
 ```typescript
-const createSaveCommand = (service: DataService) => () => service.save();
-const buttonClick = (command: () => void) => command();
+const createSaveCommand = (service: DataService) => () => service.save()
+const buttonClick = (command: () => void) => command()
 
 // Usage
-const service = new DataService();
-const saveCommand = createSaveCommand(service);
-buttonClick(saveCommand);
+const service = new DataService()
+const saveCommand = createSaveCommand(service)
+buttonClick(saveCommand)
 ```
 
 ### State
@@ -865,56 +918,60 @@ buttonClick(saveCommand);
 
 **When to use:** When an object's behavior depends on its state and must change at runtime based on state transitions.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Organizes state-specific code into separate classes | Overkill if you only have a few states or they rarely change |
-| Makes state transitions explicit | Requires creating multiple state classes |
-| Follows Single Responsibility and Open/Closed Principles | |
+| Benefits                                                 | Drawbacks                                                    |
+| -------------------------------------------------------- | ------------------------------------------------------------ |
+| Organizes state-specific code into separate classes      | Overkill if you only have a few states or they rarely change |
+| Makes state transitions explicit                         | Requires creating multiple state classes                     |
+| Follows Single Responsibility and Open/Closed Principles |                                                              |
 
 ```typescript
 interface State {
-  publish(): void;
+  publish(): void
 }
 
 class DraftState implements State {
   publish() {
-    console.log('Document sent to review.');
+    console.log('Document sent to review.')
     // Transition to ReviewState...
   }
 }
 
 class PublishedState implements State {
   publish() {
-    console.log('Document is already published.');
+    console.log('Document is already published.')
   }
 }
 
 // Usage
 class Document {
-  private state: State = new DraftState();
-  
-  setState(state: State) { this.state = state; }
-  publish() { this.state.publish(); }
+  private state: State = new DraftState()
+
+  setState(state: State) {
+    this.state = state
+  }
+  publish() {
+    this.state.publish()
+  }
 }
 
-const doc = new Document();
-doc.publish(); // Document sent to review
+const doc = new Document()
+doc.publish() // Document sent to review
 ```
 
 #### Functional Alternative: Reducers (Redux style)
 
 ```typescript
-type State = 'draft' | 'published';
-type Action = { type: 'PUBLISH' };
+type State = 'draft' | 'published'
+type Action = { type: 'PUBLISH' }
 
 const reducer = (state: State, action: Action): State => {
-  if (state === 'draft' && action.type === 'PUBLISH') return 'published';
-  return state;
-};
+  if (state === 'draft' && action.type === 'PUBLISH') return 'published'
+  return state
+}
 
 // Usage
-let state: State = 'draft';
-state = reducer(state, { type: 'PUBLISH' }); // 'published'
+let state: State = 'draft'
+state = reducer(state, { type: 'PUBLISH' }) // 'published'
 ```
 
 ### Iterator
@@ -925,39 +982,41 @@ state = reducer(state, { type: 'PUBLISH' }); // 'published'
 
 **When to use:** When you need to traverse a complex data structure without exposing its internal details.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Separates traversal logic from the collection | Overkill for simple collections (arrays already have iterators) |
-| Follows Single Responsibility and Open/Closed Principles | Can be less efficient than direct access for some collections |
-| Can iterate over the same collection in parallel | |
+| Benefits                                                 | Drawbacks                                                       |
+| -------------------------------------------------------- | --------------------------------------------------------------- |
+| Separates traversal logic from the collection            | Overkill for simple collections (arrays already have iterators) |
+| Follows Single Responsibility and Open/Closed Principles | Can be less efficient than direct access for some collections   |
+| Can iterate over the same collection in parallel         |                                                                 |
 
 ```typescript
 class UserCollection implements Iterable<string> {
-  private users: string[] = [];
+  private users: string[] = []
 
-  addUser(user: string) { this.users.push(user); }
+  addUser(user: string) {
+    this.users.push(user)
+  }
 
   [Symbol.iterator](): Iterator<string> {
-    let index = 0;
+    let index = 0
     return {
       next: (): IteratorResult<string> => {
         if (index < this.users.length) {
-          return { value: this.users[index++], done: false };
+          return { value: this.users[index++], done: false }
         } else {
-          return { value: undefined, done: true };
+          return { value: undefined, done: true }
         }
-      }
-    };
+      },
+    }
   }
 }
 
 // Usage
-const users = new UserCollection();
-users.addUser('Alice');
-users.addUser('Bob');
+const users = new UserCollection()
+users.addUser('Alice')
+users.addUser('Bob')
 
 for (const user of users) {
-  console.log(user); // Alice, Bob
+  console.log(user) // Alice, Bob
 }
 ```
 
@@ -969,49 +1028,60 @@ for (const user of users) {
 
 **When to use:** When you have a set of objects that communicate in complex but well-defined ways.
 
-| Benefits | Drawbacks |
-| --- | --- |
+| Benefits                                        | Drawbacks                                             |
+| ----------------------------------------------- | ----------------------------------------------------- |
 | Reduces chaotic dependencies between components | The mediator can evolve into a "god object" over time |
-| Centralizes communication logic | Adds a single point of failure |
-| Follows Single Responsibility Principle | |
+| Centralizes communication logic                 | Adds a single point of failure                        |
+| Follows Single Responsibility Principle         |                                                       |
 
 ```typescript
 interface Mediator {
-  notify(sender: object, event: string): void;
+  notify(sender: object, event: string): void
 }
 
 class ConcreteMediator implements Mediator {
-  constructor(private component1: Component1, private component2: Component2) {
-    this.component1.setMediator(this);
-    this.component2.setMediator(this);
+  constructor(
+    private component1: Component1,
+    private component2: Component2,
+  ) {
+    this.component1.setMediator(this)
+    this.component2.setMediator(this)
   }
 
   notify(sender: object, event: string): void {
     if (event === 'A') {
-      console.log('Mediator triggers B');
-      this.component2.doC();
+      console.log('Mediator triggers B')
+      this.component2.doC()
     }
   }
 }
 
 // Usage
 class Component1 {
-  private mediator?: Mediator;
-  setMediator(mediator: Mediator) { this.mediator = mediator; }
-  doA() { this.mediator?.notify(this, 'A'); }
+  private mediator?: Mediator
+  setMediator(mediator: Mediator) {
+    this.mediator = mediator
+  }
+  doA() {
+    this.mediator?.notify(this, 'A')
+  }
 }
 
 class Component2 {
-  private mediator?: Mediator;
-  setMediator(mediator: Mediator) { this.mediator = mediator; }
-  doC() { console.log('Component2.doC()'); }
+  private mediator?: Mediator
+  setMediator(mediator: Mediator) {
+    this.mediator = mediator
+  }
+  doC() {
+    console.log('Component2.doC()')
+  }
 }
 
-const component1 = new Component1();
-const component2 = new Component2();
-const mediator = new ConcreteMediator(component1, component2);
+const component1 = new Component1()
+const component2 = new Component2()
+const mediator = new ConcreteMediator(component1, component2)
 
-component1.doA(); // Mediator coordinates with component2
+component1.doA() // Mediator coordinates with component2
 ```
 
 ### Memento
@@ -1022,37 +1092,47 @@ component1.doA(); // Mediator coordinates with component2
 
 **When to use:** When you need to create snapshots of an object's state to restore it later.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Preserves encapsulation boundaries | Can consume a lot of RAM if mementos are created frequently |
+| Benefits                                                  | Drawbacks                                                                 |
+| --------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Preserves encapsulation boundaries                        | Can consume a lot of RAM if mementos are created frequently               |
 | Simplifies originator code by delegating state management | Caretakers must track originator's lifecycle to destroy obsolete mementos |
-| Enables undo/redo functionality | |
+| Enables undo/redo functionality                           |                                                                           |
 
 ```typescript
 class Editor {
   constructor(private content: string) {}
 
-  type(words: string) { this.content += words; }
-  getContent() { return this.content; }
+  type(words: string) {
+    this.content += words
+  }
+  getContent() {
+    return this.content
+  }
 
-  save(): Snapshot { return new Snapshot(this.content); }
-  restore(snapshot: Snapshot) { this.content = snapshot.getContent(); }
+  save(): Snapshot {
+    return new Snapshot(this.content)
+  }
+  restore(snapshot: Snapshot) {
+    this.content = snapshot.getContent()
+  }
 }
 
 class Snapshot {
   constructor(private content: string) {}
-  getContent() { return this.content; }
+  getContent() {
+    return this.content
+  }
 }
 
 // Usage
-const editor = new Editor('Initial text');
-const saved = editor.save();
+const editor = new Editor('Initial text')
+const saved = editor.save()
 
-editor.type(' More text');
-console.log(editor.getContent()); // Initial text More text
+editor.type(' More text')
+console.log(editor.getContent()) // Initial text More text
 
-editor.restore(saved);
-console.log(editor.getContent()); // Initial text
+editor.restore(saved)
+console.log(editor.getContent()) // Initial text
 ```
 
 ### Template Method
@@ -1063,52 +1143,58 @@ console.log(editor.getContent()); // Initial text
 
 **When to use:** When you have an algorithm with invariant steps but some steps need customization.
 
-| Benefits | Drawbacks |
-| --- | --- |
-| Reuses common algorithm structure | Violates Liskov Substitution Principle if subclasses change expected behavior |
-| Lets clients override only specific parts | Template methods tend to be harder to maintain as they grow |
-| Reduces code duplication | |
+| Benefits                                  | Drawbacks                                                                     |
+| ----------------------------------------- | ----------------------------------------------------------------------------- |
+| Reuses common algorithm structure         | Violates Liskov Substitution Principle if subclasses change expected behavior |
+| Lets clients override only specific parts | Template methods tend to be harder to maintain as they grow                   |
+| Reduces code duplication                  |                                                                               |
 
 ```typescript
 abstract class DataMiner {
   mine(path: string) {
-    const file = this.openFile(path);
-    const rawData = this.extractData(file);
-    const data = this.parseData(rawData);
-    this.closeFile(file);
-    return data;
+    const file = this.openFile(path)
+    const rawData = this.extractData(file)
+    const data = this.parseData(rawData)
+    this.closeFile(file)
+    return data
   }
 
-  abstract parseData(data: any): any;
+  abstract parseData(data: any): any
   // ... other methods
-  openFile(path: string) { return "file"; }
-  extractData(file: any) { return "raw"; }
+  openFile(path: string) {
+    return 'file'
+  }
+  extractData(file: any) {
+    return 'raw'
+  }
   closeFile(file: any) {}
 }
 
 class PDFMiner extends DataMiner {
-  parseData(data: any) { return "PDF Data"; }
+  parseData(data: any) {
+    return 'PDF Data'
+  }
 }
 
 // Usage
-const pdfMiner = new PDFMiner();
-const data = pdfMiner.mine('document.pdf');
+const pdfMiner = new PDFMiner()
+const data = pdfMiner.mine('document.pdf')
 ```
 
 #### Functional Alternative: Higher-Order Functions
 
 ```typescript
 const mineData = (path: string, parseFn: (data: any) => any) => {
-  const file = openFile(path);
-  const raw = extract(file);
-  const data = parseFn(raw);
-  close(file);
-  return data;
-};
+  const file = openFile(path)
+  const raw = extract(file)
+  const data = parseFn(raw)
+  close(file)
+  return data
+}
 
 // Usage
-const parsePDF = (data: any) => `Parsed PDF: ${data}`;
-const result = mineData('document.pdf', parsePDF);
+const parsePDF = (data: any) => `Parsed PDF: ${data}`
+const result = mineData('document.pdf', parsePDF)
 ```
 
 ### Visitor
@@ -1119,62 +1205,72 @@ const result = mineData('document.pdf', parsePDF);
 
 **When to use:** When you need to perform operations across a set of objects with different classes.
 
-| Benefits | Drawbacks |
-| --- | --- |
+| Benefits                                                           | Drawbacks                                             |
+| ------------------------------------------------------------------ | ----------------------------------------------------- |
 | Adds new operations to a class hierarchy without modifying classes | Must update all visitors when adding/removing classes |
-| Follows Single Responsibility and Open/Closed Principles | Visitors might lack access to private fields |
-| Groups related operations in one visitor class | |
+| Follows Single Responsibility and Open/Closed Principles           | Visitors might lack access to private fields          |
+| Groups related operations in one visitor class                     |                                                       |
 
 ```typescript
 interface Shape {
-  accept(visitor: Visitor): void;
+  accept(visitor: Visitor): void
 }
 
 class Circle implements Shape {
-  accept(visitor: Visitor) { visitor.visitCircle(this); }
+  accept(visitor: Visitor) {
+    visitor.visitCircle(this)
+  }
 }
 
 class Square implements Shape {
-  accept(visitor: Visitor) { visitor.visitSquare(this); }
+  accept(visitor: Visitor) {
+    visitor.visitSquare(this)
+  }
 }
 
 interface Visitor {
-  visitCircle(c: Circle): void;
-  visitSquare(s: Square): void;
+  visitCircle(c: Circle): void
+  visitSquare(s: Square): void
 }
 
 class XMLExportVisitor implements Visitor {
-  visitCircle(c: Circle) { console.log('Exporting Circle to XML'); }
-  visitSquare(s: Square) { console.log('Exporting Square to XML'); }
+  visitCircle(c: Circle) {
+    console.log('Exporting Circle to XML')
+  }
+  visitSquare(s: Square) {
+    console.log('Exporting Square to XML')
+  }
 }
 
 // Usage
-const shapes: Shape[] = [new Circle(), new Square()];
-const exporter = new XMLExportVisitor();
+const shapes: Shape[] = [new Circle(), new Square()]
+const exporter = new XMLExportVisitor()
 
-shapes.forEach(shape => shape.accept(exporter));
+shapes.forEach(shape => shape.accept(exporter))
 ```
 
 #### Functional Alternative: Pattern Matching (Discriminated Unions)
 
 ```typescript
-type Shape = 
-  | { kind: 'circle', radius: number }
-  | { kind: 'square', side: number };
+type Shape =
+  | { kind: 'circle'; radius: number }
+  | { kind: 'square'; side: number }
 
 const exportToXML = (shape: Shape) => {
   switch (shape.kind) {
-    case 'circle': return `Circle(r=${shape.radius})`;
-    case 'square': return `Square(s=${shape.side})`;
+    case 'circle':
+      return `Circle(r=${shape.radius})`
+    case 'square':
+      return `Square(s=${shape.side})`
   }
-};
+}
 
 // Usage
-const circle: Shape = { kind: 'circle', radius: 10 };
-const square: Shape = { kind: 'square', side: 5 };
+const circle: Shape = { kind: 'circle', radius: 10 }
+const square: Shape = { kind: 'square', side: 5 }
 
-console.log(exportToXML(circle)); // Circle(r=10)
-console.log(exportToXML(square)); // Square(s=5)
+console.log(exportToXML(circle)) // Circle(r=10)
+console.log(exportToXML(square)) // Square(s=5)
 ```
 
 ### Null Object
@@ -1187,32 +1283,40 @@ console.log(exportToXML(square)); // Square(s=5)
 
 **When to use:** When you want to eliminate repetitive null checks by providing default "do nothing" behavior.
 
-| Benefits | Drawbacks |
-| --- | --- |
+| Benefits                                       | Drawbacks                                                   |
+| ---------------------------------------------- | ----------------------------------------------------------- |
 | Eliminates null checks throughout the codebase | Can hide errors if null cases should be handled differently |
-| Provides predictable default behavior | Creates extra classes for null behavior |
-| Simplifies client code | |
+| Provides predictable default behavior          | Creates extra classes for null behavior                     |
+| Simplifies client code                         |                                                             |
 
 ```typescript
 interface User {
-  getName(): string;
-  hasAccess(): boolean;
+  getName(): string
+  hasAccess(): boolean
 }
 
 class RealUser implements User {
   constructor(private name: string) {}
-  getName() { return this.name; }
-  hasAccess() { return true; }
+  getName() {
+    return this.name
+  }
+  hasAccess() {
+    return true
+  }
 }
 
 class GuestUser implements User {
-  getName() { return 'Guest'; }
-  hasAccess() { return false; }
+  getName() {
+    return 'Guest'
+  }
+  hasAccess() {
+    return false
+  }
 }
 
 // Usage
 function getUser(id: number): User {
-  return id === 1 ? new RealUser('Alice') : new GuestUser();
+  return id === 1 ? new RealUser('Alice') : new GuestUser()
 }
 ```
 
@@ -1220,10 +1324,10 @@ function getUser(id: number): User {
 
 ```typescript
 const getUserMaybe = (id: number): User | undefined =>
-  id === 1 ? new RealUser('Alice') : undefined;
+  id === 1 ? new RealUser('Alice') : undefined
 
-const user = getUserMaybe(2);
-const name = user?.getName() ?? 'Guest';
+const user = getUserMaybe(2)
+const name = user?.getName() ?? 'Guest'
 ```
 
 ### Semaphore
@@ -1236,66 +1340,66 @@ const name = user?.getName() ?? 'Guest';
 
 **When to use:** When you need to throttle concurrent access to prevent overwhelming a resource (API rate limits, memory constraints, connection limits).
 
-| Benefits | Drawbacks |
-| --- | --- |
+| Benefits                                                  | Drawbacks                                                        |
+| --------------------------------------------------------- | ---------------------------------------------------------------- |
 | Prevents resource exhaustion and respects external limits | Can introduce latency if permits are scarce and queues grow long |
-| Provides predictable concurrency control and backpressure | Adds complexity compared to unbounded concurrent operations |
-| Enables fine-grained control over parallel operations | Requires careful management to avoid deadlocks |
+| Provides predictable concurrency control and backpressure | Adds complexity compared to unbounded concurrent operations      |
+| Enables fine-grained control over parallel operations     | Requires careful management to avoid deadlocks                   |
 
 ```typescript
 class Semaphore {
-  private permits: number;
-  private queue: Array<() => void> = [];
+  private permits: number
+  private queue: Array<() => void> = []
 
   constructor(permits: number) {
-    this.permits = permits;
+    this.permits = permits
   }
 
   async acquire(): Promise<void> {
     if (this.permits > 0) {
-      this.permits--;
-      return Promise.resolve();
+      this.permits--
+      return Promise.resolve()
     }
 
-    return new Promise<void>((resolve) => {
-      this.queue.push(resolve);
-    });
+    return new Promise<void>(resolve => {
+      this.queue.push(resolve)
+    })
   }
 
   release(): void {
-    this.permits++;
-    
-    const resolve = this.queue.shift();
+    this.permits++
+
+    const resolve = this.queue.shift()
     if (resolve) {
-      this.permits--;
-      resolve();
+      this.permits--
+      resolve()
     }
   }
 
   async runExclusive<T>(fn: () => Promise<T>): Promise<T> {
-    await this.acquire();
+    await this.acquire()
     try {
-      return await fn();
+      return await fn()
     } finally {
-      this.release();
+      this.release()
     }
   }
 }
 
 // Usage: Rate-limiting API calls
-const apiSemaphore = new Semaphore(3); // Max 3 concurrent API calls
+const apiSemaphore = new Semaphore(3) // Max 3 concurrent API calls
 
 async function fetchUser(id: number): Promise<void> {
   await apiSemaphore.runExclusive(async () => {
-    console.log(`Fetching user ${id}...`);
-    await fetch(`https://api.example.com/users/${id}`);
-    console.log(`User ${id} fetched`);
-  });
+    console.log(`Fetching user ${id}...`)
+    await fetch(`https://api.example.com/users/${id}`)
+    console.log(`User ${id} fetched`)
+  })
 }
 
 // Send 10 requests, but only 3 will run concurrently
-const requests = Array.from({ length: 10 }, (_, i) => fetchUser(i + 1));
-await Promise.all(requests);
+const requests = Array.from({ length: 10 }, (_, i) => fetchUser(i + 1))
+await Promise.all(requests)
 ```
 
 ## How to Choose a Pattern
@@ -1315,19 +1419,19 @@ When in doubt, start with the simplest working solution, then refactor if you se
 
 **Adapter**, **Facade**, and **Proxy** can look similar because they all wrap another object. The key difference is *why* they wrap: compatibility, simplification, or access control.
 
-| Pattern | Intent | Use it when | Trade-off |
-| --- | --- | --- | --- |
-| Adapter | Make incompatible APIs work together. | You must keep a legacy or third-party interface. | Adds a translation layer. |
-| Facade | Provide a simpler API over a complex system. | You want a clean boundary for a subsystem. | Can hide useful capabilities. |
-| Proxy | Control access to a real object. | You need lazy loading, caching, or access control. | Adds indirection and potential latency. |
+| Pattern | Intent                                       | Use it when                                        | Trade-off                               |
+| ------- | -------------------------------------------- | -------------------------------------------------- | --------------------------------------- |
+| Adapter | Make incompatible APIs work together.        | You must keep a legacy or third-party interface.   | Adds a translation layer.               |
+| Facade  | Provide a simpler API over a complex system. | You want a clean boundary for a subsystem.         | Can hide useful capabilities.           |
+| Proxy   | Control access to a real object.             | You need lazy loading, caching, or access control. | Adds indirection and potential latency. |
 
 **Strategy**, **State**, and **Command** can all move logic out of a big conditional. The key difference is *who* decides the behavior: a caller, the object itself, or a queued request.
 
-| Pattern | Intent | Use it when | Trade-off |
-| --- | --- | --- | --- |
-| Strategy | Swap algorithms. | You need runtime behavior changes. | More objects and wiring. |
-| State | Vary behavior based on internal state. | Transitions are explicit and frequent. | More classes to manage. |
-| Command | Encapsulate requests. | You need queues, undo, or logging. | Extra indirection per action. |
+| Pattern  | Intent                                 | Use it when                            | Trade-off                     |
+| -------- | -------------------------------------- | -------------------------------------- | ----------------------------- |
+| Strategy | Swap algorithms.                       | You need runtime behavior changes.     | More objects and wiring.      |
+| State    | Vary behavior based on internal state. | Transitions are explicit and frequent. | More classes to manage.       |
+| Command  | Encapsulate requests.                  | You need queues, undo, or logging.     | Extra indirection per action. |
 
 ## TypeScript-Adjacent Patterns in the Wild
 

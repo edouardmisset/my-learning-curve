@@ -20,7 +20,7 @@ In-depth articles exploring core engineering concepts:
 
 Practical guides and tutorials for setting up and maintaining projects:
 
-- **Project Setup** ([Biome](src/content/docs/learn/guides/project/biome.mdx), [ESLint](src/content/docs/learn/guides/project/eslint.mdx), [Husky](src/content/docs/learn/guides/project/husky.mdx), [EditorConfig](src/content/docs/learn/guides/project/editorconfig.mdx))
+- **Project Setup** ([Oxlint](src/content/docs/learn/guides/project/oxlint.mdx), [Oxfmt](src/content/docs/learn/guides/project/oxfmt.mdx), [TypeScript Go](src/content/docs/learn/guides/project/tsgo.mdx), [Husky](src/content/docs/learn/guides/project/husky.mdx), [EditorConfig](src/content/docs/learn/guides/project/editorconfig.mdx))
 - **Collaboration** ([Writing guidelines](src/content/docs/learn/guides/project-collaboration/11-writing-guidelines.mdx), [Pull Request templates](src/content/docs/reference/templates/pr-template.md))
 - **Tutorials** ([Step-by-step implementations](src/content/docs/learn/tutorials/index.mdx))
 

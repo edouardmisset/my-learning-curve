@@ -2,8 +2,19 @@
 date: 2025-12-22
 title: Object-Oriented Programming (OOP)
 excerpt: A deep dive into Object-Oriented Programming concepts in TypeScript.
-tags: [ 'TypeScript', 'OOP', 'Classes', 'Inheritance', 'Composition', 'Polymorphism', 'Abstraction', 'Prototype', 'Structural Typing' ]
-lastUpdated: 2026-02-13
+tags:
+  [
+    'TypeScript',
+    'OOP',
+    'Classes',
+    'Inheritance',
+    'Composition',
+    'Polymorphism',
+    'Abstraction',
+    'Prototype',
+    'Structural Typing',
+  ]
+lastUpdated: 2026-03-24
 ---
 
 import Disclaimer from '~/components/Disclaimer.astro'
@@ -66,23 +77,23 @@ Here is a simple class demonstrating these parts:
 ```typescript
 class Dog {
   // 1. Properties
-  name: string;
-  breed: string;
+  name: string
+  breed: string
 
   // 2. Constructor
   constructor(name: string, breed: string) {
-    this.name = name;
-    this.breed = breed;
+    this.name = name
+    this.breed = breed
   }
 
   // 3. Methods
   bark() {
-    console.log(`${this.name} says: Woof!`);
+    console.log(`${this.name} says: Woof!`)
   }
 }
 
-const myDog = new Dog('Rex', 'German Shepherd');
-myDog.bark(); // Rex says: Woof!
+const myDog = new Dog('Rex', 'German Shepherd')
+myDog.bark() // Rex says: Woof!
 ```
 
 ### Constructor Shorthand (Parameter Properties)
@@ -94,7 +105,7 @@ class Dog {
   // The 'public' keyword here automatically creates a property and assigns the value
   constructor(
     public name: string,
-    public breed: string
+    public breed: string,
   ) {}
 }
 ```
@@ -111,21 +122,21 @@ TypeScript provides access modifiers to control the visibility of class members.
 class ZooKeeper {
   constructor(
     public name: string,
-    private _masterKey: string
+    private _masterKey: string,
   ) {}
 
   public feedAnimals() {
-    this.unlockEnclosure();
-    console.log(`${this.name} is feeding the animals.`);
+    this.unlockEnclosure()
+    console.log(`${this.name} is feeding the animals.`)
   }
 
   private unlockEnclosure() {
-    console.log(`Unlocking enclosure with key: ${this._masterKey}`);
+    console.log(`Unlocking enclosure with key: ${this._masterKey}`)
   }
 }
 
-const keeper = new ZooKeeper('Alice', '12345');
-keeper.feedAnimals();
+const keeper = new ZooKeeper('Alice', '12345')
+keeper.feedAnimals()
 // keeper.unlockEnclosure(); // Error: Property 'unlockEnclosure' is private
 // console.log(keeper._masterKey); // Error: Property '_masterKey' is private
 ```
@@ -139,7 +150,7 @@ class Animal {
   constructor(readonly dna: string) {}
 }
 
-const samoyed = new Animal('GATACA');
+const samoyed = new Animal('GATACA')
 // samoyed.dna = '000000000000000'; // Error: Cannot assign to 'dna' because it is a read-only property.
 ```
 
@@ -149,22 +160,22 @@ Getters and setters allow you to control access to a member. They are useful for
 
 ```typescript
 class Cat {
-  private _lives: number = 9;
+  private _lives: number = 9
 
   get lives(): number {
-    return this._lives;
+    return this._lives
   }
 
   set lives(value: number) {
     if (value < 0) {
-      throw new Error('Lives cannot be negative');
+      throw new Error('Lives cannot be negative')
     }
-    this._lives = value;
+    this._lives = value
   }
 }
 
-const kitty = new Cat();
-console.log(kitty.lives); // 9
+const kitty = new Cat()
+console.log(kitty.lives) // 9
 // kitty.lives = -1; // Throws Error
 ```
 
@@ -174,15 +185,15 @@ Static properties and methods belong to the class itself rather than to instance
 
 ```typescript
 class AnimalHelper {
-  static DOG_YEARS_MULTIPLIER = 7;
+  static DOG_YEARS_MULTIPLIER = 7
 
   static toDogYears(humanYears: number): number {
-    return humanYears * this.DOG_YEARS_MULTIPLIER;
+    return humanYears * this.DOG_YEARS_MULTIPLIER
   }
 }
 
-console.log(AnimalHelper.DOG_YEARS_MULTIPLIER); // 7
-console.log(AnimalHelper.toDogYears(5)); // 35
+console.log(AnimalHelper.DOG_YEARS_MULTIPLIER) // 7
+console.log(AnimalHelper.toDogYears(5)) // 35
 ```
 
 ### The `declare` Keyword (Class Fields)
@@ -196,19 +207,19 @@ Use `declare` inside a class to tell TypeScript that a field exists at runtime b
 ```typescript
 class Bird {
   // Provided later (e.g., hydration from API or framework)
-  declare name: string;
+  declare name: string
 
   constructor(public species: string) {}
 
   describe() {
-    console.log(`${this.name} the ${this.species}`);
+    console.log(`${this.name} the ${this.species}`)
   }
 }
 
-const parrot = new Bird('Parrot');
+const parrot = new Bird('Parrot')
 // Name arrives later (e.g., from server/state)
-parrot.name = 'Polly';
-parrot.describe(); // Polly the Parrot
+parrot.name = 'Polly'
+parrot.describe() // Polly the Parrot
 ```
 
 ## Abstraction
@@ -224,24 +235,24 @@ abstract class Animal {
   constructor(protected name: string) {}
 
   // Must be implemented by derived classes
-  abstract makeSound(): void;
+  abstract makeSound(): void
 
   // Common implementation shared by all subclasses
   sleep(): void {
-    console.log(`${this.name} is sleeping... zzz`);
+    console.log(`${this.name} is sleeping... zzz`)
   }
 }
 
 class Dog extends Animal {
   makeSound() {
-    console.log(`${this.name} barks!`);
+    console.log(`${this.name} barks!`)
   }
 }
 
 // const animal = new Animal('Generic'); // Error: Cannot create an instance of an abstract class
-const dog = new Dog('Buddy');
-dog.makeSound(); // Buddy barks!
-dog.sleep(); // Buddy is sleeping... zzz
+const dog = new Dog('Buddy')
+dog.makeSound() // Buddy barks!
+dog.sleep() // Buddy is sleeping... zzz
 ```
 
 > **Abstract Class vs Interface**: Use an **Abstract Class** when you want to
@@ -254,13 +265,17 @@ In TypeScript, interfaces are purely for type-checking and define the shape of a
 
 ```typescript
 interface Pet {
-  play(): void;
-  feed(): void;
+  play(): void
+  feed(): void
 }
 
 class Goldfish implements Pet {
-  play() { console.log('Swimming around happily!'); }
-  feed() { console.log('Eating flakes...'); }
+  play() {
+    console.log('Swimming around happily!')
+  }
+  feed() {
+    console.log('Eating flakes...')
+  }
 }
 ```
 
@@ -270,24 +285,27 @@ Polymorphism allows objects of different classes to be treated as objects of a c
 
 ```typescript
 interface Animal {
-  makeSound(): void;
+  makeSound(): void
 }
 
 class Dog implements Animal {
-  makeSound() { console.log('Woof!'); }
+  makeSound() {
+    console.log('Woof!')
+  }
 }
 
 class Cat implements Animal {
-  makeSound() { console.log('Meow!'); }
+  makeSound() {
+    console.log('Meow!')
+  }
 }
 
 function letAnimalSpeak(animal: Animal) {
-  animal.makeSound();
+  animal.makeSound()
 }
 
-letAnimalSpeak(new Dog()); // Woof!
-letAnimalSpeak(new Cat()); // Meow!
-
+letAnimalSpeak(new Dog()) // Woof!
+letAnimalSpeak(new Cat()) // Meow!
 ```
 
 > **Runtime Checks**: Since interfaces are erased at runtime, you cannot use
@@ -306,12 +324,12 @@ class Cage<T> {
   constructor(private occupant: T) {}
 
   getOccupant(): T {
-    return this.occupant;
+    return this.occupant
   }
 }
 
-const dogCage = new Cage<Dog>(new Dog());
-const catCage = new Cage<Cat>(new Cat());
+const dogCage = new Cage<Dog>(new Dog())
+const catCage = new Cage<Cat>(new Cat())
 ```
 
 ### Decorators
@@ -320,24 +338,24 @@ Decorators are a special kind of declaration that can be attached to a class dec
 
 ```typescript
 function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-  const originalMethod = descriptor.value;
+  const originalMethod = descriptor.value
 
   descriptor.value = function (...args: any[]) {
-    console.log(`Calling ${propertyKey} with arguments: ${args}`);
-    return originalMethod.apply(this, args);
-  };
+    console.log(`Calling ${propertyKey} with arguments: ${args}`)
+    return originalMethod.apply(this, args)
+  }
 }
 
 class AnimalTrainer {
   @Log
   teachTrick(trickName: string) {
-    console.log(`Teaching trick: ${trickName}`);
+    console.log(`Teaching trick: ${trickName}`)
   }
 }
 
-const trainer = new AnimalTrainer();
-trainer.teachTrick('Sit'); 
-// Logs: 
+const trainer = new AnimalTrainer()
+trainer.teachTrick('Sit')
+// Logs:
 // Calling teachTrick with arguments: Sit
 // Teaching trick: Sit
 ```
@@ -350,16 +368,20 @@ Inheritance allows a class to derive properties and methods from another class u
 
 ```typescript
 class Animal {
-  move() { console.log('Moving along!'); }
+  move() {
+    console.log('Moving along!')
+  }
 }
 
 class Bird extends Animal {
-  fly() { console.log('Flying high!'); }
+  fly() {
+    console.log('Flying high!')
+  }
 }
 
-const bird = new Bird();
-bird.move(); // Inherited method
-bird.fly(); // Own method
+const bird = new Bird()
+bird.move() // Inherited method
+bird.fly() // Own method
 ```
 
 #### The `super` keyword
@@ -372,17 +394,17 @@ The `super` keyword is used to access and call functions on an object's parent.
 ```typescript
 class Lion extends Animal {
   constructor(public name: string) {
-    super(); // Calls Animal's constructor
+    super() // Calls Animal's constructor
   }
 
   move() {
-    super.move(); // Calls Animal's move()
-    console.log(`${this.name} roars and runs!`);
+    super.move() // Calls Animal's move()
+    console.log(`${this.name} roars and runs!`)
   }
 }
 
-const lion = new Lion('Simba');
-lion.move();
+const lion = new Lion('Simba')
+lion.move()
 // Moving along!
 // Simba roars and runs!
 ```
@@ -397,14 +419,16 @@ Inheritance can lead to rigid hierarchies and the "fragile base class" problem. 
 
 ```typescript
 class Veterinarian {
-  checkHealth(animal: string) { console.log(`Checking health of ${animal}`); }
+  checkHealth(animal: string) {
+    console.log(`Checking health of ${animal}`)
+  }
 }
 
 class Zoo {
   constructor(private vet: Veterinarian) {} // Composition via dependency injection
 
   dailyCheckup() {
-    this.vet.checkHealth('Lion');
+    this.vet.checkHealth('Lion')
   }
 }
 ```

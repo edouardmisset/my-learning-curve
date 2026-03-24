@@ -16,8 +16,7 @@
   gap: var(--gap);
   grid-auto-flow: column;
   grid-auto-columns: calc(
-    (100% / var(--elements)) -
-    (var(--gap) * (var(--elements) + 1))
+    (100% / var(--elements)) - (var(--gap) * (var(--elements) + 1))
   );
   overflow-x: auto;
   overscroll-behavior: contain;

@@ -3,14 +3,15 @@ title: Template Article
 excerpt: A short, catchy summary for the preview. Max 20 words.
 tags: ['Topic1', 'Topic2']
 date: 1999-12-31 #YYYY-MM-DD
-lastUpdated: 1999-12-31 # Replace with actual date  
+lastUpdated: 1999-12-31 # Replace with actual date
 ---
 
 import { Aside } from '@astrojs/starlight/components'
 import Disclaimer from '~/components/Disclaimer.astro'
 
 > [A real quote or definition regarding the topic. This should be sourced and
-> accessible via a link. Keep it concise and relevant.]
+>
+> > accessible via a link. Keep it concise and relevant.]
 >
 > ~ Source Name {/*with link*/}
 
@@ -31,7 +32,7 @@ Keep it light but relevant.]
 
 ```typescript
 // Simple code example demonstrating the concept
-const hello = "world";
+const hello = 'world'
 ```
 
 ## Deep Dive / Advanced Usage
@@ -46,9 +47,7 @@ const hello = "world";
 
 [Details...]
 
-<Aside type="caution">
-  Watch out for this specific pitfall!
-</Aside>
+<Aside type="caution">Watch out for this specific pitfall!</Aside>
 
 ### Performance Implications
 

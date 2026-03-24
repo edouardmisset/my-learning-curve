@@ -2,8 +2,8 @@
  * This function calculates the sum of all numbers provided as arguments.
  * It accepts either a single array of numbers or multiple number arguments.
  *
- * @param {...(number[] | number)[]} num - The numbers to sum.
- * @returns {number} The sum of all numbers.
+ * @param num - The numbers to sum.
+ * @returns The sum of all numbers.
  *
  * @example
  * sum(1, 2, 3)

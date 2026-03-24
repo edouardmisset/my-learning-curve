@@ -1,14 +1,14 @@
 ---
 date: 2025-10-02
-title: "Merge Request Recommendations"
-description: "Best practices for creating and reviewing merge requests."
+title: 'Merge Request Recommendations'
+description: 'Best practices for creating and reviewing merge requests.'
 tags: [merge-requests, git, collaboration]
 prev:
   link: /my-learning-curve/learn/guides/project-collaboration/05-conventional-commits
   label: Conventional Commits
-next: 
-   link: /my-learning-curve/learn/guides/project-collaboration/07-git-workflow
-   label: Git Workflow
+next:
+  link: /my-learning-curve/learn/guides/project-collaboration/07-git-workflow
+  label: Git Workflow
 ---
 
 ## Creating the perfect MR

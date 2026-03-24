@@ -1,0 +1,133 @@
+---
+date: 2026-03-24
+title: Oxlint
+description: Oxlint is a high-performance JavaScript and TypeScript linter built on the Oxc compiler stack, up to 100x faster than ESLint.
+tags: ['Oxlint', 'Linter', 'TypeScript', 'Frontend']
+---
+
+import { Code } from '@astrojs/starlight/components'
+import { Aside } from '@astrojs/starlight/components'
+import PackageManagers from '~/components/PackageManagers.astro'
+import Source from './oxlint-config.ts?raw'
+
+Oxlint is a high-performance linter for JavaScript and TypeScript that is
+50–100x faster than ESLint. It is correctness-focused by default and supports
+695+ rules across a wide range of plugins — including TypeScript, React, Unicorn,
+Import, and jsx-a11y — making migration straightforward.
+
+## TL;DR
+
+Oxlint replaces ESLint (and the linting part of Biome) with a Rust-based tool
+that runs dramatically faster in CI. Drop in `oxlint.config.ts` to get
+started and retain fine-grained rule control.
+
+## Installation
+
+<PackageManagers pkg="oxlint" flags="-D" />
+
+## Configuration
+
+Oxlint can be configured with a TypeScript config file (`oxlint.config.ts`) or
+a JSON file (`.oxlintrc.json`). The TypeScript format provides type-safe
+config with auto-complete.
+
+<Code code={Source} lang="typescript" title="oxlint.config.ts" wrap />
+
+### Available plugins
+
+Enable only the plugins relevant to your stack:
+
+| Plugin       | Coverage                                    |
+| ------------ | ------------------------------------------- |
+| `typescript` | `@typescript-eslint` rules                  |
+| `import`     | `eslint-plugin-import-x` rules              |
+| `unicorn`    | `eslint-plugin-unicorn` rules               |
+| `react`      | `eslint-plugin-react` + `react-hooks` rules |
+| `jsx-a11y`   | Accessibility rules for JSX                 |
+| `jest`       | `eslint-plugin-jest` rules                  |
+| `vitest`     | `eslint-plugin-vitest` rules                |
+| `jsdoc`      | JSDoc documentation rules                   |
+| `promise`    | `eslint-plugin-promise` rules               |
+| `node`       | Node.js-specific rules                      |
+
+### Rule categories
+
+Control entire categories at once via `categories`:
+
+```json
+{
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "style": "warn"
+  }
+}
+```
+
+Individual rules in `rules` override category-level settings.
+
+## Scripts
+
+Add to `package.json`:
+
+```json
+{
+  "scripts": {
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix ."
+  }
+}
+```
+
+## Type-aware linting
+
+Oxlint supports type-aware rules by integrating with
+[`oxlint-tsgolint`](https://github.com/oxc-project/tsgolint#readme), the tsgo
+(TypeScript 7 native Go port) bridge.
+
+<PackageManagers pkg="oxlint-tsgolint" flags="-D" />
+
+Enable type-aware mode in your config:
+
+```typescript title="oxlint.config.ts"
+import { defineConfig } from 'oxlint'
+
+export default defineConfig({
+  options: {
+    typeAware: true,
+  },
+  // ...
+})
+```
+
+<Aside type="note">
+  Type-aware linting requires `@typescript/native-preview` (tsgo) to be
+  installed in the project.
+</Aside>
+
+## Astro support
+
+Oxlint lints the `<script>` blocks of `.astro` files automatically — no
+plugin needed.
+
+## VS Code integration
+
+Install the
+[OXC extension](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)
+and add to your workspace settings:
+
+```json title=".vscode/settings.json"
+{
+  "oxc.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  }
+}
+```
+
+## Documentation
+
+- [Oxlint overview](https://oxc.rs/docs/guide/usage/linter)
+- [Rules reference](https://oxc.rs/docs/guide/usage/linter/rules)
+- [Config file reference](https://oxc.rs/docs/guide/usage/linter/config-file-reference)
+- [Type-aware linting](https://oxc.rs/docs/guide/usage/linter/type-aware)

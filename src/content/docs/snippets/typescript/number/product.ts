@@ -2,8 +2,8 @@
  * This function calculates the product of all numbers provided as arguments.
  * It accepts either a single array of numbers or multiple number arguments.
  *
- * @param {...(number[] | number)[]} num - The numbers to multiply.
- * @returns {number} The product of all numbers.
+ * @param num - The numbers to multiply.
+ * @returns The product of all numbers.
  *
  * @example
  * product(1, 2, 3, 4)

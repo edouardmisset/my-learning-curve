@@ -6,9 +6,9 @@
  * - Data analysis: This function can be used to round numbers to reduce the impact of very small variations in data analysis.
  * - Mathematical calculations: This function can be used to approximate numbers to make calculations simpler or faster.
  *
- * @param {number} num - The number to round.
- * @param {number} [precision=0] - The number of decimal places to round to. Defaults to 0 if not provided.
- * @returns {number} The number rounded to the specified precision.
+ * @param num - The number to round.
+ * @param [precision=0] - The number of decimal places to round to. Defaults to 0 if not provided.
+ * @returns The number rounded to the specified precision.
  *
  * @example
  * roundToPrecision(1.2345, 2)

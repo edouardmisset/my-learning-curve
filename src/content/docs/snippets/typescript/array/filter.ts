@@ -52,8 +52,8 @@ export const filterLast5years = createDateFilter({
  *
  * @template Obj - The type of the object.
  * @template Key - The type of the key of the object.
- * @param {Key} key - The key of the property to check in the value object.
- * @returns {(value: Obj) => boolean} The filter function.
+ * @param key - The key of the property to check in the value object.
+ * @returns The filter function.
  *
  * @example
  * const filterByKey = createBooleanFilter('key');

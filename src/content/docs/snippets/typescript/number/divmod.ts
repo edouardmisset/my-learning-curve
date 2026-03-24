@@ -6,10 +6,10 @@ type Remainder = number
  * It returns the quotient and the remainder of the division of the dividend by
  * the divisor.
  *
- * @param {number} dividend - The number to be divided.
- * @param {Exclude<number, 0>} divisor - The number by which the dividend is to
+ * @param dividend - The number to be divided.
+ * @param divisor - The number by which the dividend is to
  * be divided. This cannot be `0`
- * @returns {[number, number]} An array where the first element is the quotient
+ * @returns An array where the first element is the quotient
  * and the second element is the remainder.
  *
  * @example

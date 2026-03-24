@@ -73,10 +73,10 @@ export const toggleItemInList = <T extends DefinedValue>(
  * @template Obj - The type of objects in the array.
  * @template Key - The type of the property used for deduplication.
  *
- * @param {Obj[]} array - The array of objects to deduplicate.
- * @param {Key} key - The property used for deduplication.
+ * @param array - The array of objects to deduplicate.
+ * @param key - The property used for deduplication.
  *
- * @returns {Obj[]} - An array containing unique objects based on the specified property.
+ * @returns - An array containing unique objects based on the specified property.
  *
  * @example
  * const inputArray = [
@@ -110,10 +110,10 @@ export const deduplicateObjectsByAllKeys = <Obj extends object = ObjectType>(
 /**
  * @description Updates an object in an array in an immutable way.
  *
- * @param {Obj[]} array - The original array.
- * @param {keyof Obj} key - The key of the object to be updated.
- * @param {Partial<Obj>} newData - The new data to be updated.
- * @returns {Obj[]} - A new array with the specified object updated.
+ * @param array - The original array.
+ * @param key - The key of the object to be updated.
+ * @param newData - The new data to be updated.
+ * @returns - A new array with the specified object updated.
  *
  * @example
  * const inputArray = [

@@ -1,7 +1,7 @@
 ---
 date: 2025-10-02
-title: "Conventional Commits"
-description: "Guidelines for writing clear and structured commit messages."
+title: 'Conventional Commits'
+description: 'Guidelines for writing clear and structured commit messages.'
 tags: [commits, conventions, git]
 prev:
   link: /my-learning-curve/learn/guides/project-collaboration/04-component-structure

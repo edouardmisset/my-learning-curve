@@ -6,10 +6,10 @@
  *
  *
  * @template Obj - The type of the object.
- * @param {Obj} obj - The object whose keys are to be sorted.
- * @param {boolean} [ascending=true] - Whether to sort the keys in ascending
+ * @param obj - The object whose keys are to be sorted.
+ * @param [ascending=true] - Whether to sort the keys in ascending
  * order. If false, the keys are sorted in descending order.
- * @returns {Obj} A new object with the sorted keys.
+ * @returns A new object with the sorted keys.
  *
  * @example
  * const obj = { b: 1, a: 2, c: 3 };

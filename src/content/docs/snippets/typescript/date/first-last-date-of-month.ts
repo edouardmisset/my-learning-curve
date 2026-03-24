@@ -1,8 +1,8 @@
 /**
  * Returns the first date of the month for a given date.
  *
- * @param {Date} [date=new Date()] - The date from which to extract the month. Defaults to the current date.
- * @returns {Date} The first date of the month.
+ * @param [date=new Date()] - The date from which to extract the month. Defaults to the current date.
+ * @returns The first date of the month.
  *
  * @example
  * // For a date input of '2022-12-15'
@@ -20,8 +20,8 @@ export const firstDateOfMonth = (date = new Date()): Date =>
 /**
  * Returns the last date of the month for a given date.
  *
- * @param {Date} [date=new Date()] - The date from which to extract the month. Defaults to the current date.
- * @returns {Date} The last date of the month.
+ * @param [date=new Date()] - The date from which to extract the month. Defaults to the current date.
+ * @returns The last date of the month.
  *
  * @example
  * // For a date input of '2022-12-15'

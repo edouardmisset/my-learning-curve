@@ -3,8 +3,8 @@ date: 2023-03-15
 title: My setup
 description: Learn about my development setup and tools.
 tags: ['setup', 'development', 'tools']
-lastUpdated: 2025-10-02
-next: 
+lastUpdated: 2026-03-24
+next:
   link: /my-learning-curve/reference/cheatsheets/vs-code-shortcuts
   label: VS Code Shortcuts
 ---
@@ -65,7 +65,8 @@ Add this to your VS Code `settings.JSON`:
 - Path Intellisense
 - Rewrap
 
-- Biome
+- OXC
+- Oxfmt
 - ESLint
 - Prettier
 
@@ -286,7 +287,7 @@ alias
 ```
 
 Usually there will be lots of them. You can search for specific aliases using
-the pipe operator  `|` and `grep`.
+the pipe operator `|` and `grep`.
 
 ```sh
 alias | grep git
@@ -389,9 +390,9 @@ alias dta="deno task"
 alias dt="deno test"
 alias dtw="deno test --watch"
 alias dtc="deno task check" # something like "deno lint && deno fmt && deno test --reporter=dot --coverage --parallel"
-alias dtd="deno task dev" # something like "deno lint --watch & deno fmt --watch & deno run --allow-net --allow-env --allow-read --watch ./path/to/entry.ts" 
-alias dtd="deno task docs" # something like "deno doc --html --name='name-of-my-app' ./path/to/entry.ts" 
-alias dtl="deno task cache" # something like "deno cache --lock=deno.lock --lock-write ./path/to/entry.ts" 
+alias dtd="deno task dev" # something like "deno lint --watch & deno fmt --watch & deno run --allow-net --allow-env --allow-read --watch ./path/to/entry.ts"
+alias dtd="deno task docs" # something like "deno doc --html --name='name-of-my-app' ./path/to/entry.ts"
+alias dtl="deno task cache" # something like "deno cache --lock=deno.lock --lock-write ./path/to/entry.ts"
 ```
 
 See `.zshrc` file for a more complete description, sources, functions, etc.

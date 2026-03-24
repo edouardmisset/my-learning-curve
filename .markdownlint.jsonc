@@ -43,7 +43,7 @@
   "MD040": true,
   // MD049/emphasis-style - Consistent emphasis style
   "MD049": {
-    "style": "underscore"
+    "style": "asterisk"
   },
   // MD050/strong-style - Consistent strong style
   "MD050": {

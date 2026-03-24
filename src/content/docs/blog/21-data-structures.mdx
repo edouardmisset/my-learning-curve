@@ -16,7 +16,7 @@ import { Aside } from '@astrojs/starlight/components'
 >
 > ~ [Wikipedia](https://en.wikipedia.org/wiki/Data_structure)
 
-{/*<!-- truncate -->*/}
+{/* <!-- truncate --> */}
 
 ## TL;DR
 
@@ -34,9 +34,9 @@ optimizing database queries, the way we structure our data matters.
 
 Choosing the appropriate data structure is about writing code that is:
 
-1. *Readable*: Intent is clear.
-2. *Performant*: Operations like search, insertion, and deletion are optimized.
-3. *Maintainable*: Easy to debug and extend.
+1. _Readable_: Intent is clear.
+2. _Performant_: Operations like search, insertion, and deletion are optimized.
+3. _Maintainable_: Easy to debug and extend.
 
 In the TypeScript/JavaScript ecosystem, we have several built-in structures at
 our disposal.
@@ -87,7 +87,7 @@ const alice = usersById['u-123']
 
 ### Sets
 
-Collections of *unique* values.
+Collections of _unique_ values.
 
 **Use case**: Managing selected filters, tracking visited URLs, ensuring no
 duplicate tags.
@@ -139,7 +139,7 @@ function getCachedData(url: string): Promise<Response> {
 
 ### WeakMaps
 
-A `WeakMap` is like a `Map`, but with key differences: keys *must* be objects
+A `WeakMap` is like a `Map`, but with key differences: keys _must_ be objects
 (not primitives), and the references are "weak" — meaning if there are no other
 references to the key object, it can be garbage collected.
 
@@ -170,7 +170,7 @@ console.log(getSecret(alice)) // 'my-secret'
 
 ### WeakSets
 
-A `WeakSet` is similar to a `Set`, but only holds *objects* (not primitives) and
+A `WeakSet` is similar to a `Set`, but only holds _objects_ (not primitives) and
 the references are "weak" — objects can be garbage collected if there are no
 other references to them. Unlike `Set`, you can't iterate over a `WeakSet` or
 get its size.

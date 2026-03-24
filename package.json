@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "lint": "oxlint --fix .",
+    "lint": "oxlint --fix",
     "lint:md": "markdownlint-cli2 --fix",
     "style:lint": "stylelint --cache --fix './src/**/*.css' './**/snippets/CSS/**/*.css'",
     "format": "oxfmt --write",

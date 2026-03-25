@@ -1,6 +1,0 @@
-{
-  "$schema": "https://www.schemastore.org/lintstagedrc.schema.json",
-  "*.{js,jsx,ts,tsx,mjs,cjs,json,jsonc}": ["pnpm lint", "pnpm format"],
-  "*.css": ["stylelint --fix"],
-  "*.{md,mdx}": ["pnpm update:edit:date", "pnpm lint:md", "pnpm format"]
-}

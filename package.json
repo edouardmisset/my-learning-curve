@@ -4,21 +4,21 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "lint": "oxlint --fix",
+    "lint": "vp lint --fix",
     "lint:md": "markdownlint-cli2 --fix",
-    "style:lint": "stylelint --cache --fix './src/**/*.css' './**/snippets/CSS/**/*.css'",
-    "format": "oxfmt --write",
+    "style:lint": "stylelint --fix './src/**/*.css' './**/snippets/CSS/**/*.css'",
+    "format": "vp fmt --write",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
     "typecheck:tsgo": "tsgo --noEmit --skipLibCheck",
-    "check": "pnpm lint:md && pnpm lint && pnpm format && pnpm typecheck && pnpm style:lint",
+    "check": "vp run lint:md && vp run lint && vp run format && vp run astro:check && vp run style:lint",
     "spell:check": "cspell lint --no-progress --show-context --relative .",
-    "prepare": "husky",
+    "prepare": "vp config",
     "update:edit:date": "node --experimental-strip-types scripts/update-frontmatter.ts",
-    "reset": "rm -rf node_modules pnpm-lock.yaml && pnpm install"
+    "reset": "rm -rf node_modules pnpm-lock.yaml && vp install"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -39,19 +39,15 @@
   "devDependencies": {
     "@typescript/native-preview": "7.0.0-dev.20260324.1",
     "cspell": "^9.6.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
     "markdownlint-cli2": "^0.22.0",
     "markdownlint-cli2-formatter-pretty": "^0.0.10",
-    "oxfmt": "^0.42.0",
-    "oxlint": "^1.56.0",
-    "oxlint-tsgolint": "^0.17.2",
     "stylelint": "^17.0.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^8.1.1",
     "stylelint-plugin-defensive-css": "^2.8.0",
     "stylelint-use-logical-spec": "^5.0.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite-plus": "catalog:"
   },
   "engines": {
     "node": ">=24.0.0"

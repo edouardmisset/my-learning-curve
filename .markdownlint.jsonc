@@ -39,6 +39,8 @@
   "MD025": false,
   // MD034/no-bare-urls - Allow bare URLs
   "MD034": false,
+  // MD037/no-space-in-emphasis - Disabled: conflicts with MDX JSX comments (/* ... */) and OXC formatting
+  "MD037": false,
   // MD040/fenced-code-language - Require language in code blocks
   "MD040": true,
   // MD049/emphasis-style - Consistent emphasis style conflicts with oxfmt's formatting, so disable it

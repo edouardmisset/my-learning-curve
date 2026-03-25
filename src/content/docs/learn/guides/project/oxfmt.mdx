@@ -8,7 +8,7 @@ tags: ['Oxfmt', 'Formatter', 'TypeScript', 'Frontend']
 import { Code } from '@astrojs/starlight/components'
 import { Aside } from '@astrojs/starlight/components'
 import PackageManagers from '~/components/PackageManagers.astro'
-import Source from './oxfmt.config.ts?raw'
+import Source from './oxfmtrc.json?raw'
 
 Oxfmt is a high-performance formatter for the JavaScript ecosystem. It is
 Prettier-compatible (matching 100% of Prettier's JS/TS conformance tests) and
@@ -27,9 +27,9 @@ requires minimal changes to scripts and tooling.
 
 ## Configuration
 
-Oxfmt options live in an `oxfmt.config.ts` file (Prettier-style keys):
+Oxfmt options live in an `oxfmtrc.json` file (Prettier-style keys):
 
-<Code code={Source} lang="ts" title="oxfmt.config.ts" wrap />
+<Code code={Source} lang="json" title=".oxfmtrc.json" wrap />
 
 ### Key options
 
@@ -50,10 +50,10 @@ Oxfmt options live in an `oxfmt.config.ts` file (Prettier-style keys):
 Unlike Prettier, Oxfmt ships with import sorting baked in — no extra plugin
 needed:
 
-```ts title="oxfmt.config.ts"
+```json title=".oxfmtrc.json"
 {
-  sortImports: {
-    internalPattern: ['~/', '@/']
+  "sortImports": {
+    "internalPattern": ["~/", "@/"]
   }
 }
 ```

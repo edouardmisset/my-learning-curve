@@ -8,7 +8,7 @@ tags: ['Oxlint', 'Linter', 'TypeScript', 'Frontend']
 import { Code } from '@astrojs/starlight/components'
 import { Aside } from '@astrojs/starlight/components'
 import PackageManagers from '~/components/PackageManagers.astro'
-import Source from './oxlint-config.ts?raw'
+import Source from './oxlintrc.json?raw'
 
 Oxlint is a high-performance linter for JavaScript and TypeScript that is
 50–100x faster than ESLint. It is correctness-focused by default and supports
@@ -31,7 +31,7 @@ Oxlint can be configured with a TypeScript config file (`oxlint.config.ts`) or
 a JSON file (`.oxlintrc.json`). The TypeScript format provides type-safe
 config with auto-complete.
 
-<Code code={Source} lang="typescript" title="oxlint.config.ts" wrap />
+<Code code={Source} lang="json" title=".oxlintrc.json" wrap />
 
 ### Available plugins
 

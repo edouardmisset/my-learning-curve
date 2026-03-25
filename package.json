@@ -37,7 +37,7 @@
     "starlight-package-managers": "^0.12.0"
   },
   "devDependencies": {
-    "@typescript/native-preview": "7.0.0-dev.20260324.1",
+    "@typescript/native-preview": "7.0.0-dev.20260325.1",
     "cspell": "^9.6.0",
     "markdownlint-cli2": "^0.22.0",
     "markdownlint-cli2-formatter-pretty": "^0.0.10",

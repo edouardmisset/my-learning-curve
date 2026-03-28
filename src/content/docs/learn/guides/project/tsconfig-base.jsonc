@@ -1,3 +1,8 @@
+/** See Matt Pocock's great "The TSConfig Cheat Sheet" article for more details:
+ * https://www.totaltypescript.com/tsconfig-cheat-sheet
+ * Also check out Kyle's Web Dev Simplify video on the same topic:
+ * https://www.youtube.com/watch?v=35cESnxXH6o
+ */
 {
   "$schema": "https://json.schemastore.org/tsconfig.json",
   "compilerOptions": {
@@ -9,26 +14,50 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
     /* Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
+    /* Must have from WDS: */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnusedLabels": false,
+    "noUncheckedSideEffectImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowUnreachableCode": false,
+    /* Highly suggested from WDS: */
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitOverride": true,
+    /* Preferences from WDS: */
+    "erasableSyntaxOnly": true,
+    "exactOptionalPropertyTypes": true,
+    "checkJs": true,
+    // "noErrorTruncation": true, // Only for debugging.
+
     /* If transpiling with TypeScript: */
-    "moduleResolution": "NodeNext",
+    /* 
+    "moduleResolution": "NodeNext", // This is not needed with "module": "NodeNext" below, as it will be implied. 
     "module": "NodeNext",
     "outDir": "dist",
     "sourceMap": true,
+    */
+
     /* AND if you're building for a library: */
     "declaration": true,
+
     /* AND if you're building for a library in a monorepo: */
     "composite": true,
     "declarationMap": true,
-    /* If NOT transpiling with TypeScript: 
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
-    */
+
+    /* If NOT transpiling with TypeScript: using TypeScript as more of a linter,
+    you'll want these options. */
+    "module": "preserve",
     "noEmit": true,
+
     /* If your code runs in the DOM: */
     "lib": ["es2024", "dom", "dom.iterable"]
+
     /* If your code doesn't run in the DOM: 
     "lib": ["es2024"]
     */

@@ -25,5 +25,8 @@ export const maxBy = <Obj extends Record<string, unknown>>(
 ): Obj | undefined => {
   if (array.length === 0) return undefined
 
-  return array.reduce((acc, val) => (acc[key] > val[key] ? acc : val), array[0])
+  return array.reduce((previous, current) => {
+    const previousValue = previous?.[key]
+    return previousValue && previousValue > current[key] ? previous : current
+  }, array[0])
 }

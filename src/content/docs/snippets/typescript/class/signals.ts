@@ -83,11 +83,11 @@ class ComputedValue extends EventTarget {
     return this.#signal.value
   }
 
-  addEventListener(type: string, listener: EventListener): void {
+  override addEventListener(type: string, listener: EventListener): void {
     this.#signal.addEventListener(type, listener)
   }
 
-  removeEventListener(type: string, listener: EventListener): void {
+  override removeEventListener(type: string, listener: EventListener): void {
     this.#signal.removeEventListener(type, listener)
   }
 

@@ -19,6 +19,7 @@ export function setURLParameters(
 
   for (const key of Object.keys(newParams)) {
     const parameterValue = newParams[key]
+    if (!parameterValue) continue
     if (Array.isArray(parameterValue)) {
       for (const value of parameterValue) {
         newUrl.searchParams.append(key, value.toString())

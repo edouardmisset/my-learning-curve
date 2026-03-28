@@ -7,7 +7,7 @@
   ],
   "exclude": [
     "dist",
-    "./src/content/**/tsconfig.json",
+    "./src/content/**/tsconfig*.json",
     "node_modules",
     "**/node_modules/**"
   ],
@@ -17,6 +17,19 @@
     "skipLibCheck": true,
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnusedLabels": false,
+    "noUncheckedSideEffectImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowUnreachableCode": false,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitOverride": true,
+    "erasableSyntaxOnly": true,
+    "exactOptionalPropertyTypes": true,
+    "checkJs": true
   }
 }

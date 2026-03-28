@@ -21,7 +21,7 @@ dev preview). Separately, apply the TypeScript 6.0 migration checklist to your
 
 ## Installation
 
-<PackageManagers pkg="@typescript/native-preview" flags="-D" />
+<PackageManagers pkg="@typescript/native-preview" dev />
 
 This installs the `tsgo` binary. You can expose it as an optional script for
 native checks:
@@ -36,7 +36,7 @@ native checks:
 
 <Aside type="caution">
   `@typescript/native-preview` is a **dev preview** and updates daily. It does
-  not yet replace the `typescript` package for all tooling. In particular,
+  not yet replace the `typescript` package for all tooling. For example,
   `@astrojs/check` currently requires `typescript@^5.0.0` as a peer dependency.
 </Aside>
 

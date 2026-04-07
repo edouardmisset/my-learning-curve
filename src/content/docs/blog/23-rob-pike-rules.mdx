@@ -1,0 +1,124 @@
+---
+date: 2026-04-07
+title: Rob Pike's 5 Rules of Programming
+excerpt: Rob Pike's timeless rules distill decades of systems programming wisdom into five concise principles about performance and simplicity.
+tags:
+  [
+    'Best Practices',
+    'Performance',
+    'Software Engineering',
+    'Algorithms',
+    'Clean Code',
+  ]
+---
+
+import Disclaimer from '~/components/Disclaimer.astro'
+
+> Rule 1. You can't tell where a program is going to spend its time.
+>
+> ~ Rob Pike
+
+## TL;DR
+
+Rob Pike's 5 Rules of Programming are a set of concise guidelines about
+performance optimization and code simplicity. The core message: don't guess
+where bottlenecks are — measure first. Prefer simple algorithms and data
+structures, because data dominates design.
+
+## Introduction
+
+In the world of software engineering, it is tempting to over-engineer solutions:
+reach for a complex algorithm, micro-optimize early, or build abstractions before
+they are needed. Rob Pike, co-creator of Go and long-time contributor to Unix and
+Plan 9 at Bell Labs, distilled decades of hard-won systems programming experience
+into five rules that push back against this tendency.
+
+These rules are short, memorable, and still highly relevant today — whether you
+are writing a high-performance backend service or a front-end application.
+
+{/* <!-- truncate --> */}
+
+## The 5 Rules
+
+### Rule 1 — Don't Guess, Prove
+
+> You can't tell where a program is going to spend its time. Bottlenecks occur
+> in surprising places, so don't try to second-guess and put in a speed hack
+> until you've proven that's where the bottleneck is.
+
+Human intuition about performance is notoriously unreliable. The part of the
+code you think is slow is rarely the actual bottleneck. Before making any
+optimization, profile your code and let the data guide you.
+
+### Rule 2 — Measure First
+
+> Measure. Don't tune for speed until you've measured, and even then don't
+> unless one part of the code overwhelms the rest.
+
+Measurement is the prerequisite for optimization. Even after you have identified
+a slow section, only act on it if that section dominates the overall runtime.
+Optimizing something that accounts for 2% of the total execution time will yield
+at most a 2% improvement — hardly worth the added complexity.
+
+### Rule 3 — Simple Beats Fancy for Small n
+
+> Fancy algorithms are slow when n is small, and n is usually small. Fancy
+> algorithms have big constants. Until you know that n is frequently going to be
+> big, don't get fancy. (Even if n does get big, use Rule 2 first.)
+
+A quicksort has better asymptotic complexity than insertion sort, but for a list
+of 10 elements, insertion sort wins due to lower overhead. Big-O notation
+describes behaviour as n approaches infinity — which is rarely the real-world
+scenario you are dealing with. Start simple; optimize only when proven necessary.
+
+### Rule 4 — Simple Is Correct
+
+> Fancy algorithms are buggier than simple ones, and they're much harder to
+> implement. Use simple algorithms as well as simple data structures.
+
+Complexity is the enemy of correctness. The more sophisticated an algorithm, the
+more edge cases it has, the harder it is to test, and the more likely it is to
+harbour subtle bugs. A plain array or hash map will solve the vast majority of
+real-world problems reliably and predictably.
+
+This rule is a direct expression of the **KISS** principle
+(_Keep It Simple, Stupid_), and Ken Thompson rephrased Rules 3 and 4 together as:
+_"When in doubt, use brute force."_
+
+### Rule 5 — Data Dominates
+
+> Data dominates. If you've chosen the right data structures and organized things
+> well, the algorithms will almost always be self-evident. Data structures, not
+> algorithms, are central to programming.
+
+How you model your data shapes everything else. The right data structure often
+makes the algorithm trivially obvious; the wrong one forces you into contortions.
+This rule echoes Fred Brooks's observation in _The Mythical Man-Month_ and is
+sometimes shortened to: _"Write stupid code that uses smart objects."_
+
+## Connections to Other Principles
+
+- **Rules 1 & 2** restate Tony Hoare's famous maxim: _"Premature optimization is
+  the root of all evil."_
+- **Rules 3 & 4** align with the [**KISS**](https://en.wikipedia.org/wiki/KISS_principle)
+  design philosophy and Ken Thompson's advice to prefer brute force over
+  cleverness when in doubt.
+- **Rule 5** complements the [**DRY principle**](/my-learning-curve/blog/10-dry-principle)
+  and good domain modelling: getting the data structures right reduces the
+  surface area for duplication and bugs.
+
+## Conclusion
+
+Rob Pike's 5 Rules are a timeless reminder that software quality comes from
+discipline and measurement, not from cleverness. Profile before you optimize,
+prefer simple structures, and let your data model drive your design. The next
+time you reach for a fancy algorithm or a premature optimization, run the
+profiler first — the results might surprise you.
+
+## References
+
+- [Rob's Programming Rules](https://www.cs.unc.edu/~stotts/COMP590-059-f24/robsrules.html) — Original source
+- [The Mythical Man-Month](https://en.wikipedia.org/wiki/The_Mythical_Man-Month) by Fred Brooks
+- [KISS Principle](https://en.wikipedia.org/wiki/KISS_principle) — Wikipedia
+
+<Disclaimer />

@@ -59,6 +59,7 @@
     hanging-punctuation: first last;
     animation-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
     transition-timing-function: cubic-bezier(0, 0.3, 0.1, 1);
+    scrollbar-gutter: stable;
   }
 
   @supports (interpolate-size: allow-keywords) {

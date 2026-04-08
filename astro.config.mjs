@@ -54,7 +54,10 @@ export default defineConfig({
           },
         }),
       ],
-      customCss: ['./src/styles/custom.css'],
+      customCss: [
+        '@fontsource-variable/atkinson-hyperlegible-next/index.css',
+        './src/styles/custom.css',
+      ],
       routeMiddleware: './src/route-data.ts',
       editLink: {
         baseUrl:

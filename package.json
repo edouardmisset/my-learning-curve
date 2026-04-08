@@ -26,6 +26,7 @@
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/starlight": "^0.38.3",
     "@catppuccin/starlight": "^2.0.1",
+    "@fontsource-variable/atkinson-hyperlegible-next": "^5.2.6",
     "@types/node": "^25.5.2",
     "astro": "^6.1.4",
     "astro-embed": "^0.12.0",

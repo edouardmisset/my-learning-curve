@@ -7,7 +7,7 @@ settings:
 catalogs:
   default:
     vite-plus:
-      specifier: ^0.1.16
+      specifier: latest
       version: 0.1.16
 
 overrides:
@@ -4731,8 +4731,8 @@ snapshots:
       hast-util-to-html: 9.0.5
       hast-util-to-text: 4.0.2
       hastscript: 9.0.1
-      postcss: 8.5.8
-      postcss-nested: 6.2.0(postcss@8.5.8)
+      postcss: 8.5.9
+      postcss-nested: 6.2.0(postcss@8.5.9)
       unist-util-visit: 5.1.0
       unist-util-visit-parents: 6.0.2
 
@@ -7484,9 +7484,9 @@ snapshots:
 
   pngjs@7.0.0: {}
 
-  postcss-nested@6.2.0(postcss@8.5.8):
+  postcss-nested@6.2.0(postcss@8.5.9):
     dependencies:
-      postcss: 8.5.8
+      postcss: 8.5.9
       postcss-selector-parser: 6.1.2
 
   postcss-safe-parser@7.0.1(postcss@8.5.9):

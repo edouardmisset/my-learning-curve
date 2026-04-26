@@ -5,5 +5,7 @@
 }
 
 :root {
---sl-font: "Atkinson Hyperlegible Next Variable", -apple-system, "Segoe UI", roboto, arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --sl-font:
+    'Atkinson Hyperlegible Next Variable', -apple-system, 'Segoe UI', roboto,
+    arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }

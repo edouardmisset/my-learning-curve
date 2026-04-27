@@ -43,7 +43,11 @@ kbd {
   cursor: default;
 
   /* By default, browsers style <kbd> with a monospace typeface */
-  font-family: var(--font-family-sans-serif);
+  font-family:
+    var(--font-family-sans-serif),
+    system-ui,
+    -apple-system,
+    sans-serif;
 
   /* If we do all this with the default font size */
 

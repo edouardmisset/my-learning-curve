@@ -1,0 +1,24 @@
+# My Learning Curve
+
+> Personal knowledge base about TypeScript, web engineering, Git workflows, tooling, and reusable snippets.
+
+Canonical site: https://edouardmisset.github.io/my-learning-curve
+Sitemap: https://edouardmisset.github.io/my-learning-curve/sitemap-index.xml
+Detailed guidance: https://edouardmisset.github.io/my-learning-curve/llms-full.txt
+Markdown alternates: https://edouardmisset.github.io/my-learning-curve/<page-id>.md
+
+Use the canonical HTML page as the primary citation target.
+If a page exposes a markdown alternate, prefer that alternate for machine-readable extraction.
+Respect the crawler policy in robots.txt.
+
+## Priority sections
+
+- Blog: https://edouardmisset.github.io/my-learning-curve/blog
+- Learn: https://edouardmisset.github.io/my-learning-curve/learn
+- Reference: https://edouardmisset.github.io/my-learning-curve/reference
+- Snippets: https://edouardmisset.github.io/my-learning-curve/snippets
+
+## Lower-priority sections
+
+- Templates: https://edouardmisset.github.io/my-learning-curve/reference/templates
+- Tooling setup notes: https://edouardmisset.github.io/my-learning-curve/reference/tools

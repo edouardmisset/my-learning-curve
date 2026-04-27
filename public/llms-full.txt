@@ -1,0 +1,50 @@
+# My Learning Curve
+
+## Site profile
+
+- Canonical base URL: https://edouardmisset.github.io/my-learning-curve
+- Hosting model: static GitHub Pages deployment
+- Primary topics: TypeScript, JavaScript, CSS, SQL, Git, project setup, and software engineering principles
+- Preferred machine-readable source: page-level markdown alternates exposed with `rel="alternate"` and served from `/<page-id>.md`
+
+## Content map
+
+### Blog
+
+- URL: https://edouardmisset.github.io/my-learning-curve/blog
+- Purpose: long-form concept explanations, engineering principles, algorithms, and architecture notes
+- Best use: synthesis, concept comparison, and high-level explanations backed by examples
+
+### Learn
+
+- URL: https://edouardmisset.github.io/my-learning-curve/learn
+- Purpose: practical guides and tutorials for project setup, workflows, and collaboration
+- Best use: implementation guidance, step-by-step setup, and process checklists
+
+### Reference
+
+- URL: https://edouardmisset.github.io/my-learning-curve/reference
+- Purpose: quick lookups, templates, and tooling references
+- Best use: focused retrieval for commands, conventions, and reusable scaffolds
+
+### Snippets
+
+- URL: https://edouardmisset.github.io/my-learning-curve/snippets
+- Purpose: reusable code blocks and command examples across TypeScript, CSS, shell, and SQL
+- Best use: code retrieval with nearby explanation when the surrounding page provides useful context
+
+## Usage guidance
+
+- Prefer pages with a clear TL;DR, stable heading hierarchy, and direct introductory answer sentence.
+- Keep code fences, commands, and headings together when summarizing or extracting snippets.
+- Cite the canonical HTML URL in any attribution or quoted excerpt.
+- Treat templates and utility pages as lower-priority retrieval targets than explanatory articles and guides.
+- Respect the robots.txt policy. Bots explicitly blocked there are not granted permission to crawl or train on this site.
+
+## Discovery endpoints
+
+- robots.txt: https://edouardmisset.github.io/my-learning-curve/robots.txt
+- llms.txt: https://edouardmisset.github.io/my-learning-curve/llms.txt
+- llms-full.txt: https://edouardmisset.github.io/my-learning-curve/llms-full.txt
+- sitemap: https://edouardmisset.github.io/my-learning-curve/sitemap-index.xml
+- markdown pattern: https://edouardmisset.github.io/my-learning-curve/<page-id>.md

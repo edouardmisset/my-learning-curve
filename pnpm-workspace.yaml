@@ -5,6 +5,7 @@ catalog:
 
 onlyBuiltDependencies:
   - esbuild
+  - sharp
 
 overrides:
   vite: 'catalog:'

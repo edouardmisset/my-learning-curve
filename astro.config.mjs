@@ -52,6 +52,7 @@ export default defineConfig({
             readingTime: true,
             words: 'rounded',
           },
+          navigation: 'none',
         }),
       ],
       customCss: [
@@ -131,6 +132,8 @@ export default defineConfig({
       ],
       lastUpdated: true,
     }),
-    sitemap(),
+    sitemap({
+      filter: page => !page.endsWith('.md') && !page.includes('/og/'),
+    }),
   ],
 })

@@ -55,6 +55,21 @@ pnpm dev
 
 > Built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build).
 
+## AI Discovery
+
+This site publishes static AI discovery signals that work on GitHub Pages:
+
+- `public/robots.txt` for crawler policy and the sitemap entrypoint.
+- `public/llms.txt` and `public/llms-full.txt` for machine-readable site guidance.
+- `src/pages/[...slug].md.ts` for self-hosted markdown alternates that append `.md` to the canonical page path.
+- `src/route-data.ts` for `rel="alternate"` markdown discovery and JSON-LD metadata.
+
+Maintenance notes:
+
+- Prefer updating the canonical HTML page first; the `.md` alternate is derived from the same content entry.
+- Keep high-value sections listed in `llms.txt` focused on blog posts, guides, references, and snippets.
+- GitHub Pages cannot attach custom `Link` or `X-Robots-Tag` headers, so discovery is implemented with static files and HTML head tags instead.
+
 ## License
 
 This project is licensed under the terms of the [LICENSE](LICENSE) file.

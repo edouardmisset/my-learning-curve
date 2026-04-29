@@ -2,6 +2,7 @@
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import catppuccin from '@catppuccin/starlight'
+import og from 'astro-og'
 import { defineConfig } from 'astro/config'
 import starlightBlog from 'starlight-blog'
 import starlightKbd from 'starlight-kbd'
@@ -202,5 +203,6 @@ Prefer pages with a clear TL;DR, stable heading hierarchy, and direct introducto
     sitemap({
       filter: page => !page.endsWith('.md') && !page.includes('/og/'),
     }),
+    og(),
   ],
 })

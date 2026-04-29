@@ -1,6 +1,6 @@
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 import type { CollectionEntry } from 'astro:content'
-import { BASE_URL } from '~/constants/links'
+import { BASE_PATH } from '~/constants/links'
 
 type DiscoveryCollection = 'docs' | 'snippets'
 
@@ -40,7 +40,7 @@ export function getRawPath(id: string) {
 }
 
 export function withBasePath(pathname: string) {
-  return pathname === '/' ? BASE_URL : `${BASE_URL}${pathname}`
+  return pathname === '/' ? BASE_PATH : `${BASE_PATH}${pathname}`
 }
 
 export function toAbsoluteSiteUrl(pathname: string, site: URL | string) {

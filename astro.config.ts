@@ -1,4 +1,3 @@
-// @ts-check
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import catppuccin from '@catppuccin/starlight'

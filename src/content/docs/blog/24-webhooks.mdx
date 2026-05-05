@@ -1,0 +1,89 @@
+---
+title: Understanding Webhooks
+excerpt: Learn what webhooks are, how they power real-time web applications, and best practices for implementing them.
+tags: ['Webhooks', 'Architecture', 'API', 'Backend']
+date: 2026-05-05
+lastUpdated: 2026-05-05
+---
+
+import { Aside } from '@astrojs/starlight/components'
+import Disclaimer from '~/components/Disclaimer.astro'
+
+> A webhook in web development is a method of augmenting or altering the behavior of a web page or web application with custom callbacks. These callbacks may be maintained, modified, and managed by third-party users and developers who may not necessarily be affiliated with the originating website or application.
+>
+> ~ [Wikipedia](https://en.wikipedia.org/wiki/Webhook)
+
+## TL;DR
+
+Webhooks are automated HTTP "callbacks" triggered by specific events. Instead of constantly polling an API to check if something has changed (polling), an application can provide a URL (a webhook) to receive an immediate HTTP POST request (a push) when the event occurs. They are the backbone of real-time server-to-server communication in modern web applications.
+
+## Introduction
+
+Imagine waiting for a very important package to arrive. You could call the shipping company every 5 minutes to ask, "Is it here yet?" This is annoying, inefficient, and wastes everyone's time. This is the equivalent of API polling.
+
+Alternatively, the shipping company could ask for your phone number and say, "We will call you the exact moment your package arrives." This is much better. You provide a contact method (your phone number), and they push the information to you only when necessary. This is precisely how webhooks operate on the web.
+
+{/* <!-- truncate --> */}
+
+## The Core Concept
+
+A **webhook** (sometimes called a reverse API or web callback) allows one system to send real-time data to another system as soon as a given event occurs.
+
+To use a webhook, the receiving application must register a URL (an endpoint) with the sending application. When the target event happens on the sending side, it makes an HTTP request (usually a `POST`) to that registered URL, carrying a payload (typically JSON) containing information about the event.
+
+```typescript
+import express from 'express'
+
+const app = express()
+app.use(express.json())
+
+// This is our webhook endpoint listening for events
+app.post('/api/webhooks/github', (req, res) => {
+  const eventAction = req.headers['x-github-event']
+  const payload = req.body
+
+  if (eventAction === 'push') {
+    console.log(
+      `Received push from ${payload.pusher.name} to repository ${payload.repository.name}`,
+    )
+    // Trigger build, send slack message, etc.
+  }
+
+  // Always respond with a 2xx status code to tell the sender we received it
+  res.status(200).send('Webhook received successfully')
+})
+
+app.listen(3000, () => console.log('Webhook server listening on port 3000'))
+```
+
+## Deep Dive / Advanced Usage
+
+While setting up a webhook route is simple in theory, running them reliably in production requires handling several edge cases and security concerns.
+
+### Security: Verifying the Sender
+
+If your webhook endpoint is exposed to the public internet, anyone could send a `POST` request to it and pretend to be the legitimate service.
+
+To prevent this, most services use **HMAC signatures**. The sender signs the payload using a shared secret key and places the signature in a special HTTP header (like `X-Hub-Signature`). The receiver must compute the signature of the incoming payload using the same secret key and verify that their computed signature matches the one in the header.
+
+<Aside type="caution">
+  Always verify incoming webhooks! Failing to verify signatures opens your
+  application up to spoofing attacks and malicious data injection.
+</Aside>
+
+### Reliability and Retries
+
+Because webhooks are sent "fire-and-forget" style by nature, network failures can lead to lost events.
+Good webhook providers implement retry logic with exponential backoff if the receiver does not return a `2xx` status code.
+
+As a webhook receiver, you should follow these best practices:
+
+1. **Acknowledge quickly:** Respond with a `2xx` status code as fast as possible to avoid timeouts from the sender.
+2. **Process asynchronously:** Offload heavy processing (like database writes, email dispatch, or image resizing) to a background queue (e.g., RabbitMQ, Redis, or BullMQ) instead of blocking the webhook HTTP response.
+3. **Ensure idempotency:** Since the sender might retry delivering the same event due to a timeout or network glitch, your processing logic must be idempotent. Processing the exact same webhook payload twice should safely result in the same final state without side effects like sending duplicate emails.
+
+### Trade-Offs: Webhooks vs. Polling vs. WebSockets
+
+- **Polling:** Simple to implement but heavily wastes resources on both the client and server. Only appropriate for very low-volume systems or when the data changes infrequently and absolute real-time sync isn't needed.
+- **WebSockets:** Perfect for continuous two-way communication (like a chat app) and client-server connectivity. Requires maintaining stateful, long-lived connections which can complicate scaling and load balancing.
+- **Webhooks:** The gold standard for server-to-server architectural integrations. Efficient as it relies on stateless HTTP requests, but relies heavily on the receiver being highly available and the network being reliable.

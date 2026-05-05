@@ -10,8 +10,10 @@ tags:
     'Design Patterns',
     'TypeScript',
     'Best Practices',
+    'Object-Oriented Programming',
+    'Functional Programming',
   ]
-lastUpdated: 2026-03-24
+lastUpdated: 2026-05-05
 ---
 
 import Disclaimer from '~/components/Disclaimer.astro'
@@ -36,43 +38,44 @@ for methodologies such as agile software development. These principles work hand
 
 A class (or function/component) should have only one reason to change.
 
-In a React context, avoid "God Components" that handle data fetching, complex
-logic, and UI rendering all at once.
+#### OOP Example
 
-```tsx
-// ❌ Bad: Doing too much
-function UserProfile() {
-  const [user, setUser] = useState(null)
+```typescript
+// ❌ Bad: Class handles two different responsibilities (business logic and logging/db)
+class UserService {
+  public createUser(user: User): void {
+    // ... DB logic ...
+    console.log('User created') // Logging responsibility mixed in
+  }
+}
 
-  useEffect(() => {
-    fetch('/api/user')
-      .then(r => r.json())
-      .then(setUser)
-  }, [])
-
-  const handleLogin = () => {
+// ✅ Good: Separation into distinct classes
+class UserRepository {
+  public save(user: User): void {
     /* ... */
   }
+}
+class Logger {
+  public log(msg: string): void {
+    /* ... */
+  }
+}
+```
 
-  if (!user) return <Spinner />
+#### In FP Land
 
-  return (
-    <div className="card">
-      <h1>{user.name}</h1>
-      <button onClick={handleLogin}>Login</button>
-    </div>
-  )
+In Functional Programming (FP), pure functions are naturally aligned with SRP. Because an ideal pure function only takes inputs and returns an output without hidden side effects, it is forced to do exactly one focused thing.
+
+```typescript
+// ❌ Bad: Function combines logic and side effects
+const processUser = (json: string) => {
+  const user = JSON.parse(json)
+  database.save(user) // Side effect inside
 }
 
-// ✅ Good: Separation of concerns
-// UserDataContainer handles fetching
-// UserCard handles UI
-function UserProfile() {
-  const { user, loading } = useUser() // Custom hook for logic
-
-  if (loading) return <Spinner />
-  return <UserCard user={user} />
-}
+// ✅ Good: Pure function for parsing, separate function for side effects
+const parseUser = (json: string): User => JSON.parse(json)
+const saveUser = (user: User) => database.save(user)
 ```
 
 ### O - Open/Closed Principle (OCP)
@@ -81,24 +84,56 @@ Software entities should be open for extension, but closed for modification.
 
 You should be able to add new functionality without changing existing code.
 
+#### OOP Example
+
 ```typescript
-// ❌ Bad: Modifying the function for every new role
-function getDashboardRoute(role: string) {
-  if (role === 'admin') return '/admin'
-  if (role === 'manager') return '/manager'
-  // Need to edit this file to add 'user'...
-  return '/'
+// ❌ Bad: Modifying the base calculator for every new shape
+class AreaCalculator {
+  public calculate(shape: any): number {
+    if (shape.type === 'circle') return Math.PI * shape.radius ** 2
+    if (shape.type === 'square') return shape.side ** 2
+    return 0
+  }
 }
 
-// ✅ Good: Configuration object (Extension)
-const roleRoutes: Record<string, string> = {
-  admin: '/admin',
-  manager: '/manager',
-  user: '/dashboard',
+// ✅ Good: Extending behavior by adding new classes that implement an interface
+interface Shape {
+  calculateArea(): number
 }
+class Circle implements Shape {
+  constructor(public radius: number) {}
+  calculateArea() {
+    return Math.PI * this.radius ** 2
+  }
+}
+class AreaCalculator {
+  public calculate(shape: Shape): number {
+    return shape.calculateArea()
+  }
+}
+```
 
-function getDashboardRoute(role: string) {
-  return roleRoutes[role] || '/'
+#### In FP Land
+
+FP uses union types and pattern matching to handle variations in behavior. Instead of extending base classes, the compiler should enforce handling all possible variations of a union type cleanly. Adding new cases flips the "expression problem" structure, often making sure you handle new data across all matchers safely without modifying the inner logic of old data cases.
+
+```typescript
+// ✅ Good: Discriminated Unions with pattern matching and exhaustiveness checking
+type Shape =
+  | { type: 'circle'; radius: number }
+  | { type: 'square'; side: number }
+
+const calculateArea = (shape: Shape): number => {
+  switch (shape.type) {
+    case 'circle':
+      return Math.PI * shape.radius ** 2
+    case 'square':
+      return shape.side ** 2
+    default:
+      // The compiler forces you to update this function safely if `Shape` changes.
+      const _exhaustiveCheck: never = shape
+      return _exhaustiveCheck
+  }
 }
 ```
 
@@ -110,25 +145,47 @@ without breaking the application.
 If you have a generic `Database` class, swapping it for `PostgresDatabase` or
 `MongoDatabase` shouldn't crash your app if they implement the same interface.
 
+#### OOP Example
+
 ```typescript
-interface Storage {
-  save(data: string): void
+// ❌ Bad: Subclass throws an exception for a method defined in the parent
+class Bird {
+  fly(): string {
+    return 'I am flying'
+  }
 }
-
-class LocalStorage implements Storage {
-  save(data: string) {
-    localStorage.setItem('key', data)
+class Penguin extends Bird {
+  fly(): string {
+    throw new Error('I cannot fly') // Violates LSP
   }
 }
 
-class CloudStorage implements Storage {
-  save(data: string) {
-    // ❌ Violation if this throws an error the parent doesn't expect
-    // or requires different parameters.
-    // But if it adheres to the contract, it's LSP compliant.
-    api.post('/save', { data })
+// ✅ Good: Hierarchy ensures correct structural substitutions
+class Bird {}
+class FlyingBird extends Bird {
+  fly(): string {
+    return 'I am flying'
   }
 }
+class Penguin extends Bird {}
+```
+
+#### In FP Land
+
+In strict typed functional languages where there is no hidden mutation, no nulls, and errors are handled deliberately (e.g., using `Result` or `Option` types), LSP violations become structurally impossible. A function signature dictates exactly what can be substituted, so changing the underlying implementation logic guarantees the same input-to-output contract.
+
+```typescript
+// ❌ Bad: Passing a function that violates the contract by throwing unexpectedly
+type CalculateDiscount = (price: number) => number
+
+const standardDiscount: CalculateDiscount = price => price * 0.1
+const specialDiscount: CalculateDiscount = price => {
+  if (price < 0) throw new Error('Invalid price') // Hidden side-effect/failure!
+  return price * 0.2
+}
+
+// ✅ Good: Encode failure modes explicitly in the type signature (Result/Union)
+type CalculateDiscountSafe = (price: number) => number | Error
 ```
 
 ### I - Interface Segregation Principle (ISP)
@@ -137,28 +194,63 @@ Clients should not be forced to depend upon interfaces that they do not use.
 
 Don't create massive interfaces. Break them down.
 
+#### OOP Example
+
 ```typescript
-// ❌ Bad: Forcing props that aren't needed
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  stripeId: string; // Not needed for a simple avatar
-  passwordHash: string;
+// ❌ Bad: One massive interface forcing unused implementations
+interface Machine {
+  print(doc: Document): void
+  fax(doc: Document): void
+  scan(doc: Document): void
 }
 
-function UserAvatar({ user }: { user: User }) {
-  return <img src={user.avatarUrl} />; // We only needed the URL!
+class BasicPrinter implements Machine {
+  print(doc: Document) {
+    /* ... */
+  }
+  fax(doc: Document) {
+    throw new Error('Not supported')
+  }
+  scan(doc: Document) {
+    throw new Error('Not supported')
+  }
 }
 
-// ✅ Good: Pick what you need
-interface AvatarProps {
-  avatarUrl: string;
-  name: string;
+// ✅ Good: Segregated, specific interfaces
+interface Printer {
+  print(doc: Document): void
+}
+interface Scanner {
+  scan(doc: Document): void
 }
 
-function UserAvatar({ avatarUrl, name }: AvatarProps) {
-  return <img src={avatarUrl} alt={name} />;
+class BasicPrinter implements Printer {
+  print(doc: Document) {
+    /* ... */
+  }
+}
+```
+
+#### In FP Land
+
+A function type is effectively a single-method interface—the smallest and most segregated interface possible. You literally cannot make a function type "fatter" unless you group them into bloated records or config objects. ISP is just how standalone functions behave by default.
+
+```typescript
+// ❌ Bad: Expecting a monolithic object when you only need a single property
+interface UserContext {
+  userId: string
+  email: string
+  preferences: Record<string, unknown>
+  history: Record<string, unknown>[]
+}
+
+const sendWelcomeEmail = (context: UserContext) => {
+  mailer.send(context.email, 'Welcome!')
+}
+
+// ✅ Good: Function signature dictates exactly (and only) what it needs
+const sendWelcomeEmail = (email: UserContext['email']) => {
+  mailer.send(email, 'Welcome!')
 }
 ```
 
@@ -169,31 +261,58 @@ Depend upon abstractions, not concretions.
 High-level modules should not depend on low-level modules. Both should depend on
 abstractions.
 
-In a functional world, this often means passing dependencies as arguments
-(Dependency Injection) or using Higher Order Functions.
+#### OOP Example
 
 ```typescript
-// ❌ Bad: Hard dependency on a specific library (axios)
-const getUsers = () => {
-  return axios.get('/users')
+// ❌ Bad: High-level module depends on low-level concrete classes
+class MySQLDatabase {
+  save(data: string) {}
+}
+class UserService {
+  private db = new MySQLDatabase() // Tightly coupled
+  saveUser(user: string) {
+    this.db.save(user)
+  }
 }
 
-// ✅ Good: Dependency Injection via Higher Order Function
-type HttpClient = (url: string) => Promise<unknown>
-
-const createGetUsers = (httpClient: HttpClient) => () => {
-  return httpClient('/users')
+// ✅ Good: Depend on abstractions via dependency injection
+interface Database {
+  save(data: string): void
 }
 
-// Usage
-const getUsers = createGetUsers(fetch)
+class UserService {
+  constructor(private db: Database) {} // Injection
+  saveUser(user: string) {
+    this.db.save(user)
+  }
+}
+```
+
+#### In FP Land
+
+In a functional world, a function parameter _is_ the abstraction. When a function accepts another function as an argument, it depends only on its signature constraint, entirely decoupled from its concrete implementation. This makes Partial Application a natural and lightweight mechanism for Dependency Injection.
+
+```typescript
+// ❌ Bad: Hardcoded dependency on a concrete module/implementation
+const saveUser = (user: User) => {
+  mySqlInsert('users', user)
+}
+
+// ✅ Good: Inject logic via functions (Higher-Order Functions / Partial Application)
+type SaveToDb = (table: string, data: unknown) => void
+
+const makeSaveUser = (dbInsert: SaveToDb) => (user: User) => {
+  dbInsert('users', user)
+}
+
+// Usage (Wiring up the dependencies at the composition root)
+const saveUser = makeSaveUser(mySqlInsert)
 ```
 
 ## Resources
 
-- [Clean
-  Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
-  by Robert C. Martin
+- [SOLID in FP: Interface Segregation and Dependency Inversion](https://cekrem.github.io/posts/solid-in-fp-interface-segregation/) by Christian Ekrem
+- [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) by Robert C. Martin
 - Uncle Bob on [The Principles of
   OOD](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod)
 - DigitalOcean on [SOLID Principles in

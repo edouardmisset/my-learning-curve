@@ -56,7 +56,7 @@ export default defineConfig({
     '*.css': ['stylelint --fix'],
     '*.{md,mdx}': [
       'vp run update:edit:date',
-      'vp run lint:md',
+      'markdownlint-cli2 --fix',
       'vp run format',
     ],
   },

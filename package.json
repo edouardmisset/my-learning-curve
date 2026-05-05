@@ -9,7 +9,7 @@
     "dev": "astro dev",
     "format": "vp fmt --write",
     "knip": "knip",
-    "lint:md": "markdownlint-cli2 --fix",
+    "lint:md": "markdownlint-cli2 \"**/*.{md,mdx}\" --fix",
     "lint": "vp lint --fix",
     "prepare": "vp config",
     "preview": "astro preview",

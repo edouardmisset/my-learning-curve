@@ -269,7 +269,7 @@ class MySQLDatabase {
   save(data: string) {}
 }
 class UserService {
-  private db = new MySQLDatabase() // Tigthly coupled
+  private db = new MySQLDatabase() // Tightly coupled
   saveUser(user: string) {
     this.db.save(user)
   }

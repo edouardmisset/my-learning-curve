@@ -125,11 +125,13 @@ Good webhook providers implement retry logic with exponential backoff if the rec
 As a webhook receiver, you should follow these best practices:
 
 1. **Acknowledge quickly:** Respond with a `2xx` status code as fast as possible to avoid timeouts from the sender.
-2. **Process asynchronously:** Offload heavy processing (like database writes, email dispatch, or image resizing) to a background queue (e.g., RabbitMQ, Redis, or BullMQ) instead of blocking the webhook HTTP response.
+2. **Process asynchronously:** Offload heavy processing (like database writes, email dispatch, or image resizing) to a background queue (e.g., RabbitMQ, Redis...) instead of blocking the webhook HTTP response.
 3. **Ensure idempotency:** Since the sender might retry delivering the same event due to a timeout or network glitch, your processing logic must be idempotent. Processing the exact same webhook payload twice should safely result in the same final state without side effects like sending duplicate emails.
 
-### Trade-Offs: Webhooks vs. Polling vs. WebSockets
+### Trade-Offs: Webhooks vs. Polling vs. WebSockets vs. SSE vs. Message Brokers
 
 - **Polling:** Simple to implement but heavily wastes resources on both the client and server. Only appropriate for very low-volume systems or when the data changes infrequently and absolute real-time sync isn't needed.
 - **WebSockets:** Perfect for continuous two-way communication (like a chat app) and client-server connectivity. Requires maintaining stateful, long-lived connections which can complicate scaling and load balancing.
-- **Webhooks:** The gold standard for server-to-server architectural integrations. Efficient as it relies on stateless HTTP requests, but relies heavily on the receiver being highly available and the network being reliable.
+- **Server-Sent Events (SSE):** Ideal for one-way (server-to-client) real-time updates over standard HTTP without the full overhead or bidirectional complexity of WebSockets. Good for real-time dashboards or notifications.
+- **Webhooks:** The gold standard for external server-to-server architectural integrations. Efficient as it relies on stateless HTTP requests, but relies heavily on the receiver being highly available, responding quickly, and the network being reliable.
+- **Queues and Message Brokers:** Essential for internal server-to-server async communication or microservices. They solve the availability problem of webhooks by buffering messages until the receiver is ready to process them, ensuring zero data loss and handling massive scale seamlessly.

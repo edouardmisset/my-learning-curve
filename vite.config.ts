@@ -56,7 +56,7 @@ export default defineConfig({
     '*.css': ['stylelint --fix'],
     '*.{md,mdx}': [
       'vp run update:edit:date',
-      'vp run lint:md',
+      'vp run lint:md:staged',
       'vp run format',
     ],
   },

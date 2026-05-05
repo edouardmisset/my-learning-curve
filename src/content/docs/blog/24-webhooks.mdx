@@ -31,6 +31,12 @@ A **webhook** (sometimes called a reverse API or web callback) allows one system
 
 To use a webhook, the receiving application must register a URL (an endpoint) with the sending application. When the target event happens on the sending side, it makes an HTTP request (usually a `POST`) to that registered URL, carrying a payload (typically JSON) containing information about the event.
 
+Because webhooks represent server-to-server communication, there are always two sides to this transaction.
+
+### 1. The Receiving Server (Listening for Events)
+
+This is the application that wants to be notified. It exposes a public URL and waits for incoming requests.
+
 ```typescript
 import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
@@ -56,6 +62,44 @@ app.post('/api/webhooks/github', async c => {
 serve({ fetch: app.fetch, port: 3000 }, info => {
   console.log(`Webhook server listening on port ${info.port}`)
 })
+```
+
+### 2. The Sending Server (Triggering the Webhook)
+
+This is the application where the event actually occurs (e.g., a service like GitHub or Stripe). It actively pushes the data payload to the receiver's URL.
+
+```typescript
+// The designated URL provided by the receiving application
+const webhookUrl = 'http://localhost:3000/api/webhooks/github'
+
+const eventPayload = {
+  repository: { name: 'my-learning-curve' },
+  pusher: { name: 'edouard' },
+}
+
+async function dispatchWebhook() {
+  try {
+    // The sender makes an HTTP POST request carrying the payload
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-github-event': 'push',
+      },
+      body: JSON.stringify(eventPayload),
+    })
+
+    if (!response.ok) {
+      console.error(`Webhook delivery failed: ${response.status}`)
+    } else {
+      console.log('Webhook delivered successfully!')
+    }
+  } catch (error) {
+    console.error('Failed to reach the receiving server:', error)
+  }
+}
+
+dispatchWebhook()
 ```
 
 ## Deep Dive / Advanced Usage

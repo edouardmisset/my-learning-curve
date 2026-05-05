@@ -32,15 +32,15 @@ A **webhook** (sometimes called a reverse API or web callback) allows one system
 To use a webhook, the receiving application must register a URL (an endpoint) with the sending application. When the target event happens on the sending side, it makes an HTTP request (usually a `POST`) to that registered URL, carrying a payload (typically JSON) containing information about the event.
 
 ```typescript
-import express from 'express'
+import { Hono } from 'hono'
+import { serve } from '@hono/node-server'
 
-const app = express()
-app.use(express.json())
+const app = new Hono()
 
 // This is our webhook endpoint listening for events
-app.post('/api/webhooks/github', (req, res) => {
-  const eventAction = req.headers['x-github-event']
-  const payload = req.body
+app.post('/api/webhooks/github', async c => {
+  const eventAction = c.req.header('x-github-event')
+  const payload = await c.req.json()
 
   if (eventAction === 'push') {
     console.log(
@@ -50,10 +50,18 @@ app.post('/api/webhooks/github', (req, res) => {
   }
 
   // Always respond with a 2xx status code to tell the sender we received it
-  res.status(200).send('Webhook received successfully')
+  return c.text('Webhook received successfully', 200)
 })
 
-app.listen(3000, () => console.log('Webhook server listening on port 3000'))
+serve(
+  {
+    fetch: app.fetch,
+    port: 3000,
+  },
+  info => {
+    console.log(`Webhook server listening on port ${info.port}`)
+  },
+)
 ```
 
 ## Deep Dive / Advanced Usage

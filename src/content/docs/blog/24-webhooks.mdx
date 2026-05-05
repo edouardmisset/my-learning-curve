@@ -53,15 +53,9 @@ app.post('/api/webhooks/github', async c => {
   return c.text('Webhook received successfully', 200)
 })
 
-serve(
-  {
-    fetch: app.fetch,
-    port: 3000,
-  },
-  info => {
-    console.log(`Webhook server listening on port ${info.port}`)
-  },
-)
+serve({ fetch: app.fetch, port: 3000 }, info => {
+  console.log(`Webhook server listening on port ${info.port}`)
+})
 ```
 
 ## Deep Dive / Advanced Usage

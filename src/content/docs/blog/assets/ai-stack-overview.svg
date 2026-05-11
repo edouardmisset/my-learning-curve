@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">AI stack overview for developers</title>
+  <desc id="desc">A layered diagram showing application, agent tooling, model, and infrastructure layers, with reliability and evaluation spanning across them.</desc>
+  <rect width="1200" height="720" rx="32" fill="#11111b"/>
+  <rect x="70" y="64" width="1060" height="592" rx="28" fill="#1e1e2e" stroke="#313244" stroke-width="2"/>
+
+  <text x="110" y="118" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="36" font-weight="700">The practical AI stack</text>
+  <text x="110" y="152" fill="#a6adc8" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="20">The same request passes through interface, tooling, model, and infrastructure.</text>
+
+  <rect x="120" y="192" width="960" height="92" rx="22" fill="#f9e2af"/>
+  <text x="152" y="230" fill="#1e1e2e" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="28" font-weight="700">1. Application layer</text>
+  <text x="152" y="264" fill="#313244" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="20">Chat, IDE, CLI, web app, design tool, support UI</text>
+
+  <rect x="120" y="302" width="960" height="92" rx="22" fill="#a6e3a1"/>
+  <text x="152" y="340" fill="#1e1e2e" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="28" font-weight="700">2. Agent and tooling layer</text>
+  <text x="152" y="374" fill="#313244" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="20">Prompts, MCP, tools, RAG, embeddings, vector search, orchestration</text>
+
+  <rect x="120" y="412" width="960" height="92" rx="22" fill="#89dceb"/>
+  <text x="152" y="450" fill="#1e1e2e" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="28" font-weight="700">3. Model layer</text>
+  <text x="152" y="484" fill="#313244" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="20">Foundation models, temperature, tuning, distillation, open vs proprietary weights</text>
+
+  <rect x="120" y="522" width="960" height="92" rx="22" fill="#f38ba8"/>
+  <text x="152" y="560" fill="#1e1e2e" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="28" font-weight="700">4. Infrastructure layer</text>
+  <text x="152" y="594" fill="#313244" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="20">GPUs, cloud inference, caching, throughput, rate limits, pricing</text>
+
+  <rect x="915" y="180" width="150" height="446" rx="20" fill="#313244" opacity="0.95"/>
+  <text x="990" y="240" fill="#f5e0dc" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">Across all</text>
+  <text x="990" y="286" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18" text-anchor="middle">Evals</text>
+  <text x="990" y="326" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18" text-anchor="middle">Guardrails</text>
+  <text x="990" y="366" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18" text-anchor="middle">Latency</text>
+  <text x="990" y="406" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18" text-anchor="middle">Cost</text>
+  <text x="990" y="446" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18" text-anchor="middle">Reliability</text>
+  <text x="990" y="486" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18" text-anchor="middle">Security</text>
+  <text x="990" y="526" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18" text-anchor="middle">Workflow fit</text>
+</svg>

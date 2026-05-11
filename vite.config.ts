@@ -53,7 +53,8 @@ export default defineConfig({
     ],
   },
   staged: {
-    '*.{js,jsx,ts,tsx,mjs,cjs,json,jsonc}': ['vp run lint', 'vp run format'],
+    '*.{js,jsx,ts,tsx,mjs,cjs}': ['vp run lint', 'vp run format'],
+    '*.{json,jsonc}': ['vp run format'],
     '*.css': ['stylelint --fix'],
     '*.{md,mdx}': [
       'vp run update:edit:date',

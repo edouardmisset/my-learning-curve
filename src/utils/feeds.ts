@@ -10,21 +10,17 @@ type FeedEntryWithDate = {
 const getFeedEntryTime = (entry: FeedEntryWithDate) =>
   (entry.data.published ?? entry.data.updated)?.getTime() ?? 0
 
-export function sortFeedEntriesByDateDesc<T extends FeedEntryWithDate>(
+export const sortFeedEntriesByDateDesc = <T extends FeedEntryWithDate>(
   entries: T[],
-) {
-  return entries.toSorted(
+) =>
+  entries.toSorted(
     (left, right) => getFeedEntryTime(right) - getFeedEntryTime(left),
   )
-}
 
-export function getLatestFeedEntries<T extends FeedEntryWithDate>(
+export const getLatestFeedEntries = <T extends FeedEntryWithDate>(
   entries: T[],
   limit = MAX_FEED_ARTICLES,
-) {
-  return sortFeedEntriesByDateDesc(entries).slice(0, limit)
-}
+) => sortFeedEntriesByDateDesc(entries).slice(0, limit)
 
-export function toFeedArticleParam(articleId: string) {
-  return Buffer.from(articleId, 'utf-8').toString('base64url')
-}
+export const toFeedArticleParam = (articleId: string) =>
+  Buffer.from(articleId, 'utf-8').toString('base64url')

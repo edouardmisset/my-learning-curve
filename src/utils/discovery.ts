@@ -81,7 +81,7 @@ export function serializeRawDocument(document: RawDocument) {
     ['canonical', document.canonicalPath],
   ] as const
   const frontmatterLines = frontmatterValues.flatMap(([key, value]) =>
-    value === undefined ? [] : [`${key}: ${formatFrontmatterValue(value)}`],
+    value === undefined ? [] : [`${key}: ${JSON.stringify(value)}`],
   )
 
   return ['---', ...frontmatterLines, '---', '', document.body.trim(), ''].join(
@@ -145,41 +145,19 @@ export function buildJsonLd(
 }
 
 function normalizeAuthors(authors: DiscoveryData['authors']) {
-  if (!authors) {
-    return []
-  }
-
-  return Array.isArray(authors) ? authors : [authors]
+  return !authors ? [] : Array.isArray(authors) ? authors : [authors]
 }
 
 function formatDate(value: Date | string | undefined) {
-  if (!value) {
-    return undefined
-  }
+  if (!value) return
 
-  if (value instanceof Date) {
-    return value.toISOString().slice(0, 10)
-  }
-
-  return value
-}
-
-function formatFrontmatterValue(value: string | string[]) {
-  return Array.isArray(value) ? JSON.stringify(value) : JSON.stringify(value)
+  return value instanceof Date ? value.toISOString().slice(0, 10) : value
 }
 
 function getSchemaType(id: string) {
-  if (id === 'index') {
-    return 'WebSite'
-  }
-
-  if (!id.includes('/')) {
-    return 'CollectionPage'
-  }
-
-  if (id.startsWith('blog/')) {
-    return 'BlogPosting'
-  }
+  if (id === 'index') return 'WebSite'
+  if (!id.includes('/')) return 'CollectionPage'
+  if (id.startsWith('blog/')) return 'BlogPosting'
 
   return 'TechArticle'
 }

@@ -9,8 +9,6 @@ const FONT_FAMILY_STACK = [
   'sans-serif',
 ] as const
 
-const ACCENT_BORDER_COLOR = [145, 68, 238] as const
-
 // Get all entries from the `docs` content collection.
 const entries = await getCollection('docs')
 
@@ -30,10 +28,13 @@ export const { getStaticPaths, GET } = await OGImageRoute({
       title: page.title,
       description: page.description ?? '',
       // Customize various colors and add a border.
-      bgGradient: [[24, 24, 27]],
+      bgGradient: [
+        [30, 32, 48],
+        [36, 39, 58],
+      ],
       border: {
-        color: [...ACCENT_BORDER_COLOR],
-        width: 2,
+        color: [202, 158, 230],
+        width: 10,
         side: 'inline-start',
       },
       logo: {

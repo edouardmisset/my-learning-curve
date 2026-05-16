@@ -72,7 +72,7 @@ Create a `.env.local` file in the root directory:
 ```env
 VITE_API_URL=https://api.example.com
 VITE_DEBUG_MODE=false
-DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+DATABASE_URL=postgresql://user:password@localhost:5432/db-name
 ```
 
 ## Usage

@@ -122,7 +122,7 @@ Only copy the line you **understand** and **want** to use.
   "editor.autoIndentOnPaste": true,
   "editor.bracketPairColorization.enabled": true,
   "editor.foldingImportsByDefault": true,
-  "editor.fontFamily": "'Monaspace Neon', 'FiraCode Nerd Font', 'FiraCode Nerd Font Mono', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'Monaspace Neon', 'FiraCode Nerd Font', 'FiraCode Nerd Font Mono', consolas, 'Courier New', monospace",
   "editor.fontLigatures": "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'",
   "editor.fontSize": 14,
   "editor.formatOnPaste": true,

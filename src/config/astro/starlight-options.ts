@@ -4,7 +4,7 @@ import starlightBlog from 'starlight-blog'
 import starlightKbd from 'starlight-kbd'
 import starlightLinksValidator from 'starlight-links-validator'
 import starlightLlmsTxt from 'starlight-llms-txt'
-import { BASE_PATH, PATHS, REPO_URL } from '../../constants/links.ts'
+import { PATHS, REPO_URL } from '../../constants/links.ts'
 import { CATPPUCCIN_OPTIONS } from './plugins/catppuccin-options.ts'
 import { STARLIGHT_BLOG_OPTIONS } from './plugins/starlight-blog-options.ts'
 import { STARLIGHT_KBD_OPTIONS } from './plugins/starlight-kbd-options.ts'
@@ -14,7 +14,7 @@ export const STARLIGHT_OPTIONS = {
   title: 'My Learning Curve',
   description: 'Bits and pieces I learned during my coding journey!',
   tagline: 'Bits and pieces I learned during my coding journey!',
-  favicon: `${BASE_PATH}/favicon.ico`,
+  favicon: '/favicon.ico',
   plugins: [
     catppuccin(CATPPUCCIN_OPTIONS),
     starlightKbd(STARLIGHT_KBD_OPTIONS),

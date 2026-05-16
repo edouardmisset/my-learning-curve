@@ -1,6 +1,5 @@
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
-import og from 'astro-og'
 import robots from 'astro-robots'
 import { defineConfig } from 'astro/config'
 import { BASE_PATH, BASE_WEBSITE_URL } from './src/constants/links.ts'
@@ -23,7 +22,6 @@ export default defineConfig({
   integrations: [
     starlight(STARLIGHT_OPTIONS),
     sitemap(SITEMAP_OPTIONS),
-    og(),
     robots(ROBOTS_OPTIONS),
   ],
 })

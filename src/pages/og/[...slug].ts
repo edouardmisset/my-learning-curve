@@ -36,6 +36,9 @@ export const { getStaticPaths, GET } = await OGImageRoute({
         width: 2,
         side: 'inline-start',
       },
+      logo: {
+        path: './public/favicon.ico',
+      },
       fonts: [
         './node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2',
       ],

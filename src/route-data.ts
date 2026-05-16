@@ -1,4 +1,5 @@
 import { defineRouteMiddleware } from '@astrojs/starlight/route-data'
+import { BASE_WEBSITE_URL } from '~/constants/links'
 import { buildJsonLd, getRawPath, toAbsoluteSiteUrl } from '~/utils/discovery'
 
 type HeadTag = {
@@ -10,7 +11,7 @@ type HeadTag = {
 export const onRequest = defineRouteMiddleware(context => {
   const route = context.locals.starlightRoute
   const pageId = route.id || 'index'
-  const site = context.site ?? context.url.origin
+  const site = context.site ?? BASE_WEBSITE_URL
 
   // Get the URL of the generated image for the current page using its ID and
   // append the `.png` file extension.

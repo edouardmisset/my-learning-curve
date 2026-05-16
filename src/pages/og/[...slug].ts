@@ -38,7 +38,7 @@ export const { getStaticPaths, GET } = await OGImageRoute({
         side: 'inline-start',
       },
       logo: {
-        path: './public/favicon.ico',
+        path: './public/apple-touch-icon.png',
       },
       fonts: [
         './node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2',

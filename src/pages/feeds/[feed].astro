@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content'
+import FeedLayout from '~/components/FeedLayout.astro'
+import { FEEDS, type FeedDefinition } from '~/config/feeds'
+import { LINKS } from '~/constants/links'
+
+export async function getStaticPaths() {
+  const feedsByEntryCount = await Promise.all(
+    FEEDS.map(async feed => ({
+      feed,
+      entries: await getCollection(feed.collection),
+    })),
+  )
+
+  return feedsByEntryCount
+    .filter(item => item.entries.length > 0)
+    .map(item => ({
+      params: { feed: item.feed.slug },
+      props: { feed: item.feed },
+    }))
+}
+
+const { feed } = Astro.props as { feed: FeedDefinition }
+
+const entries = await getCollection(feed.collection)
+const sortedEntries = [...entries].sort((left, right) => {
+  const leftDate = left.data.published ?? left.data.updated
+  const rightDate = right.data.published ?? right.data.updated
+
+  const leftTime = leftDate?.getTime() ?? 0
+  const rightTime = rightDate?.getTime() ?? 0
+
+  return rightTime - leftTime
+})
+
+const formatDate = (date: Date | null) =>
+  date
+    ? new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(date)
+    : 'Unknown date'
+
+const toPlainText = (value: string | null) =>
+  value
+    ? value
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+    : ''
+---
+
+<FeedLayout
+  title={`${feed.title} | Feed | My Learning Curve`}
+  description={feed.description}
+>
+  <section class="feed-hero">
+    <p class="feed-kicker">Feed</p>
+    <h1>{feed.title}</h1>
+    <p>{feed.description}</p>
+    <p class="feed-meta">
+      Source:{' '}
+      <a href={feed.websiteUrl} target="_blank" rel="noopener noreferrer">
+        {feed.websiteUrl}
+      </a>
+    </p>
+  </section>
+
+  <section class="feed-list" aria-label={`${feed.title} articles`}>
+    {
+      sortedEntries.map(article => {
+        const publishedDate = article.data.published ?? article.data.updated
+        const preview = toPlainText(article.data.description)
+        const trimmedPreview =
+          preview.length > 180 ? `${preview.slice(0, 180)}...` : preview
+
+        return (
+          <article class="feed-list-item">
+            <h2>
+              <a
+                class="feed-link"
+                href={LINKS.feeds(
+                  `${feed.slug}/${encodeURIComponent(article.id)}`,
+                )}
+              >
+                {article.data.title ?? 'Untitled article'}
+              </a>
+            </h2>
+            <p class="feed-meta">{formatDate(publishedDate)}</p>
+            {trimmedPreview && <p>{trimmedPreview}</p>}
+          </article>
+        )
+      })
+    }
+  </section>
+</FeedLayout>

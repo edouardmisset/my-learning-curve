@@ -1,0 +1,82 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import FeedLayout from '~/components/FeedLayout.astro'
+import { FEEDS, type FeedDefinition } from '~/config/feeds'
+import { LINKS } from '~/constants/links'
+
+export async function getStaticPaths() {
+  const pathSets = await Promise.all(
+    FEEDS.map(async feed => {
+      const entries = await getCollection(feed.collection)
+
+      if (entries.length === 0) {
+        return []
+      }
+
+      return entries.map(entry => ({
+        params: {
+          feed: feed.slug,
+          article: encodeURIComponent(entry.id),
+        },
+        props: {
+          article: entry,
+          feed,
+        },
+      }))
+    }),
+  )
+
+  return pathSets.flat()
+}
+
+type FeedCollection = (typeof FEEDS)[number]['collection']
+
+const { article, feed } = Astro.props as {
+  article: CollectionEntry<FeedCollection>
+  feed: FeedDefinition
+}
+
+const articleTitle = article.data.title ?? 'Untitled article'
+const articleHtml =
+  article.data.content ??
+  article.data.description ??
+  '<p>No article excerpt is available for this feed item.</p>'
+const publishedDate = article.data.published ?? article.data.updated
+const formattedDate = publishedDate
+  ? new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(
+      publishedDate,
+    )
+  : null
+---
+
+<FeedLayout
+  title={`${articleTitle} | ${feed.title}`}
+  description={feed.description}
+>
+  <article class="feed-article">
+    <p class="feed-breadcrumb">
+      <a href={LINKS.feeds()}>Feed</a> /{' '}
+      <a href={LINKS.feeds(feed.slug)}>{feed.title}</a>
+    </p>
+
+    <h1>{articleTitle}</h1>
+    {formattedDate && <p class="feed-meta">{formattedDate}</p>}
+
+    <div class="feed-content" set:html={articleHtml} />
+
+    {
+      article.data.url && (
+        <p>
+          <a
+            class="feed-link"
+            href={article.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read original article ↗
+          </a>
+        </p>
+      )
+    }
+  </article>
+</FeedLayout>

@@ -8,4 +8,10 @@
   --sl-font:
     'Atkinson Hyperlegible Next Variable', -apple-system, 'Segoe UI', roboto,
     arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  /* stylelint-disable-next-line custom-property-pattern */
+  --__sl-font:
+    'Atkinson Hyperlegible Next Variable', -apple-system, 'Segoe UI', roboto,
+    arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  /* stylelint-disable-next-line custom-property-pattern */
+  --__sl-font-mono: 'FiraCode Nerd Font', 'FiraCode Nerd Font Mono', 'Fira Code Nerd Font', 'FiraCode', 'Fira Code', firacode , consolas, 'Courier New', monospace;
 }

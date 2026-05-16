@@ -18,6 +18,9 @@ importers:
 
   .:
     dependencies:
+      '@ascorbic/feed-loader':
+        specifier: ^2.0.1
+        version: 2.0.1(astro@6.1.9(@types/node@25.6.0)(jiti@2.6.1)(typescript@6.0.3)(yaml@2.8.3))
       '@astrojs/check':
         specifier: 0.9.8
         version: 0.9.8(prettier@3.8.3)(typescript@6.0.3)
@@ -111,6 +114,16 @@ importers:
         version: 0.1.19(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))(yaml@2.8.3)
 
 packages:
+
+  '@ascorbic/feed-loader@2.0.1':
+    resolution: {integrity: sha512-nlP4WTp0Ea6J4q3vOleGK0d0l9s4bvKXTvAkttRgvobGb4AslsWm3LOciObWux9wKmzNjk0xSgJt9s00skXeFw==}
+    peerDependencies:
+      astro: ^4.14.0 || ^5.0.0
+
+  '@ascorbic/loader-utils@1.0.2':
+    resolution: {integrity: sha512-pg43g83gojVtEsAkXfjWuzJhuXneJp4wM/leBftGkCPV3yxKgB92EWA+nWu735BgbBMph3P7DrVqVc3ikt+dJA==}
+    peerDependencies:
+      astro: ^4.14.0 || ^5.0.0-beta.0
 
   '@astro-community/astro-embed-baseline-status@0.2.2':
     resolution: {integrity: sha512-07TBEb+xQWWZfMuoHohcZv/r2VSB80/1xN5iLhzSqavLmdsMyebEnbc6tvw3yMkxvX9IBLduNA5SxvVkpmowNQ==}
@@ -1582,6 +1595,10 @@ packages:
       rollup:
         optional: true
 
+  '@rowanmanning/feed-parser@2.1.3':
+    resolution: {integrity: sha512-sfr85UZqCNGwPwJ8pBqnZq/vO4wrC/UEfNuCnJAtNSPPQCK7w1sfH6PAzwfNpaAK3erafFFm6m+6TKyCSFw6Bw==}
+    engines: {node: 20.x || 22.x || 24.x}
+
   '@shikijs/core@3.23.0':
     resolution: {integrity: sha512-NSWQz0riNb67xthdm5br6lAkvpDJRTgB36fxlo37ZzM2yq0PQFFzbd8psqC2XMPgCzo1fW6cVi18+ArJ44wqgA==}
 
@@ -2662,6 +2679,9 @@ packages:
 
   hookified@2.1.1:
     resolution: {integrity: sha512-AHb76R16GB5EsPBE2J7Ko5kiEyXwviB9P5SMrAKcuAu4vJPZttViAbj9+tZeaQE5zjDme+1vcHP78Yj/WoAveA==}
+
+  html-entities@2.6.0:
+    resolution: {integrity: sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==}
 
   html-escaper@3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
@@ -4158,6 +4178,16 @@ packages:
 
 snapshots:
 
+  '@ascorbic/feed-loader@2.0.1(astro@6.1.9(@types/node@25.6.0)(jiti@2.6.1)(typescript@6.0.3)(yaml@2.8.3))':
+    dependencies:
+      '@ascorbic/loader-utils': 1.0.2(astro@6.1.9(@types/node@25.6.0)(jiti@2.6.1)(typescript@6.0.3)(yaml@2.8.3))
+      '@rowanmanning/feed-parser': 2.1.3
+      astro: 6.1.9(@types/node@25.6.0)(jiti@2.6.1)(typescript@6.0.3)(yaml@2.8.3)
+
+  '@ascorbic/loader-utils@1.0.2(astro@6.1.9(@types/node@25.6.0)(jiti@2.6.1)(typescript@6.0.3)(yaml@2.8.3))':
+    dependencies:
+      astro: 6.1.9(@types/node@25.6.0)(jiti@2.6.1)(typescript@6.0.3)(yaml@2.8.3)
+
   '@astro-community/astro-embed-baseline-status@0.2.2':
     dependencies:
       '@astro-community/astro-embed-utils': 0.2.0
@@ -5396,6 +5426,11 @@ snapshots:
       '@types/estree': 1.0.8
       estree-walker: 2.0.2
       picomatch: 4.0.4
+
+  '@rowanmanning/feed-parser@2.1.3':
+    dependencies:
+      fast-xml-parser: 5.7.2
+      html-entities: 2.6.0
 
   '@shikijs/core@3.23.0':
     dependencies:
@@ -6675,6 +6710,8 @@ snapshots:
   hookified@1.15.1: {}
 
   hookified@2.1.1: {}
+
+  html-entities@2.6.0: {}
 
   html-escaper@3.0.3: {}
 

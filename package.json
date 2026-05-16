@@ -21,6 +21,7 @@
     "update:edit:date": "node --experimental-strip-types scripts/update-frontmatter.ts"
   },
   "dependencies": {
+    "@ascorbic/feed-loader": "^2.0.1",
     "@astrojs/check": "0.9.8",
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/starlight": "^0.38.4",

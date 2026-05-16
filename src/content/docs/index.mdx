@@ -30,20 +30,23 @@ import { LINKS } from '~/constants/links'
     description="Insights and experiences from my coding journey."
   />
   <LinkCard
-    title="Browse snippets"
-    href={LINKS.snippets('css/layouts/every-layout')}
-    description="A collection of
- useful code snippets (CSS, TypeScript, SQL, Shell)."
+    title="Explore feeds"
+    href={LINKS.feeds()}
+    description="Browse curated RSS sources and their latest articles."
   />
   <LinkCard
-    title="My setup"
+    title="Browse snippets"
+    href={LINKS.snippets('css/layouts/every-layout')}
+    description="A collection of useful code snippets (CSS, TypeScript, SQL, Shell)."
+  />
+  <LinkCard
+    title="Peak at my setup"
     href={LINKS.reference('tools/setup')}
     description="Details about my development setup."
   />
   <LinkCard
     title="Learn"
     href={LINKS.learn()}
-    description="Tutorials and guides on development topics (data analysis, project
- setup, collaboration...)."
+    description="Tutorials and guides on development topics (data analysis, project setup, collaboration...)."
   />
 </CardGrid>

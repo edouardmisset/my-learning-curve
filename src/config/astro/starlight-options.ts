@@ -43,6 +43,10 @@ export const STARLIGHT_OPTIONS = {
       link: PATHS.blog(),
     },
     {
+      label: 'RSS Feed',
+      link: PATHS.feeds(),
+    },
+    {
       label: 'Learn',
       items: [
         {

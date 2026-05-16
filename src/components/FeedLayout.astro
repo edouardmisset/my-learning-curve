@@ -1,0 +1,39 @@
+---
+import { BASE_PATH } from '~/constants/links'
+// oxlint-disable-next-line import/no-unassigned-import
+import '~/styles/feed.css'
+
+interface Props {
+  title: string
+  description?: string
+}
+
+const { title, description = 'Live RSS feeds curated in My Learning Curve.' } =
+  Astro.props
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <div class="feed-shell">
+      <header class="feed-header">
+        <a href={`${BASE_PATH}/`} class="feed-brand">My Learning Curve</a>
+        <nav class="feed-nav" aria-label="Main">
+          <a href={`${BASE_PATH}/blog`}>Blog</a>
+          <a href={`${BASE_PATH}/feeds`}>Feed</a>
+          <a href={`${BASE_PATH}/learn`}>Learn</a>
+        </nav>
+      </header>
+
+      <main class="feed-main">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

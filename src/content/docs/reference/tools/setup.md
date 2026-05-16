@@ -58,21 +58,16 @@ Add this to your VS Code `settings.JSON`:
 - IntelliCode
 - Better Comments
 - Code Spell Checker
-- Conventional Commits
-- indent-rainbow
-- Live Server
 - Live Share
 - Path Intellisense
 - Rewrap
 
 - OXC
-- Oxfmt
 - ESLint
 - Prettier
 
 #### HTML
 
-- Auto Rename Tag
 - htmltagwrap
 
 #### CSS
@@ -94,7 +89,6 @@ Add this to your VS Code `settings.JSON`:
 
 #### Node
 
-- REST Client
 - npm Intellisense
 
 #### Deno
@@ -113,7 +107,6 @@ Add this to your VS Code `settings.JSON`:
 #### Customization
 
 - Material Icon Theme
-- One Dark Pro
 
 ### Settings
 
@@ -352,7 +345,6 @@ Then save.
 
 Here is a list of some of the plugins I use:
 
-- alias-tips
 - aliases
 - bun
 - colored-man-pages
@@ -413,6 +405,9 @@ Here are the ones I've setup:
 
 ```sh
 # Shell
+alias ".."="cd .."
+alias "..."="cd ../.."
+alias "...."="cd ../../.."
 alias as="alias | grep "
 alias c="clear"
 alias cat="bat"
@@ -424,22 +419,29 @@ alias htop="btop"
 alias la="eza -laF --git  --icons --group-directories-first"
 alias ll="eza -lF --git --icons --group-directories-first"
 alias ls="eza -F --git --icons --group-directories-first"
+# List directory in tree format with icons and limit depth to 2
 alias lst="eza -lF --git --tree --icons --level=2"
 alias top="btop"
+# Print each element of PATH on a new line
 alias trail="<<<${(F)path}"
 alias z-="z -"
 alias zz="z -"
-alias update="brew update && brew upgrade && tldr --update && omz update && mas upgrade && sudo softwareupdate -ia --verbose"
+# Update all package managers and system software
+alias update="brew update && brew upgrade && tldr --update && mas upgrade && system_update"
+alias system_update="sudo softwareupdate --install --all --verbose"
+alias python="python3"
+alias vsc="code ."
 
 # ZSH
-alias p10k="code ~/.p10k.zsh"
-alias zshrc="code ~/.zshrc"
+alias zshrc="code ~/.dotfiles && code ~/.zshrc"
 
 # GIT
 alias gac="git add -A && git commit -m"
+# List git branches with detailed formatted information
 alias gbr+="git branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate"
 alias gca="git commit --amend --no-edit"
-alias gclean="git remote prune origin && git switch main | git branch --merged | egrep -v '(^\*|master|main|dev)' | xargs git branch -d"
+# Clean merged local git branches excluding main, master, and dev
+alias gclean="git remote prune origin && git switch main && git branch --merged | grep -Ev '(^\*|master|main|dev)' | xargs git branch -d"
 alias gco---="git checkout @{-3}"
 alias gco--="git checkout @{-2}"
 alias gco-="git checkout -"
@@ -450,15 +452,23 @@ alias gcom="git checkout main"
 alias gdel="git branch -D"
 alias gla="git pull --all && git fetch --all"
 alias glm="glol main..HEAD"
-alias glol1m="glol --since='1 month ago'"
-alias glol1w="glol --since='1 week ago'"
-alias glol1y="glol --since='1 year ago'"
-alias glolg-="glol --grep="
+alias gstat="git shortlog -sne --since='1 year ago'"
+# Show last commit with formatted details
+alias glast="git log -1 --pretty=format:\"%C(auto)%h %s %Cgreen(%ar)\""
+alias glog1w="glol --since='1 week ago'"
+alias glog1m="glol --since='1 month ago'"
+alias glog1y="glol --since='1 year ago'"
+alias glogg-="glol --grep="
+# Display a graphical git log for commits on current branch with formatting
 alias glolm="git log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset\" main..HEAD"
+# Graphical git log with commit stats
 alias glolsm="glolm --stat"
 alias gmm="git merge main"
+# Switch to main branch and update remote branches
 alias gmu="git switch main && git pull --all && git fetch --all"
-alias gpo="git push --set-upstream origin $(git_current_branch)"
+# Push current branch with setting upstream tracking
+alias gpo="git push --set-upstream origin \$(git branch --show-current)"
+alias gpf="git push --force-with-lease"
 alias gt="git tag"
 alias gta="git tag -a"
 alias gundo="git reset --soft HEAD^"
@@ -467,14 +477,14 @@ alias gundo="git reset --soft HEAD^"
 alias bbd="brew bundle dump --force --describe --file='~/.dotfiles/Brewfile'"
 alias bubu="brew update && brew upgrade"
 
-# PNPM
+# Pnpm
 alias pm="pnpm"
 alias pad="pnpm add -d"
 alias pb="pnpm build"
 alias pd="pnpm dev"
 alias pdev="pnpm dev"
 alias pf="pnpm format"
-alias pi="pnpm install"
+alias pii="pnpm install"
 alias plf="pnpm lint:fix"
 alias pln="pnpm lint"
 alias prm="pnpm remove"
@@ -482,7 +492,12 @@ alias prun="pnpm run"
 alias pst="pnpm start"
 alias pt="pnpm test"
 
-# BUN
+# Yarn
+alias ylf="yarn lint:fix"
+alias yst="BROWSER=none yarn start"
+alias yta="yarn test:all"
+
+# Bun
 alias b="bun"
 alias ba="bun add"
 alias bad="bun add -d"
@@ -507,7 +522,7 @@ alias dt="deno test"
 alias dtw="deno test --watch"
 alias dtc="deno task check" # something like "deno lint && deno fmt && deno test --reporter=dot --coverage --parallel"
 alias dtd="deno task dev" # something like "deno lint --watch & deno fmt --watch & deno run --allow-net --allow-env --allow-read --watch ./path/to/entry.ts"
-alias dtd="deno task docs" # something like "deno doc --html --name='name-of-my-app' ./path/to/entry.ts"
+alias dtdoc="deno task docs" # something like "deno doc --html --name='name-of-my-app' ./path/to/entry.ts"
 alias dtl="deno task cache" # something like "deno cache --lock=deno.lock --lock-write ./path/to/entry.ts"
 ```
 

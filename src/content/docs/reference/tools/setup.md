@@ -545,6 +545,11 @@ function cl() {
     ls
 }
 
+# Create directory and cd into it
+mkcd() {
+  mkdir -p "$@" && cd "$_"
+}
+
 # You fix the bug, stage only the changes related to the bug and execute
 # This will create a branch called bugfix based off master with only the bug fix
 function gmove() {

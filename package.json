@@ -10,7 +10,7 @@
     "format": "vp fmt --write",
     "knip": "knip",
     "lint:md": "markdownlint-cli2 \"**/*.{md,mdx}\" --fix",
-    "lint": "vp lint --fix",
+    "lint": "vp lint --fix --no-error-on-unmatched-pattern",
     "prepare": "vp config",
     "preview": "astro preview",
     "reset": "rm -rf node_modules pnpm-lock.yaml && vp install",

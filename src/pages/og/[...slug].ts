@@ -26,7 +26,7 @@ export const { getStaticPaths, GET } = await OGImageRoute({
     return {
       // Use the page title and description as the image title and description.
       title: page.title,
-      description: page.description ?? '',
+      description: page.description ?? page.excerpt ?? '',
       // Customize various colors and add a border.
       bgGradient: [
         [30, 32, 48],

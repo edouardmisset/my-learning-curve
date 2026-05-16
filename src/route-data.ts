@@ -8,10 +8,17 @@ type HeadTag = {
   content?: string | undefined
 }
 
+type DiscoveryFrontmatter = {
+  description?: string
+  excerpt?: string
+}
+
 export const onRequest = defineRouteMiddleware(context => {
   const route = context.locals.starlightRoute
   const pageId = route.id || 'index'
   const site = context.site ?? BASE_WEBSITE_URL
+  const data = route.entry.data as DiscoveryFrontmatter
+  const fallbackDescription = data.description ?? data.excerpt
 
   // Get the URL of the generated image for the current page using its ID and
   // append the `.png` file extension.
@@ -45,6 +52,17 @@ export const onRequest = defineRouteMiddleware(context => {
     attrs: { type: 'application/ld+json' },
     content: jsonLd,
   })
+
+  if (fallbackDescription) {
+    upsertHeadTag(head, {
+      tag: 'meta',
+      attrs: { name: 'description', content: fallbackDescription },
+    })
+    upsertHeadTag(head, {
+      tag: 'meta',
+      attrs: { property: 'og:description', content: fallbackDescription },
+    })
+  }
 })
 
 function upsertHeadTag(head: HeadTag[], tag: HeadTag): void {

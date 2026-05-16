@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content'
 import FeedLayout from '~/components/FeedLayout.astro'
 import { FEEDS, type FeedDefinition } from '~/config/feeds'
 import { LINKS } from '~/constants/links'
+import { toFeedArticleParam } from '~/utils/feeds'
 
 export async function getStaticPaths() {
   const feedsByEntryCount = await Promise.all(
@@ -77,7 +78,7 @@ const toPlainText = (value: string | null) =>
               <a
                 class="feed-link"
                 href={LINKS.feeds(
-                  `${feed.slug}/${encodeURIComponent(article.id)}`,
+                  `${feed.slug}/${toFeedArticleParam(article.id)}`,
                 )}
               >
                 {article.data.title ?? 'Untitled article'}

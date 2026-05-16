@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content'
 import FeedLayout from '~/components/FeedLayout.astro'
 import { FEEDS, type FeedDefinition } from '~/config/feeds'
 import { LINKS } from '~/constants/links'
+import { toFeedArticleParam } from '~/utils/feeds'
 
 export async function getStaticPaths() {
   const pathSets = await Promise.all(
@@ -16,7 +17,7 @@ export async function getStaticPaths() {
       return entries.map(entry => ({
         params: {
           feed: feed.slug,
-          article: encodeURIComponent(entry.id),
+          article: toFeedArticleParam(entry.id),
         },
         props: {
           article: entry,

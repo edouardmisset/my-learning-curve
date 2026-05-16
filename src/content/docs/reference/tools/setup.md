@@ -3,7 +3,7 @@ date: 2023-03-15
 title: My setup
 description: Learn about my development setup and tools.
 tags: ['setup', 'development', 'tools']
-lastUpdated: 2026-03-24
+lastUpdated: 2026-05-16
 next:
   link: /my-learning-curve/reference/cheatsheets/vs-code-shortcuts
   label: VS Code Shortcuts
@@ -83,14 +83,8 @@ Add this to your VS Code `settings.JSON`:
 #### JS
 
 - BabelJavaScript
-- JavaScript (ES6) code snippets
-- Quokka.js (Pro) + Wallaby.js + Console Ninja
-- JS Refactoring Assistant (P42 v3 +)
+- JS Refactoring Assistant (**P42**)
 - Vitest
-
-#### TypeScript
-
-- Pretty TypeScript Errors
 
 #### Markdown
 
@@ -128,54 +122,176 @@ Only copy the line you **understand** and **want** to use.
 
 ```json
 {
-  "diffEditor.codeLens": true,
-  "docthis.includeDateTag": true,
-  "docthis.includeDescriptionTag": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.fontFamily": "FiraCode-Retina",
-  "editor.fontLigatures": true,
+  // ─── Telemetry ────────────────────────────────────────────────────────────
+  "telemetry.telemetryLevel": "off",
+
+  // ─── Editor ───────────────────────────────────────────────────────────────
+  "editor.autoIndentOnPaste": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.foldingImportsByDefault": true,
+  "editor.fontFamily": "'Monaspace Neon', 'FiraCode Nerd Font', 'FiraCode Nerd Font Mono', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'",
+  "editor.fontSize": 14,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "editor.minimap.enabled": false,
-  "editor.tabSize": 2,
-  "emmet.triggerExpansionOnTab": true,
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 10000,
-  "git.confirmSync": false,
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
-  "terminal.external.osxExec": "iTerm.app",
-  "terminal.integrated.cursorStyle": "line",
-  "workbench.colorTheme": "One Dark Pro",
-  "workbench.iconTheme": "material-icon-theme",
-  "auto-rename-tag.activationOnLanguage": ["html", "jsx", "tsx", "xml", "php"],
-  "breadcrumbs.enabled": false,
+  "editor.guides.bracketPairs": "active",
+  "editor.inlineSuggest.enabled": true,
+  "editor.inlineSuggest.showToolbar": "always",
   "editor.linkedEditing": true,
-  "editor.suggestSelection": "first", // or recentlyUserByPrefix
+  "editor.minimap.enabled": false,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "editor.renderWhitespace": "trailing",
+  "editor.suggest.preview": true,
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "editor.tabSize": 2,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "comment",
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
+
+  // ─── Diff Editor ──────────────────────────────────────────────────────────
+  "diffEditor.codeLens": true,
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+
+  // ─── Emmet ────────────────────────────────────────────────────────────────
+  "emmet.triggerExpansionOnTab": true,
+
+  // ─── Explorer ─────────────────────────────────────────────────────────────
+  "explorer.autoRevealExclude": {
+    "**/node_modules": true
+  },
+  "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "explorer.confirmPasteNative": false,
+
+  // ─── Files ────────────────────────────────────────────────────────────────
+  "files.associations": {
+    ".env": "env",
+    ".env.dev": "env",
+    ".env.production": "env",
+    "*.snap": "typescriptreact"
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 10000,
+
+  // ─── Git ──────────────────────────────────────────────────────────────────
   "git.autofetch": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "json.format.enable": true,
-  "liveshare.authenticationProvider": "GitHub",
-  "oneDarkPro.editorTheme": "oneDarkPro",
-  "prettier.arrowParens": "avoid",
-  "prettier.jsxSingleQuote": true,
-  "prettier.singleQuote": true,
-  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "always",
+  "git.useCommitInputAsStashMessage": true,
+
+  // ─── Terminal ─────────────────────────────────────────────────────────────
+  "terminal.external.osxExec": "Ghostty.app",
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorStyleInactive": "line",
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.fontFamily": "\"MesloLGS NF\", \"FiraCode Nerd Font\"",
   "terminal.integrated.fontSize": 13,
-  "terminal.integrated.macOptionIsMeta": true,
+  "terminal.integrated.fontLigatures.enabled": true,
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.scrollback": 10000,
   "terminal.integrated.sendKeybindingsToShell": true,
-  "terminal.integrated.shell.osx": "/bin/zsh",
+  "terminal.integrated.shellIntegration.decorationsEnabled": "both",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.stickyScroll.enabled": true,
+  "terminal.integrated.tabs.enabled": true,
+
+  // ─── Window ───────────────────────────────────────────────────────────────
+  "window.customTitleBarVisibility": "windowed",
+  "zenMode.showTabs": "none",
+
+  // ─── Workbench ────────────────────────────────────────────────────────────
+  "workbench.browser.enableChatTools": true,
+  "workbench.colorTheme": "Catppuccin Frappé",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.editor.revealIfOpen": true,
+  "workbench.externalBrowser": "/Applications/Brave Browser.app",
+  "workbench.iconTheme": "catppuccin-frappe",
+  "workbench.layoutControl.enabled": false,
+  "workbench.panel.showLabels": false,
   "workbench.preferredDarkColorTheme": "One Dark Pro",
   "workbench.sideBar.location": "right",
-  "[json]": {
-    "editor.quickSuggestions": {
-      "strings": true
-    },
-    "editor.suggest.insertMode": "replace",
-    "gitlens.codeLens.scopes": ["document"]
-  }
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.tree.enableStickyScroll": true,
+
+  // ─── Security ─────────────────────────────────────────────────────────────
+  "security.workspace.trust.untrustedFiles": "open",
+
+  // ─── CSS ──────────────────────────────────────────────────────────────────
+  "css.format.spaceAroundSelectorSeparator": true,
+  "css.lint.duplicateProperties": "warning",
+  "css.lint.float": "warning",
+  "css.lint.ieHack": "warning",
+
+  // ─── JSON ─────────────────────────────────────────────────────────────────
+  "json.format.enable": true,
+
+  // ─── Markdown ─────────────────────────────────────────────────────────────
+  "markdown.preview.fontFamily": "\"Atkinson Hyperlegible Next\", system-ui, sans-serif",
+
+  // ─── JS / TS ──────────────────────────────────────────────────────────────
+  "js/ts.format.semicolons": "remove",
+  "js/ts.preferences.preferTypeOnlyAutoImports": true,
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+
+  // ─── GitHub Copilot ───────────────────────────────────────────────────────
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+  "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+  "github.copilot.chat.languageContext.typescript.enabled": true,
+  "github.copilot.chat.localeOverride": "en",
+  "github.copilot.chat.scopeSelection": true,
+  "github.copilot.nextEditSuggestions.allowWhitespaceOnlyChanges": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+
+  // ─── Chat ─────────────────────────────────────────────────────────────────
+  "chat.editing.confirmEditRequestRemoval": false,
+  "chat.editing.confirmEditRequestRetry": false,
+  "chat.viewSessions.orientation": "stacked",
+
+  // ─── GitHub Pull Requests ─────────────────────────────────────────────────
+  "githubPullRequests.createOnPublishBranch": "never",
+  "githubPullRequests.pullBranch": "never",
+
+  // ─── CSpell ───────────────────────────────────────────────────────────────
+  "cSpell.language": "en,fr",
+
+  // ─── Extensions ───────────────────────────────────────────────────────────
+  "color-highlight.hslWithNoFunctionLanguages": ["*"],
+  "color-highlight.languages": ["*"],
+  "color-highlight.markRuler": false,
+  "htmltagwrap.tag": "div",
+  "imageCarousel.explorerContextMenu.enabled": true,
+  "liveServer.settings.CustomBrowser": "chrome",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "oneDarkPro.editorTheme": "One Dark Pro",
+  "p42.refactoring.convertLoopToForOf.suggestion": "warning",
+  "p42.refactoring.useEqEqNull.suggestion": "off",
+  "prettier.arrowParens": "avoid",
+  "prettier.documentSelectors": ["**/*.gts", "**/*.gjs"],
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "quokka.automaticRestart": true,
+  "quokka.showStartViewOnFeatureRelease": false,
+  "rewrap.autoWrap.enabled": true,
+  "rewrap.wrappingColumn": 80
+
+  // ─── Language overrides ───────────────────────────────────────────────────
+  // ...
 }
 ```
 

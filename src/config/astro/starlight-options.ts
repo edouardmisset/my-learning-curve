@@ -4,7 +4,7 @@ import starlightBlog from 'starlight-blog'
 import starlightKbd from 'starlight-kbd'
 import starlightLinksValidator from 'starlight-links-validator'
 import starlightLlmsTxt from 'starlight-llms-txt'
-import { PATHS, REPO_URL } from '../../constants/links.ts'
+import { BASE_PATH, PATHS, REPO_URL } from '../../constants/links.ts'
 import { CATPPUCCIN_OPTIONS } from './plugins/catppuccin-options.ts'
 import { STARLIGHT_BLOG_OPTIONS } from './plugins/starlight-blog-options.ts'
 import { STARLIGHT_KBD_OPTIONS } from './plugins/starlight-kbd-options.ts'
@@ -46,7 +46,7 @@ export const STARLIGHT_OPTIONS = {
       tag: 'link',
       attrs: {
         rel: 'manifest',
-        href: '/site.webmanifest',
+        href: `${BASE_PATH}/site.webmanifest`,
       },
     },
   ],

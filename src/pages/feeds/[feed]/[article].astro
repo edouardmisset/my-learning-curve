@@ -1,5 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content'
+import DocumentLayout from '~/components/DocumentLayout.astro'
 import FeedLayout from '~/components/FeedLayout.astro'
 import { FEEDS, type FeedDefinition } from '~/config/feeds'
 import { LINKS } from '~/constants/links'
@@ -48,34 +49,36 @@ const formattedDate = publishedDate
   : null
 ---
 
-<FeedLayout
+<DocumentLayout
   title={`${articleTitle} | ${feed.title}`}
   description={feed.description}
 >
-  <article class="feed-article">
-    <p class="feed-breadcrumb">
-      <a href={LINKS.feeds()}>Feed</a> /{' '}
-      <a href={LINKS.feeds(feed.slug)}>{feed.title}</a>
-    </p>
+  <FeedLayout>
+    <article class="feed-article">
+      <p class="feed-breadcrumb">
+        <a href={LINKS.feeds()}>Feed</a> /{' '}
+        <a href={LINKS.feeds(feed.slug)}>{feed.title}</a>
+      </p>
 
-    <h1>{articleTitle}</h1>
-    {formattedDate && <p class="feed-meta">{formattedDate}</p>}
+      <h1>{articleTitle}</h1>
+      {formattedDate && <p class="feed-meta">{formattedDate}</p>}
 
-    <div class="feed-content" set:html={articleHtml} />
+      <div class="feed-content" set:html={articleHtml} />
 
-    {
-      article.data.url && (
-        <p>
-          <a
-            class="feed-link"
-            href={article.data.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read original article ↗
-          </a>
-        </p>
-      )
-    }
-  </article>
-</FeedLayout>
+      {
+        article.data.url && (
+          <p>
+            <a
+              class="feed-link"
+              href={article.data.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read original article ↗
+            </a>
+          </p>
+        )
+      }
+    </article>
+  </FeedLayout>
+</DocumentLayout>

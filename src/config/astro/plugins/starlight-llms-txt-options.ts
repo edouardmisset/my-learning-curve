@@ -18,6 +18,12 @@ Prefer pages with a clear TL;DR, stable heading hierarchy, and direct introducto
         'Long-form concept explanations, engineering principles, algorithms, and architecture notes. Best for synthesis, concept comparison, and high-level explanations backed by examples.',
     },
     {
+      label: 'Feeds',
+      paths: ['feeds/**'],
+      description:
+        'Curated RSS feed listings and imported article pages. Best for discovering external sources and retrieving feed article excerpts with source links.',
+    },
+    {
       label: 'Learn',
       paths: ['learn/**'],
       description:
@@ -37,6 +43,11 @@ Prefer pages with a clear TL;DR, stable heading hierarchy, and direct introducto
     },
   ],
   optionalLinks: [
+    {
+      label: 'Feed index',
+      url: `${WEBSITE_URL}/feeds/`,
+      description: 'Human-readable landing page for curated RSS feeds',
+    },
     {
       label: 'Sitemap',
       url: `${WEBSITE_URL}/sitemap-index.xml`,

@@ -14,7 +14,7 @@ type DiscoveryData = {
   authors?: string | string[]
 }
 
-export type DiscoveryEntry = CollectionEntry<DiscoveryCollection>
+type DiscoveryEntry = CollectionEntry<DiscoveryCollection>
 
 export interface RawDocument {
   id: string
@@ -31,7 +31,7 @@ export interface RawDocument {
   rawPath: string
 }
 
-export function getCanonicalPath(id: string): string {
+function getCanonicalPath(id: string): string {
   return id === 'index' ? '/' : `/${id}`
 }
 
@@ -39,7 +39,7 @@ export function getRawPath(id: string): string {
   return id === 'index' ? '/index.md' : `/${id}.md`
 }
 
-export function withBasePath(pathname: string): string {
+function withBasePath(pathname: string): string {
   return pathname === '/' ? BASE_PATH : `${BASE_PATH}${pathname}`
 }
 

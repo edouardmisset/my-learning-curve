@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 
-function updateFileFrontmatter(files = process.argv.slice(2)) {
+function updateFileFrontmatter(files = process.argv.slice(2)): void {
   const today = new Date().toISOString().split('T')[0]
 
   for (const file of files) {

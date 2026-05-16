@@ -18,6 +18,7 @@ export default defineConfig({
     },
     rules: {
       'no-console': 'warn',
+      'explicit-function-return-type': 'error',
     },
     ignorePatterns: [
       'dist/**',

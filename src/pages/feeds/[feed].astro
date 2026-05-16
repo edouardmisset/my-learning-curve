@@ -2,11 +2,12 @@
 import { getCollection } from 'astro:content'
 import DocumentLayout from '~/components/DocumentLayout.astro'
 import FeedLayout from '~/components/FeedLayout.astro'
-import { FEEDS, type FeedDefinition } from '~/config/feeds'
+import { FEEDS } from '~/config/feeds'
 import { LINKS } from '~/constants/links'
 import { getLatestFeedEntries, toFeedArticleParam } from '~/utils/feeds'
+import type { FeedPath, FeedProps } from './types'
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<FeedPath[]> {
   const feedsByEntryCount = await Promise.all(
     FEEDS.map(async feed => {
       const entries = getLatestFeedEntries(await getCollection(feed.collection))
@@ -26,17 +27,17 @@ export async function getStaticPaths() {
     }))
 }
 
-const { feed } = Astro.props as { feed: FeedDefinition }
+const { feed } = Astro.props as FeedProps
 
 const entries = await getCollection(feed.collection)
 const sortedEntries = getLatestFeedEntries(entries)
 
-const formatDate = (date: Date | null) =>
+const formatDate = (date: Date | null): string =>
   date
     ? new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(date)
     : 'Unknown date'
 
-const toPlainText = (value: string | null) =>
+const toPlainText = (value: string | null): string =>
   value
     ? value
         .replace(/<[^>]+>/g, ' ')

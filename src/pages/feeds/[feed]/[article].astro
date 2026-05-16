@@ -1,40 +1,38 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 import DocumentLayout from '~/components/DocumentLayout.astro'
 import FeedLayout from '~/components/FeedLayout.astro'
-import { FEEDS, type FeedDefinition } from '~/config/feeds'
+import { FEEDS } from '~/config/feeds'
 import { LINKS } from '~/constants/links'
 import { getLatestFeedEntries, toFeedArticleParam } from '~/utils/feeds'
+import type { FeedArticlePath, FeedArticleProps } from '../types'
 
-export async function getStaticPaths() {
-  const pathSets = await Promise.all(
-    FEEDS.map(async feed => {
-      const entries = getLatestFeedEntries(await getCollection(feed.collection))
+export const getStaticPaths: () => Promise<FeedArticlePath[]> = async () => {
+  return (
+    await Promise.all(
+      FEEDS.map(async feed => {
+        const entries = getLatestFeedEntries(
+          await getCollection(feed.collection),
+        )
 
-      if (entries.length === 0) return []
+        if (entries.length === 0) return []
 
-      return entries.map(entry => ({
-        params: {
-          feed: feed.slug,
-          article: toFeedArticleParam(entry.id),
-        },
-        props: {
-          article: entry,
-          feed,
-        },
-      }))
-    }),
-  )
-
-  return pathSets.flat()
+        return entries.map(entry => ({
+          params: {
+            feed: feed.slug,
+            article: toFeedArticleParam(entry.id),
+          },
+          props: {
+            article: entry,
+            feed,
+          },
+        }))
+      }),
+    )
+  ).flat()
 }
 
-type FeedCollection = (typeof FEEDS)[number]['collection']
-
-const { article, feed } = Astro.props as {
-  article: CollectionEntry<FeedCollection>
-  feed: FeedDefinition
-}
+const { article, feed } = Astro.props as FeedArticleProps
 
 const articleTitle = article.data.title ?? 'Untitled article'
 const articleHtml =

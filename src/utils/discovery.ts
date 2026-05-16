@@ -31,19 +31,22 @@ export interface RawDocument {
   rawPath: string
 }
 
-export function getCanonicalPath(id: string) {
+export function getCanonicalPath(id: string): string {
   return id === 'index' ? '/' : `/${id}`
 }
 
-export function getRawPath(id: string) {
+export function getRawPath(id: string): string {
   return id === 'index' ? '/index.md' : `/${id}.md`
 }
 
-export function withBasePath(pathname: string) {
+export function withBasePath(pathname: string): string {
   return pathname === '/' ? BASE_PATH : `${BASE_PATH}${pathname}`
 }
 
-export function toAbsoluteSiteUrl(pathname: string, site: URL | string) {
+export function toAbsoluteSiteUrl(
+  pathname: string,
+  site: URL | string,
+): string {
   return new URL(withBasePath(pathname), site).href
 }
 
@@ -69,7 +72,7 @@ export function createRawDocument(
   }
 }
 
-export function serializeRawDocument(document: RawDocument) {
+export function serializeRawDocument(document: RawDocument): string {
   const frontmatterValues = [
     ['title', document.title],
     ['excerpt', document.excerpt],
@@ -93,7 +96,7 @@ export function buildJsonLd(
   route: StarlightRouteData,
   site: URL | string,
   ogImageUrl: string,
-) {
+): Record<string, unknown> {
   const data = route.entry.data as DiscoveryData
   const url = toAbsoluteSiteUrl(getCanonicalPath(route.id), site)
   const description = data.excerpt ?? data.description
@@ -144,17 +147,25 @@ export function buildJsonLd(
   }
 }
 
-function normalizeAuthors(authors: DiscoveryData['authors']) {
+function normalizeAuthors(authors: DiscoveryData['authors']): string[] {
   return !authors ? [] : Array.isArray(authors) ? authors : [authors]
 }
 
-function formatDate(value: Date | string | undefined) {
+function formatDate(value: Date | string | undefined): string | undefined {
   if (!value) return
 
   return value instanceof Date ? value.toISOString().slice(0, 10) : value
 }
 
-function getSchemaType(id: string) {
+const CONTENT_TYPE = [
+  'WebSite',
+  'CollectionPage',
+  'BlogPosting',
+  'TechArticle',
+] as const
+type ContentType = (typeof CONTENT_TYPE)[number]
+
+function getSchemaType(id: string): ContentType {
   if (id === 'index') return 'WebSite'
   if (!id.includes('/')) return 'CollectionPage'
   if (id.startsWith('blog/')) return 'BlogPosting'

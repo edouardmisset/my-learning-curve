@@ -5,7 +5,9 @@ import { docsSchema } from '@astrojs/starlight/schema'
 import { blogSchema } from 'starlight-blog/schema'
 import { FEEDS } from '~/config/feeds'
 
-function createResilientFeedLoader(feedUrl: string) {
+function createResilientFeedLoader(
+  feedUrl: string,
+): ReturnType<typeof feedLoader> {
   const loader = feedLoader({
     url: feedUrl,
   })

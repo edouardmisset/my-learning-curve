@@ -8,8 +8,17 @@ import {
 
 const rawDocuments = await getRawDocuments()
 
-export function getStaticPaths() {
-  return rawDocuments.map(document => ({
+type RouteParamsWithDocument = {
+  params: {
+    slug: string
+  }
+  props: {
+    document: RawDocument
+  }
+}
+
+export const getStaticPaths: () => RouteParamsWithDocument[] = () =>
+  rawDocuments.map(document => ({
     params: {
       slug: document.id,
     },
@@ -17,7 +26,6 @@ export function getStaticPaths() {
       document,
     },
   }))
-}
 
 export const GET: APIRoute = ({ props }) => {
   const document = props['document'] as RawDocument
@@ -29,7 +37,7 @@ export const GET: APIRoute = ({ props }) => {
   })
 }
 
-async function getRawDocuments() {
+async function getRawDocuments(): Promise<RawDocument[]> {
   const documentsByPath = new Map<string, RawDocument>()
   const docsEntries = await getCollection('docs')
   const snippetsEntries = await getCollection('snippets')

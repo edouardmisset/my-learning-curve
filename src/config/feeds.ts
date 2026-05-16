@@ -290,13 +290,3 @@ export const FEEDS = [
     collection: 'thatshubhamBlogFeed',
   },
 ] as const
-
-export const JAVASCRIPT_WEEKLY_FEED = FEEDS.find(
-  feed => feed.slug === 'javascriptweekly',
-)!
-
-export type FeedDefinition = (typeof FEEDS)[number]
-
-export function getFeedBySlug(slug: string): FeedDefinition | undefined {
-  return FEEDS.find(feed => feed.slug === slug)
-}

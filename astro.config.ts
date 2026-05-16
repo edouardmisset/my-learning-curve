@@ -3,10 +3,10 @@ import starlight from '@astrojs/starlight'
 import og from 'astro-og'
 import robots from 'astro-robots'
 import { defineConfig } from 'astro/config'
-import { BASE_PATH, BASE_WEBSITE_URL } from '~/constants/links.ts'
-import { ROBOTS_OPTIONS } from '~/config/astro/robots-options.ts'
-import { SITEMAP_OPTIONS } from '~/config/astro/sitemap-options.ts'
-import { STARLIGHT_OPTIONS } from '~/config/astro/starlight-options.ts'
+import { BASE_PATH, BASE_WEBSITE_URL } from './src/constants/links.ts'
+import { ROBOTS_OPTIONS } from './src/config/astro/robots-options.ts'
+import { SITEMAP_OPTIONS } from './src/config/astro/sitemap-options.ts'
+import { STARLIGHT_OPTIONS } from './src/config/astro/starlight-options.ts'
 
 // https://astro.build/config
 export default defineConfig({

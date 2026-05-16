@@ -3,16 +3,14 @@ import { getCollection, type CollectionEntry } from 'astro:content'
 import FeedLayout from '~/components/FeedLayout.astro'
 import { FEEDS, type FeedDefinition } from '~/config/feeds'
 import { LINKS } from '~/constants/links'
-import { toFeedArticleParam } from '~/utils/feeds'
+import { getLatestFeedEntries, toFeedArticleParam } from '~/utils/feeds'
 
 export async function getStaticPaths() {
   const pathSets = await Promise.all(
     FEEDS.map(async feed => {
-      const entries = await getCollection(feed.collection)
+      const entries = getLatestFeedEntries(await getCollection(feed.collection))
 
-      if (entries.length === 0) {
-        return []
-      }
+      if (entries.length === 0) return []
 
       return entries.map(entry => ({
         params: {

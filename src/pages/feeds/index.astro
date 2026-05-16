@@ -3,17 +3,17 @@ import { getCollection } from 'astro:content'
 import FeedLayout from '~/components/FeedLayout.astro'
 import { FEEDS } from '~/config/feeds'
 import { LINKS } from '~/constants/links'
+import { getLatestFeedEntries } from '~/utils/feeds'
 
 const feedsWithArticles = (
   await Promise.all(
     FEEDS.map(async feed => {
-      const entries = await getCollection(feed.collection)
-      const latestArticleTime = entries.reduce((latestTime, entry) => {
-        const entryDate = entry.data.published ?? entry.data.updated
-        const entryTime = entryDate?.getTime() ?? 0
-
-        return Math.max(latestTime, entryTime)
-      }, 0)
+      const entries = getLatestFeedEntries(await getCollection(feed.collection))
+      const latestEntry = entries[0]
+      const latestArticleTime =
+        (latestEntry
+          ? (latestEntry.data.published ?? latestEntry.data.updated)?.getTime()
+          : null) ?? 0
 
       return {
         feed,

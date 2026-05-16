@@ -3,14 +3,18 @@ import { getCollection } from 'astro:content'
 import FeedLayout from '~/components/FeedLayout.astro'
 import { FEEDS, type FeedDefinition } from '~/config/feeds'
 import { LINKS } from '~/constants/links'
-import { toFeedArticleParam } from '~/utils/feeds'
+import { getLatestFeedEntries, toFeedArticleParam } from '~/utils/feeds'
 
 export async function getStaticPaths() {
   const feedsByEntryCount = await Promise.all(
-    FEEDS.map(async feed => ({
-      feed,
-      entries: await getCollection(feed.collection),
-    })),
+    FEEDS.map(async feed => {
+      const entries = getLatestFeedEntries(await getCollection(feed.collection))
+
+      return {
+        feed,
+        entries,
+      }
+    }),
   )
 
   return feedsByEntryCount
@@ -24,15 +28,7 @@ export async function getStaticPaths() {
 const { feed } = Astro.props as { feed: FeedDefinition }
 
 const entries = await getCollection(feed.collection)
-const sortedEntries = [...entries].sort((left, right) => {
-  const leftDate = left.data.published ?? left.data.updated
-  const rightDate = right.data.published ?? right.data.updated
-
-  const leftTime = leftDate?.getTime() ?? 0
-  const rightTime = rightDate?.getTime() ?? 0
-
-  return rightTime - leftTime
-})
+const sortedEntries = getLatestFeedEntries(entries)
 
 const formatDate = (date: Date | null) =>
   date

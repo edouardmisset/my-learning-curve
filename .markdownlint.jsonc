@@ -7,22 +7,23 @@
   // MD033/no-inline-html - Allow inline HTML (needed for Astro components)
   "MD033": {
     "allowed_elements": [
-      "PackageManagers",
-      "Disclaimer",
-      "details",
-      "summary",
-      "kbd",
-      "br",
-      "sup",
-      "sub",
-      "strong",
-      "img",
-      "Code",
       "Aside",
-      "LinkCard",
+      "BaselineStatus",
+      "br",
       "CardGrid",
+      "Code",
+      "details",
+      "Disclaimer",
+      "img",
+      "kbd",
+      "KbdPicker",
+      "LinkCard",
       "LinkPreview",
-      "BaselineStatus"
+      "PackageManagers",
+      "strong",
+      "sub",
+      "summary",
+      "sup"
     ]
   },
   // MD041/first-line-heading - Allow frontmatter before first heading

@@ -1,4 +1,4 @@
-import starlightKbd from 'starlight-kbd'
+import { type StarlightKbdUserConfig } from 'starlight-kbd'
 
 export const STARLIGHT_KBD_OPTIONS = {
   types: [
@@ -6,4 +6,5 @@ export const STARLIGHT_KBD_OPTIONS = {
     { id: 'windows', label: 'Windows' },
     { id: 'linux', label: 'Linux' },
   ],
-} as const satisfies NonNullable<Parameters<typeof starlightKbd>[0]>
+  globalPicker: false,
+} as const satisfies StarlightKbdUserConfig

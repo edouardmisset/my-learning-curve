@@ -3,6 +3,7 @@ import { feedLoader } from '@ascorbic/feed-loader'
 import { docsLoader } from '@astrojs/starlight/loaders'
 import { docsSchema } from '@astrojs/starlight/schema'
 import { blogSchema } from 'starlight-blog/schema'
+import { skillsLoader } from 'astro-skills'
 import { FEEDS } from '~/config/feeds'
 
 function createResilientFeedLoader(
@@ -52,6 +53,9 @@ export const collections = {
     schema: docsSchema({
       extend: context => blogSchema(context),
     }),
+  }),
+  skills: defineCollection({
+    loader: skillsLoader({ base: './skills' }),
   }),
   ...feedCollections,
 }

@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content'
+import DocumentLayout from '~/components/DocumentLayout.astro'
+import FeedLayout from '~/components/FeedLayout.astro'
+import { BASE_PATH, LINKS, WEBSITE_URL } from '~/constants/links'
+
+const skills = await getCollection('skills')
+---
+
+<DocumentLayout
+  title="Agent Skills | My Learning Curve"
+  description="Discover and install Agent Skills bundled on My Learning Curve."
+>
+  <FeedLayout>
+    <section class="feed-hero">
+      <p class="feed-kicker">Agent Skills Discovery</p>
+      <h1>AI Agent Skills</h1>
+      <p>
+        These are machine-readable agent skills compatible with the <a
+          href="https://agentskills.io/"
+          target="_blank"
+          rel="noopener noreferrer" style="color: var(--feed-accent)">Agent Skills Specification</a
+        >. You can install any of these skills in your local AI companion or agent development environment.
+      </p>
+    </section>
+
+    <section class="feed-grid" aria-label="Available agent skills">
+      {
+        skills.map(skill => {
+          const installCmd = `npx skills add ${WEBSITE_URL}/.well-known/agent-skills/${skill.id}`
+
+          return (
+            <article class="feed-card" style="display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
+              <div>
+                <p class="feed-kicker">{skill.data.type}</p>
+                <h2 style="margin-block: 0 0.5rem; font-size: 1.4rem;">{skill.data.name}</h2>
+                <p style="font-size: 0.95rem; line-height: 1.5; color: var(--feed-muted); margin-block-end: 1rem;">{skill.data.description}</p>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="background-color: var(--feed-surface-2); padding: 0.6rem 0.8rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.8rem; overflow-x: auto; white-space: nowrap; border: 1px solid var(--feed-border); color: var(--feed-accent-soft); display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
+                  <span>{installCmd}</span>
+                </div>
+                <div class="feed-card-links" style="margin-top: auto;">
+                  <a class="feed-link" href={LINKS.skills(skill.id)}>
+                    Read instructions ➔
+                  </a>
+                  <a
+                    class="feed-muted-link"
+                    href={`${BASE_PATH}/.well-known/agent-skills/${skill.id}/SKILL.md`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Raw SKILL.md
+                  </a>
+                </div>
+              </div>
+            </article>
+          )
+        })
+      }
+    </section>
+  </FeedLayout>
+</DocumentLayout>

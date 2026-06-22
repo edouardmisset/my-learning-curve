@@ -82,6 +82,10 @@ export const STARLIGHT_OPTIONS = {
       link: PATHS.feeds(),
     },
     {
+      label: 'Agent Skills',
+      link: PATHS.skills(),
+    },
+    {
       label: 'Learn',
       items: [
         {

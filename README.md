@@ -70,6 +70,17 @@ Maintenance notes:
 - Keep high-value sections listed in `llms.txt` focused on blog posts, guides, references, and snippets.
 - GitHub Pages cannot attach custom `Link` or `X-Robots-Tag` headers, so discovery is implemented with static files and HTML head tags instead.
 
+### 🛠️ Installing Agent Skills
+
+You can install any of the custom agent skills published on this website directly into your local agent environment using `npx skills`:
+
+```bash
+# Example: Install the "Grilling" skill
+npx skills add https://edouardmisset.github.io/my-learning-curve/skills/grilling
+```
+
+For more options and information about the skills ecosystem, see the [Agent Skills CLI](https://skills.sh/).
+
 ## License
 
 This project is licensed under the terms of the [LICENSE](LICENSE) file.

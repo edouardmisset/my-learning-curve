@@ -3,7 +3,7 @@ title: 'The AI Stack for Developers: Terms, Tools, and Trade-Offs'
 excerpt: "A developer's guide to AI terms, tooling, infrastructure, and the trade-offs behind the hype."
 tags: ['AI', 'LLM', 'Developer Tooling', 'Infrastructure', 'Machine Learning']
 date: 2026-05-11
-lastUpdated: 2026-05-11
+lastUpdated: 2026-06-27
 draft: true
 ---
 
@@ -68,17 +68,17 @@ choices made somewhere along that path.
 
 A few shared definitions help before we start.
 
-- **AI** is the broad umbrella term. In product discourse, it usually means
+- **AI** ([Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)) is the broad umbrella term. In product discourse, it usually means
   software using machine learning.
-- **LLM** means large language model: a model trained to predict tokens in
+- **LLM** ([Large language model](https://en.wikipedia.org/wiki/Large_language_model)) means large language model: a model trained to predict tokens in
   sequence.
 - **Tokens** are chunks of text models process, price, and remember. They are
   not exactly words, which is one reason invoices and context limits always feel
   slightly petty.
-- **Inference** is the act of using a trained model to generate an output.
-- **Training** is the expensive phase where the model learned from huge
+- **Inference** ([Inference](https://en.wikipedia.org/wiki/Inference)) is the act of using a trained model to generate an output.
+- **Training** ([Training](https://en.wikipedia.org/wiki/Machine_learning#Training)) is the expensive phase where the model learned from huge
   datasets.
-- **Non-deterministic** means the same input can produce slightly different
+- **Non-deterministic** ([Non-determinism](https://en.wikipedia.org/wiki/Nondeterministic_programming)) means the same input can produce slightly different
   outputs, especially when sampling is involved.
 - **Behavior** is the practical personality of the model: style, helpfulness,
   refusal patterns, tool use habits, verbosity, and how confidently it says
@@ -110,14 +110,14 @@ constraints, tool rules, output format, and what it should refuse. If the user
 prompt is the request, the system prompt is the quietly stressed project manager
 standing behind it.
 
-The **context window** is the maximum amount of text and multimodal input the
+The **context window** ([Context window](https://en.wikipedia.org/wiki/Context_window)) is the maximum amount of text and multimodal input the
 model can consider at once. If you paste a large codebase, a long PDF, and
 several follow-up questions into the same conversation, you are spending that
 budget. Bigger context windows are useful, but they do not repeal confusion. A
 model can forget the important thing while faithfully remembering twelve
 irrelevant stack traces.
 
-**Multimodality** means the system can operate across more than text: images,
+**Multimodality** ([Multimodal learning](https://en.wikipedia.org/wiki/Multimodal_learning)) means the system can operate across more than text: images,
 audio, video, screenshots, diagrams, even screen interactions. For developers,
 this matters because modern tools increasingly mix source code, terminal output,
 screenshots, Figma files, docs, and browser state inside one workflow.
@@ -182,7 +182,10 @@ the result back into the conversation.
 That is also why **structured outputs** matter. Instead of hoping the model
 returns something parseable after a heartfelt plea in plain English, you give it
 a schema. JSON mode and similar mechanisms reduce ambiguity and make the system
-easier to automate. The model can still fail, but at least it can fail in a
+easier to automate. Specifically, many systems now use **constrained sampling**—where
+the model's output is restricted at the token level to ensure it adheres strictly to
+the provided schema—to provide guarantees that prompting alone cannot offer. The
+model can still fail, but at least it can fail in a
 format your code understands.
 
 Here is the boring-looking but important version of a modern "AI feature":
@@ -303,15 +306,15 @@ roadmap.
 The way a model gets its behavior is also worth separating into pieces.
 
 **SFT**, or supervised fine-tuning, trains the model further on examples of
-desired behavior. **Fine-tuning** is the broader category: adapting a base model
-on a task or domain. **RLHF**, reinforcement learning from human feedback, and
+desired behavior. **Fine-tuning** ([Fine-tuning](<https://en.wikipedia.org/wiki/Fine-tuning_(machine_learning)>)) is the broader category: adapting a base model
+on a task or domain. **RLHF**, ([Reinforcement learning from human feedback](https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback)), and
 other **preference tuning** methods push the model toward outputs humans judge
 more helpful, harmless, or aligned with product goals. The industry often treats
 these terms interchangeably when it should not. SFT teaches by example;
 preference tuning shapes ranking and behavior; product prompting still does a
 great deal of the everyday steering.
 
-**Distillation** is the process of training a smaller model to imitate a stronger
+**Distillation** ([Knowledge distillation](https://en.wikipedia.org/wiki/Knowledge_distillation)) is the process of training a smaller model to imitate a stronger
 one or a stronger system. It is one reason smaller models keep getting
 surprisingly good. They are not spontaneously wiser; they inherit structure from
 bigger, more expensive ancestors.
@@ -322,13 +325,13 @@ household term than RAG, but it points to a broader pattern: engineers keep
 trying to combine model weights, retrieved context, and post-training tricks so
 the model sounds both informed and obedient.
 
-Then we reach architecture jargon. **MoE**, or mixture of experts, means the
+Then we reach architecture jargon. **MoE**, ([Mixture of experts](https://en.wikipedia.org/wiki/Mixture_of_experts)), means the
 model routes tokens through a subset of specialized expert networks rather than
 activating the full network every time. That is one reason parameter counts
 alone can be misleading. A model can be enormous on paper and still use only
 part of itself per token.
 
-**Quantization** reduces the numerical precision used to represent model weights
+**Quantization** ([Quantization](https://en.wikipedia.org/wiki/Large_language_model#Quantization)) reduces the numerical precision used to represent model weights
 and activations. The point is practical: smaller memory footprint, cheaper
 serving, faster local deployment, sometimes a slight quality hit. If you care
 about self-hosting, quantization stops being obscure optimization trivia and
@@ -369,6 +372,11 @@ system can handle over time. **Rate limits** are the caps the provider imposes
 so everyone does not set the data center on fire at once. A model can be smart
 and still be a terrible product choice if it is slow, unstable, or throttled
 into uselessness.
+
+Specifically, for developers, you need to distinguish between **TTFT (Time to First Token)**—the
+latency of the initial response—and **TPS (Tokens Per Second)**, which measures
+the sustained throughput of the generation. A model might have a fast TTFT but
+low TPS, making it feel snappy initially but slow for long-form content.
 
 **Prompt caching** is an optimization where repeated prompt segments do not have
 to be processed from scratch every time. This matters more than it sounds. Many

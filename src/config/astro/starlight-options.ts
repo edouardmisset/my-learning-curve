@@ -10,6 +10,23 @@ import { STARLIGHT_BLOG_OPTIONS } from './plugins/starlight-blog-options.ts'
 import { STARLIGHT_KBD_OPTIONS } from './plugins/starlight-kbd-options.ts'
 import { STARLIGHT_LLM_TXT_OPTIONS } from './plugins/starlight-llms-txt-options.ts'
 
+type SidebarItem = NonNullable<
+  Parameters<typeof starlight>[0]['sidebar']
+>[number]
+
+const autogenerateGroup = (
+  label: string,
+  directory: string,
+  options?: { collapsed?: boolean },
+): SidebarItem =>
+  ({
+    label,
+    items: [{ autogenerate: { directory } }],
+    ...(options?.collapsed === undefined
+      ? {}
+      : { collapsed: options.collapsed }),
+  }) as unknown as SidebarItem
+
 export const STARLIGHT_OPTIONS = {
   title: 'My Learning Curve',
   description: 'Bits and pieces I learned during my coding journey!',
@@ -113,25 +130,12 @@ export const STARLIGHT_OPTIONS = {
     {
       label: 'Reference',
       items: [
-        {
-          label: 'Cheatsheets',
-          autogenerate: { directory: 'reference/cheatsheets' },
-        },
-        {
-          label: 'Templates',
-          autogenerate: { directory: 'reference/templates' },
-        },
-        {
-          label: 'Tools',
-          autogenerate: { directory: 'reference/tools' },
-        },
+        autogenerateGroup('Cheatsheets', 'reference/cheatsheets'),
+        autogenerateGroup('Templates', 'reference/templates'),
+        autogenerateGroup('Tools', 'reference/tools'),
       ],
     },
-    {
-      label: 'Snippets',
-      autogenerate: { directory: 'snippets' },
-      collapsed: true,
-    },
+    autogenerateGroup('Snippets', 'snippets', { collapsed: true }),
   ],
   lastUpdated: true,
 } as const satisfies Parameters<typeof starlight>[0]

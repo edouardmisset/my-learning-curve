@@ -1,33 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" fill="none" role="img" aria-labelledby="title desc">
   <title id="title">AI evaluation dimensions</title>
   <desc id="desc">A visual showing five evaluation dimensions for AI tools: intelligence, accuracy, speed, price, and workflow fit.</desc>
-  <rect width="1200" height="700" rx="32" fill="#11111b"/>
-  <text x="86" y="96" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="36" font-weight="700">How to evaluate an AI tool</text>
-  <text x="86" y="132" fill="#a6adc8" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="20">Benchmarks matter, but only if you separate the dimensions instead of collapsing them into one score.</text>
+  <rect width="1200" height="700" rx="32" fill="#181926"/>
+  <text x="86" y="96" fill="#cad3f5" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="36" font-weight="700">How to evaluate an AI tool</text>
+  <text x="86" y="132" fill="#a5adcb" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="20">Benchmarks matter, but only if you separate the dimensions instead of collapsing them into one score.</text>
 
   <g transform="translate(600 390)">
-    <polygon points="0,-220 209,-68 129,178 -129,178 -209,-68" fill="#1e1e2e" stroke="#45475a" stroke-width="2"/>
-    <polygon points="0,-150 143,-46 89,122 -89,122 -143,-46" fill="#313244" stroke="#585b70" stroke-width="2"/>
-    <polygon points="0,-95 92,-30 57,80 -57,80 -92,-30" fill="#89b4fa" fill-opacity="0.25" stroke="#89b4fa" stroke-width="3"/>
+    <polygon points="0,-220 209,-68 129,178 -129,178 -209,-68" fill="#24273a" stroke="#494d64" stroke-width="2"/>
+    <polygon points="0,-150 143,-46 89,122 -89,122 -143,-46" fill="#363a4f" stroke="#5b6078" stroke-width="2"/>
+    <polygon points="0,-95 92,-30 57,80 -57,80 -92,-30" fill="#8aadf4" fill-opacity="0.25" stroke="#8aadf4" stroke-width="3"/>
 
-    <line x1="0" y1="0" x2="0" y2="-220" stroke="#6c7086" stroke-width="2"/>
-    <line x1="0" y1="0" x2="209" y2="-68" stroke="#6c7086" stroke-width="2"/>
-    <line x1="0" y1="0" x2="129" y2="178" stroke="#6c7086" stroke-width="2"/>
-    <line x1="0" y1="0" x2="-129" y2="178" stroke="#6c7086" stroke-width="2"/>
-    <line x1="0" y1="0" x2="-209" y2="-68" stroke="#6c7086" stroke-width="2"/>
+    <line x1="0" y1="0" x2="0" y2="-220" stroke="#6e738d" stroke-width="2"/>
+    <line x1="0" y1="0" x2="209" y2="-68" stroke="#6e738d" stroke-width="2"/>
+    <line x1="0" y1="0" x2="129" y2="178" stroke="#6e738d" stroke-width="2"/>
+    <line x1="0" y1="0" x2="-129" y2="178" stroke="#6e738d" stroke-width="2"/>
+    <line x1="0" y1="0" x2="-209" y2="-68" stroke="#6e738d" stroke-width="2"/>
 
-    <text x="0" y="-248" fill="#f9e2af" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Intelligence</text>
-    <text x="270" y="-76" fill="#a6e3a1" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Accuracy</text>
-    <text x="182" y="224" fill="#89dceb" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Speed</text>
-    <text x="-180" y="224" fill="#f38ba8" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Price</text>
-    <text x="-278" y="-76" fill="#cba6f7" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Workflow fit</text>
+    <text x="0" y="-248" fill="#eed49f" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Intelligence</text>
+    <text x="270" y="-76" fill="#a6da95" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Accuracy</text>
+    <text x="182" y="224" fill="#91d7e3" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Speed</text>
+    <text x="-180" y="224" fill="#ed8796" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Price</text>
+    <text x="-278" y="-76" fill="#c6a0f6" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Workflow fit</text>
   </g>
 
-  <rect x="834" y="220" width="286" height="188" rx="22" fill="#1e1e2e" stroke="#313244" stroke-width="2"/>
-  <text x="862" y="264" fill="#cdd6f4" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700">Read this shape as a checklist</text>
-  <text x="862" y="308" fill="#bac2de" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">A product can score well on one axis</text>
-  <text x="862" y="336" fill="#bac2de" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">and still be a bad engineering fit.</text>
-  <text x="862" y="380" fill="#bac2de" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">The useful question is not</text>
-  <text x="862" y="408" fill="#bac2de" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">"Which model won?" but</text>
-  <text x="862" y="436" fill="#bac2de" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">"Which trade-off do I actually need?"</text>
+  <rect x="834" y="220" width="286" height="188" rx="22" fill="#1e2030" stroke="#363a4f" stroke-width="2"/>
+  <text x="862" y="264" fill="#cad3f5" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="24" font-weight="700">Read this shape as a checklist</text>
+  <text x="862" y="308" fill="#b8c0e0" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">A product can score well on one axis</text>
+  <text x="862" y="336" fill="#b8c0e0" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">and still be a bad engineering fit.</text>
+  <text x="862" y="380" fill="#b8c0e0" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">The useful question is not</text>
+  <text x="862" y="408" fill="#b8c0e0" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">"Which model won?" but</text>
+  <text x="862" y="436" fill="#b8c0e0" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="18">"Which trade-off do I actually need?"</text>
 </svg>

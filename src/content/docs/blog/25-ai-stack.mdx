@@ -3,7 +3,7 @@ title: 'The AI Stack for Developers: Terms, Tools, and Trade-Offs'
 excerpt: "A developer's guide to AI terms, tooling, infrastructure, and the trade-offs behind the hype."
 tags: ['AI', 'LLM', 'Developer Tooling', 'Infrastructure', 'Machine Learning']
 date: 2026-05-11
-lastUpdated: 2026-06-27
+lastUpdated: 2026-06-28
 draft: true
 ---
 
@@ -115,7 +115,9 @@ model can consider at once. If you paste a large codebase, a long PDF, and
 several follow-up questions into the same conversation, you are spending that
 budget. Bigger context windows are useful, but they do not repeal confusion. A
 model can forget the important thing while faithfully remembering twelve
-irrelevant stack traces.
+irrelevant stack traces. Many models also suffer from the "Lost in the Middle"
+effect, where performance degrades as the relevant information moves farther
+away from the edges of the context, even when the window is large.
 
 **Multimodality** ([Multimodal learning](https://en.wikipedia.org/wiki/Multimodal_learning)) means the system can operate across more than text: images,
 audio, video, screenshots, diagrams, even screen interactions. For developers,
@@ -125,8 +127,11 @@ screenshots, Figma files, docs, and browser state inside one workflow.
 This layer is also where **local inference** first becomes a product decision
 rather than a philosophical one. Running a model locally can reduce data-sharing
 concerns and improve control, but it usually changes the cost, speed, model
-choice, and hardware requirements. "Runs on my laptop" is a real feature. It is
-just not a free one.
+choice, and hardware requirements. In practice, local inference usually means a
+quantized model, often 4-bit or 8-bit, which changes memory bandwidth demands
+and can introduce different sampling behavior from FP16 or BF16 inference on a
+large cluster. "Runs on my laptop" is a real feature. It is just not a free
+one.
 
 The application layer is where the stack feels friendly. It is also where almost
 all marketing screenshots stop.
@@ -153,6 +158,9 @@ Anthropic makes a useful distinction: **workflows** are systems where LLMs and
 tools follow predefined code paths, while **agents** dynamically decide how to
 use tools and sequence their work. That distinction is worth keeping. Otherwise
 everything becomes an agent, including what used to be called a loop.
+The line is getting blurrier, though, because many **agentic workflows** now
+use LLMs to choose how to execute each step inside an otherwise predefined
+supervision path.
 
 A **sub-agent** is simply a delegated worker in a larger system. One model
 instance plans, another searches, another reviews, another writes.
@@ -166,12 +174,13 @@ grounded inputs and solid evals. Sometimes it is a renamed prompt template
 wearing product-market-fit cosplay.
 
 Many agent ecosystems now rely on configuration files such as `agent.md`,
-`AGENTS.md`, tool manifests, or `skills-lock.json`. These are not universal
-standards, but they do capture a real shift: developers are starting to package
-instructions, tool access, and behavior contracts as part of the product
-surface. **Skills** in this context are reusable capability bundles: a prompt, a
-toolset, a workflow, perhaps a schema, perhaps a small ceremony to make it all
-look inevitable.
+`AGENTS.md`, tool manifests, or other skill and agent metadata files. These are
+not universal standards, but they do capture a real shift: developers are
+starting to package instructions, tool access, and behavior contracts as part
+of the product surface. In engineering terms, those **skills** are usually a
+mix of tool definitions, often expressed as JSON Schemas, plus system prompts
+and a little workflow glue. The abstraction is useful, but it is still
+structured data and instructions under the hood.
 
 A lot of this becomes easier to talk about once you understand **tool use**,
 sometimes called **function calling**. The model does not execute arbitrary code
@@ -180,13 +189,12 @@ with these arguments." The surrounding application performs the action and feeds
 the result back into the conversation.
 
 That is also why **structured outputs** matter. Instead of hoping the model
-returns something parseable after a heartfelt plea in plain English, you give it
-a schema. JSON mode and similar mechanisms reduce ambiguity and make the system
-easier to automate. Specifically, many systems now use **constrained sampling**—where
-the model's output is restricted at the token level to ensure it adheres strictly to
-the provided schema—to provide guarantees that prompting alone cannot offer. The
-model can still fail, but at least it can fail in a
-format your code understands.
+returns something parseable after a heartfelt plea in plain English, you give
+it a schema. JSON mode and similar mechanisms reduce ambiguity and make the
+system easier to automate. Structured Outputs go a step further by enforcing
+schema adherence. Many systems also use **constrained decoding** or other token-
+level restrictions to keep the output within a valid format. The model can
+still fail, but at least it can fail in a format your code understands.
 
 Here is the boring-looking but important version of a modern "AI feature":
 
@@ -259,8 +267,9 @@ remember the system is probabilistic and occasionally inventive in the least
 convenient way possible.
 
 Every team eventually invents its own humorous term for the retry cycle of
-prompt, run, inspect, tweak, rerun. If you prefer **Ralph loop**, I am not here
-to take that from you. Just do not mistake repeated prodding for architecture.
+prompt, run, inspect, tweak, rerun. If you prefer **Ralph loop**, think of it as
+the very human habit of poking the system, hoping the next pass behaves better.
+Just do not mistake repeated prodding for architecture.
 
 ## Layer 3: The Model Layer
 
@@ -286,8 +295,10 @@ fact from across the room."
 
 **Hallucination** is the umbrella term for outputs that sound plausible but are
 false, unsupported, or fabricated. It is not a bug you patch once. It is a
-property you manage. Retrieval helps. Tool use helps. Verification helps. Lower
-temperature sometimes helps. None of these make the problem disappear.
+property you manage. In practice, the engineering metric you are trying to
+improve is **grounding**: how well the model stays anchored to the provided
+context and tool results. Retrieval helps. Tool use helps. Verification helps.
+Lower temperature sometimes helps. None of these make the problem disappear.
 
 A **frontier model** is the current label for the most capable general-purpose
 models from the leading labs. It is partly technical, partly commercial, partly
@@ -299,9 +310,10 @@ whose demo video you watched last.
 The **open-weight vs proprietary** distinction matters because weights are the
 learned parameters of the model. Open-weight models publish those parameters,
 letting others run, inspect, adapt, or fine-tune them within the license terms.
-Proprietary models do not. That affects cost control, portability, privacy,
-local deployment, reproducibility, and how much leverage a vendor has over your
-roadmap.
+That is not the same as open source, because the license may still impose
+important limits. Proprietary models do not publish their weights. That affects
+cost control, portability, privacy, local deployment, reproducibility, and how
+much leverage a vendor has over your roadmap.
 
 The way a model gets its behavior is also worth separating into pieces.
 
@@ -310,9 +322,9 @@ desired behavior. **Fine-tuning** ([Fine-tuning](<https://en.wikipedia.org/wiki/
 on a task or domain. **RLHF**, ([Reinforcement learning from human feedback](https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback)), and
 other **preference tuning** methods push the model toward outputs humans judge
 more helpful, harmless, or aligned with product goals. The industry often treats
-these terms interchangeably when it should not. SFT teaches by example;
-preference tuning shapes ranking and behavior; product prompting still does a
-great deal of the everyday steering.
+these terms interchangeably when it should not. SFT teaches by example; RLHF or
+RLAIF ranks and refines behavior with preference signals; product prompting
+still does a great deal of the everyday steering.
 
 **Distillation** ([Knowledge distillation](https://en.wikipedia.org/wiki/Knowledge_distillation)) is the process of training a smaller model to imitate a stronger
 one or a stronger system. It is one reason smaller models keep getting
@@ -328,14 +340,17 @@ the model sounds both informed and obedient.
 Then we reach architecture jargon. **MoE**, ([Mixture of experts](https://en.wikipedia.org/wiki/Mixture_of_experts)), means the
 model routes tokens through a subset of specialized expert networks rather than
 activating the full network every time. That is one reason parameter counts
-alone can be misleading. A model can be enormous on paper and still use only
-part of itself per token.
+alone can be misleading. Most modern MoE systems rely on sparse activation, so
+only a fraction of the parameters are active per token. A model can be enormous
+on paper and still use only part of itself per token.
 
 **Quantization** ([Quantization](https://en.wikipedia.org/wiki/Large_language_model#Quantization)) reduces the numerical precision used to represent model weights
 and activations. The point is practical: smaller memory footprint, cheaper
-serving, faster local deployment, sometimes a slight quality hit. If you care
-about self-hosting, quantization stops being obscure optimization trivia and
-becomes part of the shopping list.
+serving, faster local deployment, sometimes a slight quality hit. It also
+reduces memory bandwidth pressure, which is often the real bottleneck because
+weights have to move from VRAM to the compute units fast enough to keep them
+busy. If you care about self-hosting, quantization stops being obscure
+optimization trivia and becomes part of the shopping list.
 
 That brings us back to **local inference** and self-hosting. Running models
 yourself buys control and sometimes privacy, but it also turns you into the
@@ -359,8 +374,8 @@ infrastructure.
 API or platform. Some of that is **first-party inference**, where the lab that
 builds the model also serves it. Some is third-party hosting, where another
 platform exposes the model or a compatible interface. OpenAI, Anthropic,
-Google, xAI, and Mistral all operate first-party inference surfaces. AWS
-Bedrock, Vertex AI, Azure AI Foundry, and similar platforms also expose models
+Google DeepMind, xAI, and Mistral all operate first-party inference surfaces.
+AWS Bedrock, Vertex AI, Azure AI Foundry, and similar platforms also expose models
 through broader cloud offerings. For developers, the distinction matters because
 it affects features, latency, price, quotas, compliance, and how quickly new
 models appear.
@@ -376,14 +391,17 @@ into uselessness.
 Specifically, for developers, you need to distinguish between **TTFT (Time to First Token)**—the
 latency of the initial response—and **TPS (Tokens Per Second)**, which measures
 the sustained throughput of the generation. A model might have a fast TTFT but
-low TPS, making it feel snappy initially but slow for long-form content.
+low TPS, making it feel snappy initially but slow for long-form content. For
+batch jobs, TPS is usually the more relevant number; for interactive chat, TTFT
+drives the user's first impression.
 
 **Prompt caching** is an optimization where repeated prompt segments do not have
 to be processed from scratch every time. This matters more than it sounds. Many
 agent systems resend large instructions, tool definitions, and context blocks on
 every call. If your provider can cache those tokens, latency and cost can drop
-materially. If not, your elegant orchestration may simply be a more expensive
-way to restate yourself.
+materially. Under the hood, this usually depends on **KV caching**, while prompt
+caching is the product-facing feature that takes advantage of it. If not, your
+elegant orchestration may simply be a more expensive way to restate yourself.
 
 The infrastructure layer is also where pricing becomes legible. You are usually
 paying for some combination of input tokens, output tokens, cached tokens, tool
@@ -451,6 +469,9 @@ something foolish with API permissions. Anthropic's guardrail guidance makes a
 sober point here: attempts to make prompts leak-proof add complexity and can
 degrade performance. In other words, security theater is still theater when you
 call it agent design.
+The highest-risk version of this is **indirect prompt injection**, where the
+malicious instruction arrives through retrieved documents, web pages, or other
+untrusted context rather than directly from the user.
 
 Guardrails help, but they have limits. Output filters can catch some bad
 behavior. Schemas can reject malformed responses. Approval steps can constrain
@@ -483,7 +504,9 @@ vendor dependence, security risks, intellectual property disputes, labor
 externalities, ecological costs, bias, hype inflation, and the tendency to turn
 ordinary automation into mystical branding. They are not wrong either. "The
 model wrote it" is not the same as "the task is complete," and in many domains
-the verification bill arrives immediately.
+the verification bill arrives immediately. A task that takes 10 seconds to
+generate but 5 minutes to verify can easily destroy the ROI unless verification
+can be automated too.
 
 The uncomfortable conclusion is that both sides often talk past each other
 because they focus on different denominators. If your task is easy to verify, AI
@@ -516,7 +539,9 @@ product video.
 Finally, there is **bias**. Models inherit patterns from data, fine-tuning,
 preference optimization, tooling, and the institutions deciding what "good
 behavior" means. This is not unique to AI, but AI systems can make bias look
-more objective than it is, which is arguably worse.
+more objective than it is, which is arguably worse. They do not just inherit
+bias; they can amplify it by compressing uneven human data into outputs that
+sound like consensus.
 
 ## Benchmarking Without Losing Your Mind
 
@@ -591,7 +616,7 @@ future has already arrived.
 
 ### Reliability, Safety, and Evaluation
 
-- [OpenAI Developers, "Working with evals"](https://developers.openai.com/api/docs/guides/evals)
+- [OpenAI Developers, "Working with evals"](https://developers.openai.com/api/docs/guides/evals) [deprecated]
 - [OpenAI Developers, "Structured model outputs"](https://developers.openai.com/api/docs/guides/structured-outputs)
 - [Anthropic Docs, "Reduce prompt leak"](https://platform.claude.com/docs/en/docs/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak)
 

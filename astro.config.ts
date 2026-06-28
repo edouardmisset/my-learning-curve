@@ -5,6 +5,7 @@ import { defineConfig } from 'astro/config'
 import { BASE_PATH, BASE_WEBSITE_URL } from './src/constants/links.ts'
 import { ROBOTS_OPTIONS } from './src/config/astro/robots-options.ts'
 import { SITEMAP_OPTIONS } from './src/config/astro/sitemap-options.ts'
+import mermaid from 'astro-mermaid'
 import { STARLIGHT_OPTIONS } from './src/config/astro/starlight-options.ts'
 
 // https://astro.build/config
@@ -20,6 +21,9 @@ export default defineConfig({
     },
   },
   integrations: [
+    mermaid({
+      autoTheme: true,
+    }),
     starlight(STARLIGHT_OPTIONS),
     sitemap(SITEMAP_OPTIONS),
     robots(ROBOTS_OPTIONS),

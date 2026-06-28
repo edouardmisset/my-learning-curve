@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none" role="img" aria-labelledby="title desc">
+  <defs>
+    <style>
+      :root {
+        --bg: #181926;
+        --panel: #24273a;
+        --panel-border: #363a4f;
+        --title: #cad3f5;
+        --subtitle: #a5adcb;
+        --layer-title: #1e2030;
+        --layer-copy: #363a4f;
+        --font-stack: "Atkinson Hyperlegible Next", Arial, sans-serif;
+        --fs-title: 36px;
+        --fs-subtitle: 20px;
+        --fs-layer-title: 28px;
+        --fs-layer-copy: 20px;
+      }
+
+      svg {
+        font-family: var(--font-stack);
+      }
+
+      .background {
+        fill: var(--bg);
+      }
+
+      .frame {
+        fill: var(--panel);
+        stroke: var(--panel-border);
+        stroke-width: 2;
+      }
+
+      .heading {
+        fill: var(--title);
+        font-size: var(--fs-title);
+        font-weight: 700;
+      }
+
+      .subheading {
+        fill: var(--subtitle);
+        font-size: var(--fs-subtitle);
+      }
+
+      .layer {
+        fill: var(--layer-fill);
+      }
+
+      .layer-application {
+        --layer-fill: #f9e2af;
+      }
+
+      .layer-agent {
+        --layer-fill: #a6e3a1;
+      }
+
+      .layer-model {
+        --layer-fill: #89dceb;
+      }
+
+      .layer-infra {
+        --layer-fill: #f38ba8;
+      }
+
+      .layer-title {
+        fill: var(--layer-title);
+        font-size: var(--fs-layer-title);
+        font-weight: 700;
+      }
+
+      .layer-copy {
+        fill: var(--layer-copy);
+        font-size: var(--fs-layer-copy);
+      }
+    </style>
+  </defs>
+  <title id="title">AI stack overview for developers</title>
+  <desc id="desc">A layered diagram showing application, agent tooling, model, and infrastructure layers, with reliability and evaluation spanning across them.</desc>
+  <rect class="background" width="1200" height="720" rx="32"/>
+  <rect class="frame" x="70" y="64" width="1060" height="592" rx="28"/>
+
+  <text class="heading" x="110" y="118">The practical AI stack</text>
+  <text class="subheading" x="110" y="152">The same request passes through interface, tooling, model, and infrastructure.</text>
+
+  <g class="layer layer-application">
+    <rect x="120" y="192" width="960" height="92" rx="22"/>
+    <text class="layer-title" x="152" y="230">1. Application layer</text>
+    <text class="layer-copy" x="152" y="264">Chat, IDE, CLI, web app, design tool, support UI</text>
+  </g>
+
+  <g class="layer layer-agent">
+    <rect x="120" y="302" width="960" height="92" rx="22"/>
+    <text class="layer-title" x="152" y="340">2. Agent and tooling layer</text>
+    <text class="layer-copy" x="152" y="374">Prompts, MCP, tools, RAG, embeddings, vector search, orchestration</text>
+  </g>
+
+  <g class="layer layer-model">
+    <rect x="120" y="412" width="960" height="92" rx="22"/>
+    <text class="layer-title" x="152" y="450">3. Model layer</text>
+    <text class="layer-copy" x="152" y="484">Foundation models, temperature, tuning, distillation, open vs proprietary weights</text>
+  </g>
+
+  <g class="layer layer-infra">
+    <rect x="120" y="522" width="960" height="92" rx="22"/>
+    <text class="layer-title" x="152" y="560">4. Infrastructure layer</text>
+    <text class="layer-copy" x="152" y="594">GPUs, cloud inference, caching, throughput, rate limits, pricing</text>
+  </g>
+</svg>

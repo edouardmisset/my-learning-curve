@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" fill="none" role="img" aria-labelledby="title desc">
+  <defs>
+    <style>
+      :root {
+        --bg: #181926;
+        --panel: #1e2030;
+        --panel-outer: #24273a;
+        --panel-middle: #363a4f;
+        --panel-border-outer: #494d64;
+        --panel-border-middle: #5b6078;
+        --axis: #6e738d;
+        --title: #cad3f5;
+        --subtitle: #a5adcb;
+        --copy: #b8c0e0;
+        --intelligence: #eed49f;
+        --accuracy: #a6da95;
+        --speed: #91d7e3;
+        --price: #ed8796;
+        --workflow: #c6a0f6;
+        --value-fill: #8aadf4;
+        --font-stack: "Atkinson Hyperlegible Next", Arial, sans-serif;
+        --fs-title: 36px;
+        --fs-subtitle: 20px;
+        --fs-dimension: 24px;
+        --fs-panel-title: 24px;
+        --fs-panel-copy: 18px;
+      }
+
+      svg {
+        font-family: var(--font-stack);
+      }
+
+      .background {
+        fill: var(--bg);
+      }
+
+      .title {
+        fill: var(--title);
+        font-size: var(--fs-title);
+        font-weight: 700;
+      }
+
+      .subtitle {
+        fill: var(--subtitle);
+        font-size: var(--fs-subtitle);
+      }
+
+      .radar-outer {
+        fill: var(--panel-outer);
+        stroke: var(--panel-border-outer);
+        stroke-width: 2;
+      }
+
+      .radar-middle {
+        fill: var(--panel-middle);
+        stroke: var(--panel-border-middle);
+        stroke-width: 2;
+      }
+
+      .radar-value {
+        fill: var(--value-fill);
+        fill-opacity: 0.25;
+        stroke: var(--value-fill);
+        stroke-width: 3;
+      }
+
+      .axis {
+        stroke: var(--axis);
+        stroke-width: 2;
+      }
+
+      .dimension {
+        font-size: var(--fs-dimension);
+        font-weight: 700;
+        text-anchor: middle;
+      }
+
+      .dimension-intelligence {
+        fill: var(--intelligence);
+      }
+
+      .dimension-accuracy {
+        fill: var(--accuracy);
+      }
+
+      .dimension-speed {
+        fill: var(--speed);
+      }
+
+      .dimension-price {
+        fill: var(--price);
+      }
+
+      .dimension-workflow {
+        fill: var(--workflow);
+      }
+
+      .panel {
+        fill: var(--panel);
+        stroke: var(--panel-middle);
+        stroke-width: 2;
+      }
+
+      .panel-title {
+        fill: var(--title);
+        font-size: var(--fs-panel-title);
+        font-weight: 700;
+      }
+
+      .panel-copy {
+        fill: var(--copy);
+        font-size: var(--fs-panel-copy);
+      }
+    </style>
+  </defs>
+  <title id="title">AI evaluation dimensions</title>
+  <desc id="desc">A visual showing five evaluation dimensions for AI tools: intelligence, accuracy, speed, price, and workflow fit.</desc>
+  <rect class="background" width="1200" height="760" rx="32"/>
+  <text class="title" x="86" y="96">How to evaluate an AI tool</text>
+  <text class="subtitle" x="86" y="132">Benchmarks matter, but only if you separate the dimensions instead of collapsing them into one score.</text>
+
+  <g transform="translate(400 480)">
+    <polygon class="radar-outer" points="0,-220 209,-68 129,178 -129,178 -209,-68"/>
+    <polygon class="radar-middle" points="0,-150 143,-46 89,122 -89,122 -143,-46"/>
+    <polygon class="radar-value" points="0,-95 92,-30 57,80 -57,80 -92,-30"/>
+
+    <line class="axis" x1="0" y1="0" x2="0" y2="-220"/>
+    <line class="axis" x1="0" y1="0" x2="209" y2="-68"/>
+    <line class="axis" x1="0" y1="0" x2="129" y2="178"/>
+    <line class="axis" x1="0" y1="0" x2="-129" y2="178"/>
+    <line class="axis" x1="0" y1="0" x2="-209" y2="-68"/>
+
+    <text class="dimension dimension-intelligence" x="0" y="-248">Intelligence</text>
+    <text class="dimension dimension-accuracy" x="270" y="-76">Accuracy</text>
+    <text class="dimension dimension-speed" x="182" y="224">Speed</text>
+    <text class="dimension dimension-price" x="-180" y="224">Price</text>
+    <text class="dimension dimension-workflow" x="-278" y="-76">Workflow fit</text>
+  </g>
+  <g transform="translate(-30 -300)">
+      <rect class="panel" x="800" y="500" width="380" height="280" rx="22"/>
+      <text class="panel-title" x="828" y="544">Read this shape as a checklist</text>
+      <text class="panel-copy" x="828" y="590">A product can score well on one axis</text>
+      <text class="panel-copy" x="828" y="622">and still be a bad engineering fit.</text>
+      <text class="panel-copy" x="828" y="670">The useful question is not</text>
+      <text class="panel-copy" x="828" y="702">"Which model won?" but</text>
+      <text class="panel-copy" x="828" y="734">"Which trade-off do I actually need?"</text>
+  </g>
+</svg>
